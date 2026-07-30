@@ -78,3 +78,14 @@
 - `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-repeat.json`
 - `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-repeatability.json`
 - `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-wrong-sentence-rejection.json`
+
+## Disposition
+
+- On 2026-07-30, the user judged the model evidence promising and explicitly
+  parked this lane for later review.
+- Preserve experiment 006 and its recorded outputs as the current coarse
+  known-sentence baseline.
+- Do not treat the `270/270` closed-catalog rejection result as final
+  pronunciation quality. When this lane resumes, add intentionally incorrect
+  and near-miss learner recordings with human reference labels before
+  calibrating acceptance or localized-feedback thresholds.
