@@ -87,6 +87,8 @@ Out of the initial scope:
 - No frontend scaffold, application code, root `pyproject.toml`, test suite, or
   CI workflow exists yet.
 - Four executable or partially executable spikes live under `experiments/`.
+- Real user recordings remain off-repository in a private GPT Sites session;
+  no local copy exists yet. See [Recordings](recordings.md).
 - Durable project documentation lives under `.agents/documents/`.
 - No license has been selected; default copyright applies until one is added.
 - `.agents/tools/` is an isolated `uv` project for future repeatable helpers.
@@ -107,3 +109,4 @@ Out of the initial scope:
 - [Platform](platform.md)
 - [Recognition](recognition.md)
 - [Experiments](experiments.md)
+- [Recordings](recordings.md)

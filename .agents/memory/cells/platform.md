@@ -17,8 +17,10 @@ runtime capability tiers, and hosting assumptions.
 - Optional targets: Linux AMD64 Chrome and iOS Chrome or installed PWA, each
   requiring separate validation.
 - Intended hosting target: GPT Sites.
-- The application is assumed to be static or mostly static unless hosting
-  evidence establishes a necessary backend capability.
+- A private GPT Sites test kit has demonstrated authenticated API routes and
+  server-side recording storage/export. The intended application may still be
+  static or mostly static; this evidence does not establish that its core loop
+  requires a backend.
 
 ## Browser and PWA expectations
 
@@ -103,7 +105,25 @@ scorer may be needed, but no remote dependency is currently assumed.
 Runtime capability detection is preferred over device-name checks. The selected
 tier should be communicated clearly.
 
-## Unverified GPT Sites assumptions
+## Verified GPT Sites recording behavior
+
+The private **Japanese Voice V1 Test Kit** supplied limited hosting evidence on
+2026-07-29 and 2026-07-30:
+
+- a live browser uploaded WebM recording objects through
+  `POST /api/recordings`;
+- the server listed recordings by session and returned individual objects;
+- `GET /api/recordings?session=...&export=tar` returned a dataset archive;
+- ChatGPT sign-in protected the site;
+- session identity was browser/device-local enough that a later Chrome login
+  opened a new empty session while the earlier server-side data remained.
+
+This proves a private recording-test backend can operate on GPT Sites. It does
+not prove stable AudioWorklet PCM capture, offline/PWA behavior, recognition,
+large-model delivery, or final-product privacy policy. See
+[Recordings](recordings.md).
+
+## Remaining unverified GPT Sites assumptions
 
 - static asset size limits;
 - efficient large-model delivery;
@@ -130,9 +150,11 @@ tier should be communicated clearly.
 - `.agents/documents/open-questions.md`
 - `README.md`
 - `experiments/002-browser-microphone-capture/README.md`
+- [Recordings](recordings.md)
 
 ## Related cells
 
 - [Project](project.md)
 - [Recognition](recognition.md)
 - [Experiments](experiments.md)
+- [Recordings](recordings.md)

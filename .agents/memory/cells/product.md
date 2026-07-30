@@ -86,6 +86,9 @@ data-policy questions.
 
 ## Open data and privacy questions
 
+- The private GPT Sites test kit currently retains recordings by session and
+  supports authenticated archive export. This is experimental evidence, not a
+  product retention decision. See [Recordings](recordings.md).
 - Are learner recordings deleted immediately after scoring?
 - Can users retain recordings for self-review?
 - Is anonymized collection useful for later model calibration?
@@ -103,3 +106,4 @@ data-policy questions.
 - [Project](project.md)
 - [Recognition](recognition.md)
 - [Platform](platform.md)
+- [Recordings](recordings.md)

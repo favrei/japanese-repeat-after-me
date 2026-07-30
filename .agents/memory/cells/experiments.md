@@ -16,11 +16,15 @@ reproducibility gaps, and required local continuation.
 - Standard Node and Python code could run in the Linux execution container.
 - Browser navigation was blocked by administrator policy.
 - External Vosk package and model downloads were unavailable.
-- Therefore the cloud evidence covers deterministic algorithm spikes, not real
-  Japanese learner audio, microphone capture, browser recognition, or M3/mobile
-  performance.
+- Therefore the committed cloud experiment artifacts cover deterministic
+  algorithm spikes, not real user-speech scoring, AudioWorklet PCM capture,
+  browser recognition, or M3/mobile resource behavior.
 - Environment blocks are not negative findings about Chrome microphone capture
   or Vosk quality.
+- A separate private GPT Sites test kit later captured and uploaded real WebM
+  recordings from a live browser. Those recordings remain server-side and have
+  not yet been inspected or used in a committed experiment. See
+  [Recordings](recordings.md).
 
 ## 001 — Synthetic acoustic DTW
 
@@ -64,6 +68,17 @@ Repository gap:
 - `experiments/README.md` references a nonexistent `run_local.py`.
 - The experiment is described as a Chrome question, but the committed evidence
   only demonstrates Node execution.
+- The top-level replay sequence uses legacy `venv`/pip instructions rather than
+  the repository's `uv` convention.
+
+Local migration replay:
+
+- On 2026-07-30, Node v22.22.2 on macOS arm64 reproduced every configuration
+  value, frame count, normalized cost, worst unit, and per-unit cost from the
+  Linux/x64 baseline.
+- Three runs were byte-identical; output SHA-256:
+  `90b2840f22ead6a52cb42f1a8040a1fb62c9d06b62d030ca18e0a9fa15677afc`.
+- Only the expected runtime, platform, and architecture metadata differed.
 
 Evidence:
 
@@ -79,6 +94,21 @@ Result:
 - Blocked before microphone acquisition because administrator policy rejected
   headless Chromium navigation in the cloud container.
 - `getUserMedia` and AudioWorklet were not tested.
+
+Local migration replay:
+
+- The repository still had no executable harness, so a temporary uncommitted
+  localhost harness used Chrome 150, a generated fake WAV input, and an
+  AudioWorklet PCM meter without opening the ambient microphone.
+- Three capture cycles passed with a 48 kHz AudioContext, 53,760 to 55,808
+  sample frames, 1.120 to 1.163 seconds captured per 1.2-second request,
+  non-zero RMS, and stable repeated capture/playback alternation.
+- The first virtual-time headless attempt stalled; real wall-clock execution
+  through the browser debugging protocol passed. This was a runner-lifecycle
+  issue, not an observed media API failure.
+- The fake-device run is browser-pipeline evidence only. It does not establish
+  real built-in microphone behavior, and its temporary `--no-sandbox`
+  configuration is not a production setting.
 
 Repository gap:
 
@@ -121,6 +151,15 @@ Belief:
 - It lacks katakana, alternative long-vowel, numeral, kanji-reading, broad
   punctuation, and ASR-token normalization.
 
+Local migration replay:
+
+- On 2026-07-30, `uv run --no-project` selected Python 3.11.11 on macOS arm64.
+- Three runs were byte-identical; output SHA-256:
+  `50b3a9edb5049005c86e4e61bbe13b6b6fd0141eb5b1291592bb7c8a9979ac1a`.
+- The full executable output semantically matched every committed summary case,
+  but the committed file is a hand-shaped projection with a different schema;
+  no command regenerates it directly.
+
 Evidence:
 
 - `experiments/003-kana-mora-alignment/results/2026-07-30-container-summary.json`
@@ -137,6 +176,23 @@ Cloud result:
   disabled.
 - No accuracy, latency, memory, or learner-feedback claim exists.
 
+Local migration replay:
+
+- On 2026-07-30, the committed macOS wrapper completed in an isolated temporary
+  directory with Vosk 0.3.44 and `vosk-model-small-ja-0.22`.
+- A 1.701-second macOS Kyoko TTS sample for
+  `今日はいい天気です。` produced the exact token sequence
+  `今日 は いい 天気 です`.
+- Direct recognition took 1.14 seconds, about 0.67 times the audio duration,
+  with 211.2 MiB maximum resident memory. First-time setup took 50.99 seconds
+  with 210.5 MiB maximum resident memory.
+- The model ZIP was 49,704,573 bytes and expanded to about 94 MiB. The temporary
+  environment used about 26 MiB.
+- A `uv`/Python 3.11 arm64 run also passed, and stereo input correctly failed
+  the mono 16-bit PCM validation.
+- This was a plumbing smoke test using synthetic TTS, not recognition-quality
+  evidence. The temporary audio, model, and environments were removed.
+
 Committed local harness:
 
 - `run_macos.sh` creates an experiment-local venv, installs Vosk, downloads the
@@ -151,11 +207,19 @@ duration/device, and the result of the proposed pass rule.
 Gaps:
 
 - It tests native Python Vosk, not browser/WASM Vosk.
-- It does not measure wall-clock time or peak memory itself.
-- No audio corpus or M3 result is committed.
+- It does not measure wall-clock time or peak memory itself; the local replay
+  required an external measurement wrapper.
+- No audio corpus or M3 result is committed. Real user WebM recordings exist in
+  GPT Sites but have not been downloaded, inventoried, or converted for Vosk.
 - A good transcript would be a content signal, not proof of pronunciation
   quality.
 - The harness predates the repository's `uv` rule and uses `venv` plus pip.
+- Pip setup logs go to stdout before the transcript, so the documented
+  `tee ...json` command creates invalid JSON.
+- The documented results directory does not exist, and no ignore rules protect
+  the experiment-local `.venv/` and `models/` paths.
+- The harness does not emit expected text/kana, audio duration/device, latency,
+  memory, or pass-rule outcome despite listing those as required data.
 - `experiments/requirements.txt` contains comments only; experiments 001 and
   003 need standard runtimes, while experiment 004 installs Vosk itself.
 
@@ -167,16 +231,20 @@ Evidence:
 
 ## Highest-value next evidence
 
-1. Repair experiment 001 replay documentation.
-2. Implement and run a real experiment 002 capture harness in macOS Chrome.
-3. Measure native Vosk accuracy, latency, and memory with real Japanese audio
-   on the M3.
-4. Repeat resource and microphone measurements on representative Android
+1. Download and inventory the private GPT Sites recording archive after user
+   authorization, preserving provenance and a checksum.
+2. Convert derived copies to 16 kHz mono PCM and measure native Vosk accuracy,
+   latency, and memory on the M3 with the real user speech.
+3. Repair experiment 001 replay documentation and experiment 004's output,
+   results-directory, ignore, and `uv` problems.
+4. Commit a reproducible experiment 002 harness and run an explicitly consented
+   real microphone capture in macOS Chrome.
+5. Repeat resource and microphone measurements on representative Android
    devices.
-5. Test real-speech acoustic alignment across speakers and rates.
-6. Gather human-labeled learner attempts for false accept/reject behavior and
-   feedback usefulness.
-7. Verify GPT Sites model delivery and PWA requirements.
+6. Test real-speech acoustic alignment across speakers and rates.
+7. Gather human-labeled attempts for false accept/reject behavior and feedback
+   usefulness.
+8. Verify GPT Sites model delivery and PWA requirements.
 
 These are evidence checkpoints, not approved product requirements.
 
@@ -185,3 +253,4 @@ These are evidence checkpoints, not approved product requirements.
 - [Project](project.md)
 - [Platform](platform.md)
 - [Recognition](recognition.md)
+- [Recordings](recordings.md)

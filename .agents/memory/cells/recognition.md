@@ -126,6 +126,12 @@ General ASR character error rate is not the primary product metric. The
 important outcome is consistent, useful decisions and feedback across repeated
 learner attempts. Human pronunciation judgments are required for calibration.
 
+A private GPT Sites session contains real user WebM recordings that can supply
+an initial plumbing and transcription test after authorized recovery and
+conversion. They are not yet inventoried or human-labeled and therefore cannot
+calibrate acceptance thresholds or feedback quality. See
+[Recordings](recordings.md).
+
 ## Open questions
 
 - What model download and Android memory limits are acceptable?
@@ -149,3 +155,4 @@ learner attempts. Human pronunciation judgments are required for calibration.
 - [Product](product.md)
 - [Platform](platform.md)
 - [Experiments](experiments.md)
+- [Recordings](recordings.md)

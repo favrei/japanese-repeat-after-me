@@ -12,11 +12,14 @@ Canonical detail belongs in linked cells.
 
 ## Active direction
 
-- Continue the cloud-to-local transition on the M3 MacBook with evidence-first
-  scoping; no application architecture is approved yet. See
-  [Project](cells/project.md).
-- Prioritize real macOS Chrome microphone evidence, then native local-recognizer
-  measurements and representative Android validation. See
+- Complete the cloud-to-local evidence handoff on the M3 MacBook; no
+  application architecture is approved yet. See [Project](cells/project.md).
+- With user authorization, recover and inventory the private GPT Sites
+  recording archive as the first real user-speech corpus, then use derived
+  audio for native local-recognizer measurements. See
+  [Recordings](cells/recordings.md) and [Experiments](cells/experiments.md).
+- Prioritize a committed real-microphone AudioWorklet harness in macOS Chrome,
+  followed by representative Android validation. See
   [Experiments](cells/experiments.md) and [Platform](cells/platform.md).
 
 ## Active defaults
@@ -31,11 +34,16 @@ Canonical detail belongs in linked cells.
 
 ## Blockers and open questions
 
-- No cloud experiment tested real learner speech, working browser microphone
-  capture, browser recognition, or M3/Android resource use. See
+- Real user WebM recordings exist server-side, but there is no local copy and
+  their take count, codecs, recording conditions, and labels remain
+  unverified. See [Recordings](cells/recordings.md).
+- Local replays reproduced experiments 001 and 003 and smoke-tested native Vosk
+  on M3, but no committed experiment has evaluated the real recordings,
+  browser recognition, or real AudioWorklet microphone PCM. See
   [Experiments](cells/experiments.md).
-- Experiment 001 has a stale replay command, and experiment 002 lacks an actual
-  capture harness. See [Experiments](cells/experiments.md).
+- Experiment 001 has a stale replay command, experiment 002 lacks a committed
+  harness, and experiment 004's documented wrapper produces invalid JSON and
+  uses legacy environment handling. See [Experiments](cells/experiments.md).
 - GPT Sites model delivery, caching, MIME/header, service-worker, and deployment
   behavior remain unverified. See [Platform](cells/platform.md).
 - Progression rules, feedback granularity, content validation, recording
@@ -44,9 +52,12 @@ Canonical detail belongs in linked cells.
 
 ## Active evaluation gates
 
+- Download the private archive only with user authorization; preserve its raw
+  checksum and provenance before deriving test WAV files. See
+  [Recordings](cells/recordings.md).
 - Measure download size, initialization time, latency, peak memory, and
-  battery/thermal behavior on the M3 and Android. See
-  [Recognition](cells/recognition.md).
+  battery/thermal behavior with real speech on the M3 and Android. See
+  [Recognition](cells/recognition.md) and [Experiments](cells/experiments.md).
 - Use varied speakers, devices, rooms, and speaking rates; calibrate false
   acceptance, false rejection, and feedback usefulness against human judgment.
   See [Recognition](cells/recognition.md).
