@@ -14,20 +14,32 @@ Canonical detail belongs in linked cells.
 
 - Preserve the corrected linear, two-stage café dialogue and bubble
   progression. On 2026-07-30 the user confirmed that this flow is what they are
-  looking for. Address missing UI details next without changing the confirmed
-  flow by assumption. See [Product](cells/product.md),
+  looking for. Visual work must not silently alter flow logic, state handling,
+  or test selectors. See [Product](cells/product.md),
   [Project](cells/project.md), and [Delivery](cells/delivery.md).
 - Retain the confirmed PoC boundary: two default conversation stages, the café
   theme, one learner only, a complete open–play–finish session, Android Chrome
   PWA delivery, and permission to use a temporary coarse recognizer. See
   [Product](cells/product.md) and [Platform](cells/platform.md).
+- Replace the currently implemented childlike manga frame with the user-chosen
+  full-bleed seinen slice-of-life direction. Preserve the constant-frame plus
+  swappable-art layer model, but correct the reference mockup's known
+  character, feedback, counter, wide-screen, and mobile-wrapping defects
+  rather than copying it verbatim. See
+  [Visual Design](cells/visual-design.md).
+- Generate or retain precise placeholders for the pending café scene, staff
+  sprites, cover, and app icons. Future stories can supply their own scene,
+  character, and cover art; the café is only an example. See
+  [Visual Design](cells/visual-design.md) and [Content](cells/content.md).
 - Develop and preview locally. Do not deploy because a build succeeds; release
   only the exact immutable source and artifact that passed the agreed automated
   checks, trusted-HTTPS manual QA, and explicit approval. See
   [Delivery](cells/delivery.md).
 - Experiment 006 completed the first 30-recording M3 Vosk baseline. The user
-  judged its coarse known-sentence evidence promising and parked recognition
-  for later review. Keep device-runtime experiment 005 parked as well. See
+  judged its coarse known-sentence evidence promising and parked it for later
+  review. Chrome `SpeechRecognition` remains acceptable for the PoC for now,
+  but its boundary and feedback renderer must stay replaceable by the advanced
+  local-first lane. Keep device-runtime experiment 005 parked as well. See
   [Recognition](cells/recognition.md), [Experiments](cells/experiments.md), and
   [Platform](cells/platform.md).
 - Accounts, chapter upload/review, and released canonical audio are a confirmed
@@ -41,12 +53,15 @@ Canonical detail belongs in linked cells.
   Skip press. Skip dismisses exactly one bubble immediately and never counts as
   a failure. Autoplayed sentences remain separate bubbles. See
   [Product](cells/product.md).
-- Treat the current neutral UI only as a flow-validation scaffold. Its layout,
-  styling, hierarchy, controls, timing, transitions, and feedback presentation
-  are not approved UI or art direction. Previously recorded ingredients such
-  as bubble sides, visible Japanese, reading/translation toggles, and **PC
-  speaks first** still require separate review. See
-  [Product](cells/product.md).
+- Use newsprint, black and neutral ink tones, one deep-red UI accent,
+  Shippori Mincho B1 plus Zen Kaku Gothic New, restrained adult proportions,
+  screentone, hard-edged panels, and full-viewport scene art as the replacement
+  design defaults. The concrete mockup is a reference, not blanket approval of
+  every detail. See [Visual Design](cells/visual-design.md).
+- Treat failed-attempt kana hit/miss marks as transcript-string alignment and
+  coarse guidance only. They are not acoustic phoneme or mora judgments and
+  must remain replaceable. See [Product](cells/product.md) and
+  [Recognition](cells/recognition.md).
 - Prefer a Chrome-first, local-first PWA with no mandatory per-attempt cloud
   cost, a WASM CPU baseline, optional WebGPU enhancement, and separately
   downloaded recognition models when deployment work resumes. See
@@ -61,13 +76,18 @@ Canonical detail belongs in linked cells.
 
 ## Blockers and open questions
 
-- The PoC's dialogue order and bubble-level progression are confirmed. Many UI
-  details remain missing and will be addressed with the user; those decisions
-  must not silently alter the flow. See [Product](cells/product.md).
+- The PoC source is still an uncommitted childlike manga-frame port that the
+  user rejected. The full-bleed seinen replacement is not implemented, and its
+  reference mockup retains known visual defects. See
+  [Visual Design](cells/visual-design.md) and [Delivery](cells/delivery.md).
+- Real seinen café scene, staff, cover, and icon assets remain pending. If an
+  agent lacks image generation, keep placeholders and leave a precise inbox
+  note rather than introducing unrelated stock or known-wrong art. See
+  [Visual Design](cells/visual-design.md).
 - The repository has no approved canonical product frontend or release
-  toolchain. `poc/` now embodies the confirmed flow and passes its current
-  mechanical checks, but its UI and art direction are unapproved. Experiment
-  005 remains parked and is not a release foundation. See
+  toolchain. `poc/` embodies the confirmed flow, and its last recorded
+  manga-frame pass was mechanically green, but that visual implementation was
+  rejected. Experiment 005 remains parked and is not a release foundation. See
   [Delivery](cells/delivery.md).
 - Android SDK tooling is installed, but no phone was attached; the proposed
   `adb reverse` localhost bridge, microphone path, browser speech adapter,
@@ -80,6 +100,12 @@ Canonical detail belongs in linked cells.
 
 ## Active evaluation gates
 
+- A replacement frame must retain the confirmed flow and pass the PoC's QA
+  command plus browser state inspection at phone and wide-desktop sizes.
+  Specifically verify full-viewport composition, overlay collisions, readable
+  feedback, and reduced-motion behavior rather than relying on a successful
+  build alone. See [Visual Design](cells/visual-design.md) and
+  [Delivery](cells/delivery.md).
 - Before any deployment, run one reproducible QA command covering type checks,
   lint, unit tests, build, browser smoke tests, forced WASM fallback, optional
   WebGPU, and artifact-privacy checks. Preview that exact build over trusted

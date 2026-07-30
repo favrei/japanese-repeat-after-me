@@ -40,13 +40,23 @@ substitute a different artifact after approval.
   It serves locally at `http://localhost:3000/` and has a PWA manifest, service
   worker, generated placeholder icons, and a development-only synthetic
   speech/flow control.
-- `poc/npm run qa` passes type checks, lint, build, 10 unit/rendered tests, and
-  public-artifact privacy assertions. Browser flow testing remains separate
-  from that command.
+- The latest recorded `npm run qa` in `poc/` passes type checks, lint, build,
+  `13/13` unit/rendered tests, and public-artifact privacy assertions. Browser
+  flow testing remains separate from that command. One non-blocking
+  `@next/next/no-page-custom-font` warning remains around app-router font
+  loading.
 - A Chrome run at 412×915 verified one-bubble Skip, one-success progression,
   third-failure progression, the stage boundary, completion, and restart. The
-  user confirmed the resulting flow on 2026-07-30. The current neutral UI is
-  deliberately incomplete and is not approved art direction.
+  user confirmed the resulting flow on 2026-07-30.
+- Subsequent uncommitted changes added a manga-storybook frame, mood-specific
+  placeholder art, and approximate target-reading marks while preserving flow.
+  QA mode now exposes synthetic success, near-miss, and failure controls. A
+  second `412×915` Chrome click-through covered the updated states.
+- The user rejected that frame's childlike visual register and fixed-width
+  desktop behavior. Its green checks remain mechanical evidence only. The
+  approved full-bleed seinen replacement direction has not been ported and its
+  working mockup still contains unresolved design defects. See
+  [Visual Design](visual-design.md).
 - No real Android microphone, service-worker, or installation QA has occurred.
   Android SDK Platform Tools are installed and `adb reverse tcp:3000 tcp:3000`
   is a candidate no-deployment localhost bridge, but no phone was connected to
@@ -124,11 +134,21 @@ server-side requirement justifies it.
   and capture hooks behind an explicit development/QA flag.
 - Disable the harness for deployment and exclude private debug surfaces and
   fixtures from the production artifact where practical.
+- For local headless screenshots in the current environment, the Playwright
+  package may request a newer cached `chromium_headless_shell` than is
+  installed. Launching Playwright with `{ channel: "chrome" }` uses the
+  installed Google Chrome and has worked for screenshots and click-through QA.
+- `?qa=1` exposes the PoC's synthetic success, near-miss, and failure controls.
+  Headless Chrome may stall on speech autoplay when no TTS voice is available;
+  use the one-bubble Skip control to reach a learner-speaking state.
+- Use the exact port reported by the normal development server. Port `3001`
+  was used once because `3000` was already occupied; this is not a new default
+  and does not authorize port scanning.
 
 ## Open questions
 
-- Which missing UI details should be addressed first while preserving the
-  confirmed flow?
+- Which seinen mockup defects and pending art assets should be resolved before
+  porting the replacement frame while preserving the confirmed flow?
 - What exact commands and evidence make up the initial QA gate?
 - Will Android USB `adb reverse` provide the preferred localhost-secure preview,
   or is trusted LAN HTTPS still needed for real-device QA?
@@ -145,6 +165,9 @@ server-side requirement justifies it.
 - User's corrected dialogue and Skip semantics recorded on 2026-07-30.
 - User confirmation of the corrected flow and deferral of UI/art decisions
   recorded on 2026-07-30.
+- User rejection of the childlike frame and selection of a full-bleed seinen
+  replacement recorded on 2026-07-30.
+- `.agents/resources/seinen-manga-frame/`
 
 ## Related cells
 
@@ -152,3 +175,4 @@ server-side requirement justifies it.
 - [Platform](platform.md)
 - [Product](product.md)
 - [Recordings](recordings.md)
+- [Visual Design](visual-design.md)

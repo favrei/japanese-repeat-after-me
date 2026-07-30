@@ -26,8 +26,10 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   deferred.
 - On 2026-07-30 the user confirmed that the corrected PoC flow is what they are
   looking for. Preserve that flow as the baseline; the next product work is to
-  address missing UI details without silently changing it. The current neutral
-  presentation is not approved art direction.
+  replace the rejected childlike manga frame with the approved full-bleed
+  seinen slice-of-life direction without silently changing the flow. The
+  working replacement mockup has known defects and is not blanket approval of
+  every detail. See [Visual Design](visual-design.md).
 - For learner-speaking bubbles, advance after one correct attempt, the third
   failed attempt, or one Skip press. Skip dismisses exactly one bubble and does
   not count as a failure. See [Product](product.md).
@@ -113,13 +115,16 @@ Out of the initial scope:
 - No approved canonical product frontend, root `pyproject.toml`,
   project-wide test suite, or CI workflow exists yet.
 - `poc/` is an isolated, uncommitted Vinext/React/TypeScript Git repository. It
-  contains a neutral, flow-first two-stage PWA, temporary Chrome speech
-  adapter, manifest, service worker, and its own `npm run qa` checks.
-- The corrected PoC passed type checks, lint, build, and 10 tests. A Chrome run
-  at 412×915 verified one-bubble Skip, success progression, third-failure
-  progression, automatic stage transition, completion, and restart. The user
-  subsequently confirmed the flow; this does not approve the UI or validate
-  Android microphone/PWA behavior.
+  contains a flow-first two-stage PWA, temporary Chrome speech adapter,
+  manifest, service worker, development QA controls, and its own `npm run qa`
+  checks.
+- The confirmed-flow baseline passed type checks, lint, build, and 10 tests. A
+  later uncommitted manga-frame and approximate-reading-feedback pass recorded
+  `13/13` passing tests and another `412×915` Chrome click-through. The user
+  confirmed the flow but rejected that frame's childlike tone and fixed-width
+  desktop behavior. Neither mechanical result validates Android
+  microphone/PWA behavior. See [Delivery](delivery.md) and
+  [Visual Design](visual-design.md).
 - No Android device run, Sites project creation, saved Sites version, or
   deployment occurred.
 - Six numbered experiment directories live under `experiments/`. Experiments
@@ -154,6 +159,8 @@ Out of the initial scope:
   2026-07-30.
 - User confirmation of the corrected flow and deferral of UI/art decisions
   recorded on 2026-07-30.
+- User selection of a full-bleed seinen replacement for the rejected childlike
+  manga frame recorded on 2026-07-30.
 
 ## Related cells
 
@@ -164,3 +171,4 @@ Out of the initial scope:
 - [Recordings](recordings.md)
 - [Content](content.md)
 - [Delivery](delivery.md)
+- [Visual Design](visual-design.md)

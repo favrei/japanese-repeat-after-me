@@ -140,8 +140,11 @@ large-model delivery, or final-product privacy policy. See
 - The user requested an Android Chrome PWA PoC, temporarily reprioritizing
   product preview without authorizing deployment. The first implemented flow
   was rejected; the corrected two-stage script and bubble-level progression
-  are now implemented and user-confirmed. UI-detail work is next, followed by
-  real-device QA when the phone is available.
+  are now implemented and user-confirmed. The current source still carries a
+  subsequently rejected childlike, fixed-width visual frame; the approved
+  replacement direction is full-bleed seinen and must retain responsive
+  Android behavior. Real-device QA follows when the phone is available. See
+  [Visual Design](visual-design.md).
 - Android SDK Platform Tools 35.0.1 and the broader local Android SDK are
   installed. A proposed local preview path uses USB debugging plus
   `adb reverse tcp:3000 tcp:3000`, allowing Android Chrome to open the Mac-hosted
@@ -182,6 +185,8 @@ large-model delivery, or final-product privacy policy. See
 - User's corrected dialogue and Skip semantics recorded on 2026-07-30.
 - User confirmation of the corrected flow and deferral of UI/art decisions
   recorded on 2026-07-30.
+- User selection of full-bleed responsive desktop behavior and a seinen visual
+  register recorded on 2026-07-30.
 
 ## Related cells
 
@@ -190,3 +195,4 @@ large-model delivery, or final-product privacy policy. See
 - [Experiments](experiments.md)
 - [Recordings](recordings.md)
 - [Delivery](delivery.md)
+- [Visual Design](visual-design.md)

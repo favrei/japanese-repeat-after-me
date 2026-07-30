@@ -44,10 +44,12 @@ implementation.
   confirmed that its flow is what they are looking for.
 - The confirmed flow is the baseline for subsequent work. Do not change it
   while addressing UI details unless the user explicitly revises the flow.
-- The current neutral UI is only a flow-validation scaffold. Its layout,
-  styling, information hierarchy, control treatment, transitions, and feedback
-  presentation are not approved UI or art direction. The user said many UI
-  details remain missing and will be addressed later.
+- A manga-storybook frame was subsequently implemented around the confirmed
+  flow without changing its progression. The user rejected that frame's
+  childlike tone and fixed-width desktop composition, then selected a
+  full-bleed seinen slice-of-life direction. The replacement direction is
+  approved; its concrete mockup still has known defects and has not been ported
+  into `poc/`. See [Visual Design](visual-design.md).
 
 The two-stage café script specified by the user on 2026-07-30 is:
 
@@ -110,11 +112,19 @@ only with the user's approval.
   pronunciation failure.
 - Mora-level feedback is desirable but should only be shown when alignment is
   sufficiently reliable. Word or phrase-region highlighting is safer early.
+- At the user's request, the current PoC approximates per-character hit/miss
+  feedback on failed attempts by aligning the recognized transcript to the
+  target reading. This is approved as coarse UI guidance, not acoustic
+  phoneme evidence, mora-level diagnosis, or a final feedback policy. The
+  renderer must remain replaceable by later alignment evidence. See
+  [Recognition](recognition.md).
 
-## Unsettled UI and later interaction ideas
+## Unsettled interaction ideas
 
-The user has approved the flow, not the current UI. These previously recorded
-ingredients remain unapproved ideas that require separate review:
+The user has approved the flow and the high-level replacement visual direction,
+not every UI behavior or mockup detail. The visual system and art work are
+owned by [Visual Design](visual-design.md). These previously recorded
+interaction ingredients still require separate review:
 
 - Present the other party's bubbles on the left and learner-party bubbles on
   the right.
@@ -162,6 +172,8 @@ ingredients remain unapproved ideas that require separate review:
 ## Open learning and feedback questions
 
 - Which UI details should be added or changed around the confirmed flow?
+- Which known defects in the seinen frame mockup must be corrected before it is
+  ported into the PoC?
 - Does the intro count as a round?
 - Are difficult turns scheduled earlier in later rounds?
 - Do rounds restart immediately or pause briefly?
@@ -204,6 +216,9 @@ ingredients remain unapproved ideas that require separate review:
   2026-07-30.
 - User confirmation that the corrected flow is right, while UI details remain
   missing, recorded on 2026-07-30.
+- User selection of manga-storybook direction, later rejection of its
+  childlike implementation, and selection of a full-bleed seinen replacement
+  recorded on 2026-07-30.
 - `poc/`
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
@@ -217,3 +232,4 @@ ingredients remain unapproved ideas that require separate review:
 - [Recordings](recordings.md)
 - [Content](content.md)
 - [Delivery](delivery.md)
+- [Visual Design](visual-design.md)

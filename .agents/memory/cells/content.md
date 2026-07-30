@@ -53,6 +53,18 @@ not required by the current direction.
   canonical audio generated anew for every released playback. This avoids
   voice and output differences across browsers and devices.
 
+## Chapter visual assets
+
+- The café is only an example story. Future chapter authors may provide a
+  scene background, other-party character art, and cover art while the
+  application's UI frame remains constant.
+- The first PoC uses placeholders until suitable assets are generated. Do not
+  let future upload and review machinery complicate the current local
+  rehearsal implementation.
+- Future upload validation will need crop or focal-point metadata, safe overlay
+  areas, file and dimension limits, accessibility treatment, and copyright and
+  review policy. See [Visual Design](visual-design.md).
+
 ## Open questions
 
 - What review criteria and automated pre-review checks apply?
@@ -63,10 +75,14 @@ not required by the current direction.
 - Which synthesis engine and voices create canonical audio?
 - How are chapter text, readings, segmentation, translations, and audio
   revisions versioned?
+- How are uploaded scene, character, and cover assets validated, versioned,
+  reviewed, and cropped across phone and desktop layouts?
 
 ## Sources
 
 - User direction recorded on 2026-07-30.
+- User clarification that the café is only an example and future story
+  backgrounds and characters will be uploadable, recorded on 2026-07-30.
 
 ## Related cells
 
@@ -74,3 +90,4 @@ not required by the current direction.
 - [Project](project.md)
 - [Platform](platform.md)
 - [Delivery](delivery.md)
+- [Visual Design](visual-design.md)

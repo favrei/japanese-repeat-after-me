@@ -187,9 +187,17 @@ identity and aggregate closed-catalog discrimination remained stable.
 
 - The user accepted a temporary coarse recognizer for the first Android PWA
   PoC so recognition research would not block discussion of the product loop.
+  On 2026-07-30 the user confirmed that Chrome `SpeechRecognition` remains
+  acceptable for now but is expected to be replaced by the more advanced
+  local-first lane.
 - `poc/` uses Chrome's `SpeechRecognition` interface with Japanese alternatives
   and a normalized character-edit similarity threshold of `0.56`. The app
   itself does not retain audio, but Chrome may use a network speech service.
+- `poc/` also uses Levenshtein backtrace alignment between the recognized
+  transcript and target reading to display approximate per-character hit/miss
+  marks after a failed attempt. This is string evidence, not acoustic phoneme
+  scoring. It must be presented as coarse guidance rather than precise
+  pronunciation diagnosis.
 - Automated and desktop flow QA used exact-target simulated transcripts. There
   has been no real Android microphone run, human acceptance comparison, false
   acceptance/rejection measurement, or threshold calibration.
@@ -197,6 +205,12 @@ identity and aggregate closed-catalog discrimination remained stable.
   user confirmed the corrected flow. Preserve the adapter as replaceable
   implementation scaffolding only: synthetic flow acceptance does not make it
   recognition evidence or select the final scoring architecture.
+- Keep Chrome-specific behavior behind the recognition boundary. `scoreAttempt`,
+  the hit/miss renderer, and feedback UI must remain able to consume later
+  constrained-recognition and acoustic-alignment results without adopting
+  browser-service assumptions.
+- When the user resumes this lane, begin with the human-label protocol and the
+  evidence sequence below, not another uncalibrated model experiment.
 
 ## Evidence sequence when this lane resumes
 
@@ -257,6 +271,8 @@ identity and aggregate closed-catalog discrimination remained stable.
 - `poc/app/PracticeApp.tsx`
 - User flow rejection recorded on 2026-07-30.
 - User confirmation of the corrected flow recorded on 2026-07-30.
+- User confirmation that Chrome recognition is temporary and the advanced
+  local-first lane will resume later, recorded on 2026-07-30.
 
 ## Related cells
 
@@ -264,3 +280,4 @@ identity and aggregate closed-catalog discrimination remained stable.
 - [Platform](platform.md)
 - [Experiments](experiments.md)
 - [Recordings](recordings.md)
+- [Visual Design](visual-design.md)
