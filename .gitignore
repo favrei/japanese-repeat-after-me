@@ -3,3 +3,6 @@
 
 # Isolated product PoC is preserved in its own local Git repository.
 /poc/
+
+# Private voice corpus stays local and is never pushed to the public origin.
+/datasets/

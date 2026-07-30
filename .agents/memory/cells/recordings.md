@@ -85,10 +85,11 @@ navigation to that route was blocked by the Chrome control client during the
   other credentials. Use the Sites connector or an authenticated browser.
 - Download the private archive only when the user requests it. The initial
   authorized recovery is complete.
-- The user explicitly approved committing this private corpus locally. The
-  configured GitHub origin is public, so keep commit `27cf466` local unless the
-  repository becomes private or the user explicitly approves publishing the
-  voice data.
+- The user explicitly approved committing this private corpus locally, then on
+  2026-07-30 chose to make the repository public with the voice excluded. The
+  corpus was removed from all Git history and `/datasets/` is now in
+  `.gitignore`. Keep it that way: the recordings live only as untracked local
+  files unless the user explicitly approves publishing the voice data.
 - Do not publish, redistribute, or upload the recordings elsewhere without
   explicit user approval. Never include `datasets/` in a GPT Sites deployment.
 - After download, preserve the raw archive, record its checksum and provenance,

@@ -57,10 +57,12 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   platform constraint or invalidate an assumption.
 - For experiments, preserve the question, replay command, environment,
   machine-readable result, observed facts, interpretation, and limitations.
-- Do not commit model files, virtual environments, generated audio, or package
-  caches. The user explicitly approved one exception for the recovered private
-  voice corpus: it is committed locally but must not be pushed to the
-  configured public upstream.
+- Do not commit model files, virtual environments, generated audio, package
+  caches, or the private voice corpus. The earlier local-commit exception for
+  that corpus was withdrawn on 2026-07-30 when the repository became public;
+  `/datasets/` is now ignored and must stay untracked.
+- This repository is published on the public GitHub origin. Treat everything
+  committed here as world-readable before adding it.
 - Avoid mandatory per-attempt cloud API costs.
 - Keep the architecture open until recognition quality, resource limits,
   feedback granularity, content, privacy, and hosting assumptions have evidence.
@@ -158,9 +160,12 @@ Out of the initial scope:
   baseline on the M3 and recorded repeatability and wrong-sentence rejection
   evidence. See [Experiments](experiments.md).
 - The explicitly authorized private voice corpus is local at
-  `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/` and committed in local
-  commit `27cf466`. The configured GitHub origin is public, so the commit has
-  not been pushed. See [Recordings](recordings.md).
+  `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/`. On 2026-07-30 the
+  user decided to publish this repository, so `datasets/` was stripped from
+  every commit and added to `.gitignore`. The corpus now exists **only as
+  untracked files on the Mac** — Git no longer holds a copy, and there is no
+  commit to recover it from. Back it up outside Git. See
+  [Recordings](recordings.md).
 - Durable project documentation lives under `.agents/documents/`, which now
   includes the drafted stage design flow. See [Content](content.md).
 - No license has been selected; default copyright applies until one is added.
