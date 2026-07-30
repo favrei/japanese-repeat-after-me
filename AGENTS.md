@@ -5,16 +5,35 @@
 
 This repo uses cell-first Markdown memory under `.agents/memory/`.
 
-Outside these two cases, do not create, edit, rename, or delete anything under
-`.agents/memory/` except files inside `.agents/memory/inbox/`:
+### Rule 1 — Cells are read-only during ordinary work
+
+Do not create, edit, rename, or delete anything under `.agents/memory/`
+except files inside `.agents/memory/inbox/`, unless one of these happens
+verbatim in the current session:
 
 1. The user explicitly asks to dream or consolidate memory.
 2. The user explicitly asks to create, update, move, or delete durable memory.
 
-Never infer permission from ordinary work, stale memory, contradictions, or a
-desire to keep memory updated. Write an inbox note instead. The user is
-authoritative: when directly asked to edit durable memory, comply without
-requiring a dreaming pass.
+Never infer permission from ordinary work, stale memory, contradictions, a
+dream-like request phrased indirectly, or a desire to keep memory updated.
+"This belongs in a cell" is not permission — write an inbox note instead,
+every time. The user is authoritative: when directly asked to edit durable
+memory, comply without requiring a dreaming pass.
+
+### Rule 2 — Inbox-first capture, dream discards
+
+Memo to `.agents/memory/inbox/` liberally — one small file per note, whenever
+anything noteworthy happens, including:
+
+- a tool or command fails (what failed, why), or succeeds (and the conclusion)
+- you create or update a tool, script, or document
+- you retrieve data from the internet worth keeping
+- you submit a new version of code
+- anything else a future agent should know
+
+Inbox notes are cheap and ephemeral: do not organize, merge, or update them,
+and never "graduate" them into cells yourself. Consolidation and disposal of
+inbox notes happen only in the dream round.
 
 Before research, planning, architecture, or long-running work, read
 `.agents/memory/current.md` and the cells it points to. Cells are canonical;
