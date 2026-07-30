@@ -86,7 +86,7 @@ navigation to that route was blocked by the Chrome control client during the
 - Download the private archive only when the user requests it. The initial
   authorized recovery is complete.
 - The user explicitly approved committing this private corpus locally. The
-  configured GitHub origin is public, so keep commit `53ff9af` local unless the
+  configured GitHub origin is public, so keep commit `6748321` local unless the
   repository becomes private or the user explicitly approves publishing the
   voice data.
 - Do not publish, redistribute, or upload the recordings elsewhere without
