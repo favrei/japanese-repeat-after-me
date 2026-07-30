@@ -1,5 +1,26 @@
 # Product and Technical Discussion
 
+> **Status — cloud-era scoping, partly superseded (reviewed 2026-07-30).**
+> This is the original concept record. Keep it for the reasoning; do not treat
+> it as current specification. What has changed:
+>
+> - **§1, §8** — the "configurable number of successful repetitions" model was
+>   replaced by the confirmed bubble flow: one success, the third failure, or
+>   one Skip advances. See [`../memory/cells/product.md`](../memory/cells/product.md).
+> - **§3** — the lesson-item JSON with `requiredSuccesses` is not the shipped
+>   shape. Stages live in `poc/app/stages.ts`, authored through
+>   [`stage-design-flow.md`](stage-design-flow.md) and gated by
+>   [`character-separation-gate.md`](character-separation-gate.md).
+> - **§4** — the PoC is Vinext/React/TypeScript, not Vite.
+> - **§9** — reference audio is now generated locally at authoring time and
+>   bundled; browser TTS is a fallback only. See
+>   [`../memory/cells/audio.md`](../memory/cells/audio.md).
+> - **§5–§7, §10–§13** — still the working direction, now with real evidence
+>   behind it. See [`recognition-options.md`](recognition-options.md).
+>
+> The document says nothing about the visual frame; that is
+> [`art-system.md`](art-system.md).
+
 ## 1. Product concept
 
 The application is a Japanese speaking-practice tool built around repeated pronunciation exercises.

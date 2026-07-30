@@ -1,5 +1,29 @@
 # Platform Scope
 
+> **Status — assumptions, mostly unverified (reviewed 2026-07-30).**
+> Everything below is still the intended scope. What has actually been
+> exercised is narrow:
+>
+> - **Verified:** macOS Chrome on the M3 — local preview, microphone, service
+>   worker, `412×915` and wide-desktop click-throughs. A local `0.0.0.0` origin
+>   can block microphone permission, so the app redirects to `localhost` and
+>   refuses recording on untrusted origins.
+> - **Not verified:** every Android claim. Android SDK Platform Tools are
+>   installed and `adb reverse tcp:3000 tcp:3000` is the candidate
+>   no-deployment localhost bridge, but no phone has ever been connected.
+>   Microphone, service worker, PWA install, memory, and thermal behavior on
+>   Android are all unmeasured.
+> - **Not verified:** every GPT Sites hosting assumption in this document. No
+>   Sites project exists and nothing has been deployed.
+> - **Not verified:** the capability tiers below. No runtime tier detection
+>   exists; the recognizer that would define Tier A/B is on an unmerged branch.
+>   See [`../memory/cells/recognition.md`](../memory/cells/recognition.md).
+> - **Changed:** the PoC is Vinext/React/TypeScript. WebGPU has not been used
+>   for anything yet.
+>
+> See [`../memory/cells/platform.md`](../memory/cells/platform.md) and
+> [`../memory/cells/delivery.md`](../memory/cells/delivery.md).
+
 ## Development environment
 
 The current development machine is a MacBook with Apple M3.

@@ -1,5 +1,35 @@
 # Recognition Options
 
+> **Status — Option 1 chosen and measured; the rest remain candidates
+> (reviewed 2026-07-30).**
+>
+> - **Option 1 (lightweight local ASR)** is the active lane. Experiment 006 ran
+>   30 real recordings through native Vosk `small-ja-0.22` on the M3: every
+>   transcript picked its intended sentence out of ten, closed-catalog
+>   precision `1.0` and recall `0.933`, median recognition about `0.2×` audio
+>   duration, `~201 MiB` RSS after model load. But only `1/30` transcripts
+>   matched the target exactly, so it is a coarse content check, not a
+>   pronunciation judge.
+> - A **browser** implementation exists on the unmerged branch
+>   `recognition/vosk-local-first` — `vosk-browser` 0.0.8 with AudioWorklet
+>   capture, a checksum-pinned 49.7 MB model archive, and closed-catalog
+>   matching at a descriptive `0.30` threshold. One live microphone test has
+>   passed. Browser and Android memory are still unmeasured, and that gates
+>   more than archive size does.
+> - `poc/` main still runs Chrome `SpeechRecognition` at a `0.56` similarity
+>   threshold, with Levenshtein-backtrace kana hit/miss marks. Those marks are
+>   string alignment, not acoustic evidence, and must stay replaceable.
+> - **Options 2–4** (ONNX, standalone acoustic alignment, a target-conditioned
+>   model) are untried. Do not promote synthetic DTW into the product gate
+>   before the browser and human-labeled evidence is stronger.
+> - The evaluation requirements at the end of this document are **unmet**.
+>   There are no human acceptance labels yet, so no threshold here is
+>   calibrated.
+>
+> Canonical detail, including the evidence sequence for resuming this lane:
+> [`../memory/cells/recognition.md`](../memory/cells/recognition.md) and
+> [`../memory/cells/experiments.md`](../memory/cells/experiments.md).
+
 ## Objective
 
 The recognition system does not need to transcribe arbitrary Japanese speech. Each exercise already provides the expected sentence and reading.

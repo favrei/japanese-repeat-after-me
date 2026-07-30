@@ -19,12 +19,19 @@ During ordinary work, write memory notes only to `memory/inbox/`.
   current status.
 - [`../poc/README.md`](../poc/README.md) — isolated Kissa Loop product PoC,
   local QA, and Android USB preview workflow.
-- [`documents/open-questions.md`](documents/open-questions.md) — unresolved
-  product, recognition, content, privacy, platform, and validation questions.
+- [`documents/INDEX.md`](documents/INDEX.md) — all durable documents, grouped
+  into story authoring and scoping/status.
+- [`documents/stage-design-flow.md`](documents/stage-design-flow.md) and
+  [`documents/character-separation-gate.md`](documents/character-separation-gate.md)
+  — how a new conversation stage is authored and reviewed.
+- [`documents/art-system.md`](documents/art-system.md) — the constant manga
+  frame and the art-pack contract for story art.
+- [`documents/open-questions.md`](documents/open-questions.md) — what is
+  settled, partially answered, and still open.
 - [`documents/product-and-technical-discussion.md`](documents/product-and-technical-discussion.md)
-  — cloud-era product and technical scoping.
+  — cloud-era product and technical scoping, partly superseded.
 - [`documents/platform-scope.md`](documents/platform-scope.md) — development,
-  hosting, browser, and capability-tier assumptions.
+  hosting, browser, and capability-tier assumptions, largely unverified.
 - [`documents/recognition-options.md`](documents/recognition-options.md) —
   candidate local recognition and acoustic-alignment approaches.
 - [`../experiments/README.md`](../experiments/README.md) — experiment catalog,
@@ -42,9 +49,15 @@ During ordinary work, write memory notes only to `memory/inbox/`.
 
 ## Current state
 
-- An isolated product PoC now exists under `poc/`; model/runtime research
-  remains evidence-gated.
-- Four cloud-era experiments exist under `experiments/`.
-- The cloud-to-local handoff was consolidated into the topic cells linked by
-  [`memory/current.md`](memory/current.md) on 2026-07-30.
-- No agent helper tool or supplemental resource has been registered yet.
+Reviewed 2026-07-30. `memory/current.md` is the authority; this is orientation.
+
+- An isolated product PoC exists under `poc/`. Its two-stage café flow is
+  user-confirmed and bundles locally generated Japanese reference audio.
+- Two significant lanes sit on **unmerged sibling worktrees**: local-first Vosk
+  recognition (`recognition/vosk-local-first`, committed) and the seinen art
+  system (`design/art-pack-system`, **uncommitted working-tree state**).
+- Six experiments exist under `experiments/`; 005 is parked and incomplete.
+- Model/runtime research remains evidence-gated. Nothing has been deployed, and
+  no Android device has ever been connected.
+- `resources/seinen-manga-frame/` holds the design mockup. No agent helper tool
+  has been registered yet.
