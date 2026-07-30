@@ -159,7 +159,7 @@ Out of the initial scope:
   evidence. See [Experiments](experiments.md).
 - The explicitly authorized private voice corpus is local at
   `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/` and committed in local
-  commit `6748321`. The configured GitHub origin is public, so the commit has
+  commit `27cf466`. The configured GitHub origin is public, so the commit has
   not been pushed. See [Recordings](recordings.md).
 - Durable project documentation lives under `.agents/documents/`, which now
   includes the drafted stage design flow. See [Content](content.md).
@@ -176,7 +176,7 @@ Out of the initial scope:
 - `.agents/documents/open-questions.md`
 - `poc/README.md`
 - `experiments/README.md`
-- Git history through `3344075`
+- Git history through `f7a71d4`
 - User correction recorded on 2026-07-30.
 - User's two-stage dialogue and bubble-progression clarification recorded on
   2026-07-30.
