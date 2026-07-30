@@ -2,15 +2,15 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Japanese conversation — UX flow PoC",
+  title: "にほんごものがたり — Japanese story practice",
   description:
-    "A neutral two-stage Japanese conversation flow for Android Chrome.",
-  applicationName: "Conversation PoC",
+    "Speak-the-line Japanese story practice in a manga frame. Android Chrome PWA PoC.",
+  applicationName: "Nihongo Monogatari",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Conversation PoC",
+    title: "にほんごものがたり",
   },
   formatDetection: {
     telephone: false,
@@ -28,7 +28,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#f4f4f2",
+  themeColor: "#fffdf4",
 };
 
 export default function RootLayout({
@@ -37,8 +37,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="ja">
+      <body>
+        {/* React 19 hoists these font links into <head>. The service worker
+            caches the font CSS and files for repeat offline visits. */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Klee+One:wght@600&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        />
+        {children}
+      </body>
     </html>
   );
 }

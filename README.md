@@ -18,11 +18,26 @@ two-stage Japanese café conversation.
   counts as a failure.
 - The final bubble leads to a finished screen, from which the loop can restart.
 
-The presentation is intentionally neutral. Art direction, branding, detailed
-motion, and visual polish are deferred until the UX and flow are confirmed.
+The presentation uses an approved manga-storybook frame: a comic balloon per
+sentence, speaker chips and tails, skewed progress cells, burst feedback
+(ピンポン！ / ざんねん…), and a placeholder scene/character layer. The café
+is only an example story — the scene background and the staff character are
+swappable slots that user-uploaded art will fill later. The frame (header,
+progress, balloon, panel, feedback) stays constant across stories.
+
+A failed attempt overlays the target reading with approximate per-kana
+hit/miss marks (green hit, red wavy-underlined miss). They come from
+transcript-to-target string alignment, not acoustic phoneme scoring — coarse
+guidance, not ground truth.
 
 The app does not store recordings. Chrome may use a network speech service for
 the temporary PoC recognizer.
+
+Autoplay uses pre-generated Qwen3-TTS clips rather than browser
+`speechSynthesis`. The clips are generated locally on Apple Silicon through
+MLX, bundled with the PWA, and cached for offline playback. Browser TTS remains
+only as a playback-error fallback. See `tools/tts/` for the authoring command;
+model weights are never shipped with the app.
 
 ## Local workflow
 
@@ -31,8 +46,8 @@ npm run dev
 npm run qa
 ```
 
-Add `?qa=1` to a development URL to expose synthetic success and failure
-buttons for flow testing without microphone input.
+Add `?qa=1` to a development URL to expose synthetic success, near-miss, and
+failure buttons for flow testing without microphone input.
 
 ## Android USB preview
 

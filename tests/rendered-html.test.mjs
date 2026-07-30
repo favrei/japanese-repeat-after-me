@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import test from "node:test";
 
 const templateRoot = new URL("../", import.meta.url);
@@ -25,7 +25,7 @@ async function render() {
   );
 }
 
-test("server-renders the neutral conversation start screen", async () => {
+test("server-renders the manga cover start screen", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -33,17 +33,18 @@ test("server-renders the neutral conversation start screen", async () => {
   const html = await response.text();
   assert.match(
     html,
-    /<title>Japanese conversation — UX flow PoC<\/title>/i,
+    /<title>にほんごものがたり — Japanese story practice<\/title>/,
   );
-  assert.match(html, /Café conversation/);
-  assert.match(html, /Stage (?:<!-- -->)?1/);
-  assert.match(html, /Stage (?:<!-- -->)?2/);
-  assert.match(html, /Start conversation/);
+  assert.match(html, /にほんご/);
+  assert.match(html, /ものがたり/);
+  assert.match(html, /第(?:<!-- -->)?1(?:<!-- -->)?話/);
+  assert.match(html, /第(?:<!-- -->)?2(?:<!-- -->)?話/);
+  assert.match(html, /はじめる/);
   assert.match(html, /Skip always dismisses exactly one bubble/);
   assert.match(html, /manifest\.json/);
   assert.doesNotMatch(
     html,
-    /Kissa Loop|three short rounds|choose a stage|cafe-scene|codex-preview/i,
+    /Kissa Loop|three short rounds|choose a stage|cafe-scene|codex-preview|Café conversation/i,
   );
 });
 
@@ -73,10 +74,7 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.match(app, /data-testid="skip-bubble"/);
   assert.doesNotMatch(app, /DEFAULT_ROUNDS|Skip round|manual override/i);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.doesNotMatch(
-    css,
-    /\.cafe-scene|\.awning|\.lamp|\.counter|radial-gradient/i,
-  );
+  assert.doesNotMatch(css, /\.cafe-scene|\.awning|\.lamp|\.counter/i);
   assert.match(page, /<PracticeApp \/>/);
   assert.match(layout, /manifest:\s*"\/manifest\.json"/);
   assert.doesNotMatch(
@@ -88,7 +86,26 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.equal(parsedManifest.display, "standalone");
   assert.equal(parsedManifest.orientation, "portrait");
   assert.equal(parsedManifest.icons.length, 2);
-  assert.match(serviceWorker, /conversation-poc-shell-v2/);
+  assert.match(serviceWorker, /conversation-poc-shell-v5/);
+  assert.match(app, /window\.isSecureContext/);
+  assert.match(app, /trusted HTTPS or localhost URL/);
+  const audioFiles = [
+    "ordering-welcome.mp3",
+    "ordering-question.mp3",
+    "ordering-second.mp3",
+    "ordering-menu.mp3",
+    "ordering-thanks.mp3",
+    "meal-arrives.mp3",
+  ];
+  await Promise.all(
+    audioFiles.map(async (file) => {
+      assert.match(serviceWorker, new RegExp(file.replace(".", "\\.")));
+      const info = await stat(
+        new URL(`../public/audio/qwen3/${file}`, import.meta.url),
+      );
+      assert.ok(info.size > 1_000);
+    }),
+  );
 
   const publicInventory = publicFiles.join("\n");
   assert.doesNotMatch(

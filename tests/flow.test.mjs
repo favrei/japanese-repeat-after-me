@@ -33,6 +33,11 @@ test("ships the specified two-stage, nine-bubble conversation", () => {
       "Here is the meal.",
     ],
   );
+  assert.ok(
+    FLOW.filter((bubble) => bubble.mode === "autoplay").every((bubble) =>
+      bubble.audioSrc?.startsWith("/audio/qwen3/"),
+    ),
+  );
 });
 
 test("one success advances the current bubble", () => {
