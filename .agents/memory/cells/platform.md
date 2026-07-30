@@ -16,7 +16,9 @@ runtime capability tiers, and hosting assumptions.
 - Primary runtime target: Android Chrome.
 - Optional targets: Linux AMD64 Chrome and iOS Chrome or installed PWA, each
   requiring separate validation.
-- Intended hosting target: GPT Sites.
+- Intended hosting target: GPT Sites, privately and only after the exact
+  QA-passed artifact receives explicit deployment approval. See
+  [Delivery](delivery.md).
 - A private GPT Sites test kit has demonstrated authenticated API routes and
   server-side recording storage/export. The intended application may still be
   static or mostly static; this evidence does not establish that its core loop
@@ -135,8 +137,9 @@ large-model delivery, or final-product privacy policy. See
 
 ## Active platform gates
 
-- The user has deferred device-deployment work while model and pipeline
-  functionality and recall/precision are evaluated.
+- The user has parked device-deployment work. Model evidence is also parked
+  after experiment 006; neither lane blocks local product development and
+  preview.
 - Preserve the incomplete local experiment 005 benchmark under
   `experiments/005-device-runtime-benchmark/`; do not build, deploy, or treat it
   as current evidence until the user reprioritizes this lane.
@@ -173,3 +176,4 @@ large-model delivery, or final-product privacy policy. See
 - [Recognition](recognition.md)
 - [Experiments](experiments.md)
 - [Recordings](recordings.md)
+- [Delivery](delivery.md)

@@ -7,24 +7,31 @@ directly requested a durable-memory edit. During normal work, write only under
 
 # Product
 
-Canonical memory for the learning loop, lesson content, learner feedback, and
-data-policy questions.
+Canonical memory for the conversation-rehearsal loop, learner experience,
+feedback, and data-policy questions.
 
 ## Core learning loop
 
-1. Present a Japanese sentence.
-2. Play a reference recording.
-3. Record the learner repeating it.
-4. Evaluate the attempt locally when practical.
-5. Highlight probable missing, mistimed, unclear, or substantially different
-   regions.
-6. Count successful attempts.
-7. Unlock the next challenge after the configured number of successes.
+1. Present an immediately useful situation as a scripted two-party
+   conversation.
+2. Optionally autoplay the whole scene as an intro before the learner joins.
+3. Advance through the other party's turns until a learner turn becomes
+   active.
+4. Keep the learner's Japanese text visible; optionally play its reference
+   audio, then record and evaluate the learner locally when practical.
+5. On a correct attempt, advance the conversation. On an error, stop on the
+   active learner bubble and provide conservative feedback.
+6. Advance after either one correct attempt or three errors.
+7. Repeat the complete conversation for the chosen number of rounds.
 
 ## Current product belief
 
-- The main value is repeated speaking practice with immediate verification and
-  localized feedback, not broad course coverage.
+- The main value is practical spoken recall through repeated rehearsal of
+  immediately useful phrases. This is not a grammar course or a conventional
+  learning sequence; a learner may rehearse useful language well before
+  studying its underlying Japanese.
+- The practice unit is a scripted conversation scene, not an isolated sentence
+  list or open-ended conversation.
 - Feedback should expose evidence and uncertainty rather than only an opaque
   score or a definitive phonetic judgment.
 - Model evidence and product progression policy are separate concerns: the
@@ -40,35 +47,61 @@ data-policy questions.
 - Mora-level feedback is desirable but should only be shown when alignment is
   sufficiently reliable. Word or phrase-region highlighting is safer early.
 
-## Lesson content hypothesis
+## Scene and interaction model
+
+- Present the other party's bubbles on the left and learner-party bubbles on
+  the right.
+- Use a situational background, such as a group talking or counter staff.
+  Material submitters may provide it; otherwise they choose one of the
+  application's defaults during submission.
+- Bubbles enter from the bottom and leave through the top. The visual feeling
+  may resemble a slow music-rhythm game, but pacing supports deliberate
+  speaking and is not a continuously timed conveyor.
+- The flow stops on an active learner bubble after an error.
+- Keep Japanese visible on the learner bubble.
+- Let the learner independently show or hide the hiragana reading and the
+  translation.
+- Provide a **PC speaks first** control that plays the learner's reference line
+  before the attempt.
+- Provide a **Skip round** control.
+- Recommend ten complete conversation rounds for a practice session. Ten is
+  guidance, not a hard mastery rule, and the learner may choose another amount.
+- A scene may have an intro mode that autoplays the conversation before the
+  learner joins.
+
+## Content inputs
 
 - AI may generate lesson content, but the user supplies the AI access or imports
   content generated elsewhere.
 - Candidate inputs include copied AI output, generated JSON, external sentence
   lists, or a later personal API-key integration.
-- A proposed lesson item contains:
-  - Japanese text;
-  - kana reading;
-  - translation;
-  - difficulty;
-  - required success count;
-  - notes;
-  - tags.
+- A proposed conversation chapter contains:
+  - scene title and situational background;
+  - ordered bubbles with speaker side, Japanese text, kana reading,
+    translation, and reference audio;
+  - recommended round count;
+  - notes and tags.
 - AI-generated readings must be validated before becoming pronunciation
   targets.
 - Browser or operating-system TTS is a zero-recurring-cost reference-audio
   candidate, but Japanese voice availability, pronunciation, pitch accent, and
   voice identity vary by platform.
 - Imported or pre-generated audio may later provide a consistent reference.
+- Future authenticated chapter submission, private preview, review, release,
+  and canonical per-bubble audio are owned by [Content](content.md), not the
+  initial rehearsal implementation.
 
 ## Open learning and feedback questions
 
-- What exactly counts as one successful repetition?
-- Must successes be consecutive?
-- Does a failed attempt reset current-sentence progress?
+- Does the intro count as a round?
+- What happens immediately after the third error?
+- Are difficult turns scheduled earlier in later rounds?
+- Do rounds restart immediately or pause briefly?
+- Which situational cues beyond Japanese, hiragana, and translation are
+  visible?
+- What exact motion, reduced-motion behavior, reference-audio requirements, and
+  background media format should be used?
 - Can a learner override a rejection?
-- Should the required count vary by difficulty?
-- Is reference audio replayed before every attempt or only on demand?
 - Should the first UI highlight words, phrases, kana, or morae?
 - How should uncertain feedback be displayed?
 - Which detected errors block progression?
@@ -97,6 +130,7 @@ data-policy questions.
 
 ## Sources
 
+- User direction recorded on 2026-07-30.
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
 - `README.md`
@@ -107,3 +141,5 @@ data-policy questions.
 - [Recognition](recognition.md)
 - [Platform](platform.md)
 - [Recordings](recordings.md)
+- [Content](content.md)
+- [Delivery](delivery.md)

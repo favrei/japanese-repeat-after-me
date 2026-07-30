@@ -13,18 +13,22 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
 
 - Project type: ML or AI project.
 - Build a web-first Japanese speaking-practice application around repeated,
-  verified sentence exercises with localized pronunciation feedback.
-- The initial product is a focused speaking-drill engine, not a complete
-  language course.
+  verified rehearsal of immediately useful scripted conversations, with
+  conservative localized feedback where evidence supports it.
+- The initial product is a focused practical-speaking rehearsal engine, not a
+  complete language course or open-ended conversation system.
 - The repository remains in evidence-gathering product and technical scoping.
   Existing documents describe hypotheses and constraints, not an approved
   implementation plan.
-- The active evidence priority is model and pipeline functionality followed by
-  measurable precision and recall. Device-deployment benchmarking is deferred
-  and must not displace that work.
-- The central product question is whether learners will repeatedly practise a
-  sentence when immediate approximate feedback and a required number of
-  successful attempts are combined.
+- The first real-corpus recognition baseline is complete and promising as a
+  coarse known-sentence content signal. The user parked that lane on
+  2026-07-30 pending later review; device-runtime benchmarking also remains
+  deferred.
+- Current product direction centers on a locally previewed two-party
+  conversation flow that advances a learner turn after one correct attempt or
+  three errors. Ten complete rounds is a recommendation, not a mastery rule.
+- The central product question is whether slow, repeated rehearsal with
+  immediate approximate feedback improves practical spoken recall.
 
 ## Development transition
 
@@ -52,16 +56,20 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
 - Avoid mandatory per-attempt cloud API costs.
 - Keep the architecture open until recognition quality, resource limits,
   feedback granularity, content, privacy, and hosting assumptions have evidence.
+- Develop and preview locally. A build result is not deployment authority;
+  release only an explicitly approved, QA-passed immutable artifact. See
+  [Delivery](delivery.md).
 
 ## Scope boundaries
 
 In scope:
 
-- repeated sentence-speaking practice;
+- repeated learner-turn speaking practice;
+- scripted two-party conversation rehearsal;
 - immediate automatic verification;
 - localized, uncertainty-aware feedback;
-- configurable mastery requirements;
-- user-generated lesson packs;
+- learner-selectable conversation rounds;
+- imported or bundled conversation material;
 - offline-capable, low-operating-cost delivery.
 
 Out of the initial scope:
@@ -70,13 +78,17 @@ Out of the initial scope:
 - grammar courses;
 - social features;
 - teacher marketplaces;
-- open-ended conversation.
+- open-ended conversation;
+- multi-user accounts and chapter publication, which are a confirmed future
+  phase rather than initial scope. See [Content](content.md).
 
 ## Cross-topic decisions and belief
 
 - Prefer a Chrome-first PWA and local-first pronunciation verification.
 - Keep recognition, scoring, lesson storage, and progress in the browser where
   practical.
+- Prefer browser-local storage with export/import until synchronization or
+  another proven requirement justifies hosted state.
 - Treat macOS Chrome and Android Chrome as primary targets. Linux Chrome and
   iOS are optional targets requiring separate validation.
 - Retain a WASM CPU path. WebGPU may enhance the experience but must not be the
@@ -94,9 +106,14 @@ Out of the initial scope:
 
 - No product frontend, root `pyproject.toml`, project-wide test suite, or CI
   workflow exists yet.
-- Four replayed spikes and one incomplete, parked device-runtime site live
-  under `experiments/`. Experiment 005 is preserved in its nested local commit
-  `fa6b9d3`; it is not an approved product architecture or deployment.
+- Six numbered experiment directories live under `experiments/`. Experiments
+  001, 003, 004, and 006 contain recorded or replayed evidence; experiment 002
+  lacks a committed harness; experiment 005 is incomplete and parked.
+- Experiment 005 is preserved in its nested local commit `fa6b9d3`; its scaffold
+  is not an approved product architecture or release foundation.
+- Experiment 006 ran all 30 private recordings through the pinned native Vosk
+  baseline on the M3 and recorded repeatability and wrong-sentence rejection
+  evidence. See [Experiments](experiments.md).
 - The explicitly authorized private voice corpus is local at
   `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/` and committed in local
   commit `53ff9af`. The configured GitHub origin is public, so the commit has
@@ -107,13 +124,14 @@ Out of the initial scope:
 
 ## Sources
 
+- User direction recorded on 2026-07-30.
 - `README.md`
 - `AGENTS.md`
 - `.agents/INDEX.md`
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
 - `experiments/README.md`
-- Git history through `02d3a5d`
+- Git history through `3e76d51`
 
 ## Related cells
 
@@ -122,3 +140,5 @@ Out of the initial scope:
 - [Recognition](recognition.md)
 - [Experiments](experiments.md)
 - [Recordings](recordings.md)
+- [Content](content.md)
+- [Delivery](delivery.md)

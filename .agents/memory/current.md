@@ -12,65 +12,71 @@ Canonical detail belongs in linked cells.
 
 ## Active direction
 
-- Focus the next work on model and pipeline functionality, then measurable
-  precision and recall. Do not advance the device-deployment/WebGPU benchmark
-  lane unless the user reprioritizes it. Preserve its local work in place. See
+- Shape the first locally previewed experience around slow, repeated rehearsal
+  of an immediately useful scripted two-party conversation. Advance a learner
+  turn after one correct attempt or three errors; recommend ten complete rounds
+  while allowing another amount. See [Product](cells/product.md) and
+  [Project](cells/project.md).
+- Develop and preview locally. Do not deploy because a build succeeds; release
+  only the exact immutable source and artifact that passed the agreed automated
+  checks, trusted-HTTPS manual QA, and explicit approval. See
+  [Delivery](cells/delivery.md).
+- Experiment 006 completed the first 30-recording M3 Vosk baseline. The user
+  judged its coarse known-sentence evidence promising and parked recognition
+  for later review. Keep device-runtime experiment 005 parked as well. See
   [Recognition](cells/recognition.md), [Experiments](cells/experiments.md), and
   [Platform](cells/platform.md).
-- Use the recovered 30-recording private corpus for the first end-to-end local
-  recognition baseline on the M3. See [Recordings](cells/recordings.md) and
-  [Experiments](cells/experiments.md).
-- No model, scoring rule, training objective, or application architecture is
-  approved yet. Build evidence before selecting them. See
-  [Project](cells/project.md) and [Recognition](cells/recognition.md).
+- Accounts, chapter upload/review, and released canonical audio are a confirmed
+  future phase, not current implementation scope. See
+  [Content](cells/content.md).
 
 ## Active defaults
 
+- Present the other party on the left and the learner on the right over a
+  situational background. Keep Japanese visible; let hiragana and translation
+  be toggled independently; provide **PC speaks first** and **Skip round**.
+  Stop the flow on an errored learner bubble. See
+  [Product](cells/product.md).
 - Prefer a Chrome-first, local-first PWA with no mandatory per-attempt cloud
   cost, a WASM CPU baseline, optional WebGPU enhancement, and separately
   downloaded recognition models when deployment work resumes. See
   [Project](cells/project.md) and [Platform](cells/platform.md).
+- Prefer browser-local storage with export/import until synchronization or
+  another proven requirement justifies a backend. Keep the single-user
+  development flow free of staging sites, environment-promotion machinery,
+  extra roles, and a QA database. See [Delivery](cells/delivery.md).
 - Treat recognition and acoustic alignment as uncertain evidence; product
   policy decides progression and must not overstate phonetic precision. See
   [Recognition](cells/recognition.md) and [Product](cells/product.md).
-- Treat M3 Metal training or fine-tuning and quantization as future directions.
-  Preserve an unquantized baseline and require quality evidence before choosing
-  MLX, PyTorch MPS, model format, or precision. See
-  [Recognition](cells/recognition.md).
 
 ## Blockers and open questions
 
-- The local corpus contains 10 intended sentences with three takes each, but
-  lacks capture-condition and human acceptability labels. It therefore cannot
-  estimate both acceptance precision and recall by itself. See
-  [Recordings](cells/recordings.md) and [Recognition](cells/recognition.md).
-- Local replays reproduced experiments 001 and 003 and smoke-tested native
-  Vosk on M3, but no committed experiment has evaluated all 30 real recordings
-  or produced a model/pipeline precision-recall report. See
-  [Experiments](cells/experiments.md).
-- Experiment 001 has a stale replay command, experiment 002 lacks a committed
-  harness, and experiment 004's documented wrapper produces invalid JSON and
-  uses legacy environment handling. See [Experiments](cells/experiments.md).
-- The incomplete experiment 005 private device benchmark is preserved in
-  nested local commit `fa6b9d3` and intentionally parked; it has not been fully
-  built, validated, or deployed. See [Experiments](cells/experiments.md) and
-  [Platform](cells/platform.md).
-- Progression rules, feedback granularity, content validation, recording
-  retention, and synchronization remain undecided. See
-  [Product](cells/product.md).
+- The repository has no canonical product frontend or release toolchain.
+  Experiment 005 contains useful scaffold pieces but fails its production-like
+  start, rendered tests, lint, and TypeScript checks and is not a release
+  foundation. See [Delivery](cells/delivery.md).
+- The intro/round relationship, behavior after the third error, later-round
+  difficult-turn scheduling, pacing, reduced motion, situational cues, and
+  background media format remain open. See [Product](cells/product.md).
+- The recognition model, scoring policy, feedback granularity, training
+  objective, browser runtime, recording retention, and synchronization remain
+  evidence-gated. See [Recognition](cells/recognition.md),
+  [Product](cells/product.md), and [Platform](cells/platform.md).
 
 ## Active evaluation gates
 
-- First prove the full local pipeline on all 30 recordings: deterministic audio
-  conversion, recognition, expected-text comparison, per-file diagnostics,
-  latency, and memory. See [Recognition](cells/recognition.md) and
-  [Experiments](cells/experiments.md).
-- Define the decision event and human reference labels before reporting
-  precision or recall. Sentence-acceptance precision/recall and localized-error
-  precision/recall are different tasks. See [Recognition](cells/recognition.md).
-- Add labeled acceptable and unacceptable attempts before calibrating false
-  acceptance, false rejection, thresholds, or feedback usefulness. Use varied
-  speakers, devices, rooms, and speaking rates before generalizing. See
+- Before any deployment, run one reproducible QA command covering type checks,
+  lint, unit tests, build, browser smoke tests, forced WASM fallback, optional
+  WebGPU, and artifact-privacy checks. Preview that exact build over trusted
+  local HTTPS and require explicit sign-off. See [Delivery](cells/delivery.md).
+- The deployment package must exclude datasets, recordings, secrets, training
+  artifacts, captured screens, and private development fixtures. Debug routes
+  and state-seeding hooks must be disabled for release. See
+  [Delivery](cells/delivery.md).
+- When recognition work resumes, add human-labeled acceptable, intentionally
+  incorrect, and near-miss attempts before calibrating false acceptance, false
+  rejection, thresholds, or feedback usefulness. Sentence acceptance and
+  localized-error detection require separate reference labels. See
   [Recognition](cells/recognition.md).
 - Keep the private voice commit local while the configured GitHub origin is
   public; never include `datasets/` in a Sites deployment. See
