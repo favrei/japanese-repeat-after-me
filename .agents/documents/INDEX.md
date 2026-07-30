@@ -15,8 +15,9 @@ Read in this order when making new conversation content.
   dialogue, difficulty control, and the art & voice brief handoff.
 - [`character-separation-gate.md`](character-separation-gate.md) — required
   review pass over authored dialogue: catches writer reasoning leaking into a
-  character's mouth, and characters sharing one omniscient mind. Never yet run
-  on a real stage set.
+  character's mouth, and characters sharing one omniscient mind.
+- [`cafe-stage-redesign.md`](cafe-stage-redesign.md) — first application of the
+  upgraded stage flow and separation gate to the bundled café story.
 - [`art-system.md`](art-system.md) — the constant manga frame and the art-pack
   contract a story's art must satisfy, plus how to submit and review a pack.
 
