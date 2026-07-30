@@ -41,3 +41,24 @@
 
 CI is optional in the current minimalist phase. A trustworthy local QA command
 plus a separate manual deployment action is sufficient.
+
+## Single-user simplification
+
+- The user is currently the only application user.
+- Do not create separate development and production branches, a staging site,
+  environment-promotion machinery, multiple user roles, or a separate QA
+  database.
+- Use one deployable codebase and this flow:
+
+  `develop locally → run QA → preview the exact build locally over trusted
+  HTTPS → approve → deploy that exact build privately`
+
+- QA and deployment remain separate actions even though there are no separate
+  development and deployment environments. Deployment must still be an
+  explicit action after QA, and it must use the exact QA-passed artifact
+  without rebuilding it.
+- Retain the deployment-package privacy check for recordings, datasets,
+  secrets, and training artifacts.
+- Prefer browser-local storage plus export/import if that satisfies the
+  product. Keep hosted storage only when cross-device synchronization or
+  another proven server-side requirement justifies it.
