@@ -22,9 +22,9 @@ reproducibility gaps, and required local continuation.
 - Environment blocks are not negative findings about Chrome microphone capture
   or Vosk quality.
 - A separate private GPT Sites test kit later captured and uploaded real WebM
-  recordings from a live browser. Those recordings remain server-side and have
-  not yet been inspected or used in a committed experiment. See
-  [Recordings](recordings.md).
+  recordings from a live browser. The validated 30-file archive is now local
+  and committed privately, but it has not yet been evaluated by a committed
+  model/pipeline experiment. See [Recordings](recordings.md).
 
 ## 001 — Synthetic acoustic DTW
 
@@ -209,8 +209,9 @@ Gaps:
 - It tests native Python Vosk, not browser/WASM Vosk.
 - It does not measure wall-clock time or peak memory itself; the local replay
   required an external measurement wrapper.
-- No audio corpus or M3 result is committed. Real user WebM recordings exist in
-  GPT Sites but have not been downloaded, inventoried, or converted for Vosk.
+- The M3 TTS smoke result is documented but not committed as a machine-readable
+  run. The real user corpus is now local and conversion-tested, but has not been
+  run through the committed Vosk harness.
 - A good transcript would be a content signal, not proof of pronunciation
   quality.
 - The harness predates the repository's `uv` rule and uses `venv` plus pip.
@@ -229,22 +230,52 @@ Evidence:
 - `experiments/004-vosk-japanese-local/run_macos.sh`
 - `experiments/004-vosk-japanese-local/transcribe.py`
 
+## 005 — Device runtime benchmark (parked)
+
+Question: can every target device run a deterministic WASM CPU baseline, use an
+equivalent WebGPU path when available, verify exact output agreement, and save
+an exportable capability/timing report?
+
+Current local work:
+
+- An isolated Sites starter and partial one-page benchmark implementation exist
+  under `experiments/005-device-runtime-benchmark/`.
+- The unfinished source and generated social-preview asset are preserved in
+  nested local commit `fa6b9d3` (`WIP: park device runtime benchmark`).
+- The work includes a proposed WASM/WebGPU compute test, D1-backed result API,
+  device labeling, progress UI, and JSON/CSV export direction.
+- The site has not completed integration, build validation, Sites project
+  creation, or deployment. The nested WIP commit preserves source but is not a
+  validated experiment result.
+
+Priority decision:
+
+- On 2026-07-30, the user deferred this lane to focus on model and pipeline
+  functionality and recall/precision.
+- Preserve the local work in place, but do not advance or deploy it until the
+  user explicitly returns to device-deployment validation.
+
 ## Highest-value next evidence
 
-1. Download and inventory the private GPT Sites recording archive after user
-   authorization, preserving provenance and a checksum.
-2. Convert derived copies to 16 kHz mono PCM and measure native Vosk accuracy,
-   latency, and memory on the M3 with the real user speech.
-3. Repair experiment 001 replay documentation and experiment 004's output,
+1. Build a reproducible real-corpus evaluation that converts and runs all 30
+   recovered recordings through the native M3 recognition pipeline.
+2. Record expected text/kana, recognized output, transcript diagnostics,
+   failures, latency, and resource use per take; inspect whether Vosk is useful
+   as a content signal.
+3. Define sentence-acceptance and localized-error labeling tasks, then add
+   human-labeled acceptable and unacceptable attempts before reporting
+   precision/recall.
+4. Compare the complete pipeline against human decisions and quantify false
+   acceptance, false rejection, precision, recall, and feedback usefulness.
+5. Repair experiment 001 replay documentation and experiment 004's output,
    results-directory, ignore, and `uv` problems.
-4. Commit a reproducible experiment 002 harness and run an explicitly consented
+6. Commit a reproducible experiment 002 harness and run an explicitly consented
    real microphone capture in macOS Chrome.
-5. Repeat resource and microphone measurements on representative Android
+7. Test real-speech acoustic alignment across speakers and rates.
+8. Later, repeat resource and microphone measurements on representative Android
    devices.
-6. Test real-speech acoustic alignment across speakers and rates.
-7. Gather human-labeled attempts for false accept/reject behavior and feedback
-   usefulness.
-8. Verify GPT Sites model delivery and PWA requirements.
+9. Keep experiment 005 and GPT Sites model-delivery/PWA verification deferred
+   until the user returns to the deployment lane.
 
 These are evidence checkpoints, not approved product requirements.
 

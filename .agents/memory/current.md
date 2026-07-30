@@ -12,54 +12,66 @@ Canonical detail belongs in linked cells.
 
 ## Active direction
 
-- Complete the cloud-to-local evidence handoff on the M3 MacBook; no
-  application architecture is approved yet. See [Project](cells/project.md).
-- With user authorization, recover and inventory the private GPT Sites
-  recording archive as the first real user-speech corpus, then use derived
-  audio for native local-recognizer measurements. See
-  [Recordings](cells/recordings.md) and [Experiments](cells/experiments.md).
-- Prioritize a committed real-microphone AudioWorklet harness in macOS Chrome,
-  followed by representative Android validation. See
-  [Experiments](cells/experiments.md) and [Platform](cells/platform.md).
+- Focus the next work on model and pipeline functionality, then measurable
+  precision and recall. Do not advance the device-deployment/WebGPU benchmark
+  lane unless the user reprioritizes it. Preserve its local work in place. See
+  [Recognition](cells/recognition.md), [Experiments](cells/experiments.md), and
+  [Platform](cells/platform.md).
+- Use the recovered 30-recording private corpus for the first end-to-end local
+  recognition baseline on the M3. See [Recordings](cells/recordings.md) and
+  [Experiments](cells/experiments.md).
+- No model, scoring rule, training objective, or application architecture is
+  approved yet. Build evidence before selecting them. See
+  [Project](cells/project.md) and [Recognition](cells/recognition.md).
 
 ## Active defaults
 
 - Prefer a Chrome-first, local-first PWA with no mandatory per-attempt cloud
   cost, a WASM CPU baseline, optional WebGPU enhancement, and separately
-  downloaded recognition models. See [Project](cells/project.md) and
-  [Platform](cells/platform.md).
+  downloaded recognition models when deployment work resumes. See
+  [Project](cells/project.md) and [Platform](cells/platform.md).
 - Treat recognition and acoustic alignment as uncertain evidence; product
   policy decides progression and must not overstate phonetic precision. See
   [Recognition](cells/recognition.md) and [Product](cells/product.md).
+- Treat M3 Metal training or fine-tuning and quantization as future directions.
+  Preserve an unquantized baseline and require quality evidence before choosing
+  MLX, PyTorch MPS, model format, or precision. See
+  [Recognition](cells/recognition.md).
 
 ## Blockers and open questions
 
-- Real user WebM recordings exist server-side, but there is no local copy and
-  their take count, codecs, recording conditions, and labels remain
-  unverified. See [Recordings](cells/recordings.md).
-- Local replays reproduced experiments 001 and 003 and smoke-tested native Vosk
-  on M3, but no committed experiment has evaluated the real recordings,
-  browser recognition, or real AudioWorklet microphone PCM. See
+- The local corpus contains 10 intended sentences with three takes each, but
+  lacks capture-condition and human acceptability labels. It therefore cannot
+  estimate both acceptance precision and recall by itself. See
+  [Recordings](cells/recordings.md) and [Recognition](cells/recognition.md).
+- Local replays reproduced experiments 001 and 003 and smoke-tested native
+  Vosk on M3, but no committed experiment has evaluated all 30 real recordings
+  or produced a model/pipeline precision-recall report. See
   [Experiments](cells/experiments.md).
 - Experiment 001 has a stale replay command, experiment 002 lacks a committed
   harness, and experiment 004's documented wrapper produces invalid JSON and
   uses legacy environment handling. See [Experiments](cells/experiments.md).
-- GPT Sites model delivery, caching, MIME/header, service-worker, and deployment
-  behavior remain unverified. See [Platform](cells/platform.md).
+- The incomplete experiment 005 private device benchmark is preserved in
+  nested local commit `fa6b9d3` and intentionally parked; it has not been fully
+  built, validated, or deployed. See [Experiments](cells/experiments.md) and
+  [Platform](cells/platform.md).
 - Progression rules, feedback granularity, content validation, recording
   retention, and synchronization remain undecided. See
   [Product](cells/product.md).
 
 ## Active evaluation gates
 
-- Download the private archive only with user authorization; preserve its raw
-  checksum and provenance before deriving test WAV files. See
+- First prove the full local pipeline on all 30 recordings: deterministic audio
+  conversion, recognition, expected-text comparison, per-file diagnostics,
+  latency, and memory. See [Recognition](cells/recognition.md) and
+  [Experiments](cells/experiments.md).
+- Define the decision event and human reference labels before reporting
+  precision or recall. Sentence-acceptance precision/recall and localized-error
+  precision/recall are different tasks. See [Recognition](cells/recognition.md).
+- Add labeled acceptable and unacceptable attempts before calibrating false
+  acceptance, false rejection, thresholds, or feedback usefulness. Use varied
+  speakers, devices, rooms, and speaking rates before generalizing. See
+  [Recognition](cells/recognition.md).
+- Keep the private voice commit local while the configured GitHub origin is
+  public; never include `datasets/` in a Sites deployment. See
   [Recordings](cells/recordings.md).
-- Measure download size, initialization time, latency, peak memory, and
-  battery/thermal behavior with real speech on the M3 and Android. See
-  [Recognition](cells/recognition.md) and [Experiments](cells/experiments.md).
-- Use varied speakers, devices, rooms, and speaking rates; calibrate false
-  acceptance, false rejection, and feedback usefulness against human judgment.
-  See [Recognition](cells/recognition.md).
-- Confirm a usable WASM CPU path and GPT Sites PWA/model support before fixing
-  the runtime and hosting architecture. See [Platform](cells/platform.md).

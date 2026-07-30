@@ -135,14 +135,29 @@ large-model delivery, or final-product privacy policy. See
 
 ## Active platform gates
 
-- Confirm stable microphone PCM capture and repeated play/record behavior in
-  local macOS Chrome.
-- Measure the chosen local recognizer on the M3, then on representative Android
-  devices.
-- Confirm that a WASM CPU path is usable before treating WebGPU as an
-  enhancement.
-- Verify GPT Sites model delivery, caching, headers, service workers, and update
-  behavior before fixing the deployment architecture.
+- The user has deferred device-deployment work while model and pipeline
+  functionality and recall/precision are evaluated.
+- Preserve the incomplete local experiment 005 benchmark under
+  `experiments/005-device-runtime-benchmark/`; do not build, deploy, or treat it
+  as current evidence until the user reprioritizes this lane.
+- When deployment work resumes, confirm stable microphone PCM capture, a usable
+  WASM CPU baseline, optional WebGPU behavior, representative Android resource
+  limits, and GPT Sites model delivery/caching before fixing the runtime
+  architecture.
+
+## Future deployment direction
+
+- Train or fine-tune privately on the M3 with a Metal-capable framework if
+  model evidence warrants it, then compare quantized artifacts against an
+  unquantized baseline.
+- Keep private recordings and training-only artifacts out of deployed
+  packages.
+- Ship the application separately from a versioned model download and cache it
+  for offline reuse.
+- Retain tested WASM CPU compatibility and treat WebGPU as capability-detected
+  acceleration.
+- Candidate paths such as MLX or PyTorch MPS for local training and
+  ONNX/WebGPU/WASM for deployment remain evidence-gated, not selected.
 
 ## Sources
 

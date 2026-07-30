@@ -19,6 +19,9 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
 - The repository remains in evidence-gathering product and technical scoping.
   Existing documents describe hypotheses and constraints, not an approved
   implementation plan.
+- The active evidence priority is model and pipeline functionality followed by
+  measurable precision and recall. Device-deployment benchmarking is deferred
+  and must not displace that work.
 - The central product question is whether learners will repeatedly practise a
   sentence when immediate approximate feedback and a required number of
   successful attempts are combined.
@@ -43,7 +46,9 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
 - For experiments, preserve the question, replay command, environment,
   machine-readable result, observed facts, interpretation, and limitations.
 - Do not commit model files, virtual environments, generated audio, or package
-  caches.
+  caches. The user explicitly approved one exception for the recovered private
+  voice corpus: it is committed locally but must not be pushed to the
+  configured public upstream.
 - Avoid mandatory per-attempt cloud API costs.
 - Keep the architecture open until recognition quality, resource limits,
   feedback granularity, content, privacy, and hosting assumptions have evidence.
@@ -81,14 +86,21 @@ Out of the initial scope:
 - Recognition quality, device limits, feedback policy, lesson content, privacy,
   and GPT Sites constraints are coupled; a decision in one area can change the
   viable architecture in the others.
+- Future model training or fine-tuning should use the local Apple M3 with Metal
+  acceleration when evidence supports it. Quantization follows a measured
+  unquantized baseline; framework, format, and precision remain open.
 
 ## Repository state
 
-- No frontend scaffold, application code, root `pyproject.toml`, test suite, or
-  CI workflow exists yet.
-- Four executable or partially executable spikes live under `experiments/`.
-- Real user recordings remain off-repository in a private GPT Sites session;
-  no local copy exists yet. See [Recordings](recordings.md).
+- No product frontend, root `pyproject.toml`, project-wide test suite, or CI
+  workflow exists yet.
+- Four replayed spikes and one incomplete, parked device-runtime site live
+  under `experiments/`. Experiment 005 is preserved in its nested local commit
+  `fa6b9d3`; it is not an approved product architecture or deployment.
+- The explicitly authorized private voice corpus is local at
+  `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/` and committed in local
+  commit `53ff9af`. The configured GitHub origin is public, so the commit has
+  not been pushed. See [Recordings](recordings.md).
 - Durable project documentation lives under `.agents/documents/`.
 - No license has been selected; default copyright applies until one is added.
 - `.agents/tools/` is an isolated `uv` project for future repeatable helpers.

@@ -126,11 +126,55 @@ General ASR character error rate is not the primary product metric. The
 important outcome is consistent, useful decisions and feedback across repeated
 learner attempts. Human pronunciation judgments are required for calibration.
 
-A private GPT Sites session contains real user WebM recordings that can supply
-an initial plumbing and transcription test after authorized recovery and
-conversion. They are not yet inventoried or human-labeled and therefore cannot
-calibrate acceptance thresholds or feedback quality. See
-[Recordings](recordings.md).
+The user has explicitly prioritized model and pipeline functionality followed
+by recall and precision over device-deployment work.
+
+Use task-specific metrics rather than an ambiguous single "model accuracy":
+
+- sentence-acceptance precision: human-acceptable attempts among attempts the
+  pipeline accepts;
+- sentence-acceptance recall: pipeline-accepted attempts among attempts humans
+  judge acceptable;
+- false-accept and false-reject rates as the corresponding product-facing
+  failure views;
+- localized-error precision and recall only when human-labeled error regions
+  exist;
+- transcript CER or kana edit distance as secondary recognition diagnostics,
+  not substitutes for pronunciation acceptance quality.
+
+The recovered private corpus contains 30 real user WebM/Opus recordings across
+10 intended sentences and can supply the first end-to-end functionality,
+transcription, latency, and memory baseline after deterministic conversion. It
+does not contain labeled unacceptable attempts or human pronunciation
+judgments, so it cannot estimate both acceptance precision and recall or
+calibrate feedback thresholds by itself. See [Recordings](recordings.md).
+
+## Active evidence sequence
+
+1. Run all 30 recovered recordings through a reproducible M3 pipeline that
+   records conversion, recognized text, expected text/kana, transcript
+   diagnostics, latency, failures, and resource use.
+2. Inspect per-sentence and per-take errors to determine whether the current
+   Vosk baseline provides a useful content signal.
+3. Define the exact pass decision and human-label protocol before publishing
+   precision/recall.
+4. Add labeled acceptable and unacceptable attempts, including realistic
+   omissions, substitutions, timing errors, and recording-quality failures.
+5. Compare the full pipeline against human decisions; only then tune thresholds
+   or assess alternative models.
+
+## Future local training and quantization
+
+- Train or fine-tune a relevant model locally on the Apple M3 with Metal
+  acceleration in a later phase.
+- MLX and PyTorch MPS are candidates, not selected frameworks.
+- Determine whether the private recordings are suitable for training or only
+  evaluation after labels, consent scope, split design, and retention are
+  settled.
+- Preserve an unquantized baseline. Compare quality, size, initialization,
+  latency, memory, and battery/thermal behavior after quantization.
+- Quantization must not silently reduce acceptance precision/recall or
+  localized-feedback reliability.
 
 ## Open questions
 
@@ -142,6 +186,13 @@ calibrate acceptance thresholds or feedback quality. See
 - Which learner population and human reference process define quality?
 - How many speakers and devices are required before thresholds are trusted?
 - Is false acceptance or false rejection more harmful for the learning loop?
+- Which model and training objective, if any, should be adapted after the
+  baseline pipeline is measured?
+- Which train/validation/test split and human reference labels are required?
+- Which quantization format and precision fit the eventual browser, WASM,
+  WebGPU, MLX, or native runtime?
+- What licenses and redistribution limits apply to the base model, derived
+  weights, and private recordings?
 
 ## Sources
 

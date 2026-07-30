@@ -12,19 +12,26 @@ availability, privacy, and use as experimental evidence.
 
 ## Current belief
 
-- Real user recordings exist in a private GPT Sites test session, but no local
-  copy exists as of 2026-07-30.
+- The user explicitly authorized recovery and local versioning on 2026-07-30.
+  A validated local copy exists at
+  `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/`.
+- The source archive SHA-256 is
+  `2834ca16aae1103582e8070a2c428cb4c280107b01858181a1bc87f1c40797e7`.
+  The recovered set contains 10 sentences with three takes each: 30 WebM/Opus
+  files, 3,718,772 audio bytes, and approximately 236.160 seconds.
+- The original `manifest.json` and per-file `SHA256SUMS` are retained. Every
+  file decoded successfully and converted successfully to a temporary 16 kHz
+  mono PCM WAV during validation; derived WAVs were not retained.
 - The recordings are server-side objects, not data held only in a browser
   profile. The live application supports upload, session listing, individual
   object reads, and tar export through `/api/recordings`.
 - A fresh browser or device may create a new empty session. An empty progress
   display therefore does not establish that an earlier session was deleted.
-- Stored objects use WebM filenames organized by sentence and take. The archive
-  has not yet been downloaded or inventoried locally, so its exact take count,
-  durations, codecs, and recording conditions remain unverified.
-- These recordings can become a first private learner-speech corpus, but their
-  existence alone is not evidence of recognition accuracy, pronunciation
-  quality, or AudioWorklet PCM stability.
+- The corpus can supply the first private real-speech functionality baseline.
+  It contains intended repetitions but has no human acceptability, error-type,
+  device, room, or microphone-path labels. It therefore cannot independently
+  calibrate sentence-acceptance precision/recall, pronunciation quality, or
+  localized feedback.
 - The temporary macOS Kyoko TTS sample used to smoke-test Vosk was not the
   user's voice and was deleted with its temporary replay directory.
 
@@ -71,9 +78,14 @@ navigation to that route was blocked by the Chrome control client during the
 - Do not start a new session when the goal is recovery.
 - Do not persist or expose Sites bypass tokens, cookies, signed headers, or
   other credentials. Use the Sites connector or an authenticated browser.
-- Download the private archive only when the user requests it.
-- Keep raw private recordings and derived audio out of Git unless the user
-  explicitly approves a redistributable fixture.
+- Download the private archive only when the user requests it. The initial
+  authorized recovery is complete.
+- The user explicitly approved committing this private corpus locally. The
+  configured GitHub origin is public, so keep commit `53ff9af` local unless the
+  repository becomes private or the user explicitly approves publishing the
+  voice data.
+- Do not publish, redistribute, or upload the recordings elsewhere without
+  explicit user approval. Never include `datasets/` in a GPT Sites deployment.
 - After download, preserve the raw archive, record its checksum and provenance,
   inventory takes and codecs, and derive 16 kHz mono PCM WAV files separately
   for native recognizer tests.
@@ -84,18 +96,21 @@ navigation to that route was blocked by the Chrome control client during the
 
 ## Open questions
 
-- How many usable takes does the archive contain?
 - Which device, microphone path, room, and speaking conditions produced each
   take?
-- May the private recordings be retained as a repeatable local evaluation
-  corpus, and for how long?
+- How long should this private local evaluation corpus be retained?
 - Which recordings should receive expected-text, kana, and human-quality
   labels before recognizer evaluation?
+- Which labeled unacceptable or intentionally incorrect attempts should be
+  added so that pipeline precision and recall can be measured?
 
 ## Sources
 
 - GPT Sites production worker logs inspected on 2026-07-30.
 - Live **Japanese Voice V1 Test Kit** interface inspected on 2026-07-30.
+- `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/manifest.json`
+- `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/SHA256SUMS`
+- `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/README.md`
 - `experiments/004-vosk-japanese-local/README.md`
 
 ## Related cells
