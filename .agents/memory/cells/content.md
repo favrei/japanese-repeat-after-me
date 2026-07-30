@@ -38,6 +38,38 @@ The private draft remains usable by its uploader while review is pending.
 Google authentication establishes identity. Access to Gmail mailbox data is
 not required by the current direction.
 
+## Stage authoring flow
+
+A repeatable flow for making a new conversation stage was drafted on
+2026-07-30 at [`../../documents/stage-design-flow.md`](../../documents/stage-design-flow.md).
+It is explicitly a draft the user expects to revise.
+
+- It owns **story, dialogue, and difficulty**. It deliberately does **not**
+  produce art; it ends by writing an art & voice *brief* — required background,
+  design language, character, persona, voice — which the art work consumes.
+  See [Visual Design](visual-design.md).
+- Nine steps: situation criteria, stage cuts by goal-state change, cast and
+  persona, dialogue writing, difficulty dials, a review list, the art & voice
+  brief, encoding into `poc/app/stages.ts`, and validation.
+
+Two constraints were derived from the confirmed flow rather than stated before:
+
+- **Skip-safe.** Because Skip and the third failure both dismiss a bubble,
+  every other-party line must remain coherent when the preceding learner bubble
+  was skipped or failed out. No reply may quote or depend on what the learner
+  actually said. See [Product](product.md).
+- **Difficulty lives in the content**, because the three-failure attempt budget
+  is fixed. Its dials are mora length, speak-bubble count, structural novelty,
+  deliberate recycling of earlier phrases, `accepted` variant breadth, and
+  phonetic fragility (katakana loanwords, long vowels, small っ, counters,
+  minimal pairs). Calibration target: the first speak bubble of a stage usually
+  passes on the first attempt, and failing out at three reads as mercy rather
+  than the normal exit.
+
+The flow also captures speech-delivery intent per speaker and per generated
+bubble instead of prescribing TTS prompt text, because prompting is unresolved.
+See [Audio](audio.md).
+
 ## Chapter audio policy
 
 - Require text for every dialogue bubble.
@@ -67,6 +99,8 @@ not required by the current direction.
 
 ## Open questions
 
+- Which parts of the drafted stage design flow need revision after it is used
+  to author a real stage?
 - What review criteria and automated pre-review checks apply?
 - Is agent approval advisory or technically enforced?
 - Who may revise, withdraw, or resubmit a chapter after review?
@@ -83,6 +117,10 @@ not required by the current direction.
 - User direction recorded on 2026-07-30.
 - User clarification that the café is only an example and future story
   backgrounds and characters will be uploadable, recorded on 2026-07-30.
+- User request for a skill-like stage-making flow separated from art, and the
+  follow-up that TTS prompting must be handled as unresolved, recorded on
+  2026-07-30.
+- `.agents/documents/stage-design-flow.md`
 
 ## Related cells
 
@@ -91,3 +129,4 @@ not required by the current direction.
 - [Platform](platform.md)
 - [Delivery](delivery.md)
 - [Visual Design](visual-design.md)
+- [Audio](audio.md)

@@ -14,5 +14,8 @@ for material that should be read as a document rather than as active memory.
   targets, PWA expectations, and runtime capability tiers.
 - [`recognition-options.md`](recognition-options.md) — candidate local
   recognition, acoustic alignment, scoring, and evaluation approaches.
+- [`stage-design-flow.md`](stage-design-flow.md) — step-by-step flow for
+  authoring a new conversation stage: situation, stage cuts, personas,
+  dialogue, difficulty control, and the art & voice brief handoff.
 - [`open-questions.md`](open-questions.md) — unresolved decisions that must be
   narrowed before they become implementation requirements.

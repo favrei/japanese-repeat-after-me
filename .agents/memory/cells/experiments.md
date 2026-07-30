@@ -264,6 +264,8 @@ its transcripts agree with the intended sentence targets?
 Implementation:
 
 - `experiments/006-real-corpus-vosk-baseline/`
+- The scoring and rejection code lives in the `real_corpus_eval/` package at
+  the **experiment root**, not under a `src/` directory.
 - Deterministic WebM/Opus to 16 kHz mono PCM conversion with FFmpeg.
 - Vosk 0.3.44 and pinned `vosk-model-small-ja-0.22`; model archive SHA-256
   `efa092d280153a77615e9e0c7d7283e93e600de3d19d3bec686c57ef19d52eac`.
@@ -348,6 +350,12 @@ When the recognition lane resumes:
 4. Later, repeat resource and microphone measurements on representative
    Android devices.
 
+A separate evidence gap now belongs to reference audio rather than
+recognition: no experiment has established how to prompt Qwen3-TTS
+CustomVoice. The lever set, wording, and binding strength are untested, and
+the one attempt at per-line acting instructions produced a rejected breath
+artifact. See [Audio](audio.md).
+
 Independent reproducibility debt remains:
 
 1. Repair experiment 001 replay documentation and experiment 004's output,
@@ -365,3 +373,4 @@ These are evidence checkpoints, not approved product requirements.
 - [Platform](platform.md)
 - [Recognition](recognition.md)
 - [Recordings](recordings.md)
+- [Audio](audio.md)

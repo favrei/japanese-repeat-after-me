@@ -119,6 +119,11 @@ If an agent lacks text-to-image capability, keep the existing placeholders and
 leave one precise inbox note. Do not substitute unrelated stock art or
 known-wrong shipped assets.
 
+The other party's **voice** is part of the same character decision as their
+art. On 2026-07-30 the user parked further reference-voice tuning until the
+story-design line is ready so character and voice can be judged together. See
+[Audio](audio.md) and [Content](content.md).
+
 ## Implementation and QA history
 
 - The rejected manga-storybook port changed `poc/app/globals.css`,
@@ -132,6 +137,11 @@ known-wrong shipped assets.
   speaking, near miss, failure, success, and completion.
 - This mechanical pass does not approve the rejected visual treatment or the
   replacement mockup.
+- The 2026-07-30 Chrome audit that produced the defect lists above changed no
+  application source. Create a new `poc/` worktree for the redesign only after
+  its scope is confirmed. Reading the replacement mockup required the file
+  itself; `file://` navigation to it is blocked by browser security policy. See
+  [Delivery](delivery.md).
 
 ## Open questions
 
@@ -163,3 +173,4 @@ known-wrong shipped assets.
 - [Delivery](delivery.md)
 - [Recognition](recognition.md)
 - [Project](project.md)
+- [Audio](audio.md)

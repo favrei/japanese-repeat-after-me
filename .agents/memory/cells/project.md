@@ -67,6 +67,18 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
 - Develop and preview locally. A build result is not deployment authority;
   release only an explicitly approved, QA-passed immutable artifact. See
   [Delivery](delivery.md).
+- Keep agent-facing process documents inside the repository under `.agents/`,
+  not in host-specific locations such as `.claude/skills/`. On 2026-07-30 the
+  user rejected a `.claude/skills/` placement for exactly this reason: such
+  material must follow the project and stay in Git.
+- Use short-lived sibling worktrees for focused, apples-to-apples changes to
+  the nested `poc/` repository, then rebase and fast-forward the finished
+  commit onto nested `main`. Do not modify the dirty `poc/` checkout from
+  another worktree.
+- A personal `speak-human` skill is installed at user level for both Claude
+  (`~/.claude/skills/speak-human/`) and Codex
+  (`~/.codex/skills/speak-human/`). It is a one-off decode pass over dense
+  agent output, not a standing change to communication style.
 
 ## Scope boundaries
 
@@ -125,6 +137,16 @@ Out of the initial scope:
   desktop behavior. Neither mechanical result validates Android
   microphone/PWA behavior. See [Delivery](delivery.md) and
   [Visual Design](visual-design.md).
+- Two sibling worktrees of the nested PoC repository exist:
+  - `../japanese-repeat-after-me-tts` on `tts/qwen3-metal` — its focused audio
+    commit `ad3a356` was rebased and fast-forward merged into nested PoC
+    `main`. See [Audio](audio.md).
+  - `../japanese-repeat-after-me-recognition` on `recognition/vosk-local-first`
+    — commit `18fcf55`, clean and one commit ahead of nested `main`, **not
+    merged**. See [Recognition](recognition.md).
+- The separate story/UI working changes remain uncommitted on nested PoC
+  `main`. During the audio fast-forward they were stashed, restored, and
+  verified byte-for-byte against safety snapshot commit `9f4e9bb`.
 - No Android device run, Sites project creation, saved Sites version, or
   deployment occurred.
 - Six numbered experiment directories live under `experiments/`. Experiments
@@ -139,7 +161,8 @@ Out of the initial scope:
   `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/` and committed in local
   commit `53ff9af`. The configured GitHub origin is public, so the commit has
   not been pushed. See [Recordings](recordings.md).
-- Durable project documentation lives under `.agents/documents/`.
+- Durable project documentation lives under `.agents/documents/`, which now
+  includes the drafted stage design flow. See [Content](content.md).
 - No license has been selected; default copyright applies until one is added.
 - `.agents/tools/` is an isolated `uv` project for future repeatable helpers.
 
@@ -172,3 +195,4 @@ Out of the initial scope:
 - [Content](content.md)
 - [Delivery](delivery.md)
 - [Visual Design](visual-design.md)
+- [Audio](audio.md)

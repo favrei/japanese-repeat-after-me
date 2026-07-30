@@ -183,13 +183,87 @@ Conversion was deterministic, but only `27/30` surface transcripts and `1/30`
 word/confidence/timestamp arrays matched exactly across runs. Top-one sentence
 identity and aggregate closed-catalog discrimination remained stable.
 
+## Local browser Vosk integration (branch, unmerged)
+
+The local-first lane now has a working browser implementation, built in worktree
+`/Users/peter/workspaces/japanese-repeat-after-me-recognition` on branch
+`recognition/vosk-local-first` and committed as nested PoC commit `18fcf55`
+(`Replace browser speech with local Vosk recognition`). The branch is clean and
+one commit ahead of nested `main`; the rebase onto `main` was an up-to-date
+no-op because both shared base `d0bd4bd`. It is **not merged**, and the dirty
+`poc/` main worktree was left untouched.
+
+What it replaces Chrome `SpeechRecognition` with:
+
+- `vosk-browser` 0.0.8 with AudioWorklet PCM capture;
+- separately prepared `vosk-model-small-ja-0.22`;
+- recording-quality retry checks;
+- experiment-006-style closed-catalog target matching at the descriptive `0.30`
+  content threshold.
+
+Model hosting and preparation:
+
+- `vosk-browser`'s published GitHub demo does **not** host
+  `vosk-model-small-ja-0.22.tar.gz`; the candidate URL returned HTTP 404.
+- The official Vosk Japanese asset is a ZIP, while `vosk-browser` requires a
+  gzipped tar archive rooted at `model/`. A checksum-pinned local prepare/check
+  script therefore produces the browser archive, which stays out of Git.
+
+Size and memory:
+
+- prepared `vosk-model-small-ja-0.22.tar.gz`: exactly 49,654,706 bytes
+  (~49.7 MB decimal, 47.4 MiB);
+- browser Vosk client chunk: 5,785,953 bytes uncompressed, ~2,363,147 bytes
+  gzipped;
+- acceptable as an explicit, separately cached offline model on desktop; too
+  large for the initial app shell and borderline for mandatory Android use;
+- `vosk-browser` keeps persistent extracted model storage while the service
+  worker caches the archive separately, so total browser storage can exceed the
+  49.7 MB download. Measure this and revisit duplicate caching on Android.
+- Native experiment 006 observed ~201 MiB RSS after model load and 279–308 MiB
+  peak process RSS on the M3. **Browser and Android memory remain unmeasured
+  and are the more important gate than archive size.**
+
+Verification so far:
+
+- the first `npm run test` built the app and passed 16/17, the single failure
+  being a stale case-sensitive assertion for `Audio is not saved` against
+  lowercase `audio` UI copy — not an implementation or build failure;
+- after that fix, `npm run qa` passed the model archive check, TypeScript, lint
+  (existing font warning only), build, and 17/17 tests;
+- on 2026-07-30 the user reported the **first local-recognition test passing in
+  a live worktree preview**. This is the first positive real
+  browser/microphone smoke result for the AudioWorklet + `vosk-browser` +
+  `vosk-model-small-ja-0.22` path.
+
+What that manual pass does **not** cover: the other speaking bubbles,
+wrong-sentence rejection, short/quiet/clipped retry behaviour, Android resource
+use, and repeatability. Continue the Vosk content-verification lane first; do
+not promote synthetic DTW into the product gate until the browser and
+human-labeled evidence is stronger.
+
+Dependency risk carried by this branch:
+
+- `npm audit --omit=dev` exits nonzero in the worktree.
+- Next.js was updated 16.2.6 → 16.2.12 for the available framework advisory
+  fixes; a production audit still reports high transitive `postcss`/`sharp`
+  advisories with no non-breaking resolution in the current graph.
+- `vosk-browser` 0.0.8 declares `uuid` 9.0.0 (GHSA-w5hq-g745-h8pq). The advisory
+  affects UUID v3/v5/v6 calls receiving a caller buffer; the wrapper uses UUID
+  v4 for recognizer identity, so the affected API is not used here.
+- `vosk-browser` 0.0.8 is still the latest npm release as of 2026-07-30 and has
+  no audit fix. Keep this as an explicit browser-runtime maintenance risk
+  rather than claiming a clean production audit. See [Delivery](delivery.md).
+
 ## Temporary PoC adapter
 
 - The user accepted a temporary coarse recognizer for the first Android PWA
   PoC so recognition research would not block discussion of the product loop.
   On 2026-07-30 the user confirmed that Chrome `SpeechRecognition` remains
   acceptable for now but is expected to be replaced by the more advanced
-  local-first lane.
+  local-first lane. That replacement now exists on an unmerged branch; see
+  the local browser Vosk section above. Until it merges, the description below
+  is what `poc/` main actually runs.
 - `poc/` uses Chrome's `SpeechRecognition` interface with Japanese alternatives
   and a normalized character-edit similarity threshold of `0.56`. The app
   itself does not retain audio, but Chrome may use a network speech service.
@@ -273,6 +347,10 @@ identity and aggregate closed-catalog discrimination remained stable.
 - User confirmation of the corrected flow recorded on 2026-07-30.
 - User confirmation that Chrome recognition is temporary and the advanced
   local-first lane will resume later, recorded on 2026-07-30.
+- Worktree `/Users/peter/workspaces/japanese-repeat-after-me-recognition`,
+  branch `recognition/vosk-local-first`, nested PoC commit `18fcf55`.
+- User report of the first passing live local-recognition test recorded on
+  2026-07-30.
 
 ## Related cells
 
@@ -281,3 +359,5 @@ identity and aggregate closed-catalog discrimination remained stable.
 - [Experiments](experiments.md)
 - [Recordings](recordings.md)
 - [Visual Design](visual-design.md)
+- [Delivery](delivery.md)
+- [Audio](audio.md)

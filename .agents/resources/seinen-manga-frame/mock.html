@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seinen manga frame — mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efece4;      /* newsprint */
+  --ink:#14120f;        /* true black-ish */
+  --ink-2:#3d3831;      /* secondary text */
+  --ink-3:#7d766b;      /* tertiary */
+  --accent:#a81c22;     /* the ONE accent: deep manga red */
+  --white:#fff;
+  --f-jp:"Shippori Mincho B1",serif;
+  --f-ui:"Zen Kaku Gothic New",sans-serif;
+  --rule:2px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--ink);color:var(--ink);
+  font-family:var(--f-ui);-webkit-font-smoothing:antialiased;
+}
+
+/* ---------- screentone ---------- */
+.tone{
+  --d:6px; --r:1.1px; --c:rgba(20,18,15,.85);
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--c) 0 var(--r), transparent calc(var(--r) + .4px)),
+    radial-gradient(circle at 50% 50%, var(--c) 0 var(--r), transparent calc(var(--r) + .4px));
+  background-size:var(--d) var(--d), var(--d) var(--d);
+  background-position:0 0, calc(var(--d)/2) calc(var(--d)/2);
+}
+.tone-10{--r:.7px;--d:7px}
+.tone-30{--r:1.2px;--d:6px}
+.tone-50{--r:1.9px;--d:6px}
+.tone-70{--r:2.5px;--d:6px}
+
+/* ---------- full-bleed shell ---------- */
+.screen{
+  position:fixed;inset:0;
+  display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;
+  background:var(--paper);
+  overflow:hidden;
+}
+
+/* ---------- header ---------- */
+.hd{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:12px;padding:10px 16px;
+  border-bottom:var(--rule) solid var(--ink);
+  background:var(--paper);
+}
+.hd .chip{
+  justify-self:start;
+  padding:7px 14px;border:var(--rule) solid var(--ink);border-radius:0;
+  background:var(--paper);font-family:var(--f-ui);font-size:13px;font-weight:500;
+  letter-spacing:.08em;line-height:1;
+}
+.hd .chip.r{justify-self:end}
+.hd .chip:active{background:var(--ink);color:var(--paper)}
+.hd .ttl{text-align:center;line-height:1.2}
+.hd .ttl small{
+  display:block;font-size:9px;letter-spacing:.3em;color:var(--ink-3);font-weight:500;
+}
+.hd .ttl strong{
+  font-family:var(--f-jp);font-size:17px;font-weight:600;letter-spacing:.06em;
+}
+
+/* progress: ink rule with filled squares */
+.pg{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 16px;border-bottom:var(--rule) solid var(--ink);
+  background:var(--paper);
+}
+.pg .n{font-size:10px;font-weight:700;letter-spacing:.14em;font-variant-numeric:tabular-nums}
+.pg .cells{display:flex;flex:1;gap:4px}
+.pg .cells i{flex:1;height:7px;border:1.5px solid var(--ink);background:var(--paper)}
+.pg .cells i.done{background:var(--ink)}
+.pg .cells i.now{background:var(--accent);border-color:var(--accent)}
+
+/* ---------- scene (full-bleed art slot) ---------- */
+.scene{position:relative;overflow:hidden;background:var(--white)}
+.scene .art{position:absolute;inset:0}
+
+/* placeholder café drawn as ink + tone */
+.wall{position:absolute;inset:0;--c:rgba(20,18,15,.5)}
+.window{
+  position:absolute;left:6%;top:14%;width:32%;height:34%;
+  border:var(--rule) solid var(--ink);background:var(--white);
+}
+.window::before,.window::after{
+  content:"";position:absolute;background:var(--ink);
+}
+.window::before{left:50%;top:0;bottom:0;width:2px;margin-left:-1px}
+.window::after{top:50%;left:0;right:0;height:2px;margin-top:-1px}
+.shelf{
+  position:absolute;right:6%;top:16%;width:30%;height:26%;
+  border:var(--rule) solid var(--ink);
+}
+.shelf i{
+  position:absolute;left:0;right:0;height:2px;background:var(--ink);
+}
+.shelf i:nth-child(1){top:33%} .shelf i:nth-child(2){top:66%}
+.jar{position:absolute;bottom:4px;width:13%;height:22%;border:1.5px solid var(--ink);background:var(--white)}
+.counter{
+  position:absolute;left:0;right:0;bottom:0;height:16%;
+  border-top:3px solid var(--ink);background:var(--ink);
+}
+.counter::after{
+  content:"";position:absolute;left:0;right:0;top:5px;height:2px;background:var(--paper);opacity:.5;
+}
+.floor{position:absolute;left:0;right:0;bottom:16%;height:14%;--c:rgba(20,18,15,.55)}
+
+/* speed lines for tension states */
+.speedlines{
+  position:absolute;inset:0;opacity:0;transition:opacity .2s;
+  background:repeating-conic-gradient(from 0deg at 50% 42%,
+    rgba(20,18,15,.5) 0deg .35deg, transparent .35deg 2.6deg);
+  -webkit-mask-image:radial-gradient(ellipse 46% 40% at 50% 42%, transparent 55%, #000 100%);
+          mask-image:radial-gradient(ellipse 46% 40% at 50% 42%, transparent 55%, #000 100%);
+  pointer-events:none;
+}
+body.s-fail .speedlines{opacity:1}
+
+/* character slot */
+.char{
+  position:absolute;left:4%;bottom:11%;z-index:1;
+  height:min(62%,430px);width:auto;
+  transition:opacity .25s;
+}
+body.s-speak .char{opacity:.9}
+
+/* ---------- balloon ---------- */
+.bl{
+  position:absolute;z-index:3;
+  left:50%;top:26px;transform:translateX(-50%);
+  width:min(calc(100% - 40px),640px);
+  padding:20px 22px 16px;
+  border:2.5px solid var(--ink);border-radius:36px/26px;
+  background:var(--white);
+  animation:bl-in .22s ease-out;
+}
+@keyframes bl-in{from{opacity:0;transform:translateX(-50%) translateY(-8px) scale(.98)}}
+.bl .tail{position:absolute;width:44px;height:30px;overflow:visible}
+.bl .tail svg{display:block;overflow:visible}
+.bl.from-left .tail{left:52px;bottom:-28px}
+.bl.from-right .tail{right:52px;bottom:-28px;transform:scaleX(-1)}
+
+.bl .who{
+  position:absolute;top:-13px;left:22px;
+  padding:3px 12px 4px;background:var(--ink);color:var(--paper);
+  font-family:var(--f-ui);font-size:11px;font-weight:700;letter-spacing:.22em;
+  line-height:1;
+}
+.bl .who.you{left:auto;right:22px;background:var(--accent)}
+.bl .auto{
+  position:absolute;top:-12px;right:22px;
+  padding:3px 10px 4px;border:2px solid var(--ink);background:var(--paper);
+  font-size:10px;font-weight:700;letter-spacing:.18em;line-height:1;
+}
+.bl .jp{
+  margin:2px 0 0;font-family:var(--f-jp);font-weight:600;
+  font-size:clamp(20px,5.4vw,26px);line-height:1.72;letter-spacing:.01em;
+}
+.bl .rd{margin:10px 0 0;color:var(--ink-3);font-size:12px;letter-spacing:.02em}
+.bl .rd .hit{color:var(--ink)}
+.bl .rd .miss{
+  color:var(--accent);font-weight:700;
+  background:linear-gradient(transparent 62%, rgba(168,28,34,.22) 62%);
+}
+.bl .en{
+  margin:9px 0 0;padding-top:9px;border-top:1.5px solid rgba(20,18,15,.18);
+  color:var(--ink-2);font-size:12px;font-weight:400;
+}
+
+/* ---------- sfx ---------- */
+.sfx{
+  position:absolute;z-index:4;pointer-events:none;
+  font-family:var(--f-ui);font-weight:900;letter-spacing:.04em;
+  color:var(--white);
+  -webkit-text-stroke:3px var(--ink);
+  paint-order:stroke fill;
+}
+.sfx.amb{
+  right:5%;top:34%;font-size:clamp(26px,7vw,40px);
+  transform:rotate(-6deg);opacity:.85;
+  -webkit-text-stroke-width:2.5px;
+}
+.sfx.big{
+  left:50%;top:46%;transform:translate(-50%,-50%) rotate(-7deg);
+  font-size:clamp(46px,13vw,86px);
+  animation:sfx-in .26s cubic-bezier(.2,1.5,.4,1);
+}
+.sfx.big.win{color:var(--white);-webkit-text-stroke-color:var(--ink)}
+.sfx.big.miss{color:var(--paper);-webkit-text-stroke-color:var(--accent)}
+@keyframes sfx-in{from{opacity:0;transform:translate(-50%,-50%) rotate(-24deg) scale(.5)}}
+
+/* impact burst behind the big sfx */
+.impact{
+  position:absolute;z-index:3;left:50%;top:46%;
+  width:min(78%,460px);aspect-ratio:1.35;
+  transform:translate(-50%,-50%);
+  background:var(--ink);
+  clip-path:polygon(50% 0,57% 13%,67% 5%,70% 18%,82% 12%,81% 26%,94% 24%,88% 36%,100% 40%,90% 50%,100% 60%,88% 64%,94% 76%,81% 74%,82% 88%,70% 82%,67% 95%,57% 87%,50% 100%,43% 87%,33% 95%,30% 82%,18% 88%,19% 74%,6% 76%,12% 64%,0 60%,10% 50%,0 40%,12% 36%,6% 24%,19% 26%,18% 12%,30% 18%,33% 5%,43% 13%);
+  animation:sfx-in .26s cubic-bezier(.2,1.5,.4,1);
+}
+.impact.miss{background:var(--accent)}
+
+/* mic level */
+.mic-bars{position:absolute;z-index:4;right:22px;bottom:20px;display:flex;align-items:flex-end;gap:4px}
+.mic-bars i{width:5px;background:var(--accent);animation:bob .8s ease-in-out infinite;transform-origin:bottom}
+.mic-bars i:nth-child(1){height:12px;animation-delay:0s}
+.mic-bars i:nth-child(2){height:22px;animation-delay:.1s}
+.mic-bars i:nth-child(3){height:34px;animation-delay:.2s}
+.mic-bars i:nth-child(4){height:18px;animation-delay:.3s}
+.mic-bars i:nth-child(5){height:28px;animation-delay:.4s}
+@keyframes bob{50%{transform:scaleY(.4)}}
+
+/* ---------- bottom panel ---------- */
+.pn{
+  display:grid;grid-template-columns:1fr auto;align-items:center;
+  gap:10px 20px;
+  padding:14px 18px calc(16px + env(safe-area-inset-bottom));
+  border-top:var(--rule) solid var(--ink);background:var(--paper);
+}
+.pn .lead{grid-column:1;min-width:0}
+.pn h2{
+  margin:0;font-family:var(--f-jp);font-size:19px;font-weight:700;letter-spacing:.04em;
+}
+.pn .cap{margin:4px 0 0;color:var(--ink-3);font-size:11.5px;line-height:1.5}
+.pn .side{grid-column:2;display:flex;align-items:center;gap:14px}
+.tries{display:flex;align-items:center;gap:5px}
+.tries i{width:11px;height:11px;border:2px solid var(--ink);background:var(--paper)}
+.tries i.on{background:var(--accent);border-color:var(--accent)}
+.tries small{margin-left:4px;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--ink-3)}
+.cta{
+  grid-column:1/-1;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:15px;border:2.5px solid var(--ink);border-radius:0;
+  background:var(--ink);color:var(--paper);
+  font-family:var(--f-ui);font-size:16px;font-weight:700;letter-spacing:.14em;
+}
+.cta.live{background:var(--accent);border-color:var(--accent)}
+.cta:active{transform:translateY(1px)}
+.cta svg{display:block}
+.pn .foot{grid-column:1/-1;margin:8px 0 0;font-size:10px;color:var(--ink-3);text-align:center;letter-spacing:.04em}
+
+/* wide screens: panel becomes a single row, scene keeps growing */
+@media (min-width:760px){
+  .pn{
+    grid-template-columns:1fr minmax(280px,380px) auto;
+    padding:16px 28px;
+  }
+  .pn .lead{grid-column:1}
+  .cta{grid-column:2;margin:0}
+  .pn .side{grid-column:3}
+  .pn .foot{grid-column:1/-1;text-align:right;margin-top:6px}
+  .hd,.pg{padding-left:28px;padding-right:28px}
+}
+
+/* ---------- cover ---------- */
+.cover{
+  position:fixed;inset:0;display:grid;grid-template-rows:1fr auto;
+  background:var(--paper);
+}
+.cover .page{
+  position:relative;overflow:hidden;
+  display:grid;place-content:center;justify-items:center;gap:0;
+  padding:24px;
+}
+.cover .frame{
+  position:relative;width:min(100%,520px);
+  border:3px solid var(--ink);background:var(--white);
+}
+.cover .frame .band{
+  position:absolute;top:0;left:0;padding:6px 14px;
+  background:var(--ink);color:var(--paper);
+  font-size:10px;font-weight:700;letter-spacing:.3em;
+}
+.cover .cover-art{
+  position:relative;aspect-ratio:16/10;border-bottom:3px solid var(--ink);
+  overflow:hidden;background:var(--white);
+}
+.cover .meta{padding:22px 24px 20px}
+.cover h1{
+  margin:0;font-family:var(--f-jp);font-weight:800;
+  font-size:clamp(28px,7vw,40px);line-height:1.35;letter-spacing:.04em;
+}
+.cover .sub{
+  margin:8px 0 0;font-size:10.5px;letter-spacing:.34em;color:var(--ink-3);font-weight:500;
+}
+.cover .chapters{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:0}
+.cover .chapters li{
+  display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding:10px 0;border-top:1.5px solid rgba(20,18,15,.2);
+}
+.cover .chapters li:last-child{border-bottom:1.5px solid rgba(20,18,15,.2)}
+.cover .chapters b{font-family:var(--f-jp);font-size:15px;font-weight:600}
+.cover .chapters small{font-size:10px;color:var(--ink-3);letter-spacing:.08em;white-space:nowrap}
+.cover .foot{padding:16px 24px calc(20px + env(safe-area-inset-bottom));border-top:var(--rule) solid var(--ink)}
+.cover .foot .cta{margin:0}
+.cover .rule{margin:12px 0 0;font-size:10.5px;line-height:1.7;color:var(--ink-3);text-align:center}
+@media (min-width:760px){
+  .cover .foot{display:grid;grid-template-columns:1fr minmax(280px,380px) 1fr;align-items:center;gap:24px;padding-left:28px;padding-right:28px}
+  .cover .foot .cta{grid-column:2}
+  .cover .rule{grid-column:3;text-align:right;margin:0}
+}
+
+/* ---------- end ---------- */
+.end{
+  position:fixed;inset:0;display:grid;place-content:center;justify-items:center;
+  gap:0;padding:24px;background:var(--paper);text-align:center;
+}
+.end .mark{
+  position:relative;display:grid;place-content:center;
+  width:min(74vw,300px);aspect-ratio:1.3;
+}
+.end .mark .sfx{position:static;font-size:clamp(40px,11vw,64px);transform:rotate(-5deg)}
+.end .cont{margin:26px 0 0;font-family:var(--f-jp);font-size:18px;font-weight:600;letter-spacing:.08em}
+.end .cap{margin:8px 0 0;font-size:12px;color:var(--ink-3);line-height:1.8}
+.end .btns{display:grid;gap:10px;width:min(100%,320px);margin-top:26px}
+.end .ghost{
+  padding:13px;border:2.5px solid var(--ink);background:var(--paper);
+  font-family:var(--f-ui);font-size:14px;font-weight:700;letter-spacing:.14em;
+}
+
+/* state visibility */
+.screen,.cover,.end{display:none}
+body.s-staff .screen,body.s-speak .screen,body.s-fail .screen,body.s-win .screen{display:grid}
+body.s-cover .cover{display:grid}
+body.s-end .end{display:grid}
+/* hide only the non-matching ones, so each element keeps its own display */
+body.s-staff [data-when]:not([data-when~="staff"]),
+body.s-speak [data-when]:not([data-when~="speak"]),
+body.s-fail  [data-when]:not([data-when~="fail"]),
+body.s-win   [data-when]:not([data-when~="win"]),
+body.s-cover [data-when],
+body.s-end   [data-when]{display:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body class="s-speak">
+
+<!-- ============ CONVERSATION ============ -->
+<div class="screen">
+  <header class="hd">
+    <button class="chip">やめる</button>
+    <div class="ttl"><small>STAGE 1 / 2</small><strong>ご注文</strong></div>
+    <button class="chip r">スキップ</button>
+  </header>
+
+  <div class="pg">
+    <span class="n">05 / 09</span>
+    <div class="cells">
+      <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i>
+      <i class="now"></i><i></i><i></i><i></i><i></i>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="art">
+      <div class="wall tone tone-10"></div>
+      <div class="window"></div>
+      <div class="shelf"><i></i><i></i>
+        <span class="jar" style="left:6%"></span>
+        <span class="jar" style="left:26%"></span>
+        <span class="jar" style="left:46%"></span>
+      </div>
+      <div class="floor tone tone-30"></div>
+      <div class="counter"></div>
+    </div>
+
+    <div class="speedlines"></div>
+
+    <!-- character slot: line-art placeholder, adult proportions -->
+    <svg class="char" viewBox="0 0 200 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="tn" width="6" height="6" patternUnits="userSpaceOnUse">
+          <circle cx="1.5" cy="1.5" r="1.15" fill="#14120f" opacity=".8"/>
+          <circle cx="4.5" cy="4.5" r="1.15" fill="#14120f" opacity=".8"/>
+        </pattern>
+      </defs>
+      <g stroke="#14120f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- apron body -->
+        <path d="M62 214 q38 -16 76 0 l16 250 q-54 16 -108 0 Z" fill="#fff"/>
+        <path d="M62 214 l-2 -6 q40 -18 80 0 l-2 6" fill="#fff"/>
+        <!-- tone shading on the right side of the apron -->
+        <path d="M118 216 q12 -2 20 -2 l16 250 q-18 6 -36 8 Z" fill="url(#tn)" stroke="none"/>
+        <!-- arms -->
+        <path d="M64 222 q-22 10 -26 44 l-6 92 q-1 12 10 13 q11 1 12 -11 l8 -88" fill="#fff"/>
+        <path d="M136 222 q22 10 26 44 l6 92 q1 12 -10 13 q-11 1 -12 -11 l-8 -88" fill="#fff"/>
+        <!-- collar / neck -->
+        <path d="M84 210 l16 22 l16 -22" fill="#fff"/>
+        <path d="M90 178 v26 M110 178 v26" fill="#fff"/>
+        <!-- head -->
+        <ellipse cx="100" cy="132" rx="42" ry="50" fill="#fff"/>
+        <!-- hair -->
+        <path d="M58 128 q2 -50 42 -52 q40 2 42 52 q-6 -26 -20 -30 q-16 10 -44 6 q-14 4 -20 24 Z" fill="#14120f" stroke="none"/>
+        <path d="M58 128 q2 -50 42 -52 q40 2 42 52" />
+        <!-- face: restrained adult features -->
+        <path d="M80 130 q8 -5 16 0" stroke-width="3.8"/>
+        <path d="M120 130 q-8 -5 -16 0" stroke-width="3.8"/>
+        <path d="M96 148 q4 4 8 0" stroke-width="2.6"/>
+        <path d="M88 162 q12 7 24 0" stroke-width="3"/>
+        <!-- tone under the chin -->
+        <path d="M74 158 q26 22 52 0 q-10 26 -26 26 q-16 0 -26 -26 Z" fill="url(#tn)" stroke="none" opacity=".55"/>
+      </g>
+    </svg>
+
+    <!-- ambient sfx -->
+    <span class="sfx amb" data-when="staff">ざわ…</span>
+
+    <!-- feedback -->
+    <div class="impact" data-when="win"></div>
+    <div class="impact miss" data-when="fail"></div>
+    <span class="sfx big win" data-when="win">よし！</span>
+    <span class="sfx big miss" data-when="fail">ちがう</span>
+
+    <div class="mic-bars" data-when="speak"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <!-- balloon: staff -->
+    <div class="bl from-left" data-when="staff">
+      <span class="who">てんいん</span>
+      <span class="auto">AUTO</span>
+      <p class="jp">ご注文は何になさいますか。</p>
+      <p class="rd">ごちゅうもんはなになさいますか。</p>
+      <p class="en">What can I bring for you?</p>
+      <span class="tail"><svg width="44" height="30" viewBox="0 0 44 30"><path d="M2 0 L42 2 L6 30 Z" fill="#fff" stroke="#14120f" stroke-width="2.5" stroke-linejoin="round"/><path d="M2 0 L42 2" stroke="#fff" stroke-width="4"/></svg></span>
+    </div>
+
+    <!-- balloon: learner -->
+    <div class="bl from-right" data-when="speak win fail">
+      <span class="who you">あなた</span>
+      <p class="jp">ハンバーガーを二つと、ビールを一つください。</p>
+      <p class="rd" data-when="speak win">はんばーがーをふたつと、びーるをひとつください。</p>
+      <p class="rd" data-when="fail"><span class="hit">はんばーがーを</span><span class="miss">ふたつ</span><span class="hit">と、びーるを</span><span class="miss">ひとつ</span><span class="hit">ください。</span></p>
+      <p class="en">Two burgers, one beer.</p>
+      <span class="tail"><svg width="44" height="30" viewBox="0 0 44 30"><path d="M2 0 L42 2 L6 30 Z" fill="#fff" stroke="#14120f" stroke-width="2.5" stroke-linejoin="round"/><path d="M2 0 L42 2" stroke="#fff" stroke-width="4"/></svg></span>
+    </div>
+  </div>
+
+  <div class="pn">
+    <div class="lead">
+      <h2 data-when="staff">聞いてみよう</h2>
+      <h2 data-when="speak">話してみて</h2>
+      <h2 data-when="fail">もう一度</h2>
+      <h2 data-when="win">よくできました</h2>
+      <p class="cap" data-when="staff">自動で進みます — autoplay, tap スキップ to move on.</p>
+      <p class="cap" data-when="speak">マイクを押して読み上げてください。</p>
+      <p class="cap" data-when="fail">のこり 1 かい — Chrome heard 「まんまーがーをみつと」</p>
+      <p class="cap" data-when="win">次の場面へ進みます。</p>
+    </div>
+
+    <button class="cta live" data-when="speak">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>
+      はなす
+    </button>
+    <button class="cta" data-when="fail">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>
+      もう一度はなす
+    </button>
+    <button class="cta" data-when="staff win" disabled style="opacity:.45">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M11 5 6 9H2v6h4l5 4V5zM15.5 8.5a5 5 0 0 1 0 7"/></svg>
+      さいせい中
+    </button>
+
+    <div class="side">
+      <div class="tries" data-when="speak fail win">
+        <i class="on" data-when="fail"></i><i data-when="fail"></i><i data-when="fail"></i>
+        <i data-when="speak win"></i><i data-when="speak win"></i><i data-when="speak win"></i>
+        <small>1 / 3</small>
+      </div>
+    </div>
+
+    <p class="foot">ろくおんは のこりません — audio is not saved by this app.</p>
+  </div>
+</div>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div class="page">
+    <div class="frame">
+      <span class="band">第 1 巻</span>
+      <div class="cover-art">
+        <div class="wall tone tone-10" style="position:absolute;inset:0"></div>
+        <div class="floor tone tone-30" style="position:absolute;left:0;right:0;bottom:0;height:38%"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:16%;background:#14120f"></div>
+        <div class="window" style="left:8%;top:12%;width:26%;height:46%"></div>
+        <div class="shelf" style="right:8%;top:14%;width:26%;height:34%"><i></i><i></i></div>
+      </div>
+      <div class="meta">
+        <h1>にほんご<br>ものがたり</h1>
+        <p class="sub">SPEAK-THE-LINE STORY PRACTICE</p>
+        <ul class="chapters">
+          <li><b>第一話　ご注文</b><small>6 BUBBLES · 1 TO SPEAK</small></li>
+          <li><b>第二話　お食事</b><small>3 BUBBLES · 2 TO SPEAK</small></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <button class="cta">はじめる</button>
+    <p class="rule">1回成功、3回失敗、またはスキップで進みます。<br>Skip always dismisses exactly one bubble.</p>
+  </div>
+</div>
+
+<!-- ============ END ============ -->
+<div class="end">
+  <div class="mark">
+    <div class="impact" style="position:absolute;inset:0;width:100%;transform:none;"></div>
+    <span class="sfx">おしまい</span>
+  </div>
+  <p class="cont">よくがんばりました</p>
+  <p class="cap">You reached the end of both stages.</p>
+  <div class="btns">
+    <button class="cta">もう一回</button>
+    <button class="ghost">表紙にもどる</button>
+  </div>
+</div>
+
+<script>
+  const s = location.hash.replace('#','') || 'speak';
+  document.body.className = 's-' + s;
+</script>
+</body>
+</html>

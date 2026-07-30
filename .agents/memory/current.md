@@ -14,19 +14,27 @@ Canonical detail belongs in linked cells.
 
 - Preserve the corrected linear, two-stage café dialogue and bubble
   progression. On 2026-07-30 the user confirmed that this flow is what they are
-  looking for. Visual work must not silently alter flow logic, state handling,
-  or test selectors. See [Product](cells/product.md),
+  looking for. Visual, audio, and recognition work must not silently alter flow
+  logic, state handling, or test selectors. See [Product](cells/product.md),
   [Project](cells/project.md), and [Delivery](cells/delivery.md).
 - Retain the confirmed PoC boundary: two default conversation stages, the café
-  theme, one learner only, a complete open–play–finish session, Android Chrome
-  PWA delivery, and permission to use a temporary coarse recognizer. See
-  [Product](cells/product.md) and [Platform](cells/platform.md).
+  theme, one learner only, a complete open–play–finish session, and Android
+  Chrome PWA delivery. See [Product](cells/product.md) and
+  [Platform](cells/platform.md).
+- The story-design line is the next active lane. A stage design flow is drafted
+  at `.agents/documents/stage-design-flow.md` and covers situation, stage cuts,
+  personas, dialogue, difficulty, and an art & voice brief — but never art
+  itself. The user expects to revise it. See [Content](cells/content.md).
 - Replace the currently implemented childlike manga frame with the user-chosen
   full-bleed seinen slice-of-life direction. Preserve the constant-frame plus
   swappable-art layer model, but correct the reference mockup's known
   character, feedback, counter, wide-screen, and mobile-wrapping defects
   rather than copying it verbatim. See
   [Visual Design](cells/visual-design.md).
+- Do not tune the reference voice further until story design is ready. The user
+  accepted the local audio plumbing but still finds the Qwen3 voice
+  unsatisfying, and voice belongs to the character decision. See
+  [Audio](cells/audio.md).
 - Generate or retain precise placeholders for the pending café scene, staff
   sprites, cover, and app icons. Future stories can supply their own scene,
   character, and cover art; the café is only an example. See
@@ -35,13 +43,12 @@ Canonical detail belongs in linked cells.
   only the exact immutable source and artifact that passed the agreed automated
   checks, trusted-HTTPS manual QA, and explicit approval. See
   [Delivery](cells/delivery.md).
-- Experiment 006 completed the first 30-recording M3 Vosk baseline. The user
-  judged its coarse known-sentence evidence promising and parked it for later
-  review. Chrome `SpeechRecognition` remains acceptable for the PoC for now,
-  but its boundary and feedback renderer must stay replaceable by the advanced
-  local-first lane. Keep device-runtime experiment 005 parked as well. See
-  [Recognition](cells/recognition.md), [Experiments](cells/experiments.md), and
-  [Platform](cells/platform.md).
+- The local-first recognition lane has a working unmerged branch
+  (`recognition/vosk-local-first`) whose first live microphone test passed.
+  Chrome `SpeechRecognition` is what `poc/` main still runs. Keep the
+  recognition boundary and feedback renderer replaceable. Experiments 005 and
+  006 remain parked. See [Recognition](cells/recognition.md),
+  [Experiments](cells/experiments.md), and [Platform](cells/platform.md).
 - Accounts, chapter upload/review, and released canonical audio are a confirmed
   future phase, not current implementation scope. See
   [Content](cells/content.md).
@@ -53,6 +60,16 @@ Canonical detail belongs in linked cells.
   Skip press. Skip dismisses exactly one bubble immediately and never counts as
   a failure. Autoplayed sentences remain separate bubbles. See
   [Product](cells/product.md).
+- New stage content must be **skip-safe**: no other-party line may depend on
+  what the learner actually said, because Skip and third-failure both dismiss a
+  bubble. Difficulty is tuned in the content — length, speak-bubble count,
+  novelty, recycling, `accepted` breadth, phonetic fragility — never in the
+  fixed attempt budget. See [Content](cells/content.md).
+- Reference audio is generated locally at authoring time and bundled; browser
+  `speechSynthesis` is a playback fallback only. Generate with the clean native
+  `Ono_Anna` preset — acting instructions produced a rejected breath artifact
+  and are experiment-only. Record model, speaker, instruction text, and seed
+  with every clip. See [Audio](cells/audio.md).
 - Use newsprint, black and neutral ink tones, one deep-red UI accent,
   Shippori Mincho B1 plus Zen Kaku Gothic New, restrained adult proportions,
   screentone, hard-edged panels, and full-viewport scene art as the replacement
@@ -70,12 +87,20 @@ Canonical detail belongs in linked cells.
   another proven requirement justifies a backend. Keep the single-user
   development flow free of staging sites, environment-promotion machinery,
   extra roles, and a QA database. See [Delivery](cells/delivery.md).
+- Keep agent-facing process documents under `.agents/` in the repository rather
+  than in host-specific locations such as `.claude/skills/`. Do focused nested
+  PoC work in a sibling worktree, then rebase and fast-forward onto nested
+  `main`. See [Project](cells/project.md).
 - Treat recognition and acoustic alignment as uncertain evidence; product
   policy decides progression and must not overstate phonetic precision. See
   [Recognition](cells/recognition.md) and [Product](cells/product.md).
 
 ## Blockers and open questions
 
+- How to prompt Qwen3-TTS CustomVoice well is unknown: the levers, wording, and
+  binding strength are untested and need their own experiment. Stage authoring
+  proceeds anyway by recording delivery intent in plain words. See
+  [Audio](cells/audio.md) and [Experiments](cells/experiments.md).
 - The PoC source is still an uncommitted childlike manga-frame port that the
   user rejected. The full-bleed seinen replacement is not implemented, and its
   reference mockup retains known visual defects. See
@@ -84,15 +109,20 @@ Canonical detail belongs in linked cells.
   agent lacks image generation, keep placeholders and leave a precise inbox
   note rather than introducing unrelated stock or known-wrong art. See
   [Visual Design](cells/visual-design.md).
+- The browser Vosk branch is unmerged, its Android and browser memory are
+  unmeasured, and its production `npm audit` cannot be made clean in the
+  current dependency graph. Its live evidence is one passing manual test, not
+  coverage of rejection, retry, or repeatability. See
+  [Recognition](cells/recognition.md) and [Delivery](cells/delivery.md).
 - The repository has no approved canonical product frontend or release
-  toolchain. `poc/` embodies the confirmed flow, and its last recorded
-  manga-frame pass was mechanically green, but that visual implementation was
-  rejected. Experiment 005 remains parked and is not a release foundation. See
-  [Delivery](cells/delivery.md).
+  toolchain. `poc/` embodies the confirmed flow and now bundles local reference
+  audio, but its visual implementation was rejected and story/UI changes remain
+  uncommitted. Experiment 005 is parked and is not a release foundation. See
+  [Delivery](cells/delivery.md) and [Project](cells/project.md).
 - Android SDK tooling is installed, but no phone was attached; the proposed
-  `adb reverse` localhost bridge, microphone path, browser speech adapter,
-  service worker, and PWA install remain unverified on Android. See
-  [Platform](cells/platform.md) and [Recognition](cells/recognition.md).
+  `adb reverse` localhost bridge, microphone path, service worker, and PWA
+  install remain unverified on Android. See [Platform](cells/platform.md) and
+  [Recognition](cells/recognition.md).
 - The recognition model, scoring policy, feedback granularity, training
   objective, browser runtime, recording retention, and synchronization remain
   evidence-gated. See [Recognition](cells/recognition.md),
@@ -100,6 +130,12 @@ Canonical detail belongs in linked cells.
 
 ## Active evaluation gates
 
+- Every reference clip must be judged by ear before it becomes a learner
+  target; prefer changing a sentence over shipping wrong audio. See
+  [Audio](cells/audio.md).
+- New stage content must survive a pessimistic run in which every learner
+  bubble is skipped or failed out, and every `reading` must be verified against
+  its `japanese`. See [Content](cells/content.md).
 - A replacement frame must retain the confirmed flow and pass the PoC's QA
   command plus browser state inspection at phone and wide-desktop sizes.
   Specifically verify full-viewport composition, overlay collisions, readable
@@ -109,11 +145,13 @@ Canonical detail belongs in linked cells.
 - Before any deployment, run one reproducible QA command covering type checks,
   lint, unit tests, build, browser smoke tests, forced WASM fallback, optional
   WebGPU, and artifact-privacy checks. Preview that exact build over trusted
-  local HTTPS and require explicit sign-off. See [Delivery](cells/delivery.md).
-- The deployment package must exclude datasets, recordings, secrets, training
-  artifacts, captured screens, and private development fixtures. Debug routes
-  and state-seeding hooks must be disabled for release. See
+  local HTTPS and require explicit sign-off. State known unresolvable audit
+  advisories rather than claiming a clean audit. See
   [Delivery](cells/delivery.md).
+- The deployment package must exclude datasets, recordings, secrets, training
+  artifacts, captured screens, private development fixtures, and generated
+  model archives. Debug routes and state-seeding hooks must be disabled for
+  release. See [Delivery](cells/delivery.md).
 - When recognition work resumes, add human-labeled acceptable, intentionally
   incorrect, and near-miss attempts before calibrating false acceptance, false
   rejection, thresholds, or feedback usefulness. Sentence acceptance and

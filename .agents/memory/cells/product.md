@@ -161,10 +161,13 @@ interaction ingredients still require separate review:
   - notes and tags.
 - AI-generated readings must be validated before becoming pronunciation
   targets.
-- Browser or operating-system TTS is a zero-recurring-cost reference-audio
+- Browser or operating-system TTS was the zero-recurring-cost reference-audio
   candidate, but Japanese voice availability, pronunciation, pitch accent, and
-  voice identity vary by platform.
-- Imported or pre-generated audio may later provide a consistent reference.
+  voice identity vary by platform. It is now a fallback only: reference audio
+  is generated locally at authoring time and bundled. See [Audio](audio.md).
+- How to author a new stage — situation, dialogue, difficulty, and the art and
+  voice brief — is drafted in `.agents/documents/stage-design-flow.md` and
+  owned by [Content](content.md).
 - Future authenticated chapter submission, private preview, review, release,
   and canonical per-bubble audio are owned by [Content](content.md), not the
   initial rehearsal implementation.
@@ -233,3 +236,4 @@ interaction ingredients still require separate review:
 - [Content](content.md)
 - [Delivery](delivery.md)
 - [Visual Design](visual-design.md)
+- [Audio](audio.md)

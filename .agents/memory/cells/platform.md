@@ -151,6 +151,14 @@ large-model delivery, or final-product privacy policy. See
   app at `http://localhost:3000`. No attached phone has validated this path.
 - Model evidence remains parked after experiment 006. The PoC's browser speech
   adapter does not resolve local model/runtime questions.
+- An unmerged branch now runs `vosk-browser` with AudioWorklet capture and a
+  ~49.7 MB separately prepared Japanese model. Browser and Android memory for
+  that path are still unmeasured and matter more than archive size; extracted
+  model storage plus the service-worker archive cache can exceed the download.
+  See [Recognition](recognition.md).
+- Bundled locally generated reference audio removes the dependence on
+  device-specific Japanese system voices for playback quality, though system
+  TTS remains the fallback. See [Audio](audio.md).
 - Preserve the incomplete local experiment 005 benchmark under
   `experiments/005-device-runtime-benchmark/`; do not build, deploy, or treat it
   as current evidence until the user reprioritizes this lane.
@@ -196,3 +204,4 @@ large-model delivery, or final-product privacy policy. See
 - [Recordings](recordings.md)
 - [Delivery](delivery.md)
 - [Visual Design](visual-design.md)
+- [Audio](audio.md)

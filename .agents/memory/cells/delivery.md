@@ -57,6 +57,18 @@ substitute a different artifact after approval.
   approved full-bleed seinen replacement direction has not been ported and its
   working mockup still contains unresolved design defects. See
   [Visual Design](visual-design.md).
+- Nested PoC `main` now bundles locally generated Japanese reference audio,
+  precached in service-worker shell v5, with system TTS as playback fallback.
+  Its combined `npm run qa` passed typecheck, build, and all 13 tests with the
+  pre-existing font warning only. See [Audio](audio.md).
+- Preview on `http://localhost:...`. A local `0.0.0.0` origin can block Chrome
+  microphone permission; the app now redirects `0.0.0.0` to `localhost` and
+  rejects recording on untrusted origins with an explicit message.
+- The unmerged `recognition/vosk-local-first` branch raises `npm run qa` to
+  17/17 tests plus a model-archive check, but carries an unresolvable
+  production `npm audit` (transitive `postcss`/`sharp`, and `vosk-browser`'s
+  `uuid` 9.0.0). Any release gate must state this explicitly rather than claim
+  a clean audit. See [Recognition](recognition.md).
 - No real Android microphone, service-worker, or installation QA has occurred.
   Android SDK Platform Tools are installed and `adb reverse tcp:3000 tcp:3000`
   is a candidate no-deployment localhost bridge, but no phone was connected to
@@ -144,6 +156,14 @@ server-side requirement justifies it.
 - Use the exact port reported by the normal development server. Port `3001`
   was used once because `3000` was already occupied; this is not a new default
   and does not authorize port scanning.
+- Browser evaluation scopes used for read-only QA may not expose every web API.
+  A `caches.keys()` inspection failed with `caches` undefined; that is a tool
+  limitation, not an application failure. Verify service-worker precaching by
+  served responses, source inspection, or a real offline reload instead.
+- Direct `file://` navigation to repository HTML such as
+  `.agents/resources/seinen-manga-frame/mock.html` is blocked by browser
+  security policy. Read such references as files, or serve them, rather than
+  working around the block.
 
 ## Open questions
 
@@ -176,3 +196,5 @@ server-side requirement justifies it.
 - [Product](product.md)
 - [Recordings](recordings.md)
 - [Visual Design](visual-design.md)
+- [Recognition](recognition.md)
+- [Audio](audio.md)
