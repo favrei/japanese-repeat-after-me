@@ -1,0 +1,2 @@
+# Experiments 001 and 003 use only standard runtimes.
+# Experiment 004 installs Vosk separately through its replay script.
