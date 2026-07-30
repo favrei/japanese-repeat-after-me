@@ -27,11 +27,16 @@ availability, privacy, and use as experimental evidence.
   object reads, and tar export through `/api/recordings`.
 - A fresh browser or device may create a new empty session. An empty progress
   display therefore does not establish that an earlier session was deleted.
-- The corpus can supply the first private real-speech functionality baseline.
-  It contains intended repetitions but has no human acceptability, error-type,
-  device, room, or microphone-path labels. It therefore cannot independently
-  calibrate sentence-acceptance precision/recall, pronunciation quality, or
-  localized feedback.
+- Experiment 006 used the corpus for the first private real-speech Vosk
+  functionality baseline. Two warm-cache runs converted and recognized all 30
+  files without pipeline failure and selected the intended sentence as closest
+  among the ten manifest targets for every recording.
+- The corpus contains intended repetitions but has no human acceptability,
+  error-type, device, room, or microphone-path labels. It therefore cannot
+  independently calibrate human-referenced sentence-acceptance precision and
+  recall, pronunciation quality, or localized feedback. Experiment 006's
+  `270/270` wrong-sentence rejections are correlated closed-catalog pair
+  decisions, not labeled pronunciation negatives.
 - The temporary macOS Kyoko TTS sample used to smoke-test Vosk was not the
   user's voice and was deleted with its temporary replay directory.
 
@@ -99,8 +104,8 @@ navigation to that route was blocked by the Chrome control client during the
 - Which device, microphone path, room, and speaking conditions produced each
   take?
 - How long should this private local evaluation corpus be retained?
-- Which recordings should receive expected-text, kana, and human-quality
-  labels before recognizer evaluation?
+- Which recordings should receive human literal transcripts, acceptability
+  judgments, and localized error labels when model evaluation resumes?
 - Which labeled unacceptable or intentionally incorrect attempts should be
   added so that pipeline precision and recall can be measured?
 
@@ -112,6 +117,8 @@ navigation to that route was blocked by the Chrome control client during the
 - `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/SHA256SUMS`
 - `datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/README.md`
 - `experiments/004-vosk-japanese-local/README.md`
+- `experiments/006-real-corpus-vosk-baseline/README.md`
+- `experiments/006-real-corpus-vosk-baseline/results/`
 
 ## Related cells
 

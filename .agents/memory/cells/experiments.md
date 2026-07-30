@@ -7,8 +7,8 @@ directly requested a durable-memory edit. During normal work, write only under
 
 # Experiments
 
-Canonical memory for cloud-era experimental evidence, negative results,
-reproducibility gaps, and required local continuation.
+Canonical memory for experimental evidence, negative results, reproducibility
+gaps, and required local continuation.
 
 ## Evidence boundary
 
@@ -23,8 +23,8 @@ reproducibility gaps, and required local continuation.
   or Vosk quality.
 - A separate private GPT Sites test kit later captured and uploaded real WebM
   recordings from a live browser. The validated 30-file archive is now local
-  and committed privately, but it has not yet been evaluated by a committed
-  model/pipeline experiment. See [Recordings](recordings.md).
+  and committed privately. Experiment 006 has now evaluated all 30 files with a
+  committed native Vosk pipeline. See [Recordings](recordings.md).
 
 ## 001 — Synthetic acoustic DTW
 
@@ -210,8 +210,8 @@ Gaps:
 - It does not measure wall-clock time or peak memory itself; the local replay
   required an external measurement wrapper.
 - The M3 TTS smoke result is documented but not committed as a machine-readable
-  run. The real user corpus is now local and conversion-tested, but has not been
-  run through the committed Vosk harness.
+  run. The experiment 004 harness itself has not evaluated the real corpus;
+  experiment 006 supplies the separate reproducible corpus evaluator.
 - A good transcript would be a content signal, not proof of pronunciation
   quality.
 - The harness predates the repository's `uv` rule and uses `venv` plus pip.
@@ -255,26 +255,106 @@ Priority decision:
 - Preserve the local work in place, but do not advance or deploy it until the
   user explicitly returns to device-deployment validation.
 
-## Highest-value next evidence
+## 006 — Real-corpus Vosk baseline (parked after result)
 
-1. Build a reproducible real-corpus evaluation that converts and runs all 30
-   recovered recordings through the native M3 recognition pipeline.
-2. Record expected text/kana, recognized output, transcript diagnostics,
-   failures, latency, and resource use per take; inspect whether Vosk is useful
-   as a content signal.
-3. Define sentence-acceptance and localized-error labeling tasks, then add
-   human-labeled acceptable and unacceptable attempts before reporting
-   precision/recall.
-4. Compare the complete pipeline against human decisions and quantify false
+Question: can the pinned small Japanese Vosk model complete a reproducible
+pipeline over all 30 recovered recordings on the Apple M3, and how strongly do
+its transcripts agree with the intended sentence targets?
+
+Implementation:
+
+- `experiments/006-real-corpus-vosk-baseline/`
+- Deterministic WebM/Opus to 16 kHz mono PCM conversion with FFmpeg.
+- Vosk 0.3.44 and pinned `vosk-model-small-ja-0.22`; model archive SHA-256
+  `efa092d280153a77615e9e0c7d7283e93e600de3d19d3bec686c57ef19d52eac`.
+- Per-file expected target, transcript, word details, candidate-target scores,
+  conversion and recognition timing, real-time factor, resource use, and
+  structured failures.
+- A comparison command measures repeated-run stability.
+- A sentence-grouped rejection command treats each recording as the correct
+  utterance for its assigned prompt and as the wrong utterance for the other
+  nine prompts.
+
+Recorded M3 result from two warm-cache runs:
+
+- All `30/30` recordings converted and recognized without a pipeline failure.
+- Every transcript selected the correct sentence as closest among the ten
+  manifest targets.
+- Only `1/30` transcripts exactly matched the normalized target. Median
+  target-character distance rate was `0.384211`.
+- Closed-set manifest-target average precision was `0.989394`.
+- The best descriptive in-sample threshold produced precision `1.0`, recall
+  `0.966667`, and F1 `0.983051`, but moved slightly between runs and is not a
+  production threshold.
+- Sentence-grouped evaluation rejected all `270/270` incorrect-sentence pairs
+  and accepted `28/30` correct pairs in both runs: precision `1.0`, recall
+  `0.933333`, and F1 `0.965517`.
+- Median conversion-plus-recognition time was `1.562–1.604 s`, about
+  `0.203–0.208×` audio duration.
+- Model load took `231–251 ms`; RSS after load was about `201 MiB`; peak process
+  RSS was `279–308 MiB`.
+
+Repeatability:
+
+- Deterministic conversion produced the same WAV SHA-256 for `30/30` files.
+- Exact transcripts matched for `27/30` recordings despite identical WAVs.
+- Exact word/confidence/timestamp arrays matched for only `1/30`.
+- Correct top-one sentence identity, average precision, and aggregate
+  wrong-sentence confusion matrix were stable.
+- One `s09` take was false-rejected in both runs; the other false reject moved
+  from an `s02` take to an `s03` take.
+
+Interpretation and metric boundary:
+
+- The intended manifest prompt is not a human literal transcript, so target
+  character distance is not ASR CER.
+- Vosk is fast enough on the M3 and promising as a coarse known-sentence
+  content signal.
+- Surface transcripts are too inaccurate and unstable to serve alone as a
+  pronunciation or localized-feedback model.
+- The 270 negative decisions reuse 30 recordings and targets from the same
+  fixed catalog. They support rejection of wholly different sentences for one
+  speaker/session, not subtle pronunciation mistakes, near misses, unseen
+  prompts, or 270 independent utterances.
+- Human-referenced acceptance and localized-error precision and recall remain
+  unavailable until the labeling protocol is applied.
+
+Evidence:
+
+- `experiments/006-real-corpus-vosk-baseline/README.md`
+- `experiments/006-real-corpus-vosk-baseline/LABELING.md`
+- `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22.json`
+- `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-repeat.json`
+- `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-repeatability.json`
+- `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-wrong-sentence-rejection.json`
+
+Disposition:
+
+- On 2026-07-30, the user judged the evidence promising and parked this lane
+  for later review.
+- Preserve experiment 006 and its results as the current coarse known-sentence
+  baseline. Do not interpret its closed-catalog rejection as final
+  pronunciation quality.
+
+## Future evidence
+
+When the recognition lane resumes:
+
+1. Apply the human-label protocol to acceptable, intentionally incorrect, and
+   near-miss learner attempts before calibrating product thresholds.
+2. Compare the complete pipeline against human decisions and quantify false
    acceptance, false rejection, precision, recall, and feedback usefulness.
-5. Repair experiment 001 replay documentation and experiment 004's output,
+3. Test real-speech acoustic alignment across speakers and rates.
+4. Later, repeat resource and microphone measurements on representative
+   Android devices.
+
+Independent reproducibility debt remains:
+
+1. Repair experiment 001 replay documentation and experiment 004's output,
    results-directory, ignore, and `uv` problems.
-6. Commit a reproducible experiment 002 harness and run an explicitly consented
+2. Commit a reproducible experiment 002 harness and run an explicitly consented
    real microphone capture in macOS Chrome.
-7. Test real-speech acoustic alignment across speakers and rates.
-8. Later, repeat resource and microphone measurements on representative Android
-   devices.
-9. Keep experiment 005 and GPT Sites model-delivery/PWA verification deferred
+3. Keep experiment 005 and GPT Sites model-delivery/PWA verification deferred
    until the user returns to the deployment lane.
 
 These are evidence checkpoints, not approved product requirements.

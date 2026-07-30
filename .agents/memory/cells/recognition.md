@@ -51,12 +51,16 @@ phonetic diagnosis.
 
 ### Small local ASR
 
-- Vosk's small Japanese model is the first proposed low-cost baseline.
+- Vosk's small Japanese model is the first measured low-cost native baseline.
 - Potential signals: text, confidence, timestamps, missing/substituted regions.
 - Benefits: offline operation, no per-attempt fee, relatively small model.
 - Risks: lower accuracy, confidence not calibrated to pronunciation, weak
   phonetic localization, and unknown Android memory use.
 - Constrain recognition by the known sentence when the runtime supports it.
+- Experiment 006 found it fast enough on the M3 and useful for coarse
+  known-sentence content discrimination, but its surface transcripts were too
+  inaccurate and unstable to provide pronunciation or localized feedback by
+  themselves.
 
 ### Local ONNX model
 
@@ -126,8 +130,10 @@ General ASR character error rate is not the primary product metric. The
 important outcome is consistent, useful decisions and feedback across repeated
 learner attempts. Human pronunciation judgments are required for calibration.
 
-The user has explicitly prioritized model and pipeline functionality followed
-by recall and precision over device-deployment work.
+The user prioritized model and pipeline functionality followed by recall and
+precision over device-deployment work. Experiment 006 completed the first
+real-corpus baseline; on 2026-07-30 the user judged it promising and parked the
+lane for later review.
 
 Use task-specific metrics rather than an ambiguous single "model accuracy":
 
@@ -143,25 +149,53 @@ Use task-specific metrics rather than an ambiguous single "model accuracy":
   not substitutes for pronunciation acceptance quality.
 
 The recovered private corpus contains 30 real user WebM/Opus recordings across
-10 intended sentences and can supply the first end-to-end functionality,
-transcription, latency, and memory baseline after deterministic conversion. It
-does not contain labeled unacceptable attempts or human pronunciation
-judgments, so it cannot estimate both acceptance precision and recall or
-calibrate feedback thresholds by itself. See [Recordings](recordings.md).
+10 intended sentences. Experiment 006 used it for deterministic conversion,
+transcription, latency, memory, repeatability, and closed-catalog rejection
+evidence. It does not contain labeled unacceptable attempts or human
+pronunciation judgments, so it cannot estimate human-referenced acceptance or
+localized-error precision and recall or calibrate product thresholds by
+itself. See [Recordings](recordings.md).
 
-## Active evidence sequence
+## Current Vosk baseline
 
-1. Run all 30 recovered recordings through a reproducible M3 pipeline that
-   records conversion, recognized text, expected text/kana, transcript
-   diagnostics, latency, failures, and resource use.
-2. Inspect per-sentence and per-take errors to determine whether the current
-   Vosk baseline provides a useful content signal.
-3. Define the exact pass decision and human-label protocol before publishing
-   precision/recall.
-4. Add labeled acceptable and unacceptable attempts, including realistic
-   omissions, substitutions, timing errors, and recording-quality failures.
-5. Compare the full pipeline against human decisions; only then tune thresholds
-   or assess alternative models.
+Two warm-cache experiment 006 runs on the Apple M3 observed:
+
+- all 30 recordings converted and recognized without a pipeline failure;
+- every transcript selected its intended sentence as the closest of the ten
+  manifest targets;
+- only `1/30` normalized transcripts exactly matched the target, with median
+  target-character distance rate `0.384211`;
+- closed-set manifest-target average precision `0.989394`;
+- sentence-grouped wrong-sentence evaluation accepted `28/30` correct pairs
+  and rejected all `270/270` incorrect-sentence pairs in both runs, for
+  precision `1.0`, recall `0.933333`, and F1 `0.965517`;
+- median conversion-plus-recognition time `1.562–1.604 s`, or about
+  `0.203–0.208×` audio duration;
+- model load `231–251 ms`, about `201 MiB` RSS after load, and `279–308 MiB`
+  peak process RSS.
+
+The 270 negatives reuse 30 recordings and pair them with the other obviously
+different prompts in the same fixed ten-sentence catalog. This is correlated
+same-speaker/session evidence for rejecting wholly different sentences, not
+270 independent utterances, unseen-prompt evidence, or a pronunciation test.
+
+Conversion was deterministic, but only `27/30` surface transcripts and `1/30`
+word/confidence/timestamp arrays matched exactly across runs. Top-one sentence
+identity and aggregate closed-catalog discrimination remained stable.
+
+## Evidence sequence when this lane resumes
+
+1. Apply the defined human-label protocol to acceptable, intentionally
+   incorrect, and near-miss learner attempts.
+2. Include realistic omissions, substitutions, timing errors, recording
+   failures, varied speakers, devices, rooms, and speaking rates.
+3. Compare the complete pass decision against human labels and report
+   sentence-acceptance precision, recall, false acceptance, and false
+   rejection.
+4. Add localized human error regions before reporting localized-feedback
+   precision or recall.
+5. Only then tune thresholds, add acoustic alignment, or compare alternative
+   models and target-conditioned training.
 
 ## Future local training and quantization
 
@@ -179,15 +213,16 @@ calibrate feedback thresholds by itself. See [Recordings](recordings.md).
 ## Open questions
 
 - What model download and Android memory limits are acceptable?
-- Is the roughly 48 MB Vosk model useful enough for the core loop?
+- Is the roughly 48 MB Vosk model and its observed native memory footprint
+  viable enough in browser and on representative Android devices?
 - Is browser-TTS reference comparison stable enough across voices and devices?
 - Is WebGPU merely an optimization or a distinct enhanced recognition mode?
 - What can the limited tier honestly provide without a recognizer?
 - Which learner population and human reference process define quality?
 - How many speakers and devices are required before thresholds are trusted?
 - Is false acceptance or false rejection more harmful for the learning loop?
-- Which model and training objective, if any, should be adapted after the
-  baseline pipeline is measured?
+- Which model and training objective, if any, should be adapted after
+  human-reference labels and a complete product-decision baseline exist?
 - Which train/validation/test split and human reference labels are required?
 - Which quantization format and precision fit the eventual browser, WASM,
   WebGPU, MLX, or native runtime?
@@ -196,10 +231,13 @@ calibrate feedback thresholds by itself. See [Recordings](recordings.md).
 
 ## Sources
 
+- User direction recorded on 2026-07-30.
 - `.agents/documents/recognition-options.md`
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
 - `experiments/README.md`
+- `experiments/006-real-corpus-vosk-baseline/README.md`
+- `experiments/006-real-corpus-vosk-baseline/results/`
 
 ## Related cells
 
