@@ -4,7 +4,13 @@ A web-first Japanese speaking-practice application built around repeated, verifi
 
 ## Status
 
-This repository is currently in the **product and technical scoping** stage. The documents describe the working concept, constraints, candidate technologies, and unresolved questions. They are not yet an implementation plan.
+The repository now contains an isolated first product PoC under [`poc/`](poc/).
+It implements two bundled café-conversation stages and a complete
+open–practice–finish loop for an Android Chrome PWA. Recognition remains a
+temporary coarse browser-speech adapter rather than the final local model.
+
+Research documents and experiments still describe the evidence, constraints,
+and unresolved technical questions behind the PoC.
 
 ## Core experience
 
@@ -47,6 +53,7 @@ This repository is currently in the **product and technical scoping** stage. The
 
 ## Documentation
 
+- [Kissa Loop PoC](poc/README.md)
 - [Product and technical discussion](.agents/documents/product-and-technical-discussion.md)
 - [Platform scope](.agents/documents/platform-scope.md)
 - [Recognition options](.agents/documents/recognition-options.md)

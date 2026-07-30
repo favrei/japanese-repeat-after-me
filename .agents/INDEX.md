@@ -17,6 +17,8 @@ During ordinary work, write memory notes only to `memory/inbox/`.
 
 - [`../README.md`](../README.md) — project overview, product principles, and
   current status.
+- [`../poc/README.md`](../poc/README.md) — isolated Kissa Loop product PoC,
+  local QA, and Android USB preview workflow.
 - [`documents/open-questions.md`](documents/open-questions.md) — unresolved
   product, recognition, content, privacy, platform, and validation questions.
 - [`documents/product-and-technical-discussion.md`](documents/product-and-technical-discussion.md)
@@ -40,9 +42,9 @@ During ordinary work, write memory notes only to `memory/inbox/`.
 
 ## Current state
 
-- The project remains in product and technical scoping.
+- An isolated product PoC now exists under `poc/`; model/runtime research
+  remains evidence-gated.
 - Four cloud-era experiments exist under `experiments/`.
 - The cloud-to-local handoff was consolidated into the topic cells linked by
   [`memory/current.md`](memory/current.md) on 2026-07-30.
-- No active implementation plan, agent helper tool, or supplemental resource
-  has been registered yet.
+- No agent helper tool or supplemental resource has been registered yet.
