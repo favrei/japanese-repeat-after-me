@@ -13,6 +13,7 @@ from real_corpus_eval.core import (
     precision_recall_summary,
     score_candidates,
 )
+from real_corpus_eval.compare import compare_results
 from real_corpus_eval.pipeline import build_ffmpeg_command
 
 
@@ -96,6 +97,45 @@ class ConversionCommandTests(unittest.TestCase):
         self.assertIn("+bitexact", command)
         self.assertIn("pcm_s16le", command)
         self.assertEqual(command[-1], "/output/derived.wav")
+
+
+class RepeatabilityTests(unittest.TestCase):
+    def test_identifies_changed_transcript_with_stable_wav(self):
+        def result(transcript: str) -> dict:
+            return {
+                "aggregate": {
+                    "recordings": {"succeeded": 1},
+                    "manifestTargetAgreement": {
+                        "top1ClosedSetSentenceAccuracy": 1.0
+                    },
+                    "closedSetManifestTargetPrecisionRecall": {
+                        "averagePrecision": 1.0,
+                        "bestInSampleF1Point": {"threshold": 0.5},
+                    },
+                },
+                "records": [
+                    {
+                        "file": "audio/example.webm",
+                        "conversion": {"wavSha256": "abc"},
+                        "recognizedText": transcript,
+                        "targetAgreement": {
+                            "distanceRate": 0.1,
+                            "top1SentenceId": "s01",
+                        },
+                        "words": [],
+                    }
+                ],
+            }
+
+        comparison = compare_results(result("天気"), result("天気です"))
+        self.assertEqual(
+            comparison["deterministicConversion"]["sameDerivedWavSha256"],
+            1,
+        )
+        self.assertEqual(
+            comparison["recognitionRepeatability"]["sameTranscript"],
+            0,
+        )
 
 
 if __name__ == "__main__":

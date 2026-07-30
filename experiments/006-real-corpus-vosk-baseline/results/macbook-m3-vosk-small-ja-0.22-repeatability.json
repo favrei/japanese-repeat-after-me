@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "experiment": "006-real-corpus-vosk-baseline-repeatability",
+  "comparedAt": "2026-07-30T04:02:32.503823+00:00",
+  "recordings": 30,
+  "deterministicConversion": {
+    "sameDerivedWavSha256": 30,
+    "rate": 1.0
+  },
+  "recognitionRepeatability": {
+    "sameTranscript": 27,
+    "transcriptAgreementRate": 0.9,
+    "sameTargetDistanceRate": 27,
+    "sameTop1SentenceAssignment": 30,
+    "sameExactWordOutput": 1,
+    "changedTranscripts": [
+      {
+        "file": "audio/s03-take-01-1785329604297.webm",
+        "firstTranscript": "河野 行 理由 を 少し が 開い て です が あー 強い です",
+        "secondTranscript": "河野 行 理由 を 少し 目 が 開い て です が あー 強い です",
+        "firstTargetDistanceRate": 0.65,
+        "secondTargetDistanceRate": 0.7
+      },
+      {
+        "file": "audio/s04-take-01-1785329868526.webm",
+        "firstTranscript": "週末 に と 思っ た と 永遠 か を 見 に 行っ キー まし た",
+        "secondTranscript": "週末 に と 思っ た と 永遠 演歌 を 見 に 行っ キー まし た",
+        "firstTargetDistanceRate": 0.625,
+        "secondTargetDistanceRate": 0.6875
+      },
+      {
+        "file": "audio/s04-take-03-1785329892647.webm",
+        "firstTranscript": "週末 に 泊まっ た と エーカー を 耳 行き まし た",
+        "secondTranscript": "週末 に 泊まっ た と エーカー を 見 に 行き まし た",
+        "firstTargetDistanceRate": 0.625,
+        "secondTargetDistanceRate": 0.5
+      }
+    ]
+  },
+  "aggregateStability": {
+    "sameSucceededCount": true,
+    "sameTop1Accuracy": true,
+    "sameAveragePrecision": true,
+    "firstBestInSamplePoint": {
+      "threshold": 0.307692,
+      "true_positives": 29,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "precision": 1.0,
+      "recall": 0.966667,
+      "f1": 0.983051,
+      "true_negatives": 270
+    },
+    "secondBestInSamplePoint": {
+      "threshold": 0.3,
+      "true_positives": 29,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "precision": 1.0,
+      "recall": 0.966667,
+      "f1": 0.983051,
+      "true_negatives": 270
+    }
+  },
+  "interpretation": "Identical derived WAV bytes do not guarantee identical Vosk word decoding on repeated runs. Coarse closed-set sentence identity must be checked separately from transcript-level stability.",
+  "inputs": {
+    "first": "macbook-m3-vosk-small-ja-0.22.json",
+    "firstSha256": "05c5bb8ac872ef5b3410aeb6add4b093fc8ae86b8c04a117387e371c11029a93",
+    "second": "macbook-m3-vosk-small-ja-0.22-repeat.json",
+    "secondSha256": "a742106a9c2b2cec7eec2e1faf951131730591094c99af7507d523ca1bd0f57c"
+  }
+}
