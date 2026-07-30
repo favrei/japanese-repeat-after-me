@@ -30,6 +30,15 @@
   - one correct attempt; or
   - three errors.
 
+## Learner bubble and controls
+
+- Keep the Japanese text visible.
+- Let the learner independently show or hide the hiragana reading.
+- Let the learner independently show or hide the translation.
+- Provide a **PC speaks first** control that plays the learner's reference line
+  before the learner attempts it.
+- Provide a **Skip round** control.
+
 ## Conversation rounds
 
 - Recommend ten complete conversation rounds for a practice session.
@@ -47,7 +56,8 @@
 - Whether the intro counts as a round.
 - What the interface does immediately after the third error.
 - Whether difficult turns are automatically scheduled earlier in later rounds.
-- When Japanese text, reading, translation, or situational cues are visible.
+- Whether situational cues beyond Japanese, hiragana, and translation are
+  visible.
 - Whether rounds restart immediately or pause briefly.
 - The exact motion, reduced-motion behavior, reference-audio requirements, and
   background media format.

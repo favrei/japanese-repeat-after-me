@@ -77,3 +77,18 @@ plus a separate manual deployment action is sufficient.
   deployment.
 - Starting and testing the client does not satisfy or bypass the explicit
   deployment gate.
+
+## Development-only navigation and capture harness
+
+- During development and QA, give coding agents programmatic navigation to
+  every application screen and relevant UI state.
+- Support viewport and full-page screenshot capture so agents can preserve
+  evidence, compare regressions, and debug visual or interaction failures.
+- Make the harness usable through both headless frameworks and agents with
+  real-browser control.
+- Keep any debug routes, navigation controls, deterministic fixtures, state
+  seeding, and capture hooks behind an explicit development/QA flag.
+- Disable the harness for deployment and exclude its private debug surfaces
+  and fixtures from the production artifact where practical.
+- Extend the deployment-artifact check to reject accidentally packaged
+  development-only fixtures, captured screens, or private debug data.
