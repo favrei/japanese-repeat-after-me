@@ -137,9 +137,17 @@ large-model delivery, or final-product privacy policy. See
 
 ## Active platform gates
 
-- The user has parked device-deployment work. Model evidence is also parked
-  after experiment 006; neither lane blocks local product development and
-  preview.
+- The user requested an Android Chrome PWA PoC, temporarily reprioritizing
+  product preview without authorizing deployment. The first implemented flow
+  was rejected; the corrected two-stage script and bubble-level progression
+  are now implemented and user-confirmed. UI-detail work is next, followed by
+  real-device QA when the phone is available.
+- Android SDK Platform Tools 35.0.1 and the broader local Android SDK are
+  installed. A proposed local preview path uses USB debugging plus
+  `adb reverse tcp:3000 tcp:3000`, allowing Android Chrome to open the Mac-hosted
+  app at `http://localhost:3000`. No attached phone has validated this path.
+- Model evidence remains parked after experiment 006. The PoC's browser speech
+  adapter does not resolve local model/runtime questions.
 - Preserve the incomplete local experiment 005 benchmark under
   `experiments/005-device-runtime-benchmark/`; do not build, deploy, or treat it
   as current evidence until the user reprioritizes this lane.
@@ -167,8 +175,13 @@ large-model delivery, or final-product privacy policy. See
 - `.agents/documents/platform-scope.md`
 - `.agents/documents/open-questions.md`
 - `README.md`
+- `poc/README.md`
 - `experiments/002-browser-microphone-capture/README.md`
 - [Recordings](recordings.md)
+- User flow rejection recorded on 2026-07-30.
+- User's corrected dialogue and Skip semantics recorded on 2026-07-30.
+- User confirmation of the corrected flow and deferral of UI/art decisions
+  recorded on 2026-07-30.
 
 ## Related cells
 

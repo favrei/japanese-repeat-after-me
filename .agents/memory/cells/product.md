@@ -10,7 +10,7 @@ directly requested a durable-memory edit. During normal work, write only under
 Canonical memory for the conversation-rehearsal loop, learner experience,
 feedback, and data-policy questions.
 
-## Core learning loop
+## Earlier working loop — now under review
 
 1. Present an immediately useful situation as a scripted two-party
    conversation.
@@ -23,6 +23,70 @@ feedback, and data-policy questions.
    active learner bubble and provide conservative feedback.
 6. Advance after either one correct attempt or three errors.
 7. Repeat the complete conversation for the chosen number of rounds.
+
+On 2026-07-30, after exercising the first implemented PoC, the user said its
+flow was "not correct at all." The numbered loop and interaction ingredients
+below preserve the earlier direction and are not an approved end-to-end
+experience. The user subsequently specified the PoC dialogue and bubble
+progression recorded below; do not carry forward conflicting behavior from the
+implementation.
+
+## Confirmed PoC flow
+
+- The confirmed PoC boundary remains two default conversation stages, a theme
+  chosen by the assistant, one learner only, a complete open–play–finish
+  session, and Android Chrome PWA delivery. A temporary coarse recognizer was
+  accepted for the PoC.
+- The earlier `poc/` navigation, preview, three-round default, and attempt-level
+  Skip behavior were rejected. The corrected implementation now follows the
+  linear bubble sequence below.
+- After reviewing the corrected implementation on 2026-07-30, the user
+  confirmed that its flow is what they are looking for.
+- The confirmed flow is the baseline for subsequent work. Do not change it
+  while addressing UI details unless the user explicitly revises the flow.
+- The current neutral UI is only a flow-validation scaffold. Its layout,
+  styling, information hierarchy, control treatment, transitions, and feedback
+  presentation are not approved UI or art direction. The user said many UI
+  details remain missing and will be addressed later.
+
+The two-stage café script specified by the user on 2026-07-30 is:
+
+### Stage 1 — ordering
+
+1. Other party: “Welcome, please come in.”
+2. Other party: “What can I bring for you?”
+3. Learner-party line, autoplayed: “Oh, give me a second.”
+4. Learner-party line, autoplayed: “Where is the menu?”
+5. Learner speaks: “Two burgers, one beer.”
+6. Other party: “Yes sir, thank you for the ordering.”
+
+### Stage 2 — meal
+
+1. Other party: “Here is the meal.”
+2. Learner speaks: “Please chicken burger for lady, beer and beef burger for
+   me.”
+3. Learner speaks: “Where is the restroom?”
+4. Finish the conversation.
+
+The English wording above preserves the requested script and may be polished
+only with the user's approval.
+
+## Authoritative bubble progression
+
+- One sentence occupies one dialogue bubble.
+- The current bubble, rather than a conversation round or an individual
+  recognition attempt, is the unit of progression.
+- An autoplay line is still its own bubble and plays automatically.
+- On a learner-speaking bubble, one successful attempt dismisses that bubble
+  and advances to the next bubble.
+- A failed attempt leaves the same bubble active. The third failed attempt
+  dismisses it and advances to the next bubble.
+- One **Skip** press immediately dismisses exactly the current bubble and
+  advances to the next bubble.
+- Skip is not a failed attempt and must not merely increment the attempt
+  counter.
+- The current PoC implements this behavior; do not regress to attempt-level or
+  round-level Skip.
 
 ## Current product belief
 
@@ -47,7 +111,10 @@ feedback, and data-policy questions.
 - Mora-level feedback is desirable but should only be shown when alignment is
   sufficiently reliable. Word or phrase-region highlighting is safer early.
 
-## Scene and interaction model
+## Unsettled UI and later interaction ideas
+
+The user has approved the flow, not the current UI. These previously recorded
+ingredients remain unapproved ideas that require separate review:
 
 - Present the other party's bubbles on the left and learner-party bubbles on
   the right.
@@ -63,7 +130,8 @@ feedback, and data-policy questions.
   translation.
 - Provide a **PC speaks first** control that plays the learner's reference line
   before the attempt.
-- Provide a **Skip round** control.
+- The earlier **Skip round** concept is superseded by the authoritative
+  one-bubble Skip behavior above.
 - Recommend ten complete conversation rounds for a practice session. Ten is
   guidance, not a hard mastery rule, and the learner may choose another amount.
 - A scene may have an intro mode that autoplays the conversation before the
@@ -93,8 +161,8 @@ feedback, and data-policy questions.
 
 ## Open learning and feedback questions
 
+- Which UI details should be added or changed around the confirmed flow?
 - Does the intro count as a round?
-- What happens immediately after the third error?
 - Are difficult turns scheduled earlier in later rounds?
 - Do rounds restart immediately or pause briefly?
 - Which situational cues beyond Japanese, hiragana, and translation are
@@ -131,6 +199,12 @@ feedback, and data-policy questions.
 ## Sources
 
 - User direction recorded on 2026-07-30.
+- User rejection of the implemented PoC flow recorded on 2026-07-30.
+- User's two-stage café script and bubble/Skip clarification recorded on
+  2026-07-30.
+- User confirmation that the corrected flow is right, while UI details remain
+  missing, recorded on 2026-07-30.
+- `poc/`
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
 - `README.md`

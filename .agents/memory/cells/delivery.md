@@ -34,7 +34,23 @@ substitute a different artifact after approval.
 
 ## Current infrastructure
 
-- The repository root has no canonical product frontend or site toolchain.
+- The repository root has no approved canonical product frontend or release
+  toolchain.
+- An isolated Vinext/React/TypeScript implementation now exists under `poc/`.
+  It serves locally at `http://localhost:3000/` and has a PWA manifest, service
+  worker, generated placeholder icons, and a development-only synthetic
+  speech/flow control.
+- `poc/npm run qa` passes type checks, lint, build, 10 unit/rendered tests, and
+  public-artifact privacy assertions. Browser flow testing remains separate
+  from that command.
+- A Chrome run at 412×915 verified one-bubble Skip, one-success progression,
+  third-failure progression, the stage boundary, completion, and restart. The
+  user confirmed the resulting flow on 2026-07-30. The current neutral UI is
+  deliberately incomplete and is not approved art direction.
+- No real Android microphone, service-worker, or installation QA has occurred.
+  Android SDK Platform Tools are installed and `adb reverse tcp:3000 tcp:3000`
+  is a candidate no-deployment localhost bridge, but no phone was connected to
+  validate it.
 - Parked experiment 005 supplies useful Vinext/Vite/Sites, D1, WASM, and WebGPU
   scaffold pieces, but it is not a release foundation:
   - its production-like local start command fails;
@@ -111,10 +127,11 @@ server-side requirement justifies it.
 
 ## Open questions
 
-- What canonical frontend and site toolchain should replace or selectively
-  reuse the experiment 005 scaffold?
+- Which missing UI details should be addressed first while preserving the
+  confirmed flow?
 - What exact commands and evidence make up the initial QA gate?
-- Which trusted local HTTPS approach will support real-device microphone QA?
+- Will Android USB `adb reverse` provide the preferred localhost-secure preview,
+  or is trusted LAN HTTPS still needed for real-device QA?
 - Is browser-local export/import sufficient, or will a server-side requirement
   justify hosted storage?
 
@@ -122,7 +139,12 @@ server-side requirement justifies it.
 
 - User direction recorded on 2026-07-30.
 - `AGENTS.md`
+- `poc/README.md`
 - `experiments/005-device-runtime-benchmark/`
+- User flow rejection recorded on 2026-07-30.
+- User's corrected dialogue and Skip semantics recorded on 2026-07-30.
+- User confirmation of the corrected flow and deferral of UI/art decisions
+  recorded on 2026-07-30.
 
 ## Related cells
 

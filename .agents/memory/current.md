@@ -12,11 +12,15 @@ Canonical detail belongs in linked cells.
 
 ## Active direction
 
-- Shape the first locally previewed experience around slow, repeated rehearsal
-  of an immediately useful scripted two-party conversation. Advance a learner
-  turn after one correct attempt or three errors; recommend ten complete rounds
-  while allowing another amount. See [Product](cells/product.md) and
-  [Project](cells/project.md).
+- Preserve the corrected linear, two-stage café dialogue and bubble
+  progression. On 2026-07-30 the user confirmed that this flow is what they are
+  looking for. Address missing UI details next without changing the confirmed
+  flow by assumption. See [Product](cells/product.md),
+  [Project](cells/project.md), and [Delivery](cells/delivery.md).
+- Retain the confirmed PoC boundary: two default conversation stages, the café
+  theme, one learner only, a complete open–play–finish session, Android Chrome
+  PWA delivery, and permission to use a temporary coarse recognizer. See
+  [Product](cells/product.md) and [Platform](cells/platform.md).
 - Develop and preview locally. Do not deploy because a build succeeds; release
   only the exact immutable source and artifact that passed the agreed automated
   checks, trusted-HTTPS manual QA, and explicit approval. See
@@ -32,10 +36,16 @@ Canonical detail belongs in linked cells.
 
 ## Active defaults
 
-- Present the other party on the left and the learner on the right over a
-  situational background. Keep Japanese visible; let hiragana and translation
-  be toggled independently; provide **PC speaks first** and **Skip round**.
-  Stop the flow on an errored learner bubble. See
+- One sentence is one dialogue bubble. On a learner-speaking bubble, dismiss
+  that bubble and advance after one success, the third failed attempt, or one
+  Skip press. Skip dismisses exactly one bubble immediately and never counts as
+  a failure. Autoplayed sentences remain separate bubbles. See
+  [Product](cells/product.md).
+- Treat the current neutral UI only as a flow-validation scaffold. Its layout,
+  styling, hierarchy, controls, timing, transitions, and feedback presentation
+  are not approved UI or art direction. Previously recorded ingredients such
+  as bubble sides, visible Japanese, reading/translation toggles, and **PC
+  speaks first** still require separate review. See
   [Product](cells/product.md).
 - Prefer a Chrome-first, local-first PWA with no mandatory per-attempt cloud
   cost, a WASM CPU baseline, optional WebGPU enhancement, and separately
@@ -51,13 +61,18 @@ Canonical detail belongs in linked cells.
 
 ## Blockers and open questions
 
-- The repository has no canonical product frontend or release toolchain.
-  Experiment 005 contains useful scaffold pieces but fails its production-like
-  start, rendered tests, lint, and TypeScript checks and is not a release
-  foundation. See [Delivery](cells/delivery.md).
-- The intro/round relationship, behavior after the third error, later-round
-  difficult-turn scheduling, pacing, reduced motion, situational cues, and
-  background media format remain open. See [Product](cells/product.md).
+- The PoC's dialogue order and bubble-level progression are confirmed. Many UI
+  details remain missing and will be addressed with the user; those decisions
+  must not silently alter the flow. See [Product](cells/product.md).
+- The repository has no approved canonical product frontend or release
+  toolchain. `poc/` now embodies the confirmed flow and passes its current
+  mechanical checks, but its UI and art direction are unapproved. Experiment
+  005 remains parked and is not a release foundation. See
+  [Delivery](cells/delivery.md).
+- Android SDK tooling is installed, but no phone was attached; the proposed
+  `adb reverse` localhost bridge, microphone path, browser speech adapter,
+  service worker, and PWA install remain unverified on Android. See
+  [Platform](cells/platform.md) and [Recognition](cells/recognition.md).
 - The recognition model, scoring policy, feedback granularity, training
   objective, browser runtime, recording retention, and synchronization remain
   evidence-gated. See [Recognition](cells/recognition.md),

@@ -183,6 +183,21 @@ Conversion was deterministic, but only `27/30` surface transcripts and `1/30`
 word/confidence/timestamp arrays matched exactly across runs. Top-one sentence
 identity and aggregate closed-catalog discrimination remained stable.
 
+## Temporary PoC adapter
+
+- The user accepted a temporary coarse recognizer for the first Android PWA
+  PoC so recognition research would not block discussion of the product loop.
+- `poc/` uses Chrome's `SpeechRecognition` interface with Japanese alternatives
+  and a normalized character-edit similarity threshold of `0.56`. The app
+  itself does not retain audio, but Chrome may use a network speech service.
+- Automated and desktop flow QA used exact-target simulated transcripts. There
+  has been no real Android microphone run, human acceptance comparison, false
+  acceptance/rejection measurement, or threshold calibration.
+- The first product flow was rejected and then corrected; on 2026-07-30 the
+  user confirmed the corrected flow. Preserve the adapter as replaceable
+  implementation scaffolding only: synthetic flow acceptance does not make it
+  recognition evidence or select the final scoring architecture.
+
 ## Evidence sequence when this lane resumes
 
 1. Apply the defined human-label protocol to acceptable, intentionally
@@ -238,6 +253,10 @@ identity and aggregate closed-catalog discrimination remained stable.
 - `experiments/README.md`
 - `experiments/006-real-corpus-vosk-baseline/README.md`
 - `experiments/006-real-corpus-vosk-baseline/results/`
+- `poc/app/scoring.ts`
+- `poc/app/PracticeApp.tsx`
+- User flow rejection recorded on 2026-07-30.
+- User confirmation of the corrected flow recorded on 2026-07-30.
 
 ## Related cells
 

@@ -18,15 +18,19 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
 - The initial product is a focused practical-speaking rehearsal engine, not a
   complete language course or open-ended conversation system.
 - The repository remains in evidence-gathering product and technical scoping.
-  Existing documents describe hypotheses and constraints, not an approved
-  implementation plan.
+  An isolated PoC exists under `poc/`. Its first flow was rejected, then
+  corrected to the specified linear two-stage bubble sequence.
 - The first real-corpus recognition baseline is complete and promising as a
   coarse known-sentence content signal. The user parked that lane on
   2026-07-30 pending later review; device-runtime benchmarking also remains
   deferred.
-- Current product direction centers on a locally previewed two-party
-  conversation flow that advances a learner turn after one correct attempt or
-  three errors. Ten complete rounds is a recommendation, not a mastery rule.
+- On 2026-07-30 the user confirmed that the corrected PoC flow is what they are
+  looking for. Preserve that flow as the baseline; the next product work is to
+  address missing UI details without silently changing it. The current neutral
+  presentation is not approved art direction.
+- For learner-speaking bubbles, advance after one correct attempt, the third
+  failed attempt, or one Skip press. Skip dismisses exactly one bubble and does
+  not count as a failure. See [Product](product.md).
 - The central product question is whether slow, repeated rehearsal with
   immediate approximate feedback improves practical spoken recall.
 
@@ -40,6 +44,8 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   committed to the repository and the consolidated handoff.
 - The cloud work produced 17 commits through `02d3a5d`, four experimental
   spikes, and no application implementation.
+- Subsequent local work created the isolated `poc/` implementation. The first
+  version's flow was rejected; the corrected version was user-confirmed.
 
 ## Operating rules
 
@@ -104,8 +110,18 @@ Out of the initial scope:
 
 ## Repository state
 
-- No product frontend, root `pyproject.toml`, project-wide test suite, or CI
-  workflow exists yet.
+- No approved canonical product frontend, root `pyproject.toml`,
+  project-wide test suite, or CI workflow exists yet.
+- `poc/` is an isolated, uncommitted Vinext/React/TypeScript Git repository. It
+  contains a neutral, flow-first two-stage PWA, temporary Chrome speech
+  adapter, manifest, service worker, and its own `npm run qa` checks.
+- The corrected PoC passed type checks, lint, build, and 10 tests. A Chrome run
+  at 412×915 verified one-bubble Skip, success progression, third-failure
+  progression, automatic stage transition, completion, and restart. The user
+  subsequently confirmed the flow; this does not approve the UI or validate
+  Android microphone/PWA behavior.
+- No Android device run, Sites project creation, saved Sites version, or
+  deployment occurred.
 - Six numbered experiment directories live under `experiments/`. Experiments
   001, 003, 004, and 006 contain recorded or replayed evidence; experiment 002
   lacks a committed harness; experiment 005 is incomplete and parked.
@@ -130,8 +146,14 @@ Out of the initial scope:
 - `.agents/INDEX.md`
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
+- `poc/README.md`
 - `experiments/README.md`
 - Git history through `3e76d51`
+- User correction recorded on 2026-07-30.
+- User's two-stage dialogue and bubble-progression clarification recorded on
+  2026-07-30.
+- User confirmation of the corrected flow and deferral of UI/art decisions
+  recorded on 2026-07-30.
 
 ## Related cells
 
