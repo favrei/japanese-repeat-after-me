@@ -1,0 +1,11 @@
+[project]
+name = "jram-real-corpus-vosk-baseline"
+version = "0.1.0"
+description = "Real-corpus Vosk functionality and target-agreement evaluation"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "vosk==0.3.44",
+]
+
+[tool.uv]
+package = false

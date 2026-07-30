@@ -24,6 +24,11 @@ Model files, virtual environments, generated audio, and package caches are not c
 | [002](002-browser-microphone-capture/) | Can an automated headless Chrome session acquire and process microphone input? | Blocked in the execution container | Chrome navigation was blocked by administrator policy before microphone acquisition. The same harness is retained for replay on macOS. |
 | [003](003-kana-mora-alignment/) | Can expected and recognized kana be aligned into visible mora-level insertions, deletions, and substitutions? | Success | The baseline correctly localized the included missing long vowel, missing small っ, insertion, and substitution cases. Long-vowel spelling normalization remains incomplete. |
 | [004](004-vosk-japanese-local/) | Can the 48 MB Vosk Japanese model provide a cheap local recognition baseline? | Setup blocked in the execution container | Package and model downloads were unavailable. A macOS replay harness is included; no recognition-quality claim is made yet. |
+| [006](006-real-corpus-vosk-baseline/) | Can the native Vosk baseline process all 30 recovered real recordings, and how strongly do transcripts agree with the intended targets? | Local M3 run in progress | The evaluator keeps functionality, closed-set target discrimination, and human-referenced acceptance/localization metrics separate. |
+
+Experiment 005 is a parked device-runtime Sites prototype preserved in its own
+local Git repository. It is not a validated result and is intentionally absent
+from the parent repository.
 
 ## Replay order on the MacBook M3
 
@@ -42,3 +47,13 @@ bash experiments/004-vosk-japanese-local/run_macos.sh
 ```
 
 Experiment 002 has both automated and manual replay instructions in its own README because real microphone permission is easier to verify interactively.
+
+Experiment 006 uses its own `uv` project:
+
+```bash
+cd experiments/006-real-corpus-vosk-baseline
+uv run python3 -m unittest discover -s tests -v
+uv run python3 -m real_corpus_eval \
+  --manifest ../../datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/manifest.json \
+  --output results/macbook-m3-vosk-small-ja-0.22.json
+```
