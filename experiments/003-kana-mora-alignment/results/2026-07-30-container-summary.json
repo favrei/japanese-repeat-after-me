@@ -1,0 +1,11 @@
+{
+  "experiment": "003-kana-mora-alignment",
+  "runtime": "python3",
+  "cases": {
+    "exact": {"distance": 0, "nonEqualEdits": []},
+    "missing_long_vowel": {"distance": 1, "nonEqualEdits": [{"op": "delete", "expected": "う", "observed": null, "expectedIndex": 1}]},
+    "missing_small_tsu": {"distance": 1, "nonEqualEdits": [{"op": "delete", "expected": "っ", "observed": null, "expectedIndex": 1}]},
+    "substitution": {"distance": 2, "nonEqualEdits": [{"op": "insert", "expected": null, "observed": "せ", "expectedIndex": 6}, {"op": "replace", "expected": "す", "observed": "ん", "expectedIndex": 6}]},
+    "insertion": {"distance": 1, "nonEqualEdits": [{"op": "insert", "expected": null, "observed": "は", "expectedIndex": 2}]}
+  }
+}
