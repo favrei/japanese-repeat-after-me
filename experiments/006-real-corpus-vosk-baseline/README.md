@@ -43,6 +43,17 @@ uv run python3 -m real_corpus_eval.compare \
   --output results/macbook-m3-vosk-small-ja-0.22-repeatability.json
 ```
 
+The stored candidate scores can also be replayed as a wrong-sentence rejection
+test without running Vosk again:
+
+```bash
+uv run python3 -m real_corpus_eval.rejection \
+  results/macbook-m3-vosk-small-ja-0.22.json \
+  results/macbook-m3-vosk-small-ja-0.22-repeat.json \
+  --output \
+  results/macbook-m3-vosk-small-ja-0.22-wrong-sentence-rejection.json
+```
+
 ## Metric boundary
 
 `targetCharacterDistanceRate` compares the recognizer transcript with the
@@ -53,6 +64,14 @@ The closed-set precision/recall diagnostic treats the assigned sentence as the
 positive target and the other nine sentences as negatives. It measures coarse
 content discrimination for this one speaker/session. It is not
 human-referenced sentence-acceptance or pronunciation precision/recall.
+
+The wrong-sentence rejection test makes that diagnostic explicit. Each of the
+30 real recordings is paired once with its correct sentence and once with each
+of the other nine prompts, yielding 30 correct and 270 incorrect-sentence
+pairs. In each fold, all three takes of one source sentence are held out.
+Threshold selection also removes that sentence from the candidate side of the
+training data. The held-out recordings are then scored against all ten
+sentences.
 
 Human-referenced metrics remain explicitly unavailable until the labels in
 [`LABELING.md`](LABELING.md) exist.
@@ -80,6 +99,10 @@ Observed facts:
   positives, one false negative, precision `1.0`, recall `0.966667`, and F1
   `0.983051`. Its threshold moved from `0.307692` to `0.3` across the two
   runs, so it is not a production threshold.
+- With sentence-grouped threshold selection, both runs rejected all `270/270`
+  wrong-sentence pairs: rejection rate `1.0` and false-acceptance rate `0.0`.
+  Of the manifest-assigned pairs, `28/30` passed: recall `0.933333`,
+  precision `1.0`, and F1 `0.965517`.
 - Median end-to-end conversion plus recognition time was `1.562–1.604 s` per
   recording, about `0.203–0.208×` audio duration.
 - Model load took `231–251 ms`; RSS after model load was about `201 MiB`.
@@ -93,11 +116,20 @@ Repeatability:
 - Exact word/confidence/timestamp arrays matched for only 1/30 recordings.
 - The correct top-one sentence assignment and closed-set average precision were
   stable across both runs.
+- The aggregate wrong-sentence confusion matrix was stable, but the correct
+  recording rejected in addition to `s09` changed from an `s02` take to an
+  `s03` take.
 
 Interpretation:
 
 - This Vosk baseline is fast enough on the M3 and useful as a coarse
   known-sentence content signal.
+- It cleanly rejected completely different sentences in this small,
+  same-speaker set. This does not yet show that it can reject subtle
+  pronunciation mistakes or near-miss learner speech.
+- The 270 negative decisions reuse 30 recordings and draw targets from the
+  same fixed catalog used during threshold fitting. They are correlated
+  closed-catalog pairs, not 270 independent utterances or unseen prompts.
 - Its surface transcripts are too inaccurate and too unstable to serve alone
   as a pronunciation or localized-feedback model.
 - Human-referenced acceptance and error-localization precision/recall remain
@@ -108,3 +140,4 @@ Machine-readable evidence:
 - `results/macbook-m3-vosk-small-ja-0.22.json`
 - `results/macbook-m3-vosk-small-ja-0.22-repeat.json`
 - `results/macbook-m3-vosk-small-ja-0.22-repeatability.json`
+- `results/macbook-m3-vosk-small-ja-0.22-wrong-sentence-rejection.json`

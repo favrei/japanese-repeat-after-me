@@ -7,11 +7,13 @@ from pathlib import Path
 from real_corpus_eval.core import (
     BinaryScore,
     CandidateTarget,
+    GroupedBinaryScore,
     distribution,
     edit_distance,
     normalize_target_text,
     precision_recall_summary,
     score_candidates,
+    sentence_grouped_rejection_summary,
 )
 from real_corpus_eval.compare import compare_results
 from real_corpus_eval.pipeline import build_ffmpeg_command
@@ -78,6 +80,138 @@ class PrecisionRecallTests(unittest.TestCase):
         summary = precision_recall_summary([BinaryScore(False, 0.3)])
         self.assertIsNone(summary.average_precision)
         self.assertIsNone(summary.best_point)
+
+
+class SentenceGroupedRejectionTests(unittest.TestCase):
+    @staticmethod
+    def _score(
+        recording_group: str,
+        candidate_group: str,
+        score: float,
+    ) -> GroupedBinaryScore:
+        return GroupedBinaryScore(
+            recording_id=f"recording-{recording_group}",
+            recording_group=recording_group,
+            candidate_group=candidate_group,
+            positive=recording_group == candidate_group,
+            score=score,
+        )
+
+    def test_holds_out_source_and_candidate_sentence_groups(self):
+        values = [
+            self._score("a", "a", 0.85),
+            self._score("a", "b", 0.81),
+            self._score("a", "c", 0.10),
+            self._score("b", "a", 0.20),
+            self._score("b", "b", 0.90),
+            self._score("b", "c", 0.20),
+            self._score("c", "a", 0.25),
+            self._score("c", "b", 0.30),
+            self._score("c", "c", 0.80),
+        ]
+
+        summary = sentence_grouped_rejection_summary(values)
+
+        self.assertEqual(summary.groups, ("a", "b", "c"))
+        self.assertEqual(len(summary.decisions), 9)
+        self.assertEqual(
+            [fold.selected_threshold for fold in summary.folds],
+            [0.80, 0.80, 0.85],
+        )
+        self.assertTrue(
+            all(fold.training_positives == 2 for fold in summary.folds)
+        )
+        self.assertTrue(
+            all(fold.training_negatives == 2 for fold in summary.folds)
+        )
+
+        aggregate = summary.aggregate
+        self.assertEqual(aggregate.true_positives, 2)
+        self.assertEqual(aggregate.false_positives, 1)
+        self.assertEqual(aggregate.false_negatives, 1)
+        self.assertEqual(aggregate.true_negatives, 5)
+        self.assertTrue(math.isclose(aggregate.precision or 0.0, 2 / 3))
+        self.assertTrue(math.isclose(aggregate.recall or 0.0, 2 / 3))
+        self.assertTrue(math.isclose(aggregate.f1 or 0.0, 2 / 3))
+        self.assertTrue(
+            math.isclose(
+                aggregate.incorrect_sentence_rejection_rate or 0.0,
+                5 / 6,
+            )
+        )
+        self.assertTrue(
+            math.isclose(
+                aggregate.false_acceptance_rate or 0.0,
+                1 / 6,
+            )
+        )
+        self.assertEqual(len(summary.false_accepts), 1)
+        self.assertEqual(
+            summary.false_accepts[0].candidate_group,
+            "b",
+        )
+        self.assertEqual(len(summary.false_rejects), 1)
+        self.assertEqual(
+            summary.false_rejects[0].recording_group,
+            "c",
+        )
+
+    def test_rejects_incomplete_candidate_matrix(self):
+        values = [
+            self._score(source, candidate, 1.0 if source == candidate else 0.0)
+            for source in ("a", "b", "c")
+            for candidate in ("a", "b", "c")
+            if not (source == "a" and candidate == "c")
+        ]
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "exactly one score for every candidate",
+        ):
+            sentence_grouped_rejection_summary(values)
+
+    def test_empty_input_is_an_explicit_empty_summary(self):
+        summary = sentence_grouped_rejection_summary([])
+
+        self.assertEqual(summary.groups, ())
+        self.assertEqual(summary.aggregate.positives, 0)
+        self.assertIsNone(
+            summary.aggregate.incorrect_sentence_rejection_rate
+        )
+
+    def test_rejects_non_finite_scores_and_mislabeled_pairs(self):
+        valid = [
+            self._score(source, candidate, 1.0 if source == candidate else 0.0)
+            for source in ("a", "b", "c")
+            for candidate in ("a", "b", "c")
+        ]
+        with self.assertRaisesRegex(ValueError, "must be finite"):
+            sentence_grouped_rejection_summary(
+                [
+                    *valid[:-1],
+                    GroupedBinaryScore(
+                        recording_id="recording-c",
+                        recording_group="c",
+                        candidate_group="c",
+                        positive=True,
+                        score=math.nan,
+                    ),
+                ]
+            )
+
+        with self.assertRaisesRegex(ValueError, "positive labels must match"):
+            sentence_grouped_rejection_summary(
+                [
+                    *valid[:-1],
+                    GroupedBinaryScore(
+                        recording_id="recording-c",
+                        recording_group="c",
+                        candidate_group="c",
+                        positive=False,
+                        score=1.0,
+                    ),
+                ]
+            )
 
 
 class DistributionTests(unittest.TestCase):

@@ -47,8 +47,34 @@
 - Human-referenced acceptance and localized-error precision/recall remain
   unavailable until the labeling protocol in the experiment is applied.
 
+## Wrong-sentence rejection extension
+
+- Every real recording was also treated as the wrong utterance for each of the
+  other nine Japanese prompts: 30 correct pairs and 270 incorrect-sentence
+  pairs per run.
+- Thresholds were selected with ten sentence-grouped folds. Each fold excluded
+  the held-out sentence's three recordings and its candidate target from
+  threshold training, then tested those recordings against all ten targets.
+- Both recorded runs produced the same aggregate result: 28 true positives,
+  zero false positives, two false negatives, and 270 true negatives.
+- Incorrect-sentence rejection was `270/270 = 1.0`; false-acceptance rate was
+  `0/270 = 0.0`.
+- Manifest-pair recall was `28/30 = 0.933333`; precision was `1.0`, and F1 was
+  `0.965517`.
+- The false-reject set was not fully stable between runs: one `s09` take failed
+  in both, while the other false reject changed from an `s02` take to an `s03`
+  take.
+- This is evidence for rejecting wholly different sentences from the same
+  speaker/session. It is not evidence for rejecting subtle pronunciation
+  mistakes, near misses, or human-rated unacceptable speech.
+- The 270 negative decisions reuse 30 recordings. The candidate targets are
+  from the same fixed ten-sentence catalog used during threshold fitting, so
+  this is a correlated empirical pair rate, not 270 independent utterances or
+  an unseen-prompt result.
+
 ## Evidence
 
 - `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22.json`
 - `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-repeat.json`
 - `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-repeatability.json`
+- `experiments/006-real-corpus-vosk-baseline/results/macbook-m3-vosk-small-ja-0.22-wrong-sentence-rejection.json`

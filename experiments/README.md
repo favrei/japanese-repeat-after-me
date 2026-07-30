@@ -24,7 +24,7 @@ Model files, virtual environments, generated audio, and package caches are not c
 | [002](002-browser-microphone-capture/) | Can an automated headless Chrome session acquire and process microphone input? | Blocked in the execution container | Chrome navigation was blocked by administrator policy before microphone acquisition. The same harness is retained for replay on macOS. |
 | [003](003-kana-mora-alignment/) | Can expected and recognized kana be aligned into visible mora-level insertions, deletions, and substitutions? | Success | The baseline correctly localized the included missing long vowel, missing small っ, insertion, and substitution cases. Long-vowel spelling normalization remains incomplete. |
 | [004](004-vosk-japanese-local/) | Can the 48 MB Vosk Japanese model provide a cheap local recognition baseline? | Setup blocked in the execution container | Package and model downloads were unavailable. A macOS replay harness is included; no recognition-quality claim is made yet. |
-| [006](006-real-corpus-vosk-baseline/) | Can the native Vosk baseline process all 30 recovered real recordings, and how strongly do transcripts agree with the intended targets? | Functionality passed; quality mixed | All 30 files ran and selected the correct target sentence in the ten-sentence closed set, but only one transcript exactly matched its target and 3/30 transcripts changed across identical repeat inputs. Human acceptance/localization precision and recall remain unlabeled. |
+| [006](006-real-corpus-vosk-baseline/) | Can the native Vosk baseline process all 30 recovered real recordings, and how strongly do transcripts agree with the intended targets? | Functionality passed; quality mixed | All 30 files ran. Sentence-grouped testing rejected all 270 different-sentence pairs, while 28/30 manifest-assigned pairs passed. This does not test subtle pronunciation errors; human acceptance/localization precision and recall remain unlabeled. |
 
 Experiment 005 is a parked device-runtime Sites prototype preserved in its own
 local Git repository. It is not a validated result and is intentionally absent
@@ -56,4 +56,10 @@ uv run python3 -m unittest discover -s tests -v
 uv run python3 -m real_corpus_eval \
   --manifest ../../datasets/japanese-voice-v1/peter-v1-20260729-v9vatj/manifest.json \
   --output results/macbook-m3-vosk-small-ja-0.22.json
+
+uv run python3 -m real_corpus_eval.rejection \
+  results/macbook-m3-vosk-small-ja-0.22.json \
+  results/macbook-m3-vosk-small-ja-0.22-repeat.json \
+  --output \
+  results/macbook-m3-vosk-small-ja-0.22-wrong-sentence-rejection.json
 ```

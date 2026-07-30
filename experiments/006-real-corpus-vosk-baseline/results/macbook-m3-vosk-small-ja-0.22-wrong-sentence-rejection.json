@@ -1,0 +1,557 @@
+{
+  "schemaVersion": 1,
+  "experiment": "006-real-corpus-vosk-baseline-wrong-sentence-rejection",
+  "question": "When a real recording assigned to one Japanese sentence is presented against another sentence target, how often is it rejected?",
+  "method": {
+    "positivePair": "A real recording paired with its manifest-assigned sentence.",
+    "negativePair": "The same recording paired with each of the other nine real Japanese sentence prompts.",
+    "folding": "Leave one source sentence and all three takes out. Remove that sentence from both recording and candidate sides of threshold training, then test its recordings against all ten candidates.",
+    "thresholdSelection": "Choose the score threshold with best training F1; ties prefer precision, then recall, then the higher threshold. Accept when similarity is greater than or equal to the selected threshold.",
+    "decisionUnit": "One recording/candidate-sentence pair."
+  },
+  "runs": [
+    {
+      "input": {
+        "file": "macbook-m3-vosk-small-ja-0.22.json",
+        "sha256": "05c5bb8ac872ef5b3410aeb6add4b093fc8ae86b8c04a117387e371c11029a93",
+        "recordedAt": "2026-07-30T04:00:07.477061+00:00",
+        "sourceGitCommit": "e4376eab63c551b9145547e39a2eadd8638c5f95",
+        "datasetManifestSha256": "bbdefb7fe737fefc86ccf75a8c817cbd3b024e4d7d310fbfefe4ed917960a718",
+        "datasetSourceArchiveSha256": "2834ca16aae1103582e8070a2c428cb4c280107b01858181a1bc87f1c40797e7",
+        "model": "vosk-model-small-ja-0.22",
+        "modelSourceArchiveSha256": "efa092d280153a77615e9e0c7d7283e93e600de3d19d3bec686c57ef19d52eac"
+      },
+      "recordings": 30,
+      "sentenceGroups": 10,
+      "metrics": {
+        "positivePairs": 30,
+        "negativePairs": 270,
+        "truePositives": 28,
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "trueNegatives": 270,
+        "manifestPairPrecision": 1.0,
+        "manifestPairRecall": 0.933333,
+        "manifestPairF1": 0.965517,
+        "incorrectSentenceRejectionRate": 1.0,
+        "incorrectSentenceFalseAcceptanceRate": 0.0
+      },
+      "folds": [
+        {
+          "heldOutSentenceId": "s01",
+          "heldOutSentence": "今日はいい天気ですね。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s02",
+          "heldOutSentence": "駅まで歩いて十分ぐらいです。",
+          "selectedThreshold": 0.35,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 0.666667,
+            "manifestPairF1": 0.8,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s03",
+          "heldOutSentence": "このコーヒーは少し苦いですが、おいしいです。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s04",
+          "heldOutSentence": "週末に友達と映画を見に行きました。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s05",
+          "heldOutSentence": "すみません、もう一度言ってください。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s06",
+          "heldOutSentence": "新しい仕事にはもう慣れましたか。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s07",
+          "heldOutSentence": "雨が降りそうなので、傘を持っていきます。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s08",
+          "heldOutSentence": "予約した時間を変更してもいいですか。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s09",
+          "heldOutSentence": "日本語で自分の考えを説明するのは難しいです。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 1.0,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 0.666667,
+            "manifestPairF1": 0.8,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s10",
+          "heldOutSentence": "失敗しても、諦めずに続けることが大切です。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        }
+      ],
+      "falseAccepts": [],
+      "falseRejects": [
+        {
+          "recording": "audio/s02-take-03-1785329576935.webm",
+          "recordingManifestSentenceId": "s02",
+          "recordingManifestSentence": "駅まで歩いて十分ぐらいです。",
+          "presentedTargetSentenceId": "s02",
+          "presentedTargetSentence": "駅まで歩いて十分ぐらいです。",
+          "similarity": 0.307692,
+          "threshold": 0.35
+        },
+        {
+          "recording": "audio/s09-take-01-1785330193926.webm",
+          "recordingManifestSentenceId": "s09",
+          "recordingManifestSentence": "日本語で自分の考えを説明するのは難しいです。",
+          "presentedTargetSentenceId": "s09",
+          "presentedTargetSentence": "日本語で自分の考えを説明するのは難しいです。",
+          "similarity": 0.190476,
+          "threshold": 0.307692
+        }
+      ]
+    },
+    {
+      "input": {
+        "file": "macbook-m3-vosk-small-ja-0.22-repeat.json",
+        "sha256": "a742106a9c2b2cec7eec2e1faf951131730591094c99af7507d523ca1bd0f57c",
+        "recordedAt": "2026-07-30T04:01:16.647373+00:00",
+        "sourceGitCommit": "e4376eab63c551b9145547e39a2eadd8638c5f95",
+        "datasetManifestSha256": "bbdefb7fe737fefc86ccf75a8c817cbd3b024e4d7d310fbfefe4ed917960a718",
+        "datasetSourceArchiveSha256": "2834ca16aae1103582e8070a2c428cb4c280107b01858181a1bc87f1c40797e7",
+        "model": "vosk-model-small-ja-0.22",
+        "modelSourceArchiveSha256": "efa092d280153a77615e9e0c7d7283e93e600de3d19d3bec686c57ef19d52eac"
+      },
+      "recordings": 30,
+      "sentenceGroups": 10,
+      "metrics": {
+        "positivePairs": 30,
+        "negativePairs": 270,
+        "truePositives": 28,
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "trueNegatives": 270,
+        "manifestPairPrecision": 1.0,
+        "manifestPairRecall": 0.933333,
+        "manifestPairF1": 0.965517,
+        "incorrectSentenceRejectionRate": 1.0,
+        "incorrectSentenceFalseAcceptanceRate": 0.0
+      },
+      "folds": [
+        {
+          "heldOutSentenceId": "s01",
+          "heldOutSentence": "今日はいい天気ですね。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s02",
+          "heldOutSentence": "駅まで歩いて十分ぐらいです。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s03",
+          "heldOutSentence": "このコーヒーは少し苦いですが、おいしいです。",
+          "selectedThreshold": 0.307692,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 0.666667,
+            "manifestPairF1": 0.8,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s04",
+          "heldOutSentence": "週末に友達と映画を見に行きました。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s05",
+          "heldOutSentence": "すみません、もう一度言ってください。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s06",
+          "heldOutSentence": "新しい仕事にはもう慣れましたか。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s07",
+          "heldOutSentence": "雨が降りそうなので、傘を持っていきます。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s08",
+          "heldOutSentence": "予約した時間を変更してもいいですか。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s09",
+          "heldOutSentence": "日本語で自分の考えを説明するのは難しいです。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 1.0,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 0.666667,
+            "manifestPairF1": 0.8,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        },
+        {
+          "heldOutSentenceId": "s10",
+          "heldOutSentence": "失敗しても、諦めずに続けることが大切です。",
+          "selectedThreshold": 0.3,
+          "trainingPositivePairs": 27,
+          "trainingNegativePairs": 216,
+          "trainingBestF1": 0.981132,
+          "test": {
+            "positivePairs": 3,
+            "negativePairs": 27,
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 27,
+            "manifestPairPrecision": 1.0,
+            "manifestPairRecall": 1.0,
+            "manifestPairF1": 1.0,
+            "incorrectSentenceRejectionRate": 1.0,
+            "incorrectSentenceFalseAcceptanceRate": 0.0
+          }
+        }
+      ],
+      "falseAccepts": [],
+      "falseRejects": [
+        {
+          "recording": "audio/s03-take-01-1785329604297.webm",
+          "recordingManifestSentenceId": "s03",
+          "recordingManifestSentence": "このコーヒーは少し苦いですが、おいしいです。",
+          "presentedTargetSentenceId": "s03",
+          "presentedTargetSentence": "このコーヒーは少し苦いですが、おいしいです。",
+          "similarity": 0.3,
+          "threshold": 0.307692
+        },
+        {
+          "recording": "audio/s09-take-01-1785330193926.webm",
+          "recordingManifestSentenceId": "s09",
+          "recordingManifestSentence": "日本語で自分の考えを説明するのは難しいです。",
+          "presentedTargetSentenceId": "s09",
+          "presentedTargetSentence": "日本語で自分の考えを説明するのは難しいです。",
+          "similarity": 0.190476,
+          "threshold": 0.3
+        }
+      ]
+    }
+  ],
+  "repeatability": {
+    "runCount": 2,
+    "comparisonsAvailable": true,
+    "aggregateMetricsIdentical": true,
+    "sameFalseAcceptSet": true,
+    "sameFalseRejectSet": false,
+    "incorrectSentenceRejectionRateRange": {
+      "min": 1.0,
+      "max": 1.0
+    },
+    "manifestPairRecallRange": {
+      "min": 0.933333,
+      "max": 0.933333
+    }
+  },
+  "limitations": [
+    "These negatives are wholly different sentences, not subtle mispronunciations or near-miss learner errors.",
+    "The negative candidates come from the fixed ten-sentence catalog and occur as candidate targets during threshold training; this does not test unseen prompt sentences.",
+    "The 270 negative pair decisions reuse 30 recordings and are correlated; the reported rate is empirical, not 270 independent wrong utterances.",
+    "All recordings are from one speaker and one session, so this does not estimate unseen-speaker performance.",
+    "Manifest assignment supplies the pair label; no human acceptability or pronunciation judgment is available.",
+    "The selected thresholds are exploratory cross-validation outputs, not frozen production thresholds."
+  ]
+}
