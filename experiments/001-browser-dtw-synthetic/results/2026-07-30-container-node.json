@@ -1,0 +1,15 @@
+{
+  "experiment": "001-browser-dtw-synthetic",
+  "runtime": "node v22.16.0",
+  "platform": "linux",
+  "arch": "x64",
+  "configuration": {"sampleRate": 16000, "frameSize": 320, "hopSize": 160},
+  "results": {
+    "same_with_noise": {"queryFrames": 131, "normalizedCost": 0.08737, "worstReferenceUnit": 7, "perUnitMeanCost": [0.003738,0.01194,0.015015,0.022159,0.037037,0.041557,0.039871,0.056268]},
+    "slower_preserve_pitch": {"queryFrames": 164, "normalizedCost": 0.138072, "worstReferenceUnit": 3, "perUnitMeanCost": [0.069966,0.011361,0.09061,0.096233,0.091149,0.072334,0.036314,0.092156]},
+    "slower_pitch_shifted": {"queryFrames": 164, "normalizedCost": 0.298517, "worstReferenceUnit": 7, "perUnitMeanCost": [0.36791,0.111476,0.112827,0.215551,0.169641,0.06782,0.267994,0.613615]},
+    "missing_unit_3": {"queryFrames": 114, "normalizedCost": 0.14292, "worstReferenceUnit": 3, "perUnitMeanCost": [0.002902,0.012613,0.00981,0.402999,0.035536,0.058223,0.058866,0.052302]},
+    "wrong_unit_4": {"queryFrames": 131, "normalizedCost": 0.211614, "worstReferenceUnit": 4, "perUnitMeanCost": [0.004504,0.009609,0.010762,0.023504,1.173746,0.029525,0.033576,0.037294]},
+    "extra_pause_after_2": {"queryFrames": 161, "normalizedCost": 0.186852, "worstReferenceUnit": 7, "perUnitMeanCost": [0.003056,0.011257,0.006112,0.023289,0.022828,0.033789,0.033002,0.052935]}
+  }
+}
