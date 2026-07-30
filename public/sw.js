@@ -1,5 +1,16 @@
-const CACHE_NAME = "conversation-poc-shell-v2";
-const SHELL = ["/", "/manifest.json", "/icon-192.png", "/icon-512.png"];
+const CACHE_NAME = "conversation-poc-shell-v5";
+const SHELL = [
+  "/",
+  "/manifest.json",
+  "/icon-192.png",
+  "/icon-512.png",
+  "/audio/qwen3/ordering-welcome.mp3",
+  "/audio/qwen3/ordering-question.mp3",
+  "/audio/qwen3/ordering-second.mp3",
+  "/audio/qwen3/ordering-menu.mp3",
+  "/audio/qwen3/ordering-thanks.mp3",
+  "/audio/qwen3/meal-arrives.mp3",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL)));

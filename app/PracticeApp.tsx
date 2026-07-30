@@ -67,7 +67,7 @@ function wait(milliseconds: number) {
   return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 }
 
-function playJapanese(text: string) {
+function playSystemJapanese(text: string) {
   return new Promise<void>((resolve) => {
     if (!("speechSynthesis" in window)) {
       setTimeout(resolve, 650);
@@ -76,13 +76,54 @@ function playJapanese(text: string) {
 
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = window.speechSynthesis.getVoices();
+    const japaneseVoices = voices.filter((voice) =>
+      voice.lang.toLowerCase().startsWith("ja"),
+    );
     utterance.lang = "ja-JP";
-    utterance.rate = 0.82;
+    utterance.rate = 0.95;
     utterance.voice =
-      voices.find((voice) => voice.lang.toLowerCase().startsWith("ja")) ?? null;
+      japaneseVoices.find((voice) =>
+        /kyoko|otoya|google.*日本語/i.test(voice.name),
+      ) ??
+      japaneseVoices[0] ??
+      null;
     utterance.onend = () => resolve();
     utterance.onerror = () => resolve();
     window.speechSynthesis.speak(utterance);
+  });
+}
+
+function playJapanese(
+  text: string,
+  audioSrc: string | undefined,
+  setActiveAudio: (audio: HTMLAudioElement | null) => void,
+) {
+  if (!audioSrc) return playSystemJapanese(text);
+
+  return new Promise<void>((resolve) => {
+    const audio = new Audio(audioSrc);
+    let finished = false;
+    let fallbackStarted = false;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      setActiveAudio(null);
+      resolve();
+    };
+
+    const fallback = () => {
+      if (fallbackStarted || finished) return;
+      fallbackStarted = true;
+      setActiveAudio(null);
+      void playSystemJapanese(text).then(finish);
+    };
+
+    audio.preload = "auto";
+    audio.onended = finish;
+    audio.onerror = fallback;
+    setActiveAudio(audio);
+    void audio.play().catch(fallback);
   });
 }
 
@@ -129,12 +170,20 @@ export function PracticeApp() {
     useState<InstallPromptEvent | null>(null);
 
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
+  const activeAudioRef = useRef<HTMLAudioElement | null>(null);
   const advanceTimerRef = useRef<number | null>(null);
   const playbackRunRef = useRef(0);
 
   const currentBubble = FLOW[position];
 
   useEffect(() => {
+    if (window.location.hostname === "0.0.0.0") {
+      const trustedLocalUrl = new URL(window.location.href);
+      trustedLocalUrl.hostname = "localhost";
+      window.location.replace(trustedLocalUrl);
+      return;
+    }
+
     const qaTimer = window.setTimeout(() => {
       setQaMode(
         process.env.NODE_ENV !== "production" &&
@@ -162,6 +211,8 @@ export function PracticeApp() {
     playbackRunRef.current += 1;
     recognitionRef.current?.abort();
     recognitionRef.current = null;
+    activeAudioRef.current?.pause();
+    activeAudioRef.current = null;
     window.speechSynthesis?.cancel();
     setIsListening(false);
     setIsSpeaking(false);
@@ -203,7 +254,13 @@ export function PracticeApp() {
 
       const playback = qaMode
         ? wait(60_000)
-        : playJapanese(currentBubble.japanese);
+        : playJapanese(
+            currentBubble.japanese,
+            currentBubble.audioSrc,
+            (audio) => {
+              activeAudioRef.current = audio;
+            },
+          );
 
       playback.then(async () => {
         await wait(220);
@@ -216,6 +273,8 @@ export function PracticeApp() {
       window.clearTimeout(startTimer);
       if (playbackRunRef.current === runId) {
         playbackRunRef.current += 1;
+        activeAudioRef.current?.pause();
+        activeAudioRef.current = null;
         window.speechSynthesis?.cancel();
       }
     };
@@ -324,6 +383,16 @@ export function PracticeApp() {
       isListening ||
       isAdvancing
     ) {
+      return;
+    }
+
+    if (!window.isSecureContext) {
+      setFeedback({
+        tone: "failure",
+        title: "Trusted local URL required",
+        detail:
+          "Microphone access needs HTTPS or localhost. Open this app on a trusted HTTPS or localhost URL.",
+      });
       return;
     }
 

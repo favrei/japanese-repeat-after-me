@@ -8,6 +8,7 @@ export type DialogueBubble = {
   japanese: string;
   reading: string;
   translation: string;
+  audioSrc?: string;
   accepted?: string[];
 };
 
@@ -31,6 +32,7 @@ export const STAGES: PracticeStage[] = [
         japanese: "いらっしゃいませ。どうぞお入りください。",
         reading: "いらっしゃいませ。どうぞおはいりください。",
         translation: "Welcome, please come in.",
+        audioSrc: "/audio/qwen3/ordering-welcome.mp3",
       },
       {
         id: "ordering-question",
@@ -39,6 +41,7 @@ export const STAGES: PracticeStage[] = [
         japanese: "ご注文は何になさいますか。",
         reading: "ごちゅうもんはなになさいますか。",
         translation: "What can I bring for you?",
+        audioSrc: "/audio/qwen3/ordering-question.mp3",
       },
       {
         id: "ordering-second",
@@ -47,6 +50,7 @@ export const STAGES: PracticeStage[] = [
         japanese: "あ、ちょっと待ってください。",
         reading: "あ、ちょっとまってください。",
         translation: "Oh, give me a second.",
+        audioSrc: "/audio/qwen3/ordering-second.mp3",
       },
       {
         id: "ordering-menu",
@@ -55,6 +59,7 @@ export const STAGES: PracticeStage[] = [
         japanese: "メニューはどこですか。",
         reading: "めにゅーはどこですか。",
         translation: "Where is the menu?",
+        audioSrc: "/audio/qwen3/ordering-menu.mp3",
       },
       {
         id: "ordering-order",
@@ -75,6 +80,7 @@ export const STAGES: PracticeStage[] = [
         japanese: "はい、ご注文ありがとうございます。",
         reading: "はい、ごちゅうもんありがとうございます。",
         translation: "Yes sir, thank you for the ordering.",
+        audioSrc: "/audio/qwen3/ordering-thanks.mp3",
       },
     ],
   },
@@ -90,6 +96,7 @@ export const STAGES: PracticeStage[] = [
         japanese: "お料理をお持ちしました。",
         reading: "おりょうりをおもちしました。",
         translation: "Here is the meal.",
+        audioSrc: "/audio/qwen3/meal-arrives.mp3",
       },
       {
         id: "meal-serve",

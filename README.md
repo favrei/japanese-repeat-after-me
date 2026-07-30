@@ -24,6 +24,12 @@ motion, and visual polish are deferred until the UX and flow are confirmed.
 The app does not store recordings. Chrome may use a network speech service for
 the temporary PoC recognizer.
 
+Autoplay uses pre-generated Qwen3-TTS clips rather than browser
+`speechSynthesis`. The clips are generated locally on Apple Silicon through
+MLX, bundled with the PWA, and cached for offline playback. Browser TTS remains
+only as a playback-error fallback. See `tools/tts/` for the authoring command;
+model weights are never shipped with the app.
+
 ## Local workflow
 
 ```bash

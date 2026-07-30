@@ -1,0 +1,12 @@
+[project]
+name = "japanese-repeat-after-me-tts"
+version = "0.1.0"
+description = "Offline authoring tool for the PoC's canonical Japanese audio"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "huggingface-hub==1.26.0",
+    "mlx-audio==0.4.6",
+]
+
+[tool.uv]
+package = false

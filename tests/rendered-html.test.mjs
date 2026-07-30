@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import test from "node:test";
 
 const templateRoot = new URL("../", import.meta.url);
@@ -88,7 +88,26 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.equal(parsedManifest.display, "standalone");
   assert.equal(parsedManifest.orientation, "portrait");
   assert.equal(parsedManifest.icons.length, 2);
-  assert.match(serviceWorker, /conversation-poc-shell-v2/);
+  assert.match(serviceWorker, /conversation-poc-shell-v5/);
+  assert.match(app, /window\.isSecureContext/);
+  assert.match(app, /trusted HTTPS or localhost URL/);
+  const audioFiles = [
+    "ordering-welcome.mp3",
+    "ordering-question.mp3",
+    "ordering-second.mp3",
+    "ordering-menu.mp3",
+    "ordering-thanks.mp3",
+    "meal-arrives.mp3",
+  ];
+  await Promise.all(
+    audioFiles.map(async (file) => {
+      assert.match(serviceWorker, new RegExp(file.replace(".", "\\.")));
+      const info = await stat(
+        new URL(`../public/audio/qwen3/${file}`, import.meta.url),
+      );
+      assert.ok(info.size > 1_000);
+    }),
+  );
 
   const publicInventory = publicFiles.join("\n");
   assert.doesNotMatch(
