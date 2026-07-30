@@ -25,11 +25,11 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   2026-07-30 pending later review; device-runtime benchmarking also remains
   deferred.
 - On 2026-07-30 the user confirmed that the corrected PoC flow is what they are
-  looking for. Preserve that flow as the baseline; the next product work is to
-  replace the rejected childlike manga frame with the approved full-bleed
-  seinen slice-of-life direction without silently changing the flow. The
-  working replacement mockup has known defects and is not blanket approval of
-  every detail. See [Visual Design](visual-design.md).
+  looking for. Preserve that flow as the baseline. The full-bleed seinen
+  replacement has since been implemented as a story-neutral frame plus a
+  swappable art pack on `design/art-pack-system`, but the user has not yet seen
+  or approved it, and it is not on nested `main`. See
+  [Visual Design](visual-design.md).
 - For learner-speaking bubbles, advance after one correct attempt, the third
   failed attempt, or one Skip press. Skip dismisses exactly one bubble and does
   not count as a failure. See [Product](product.md).
@@ -139,13 +139,20 @@ Out of the initial scope:
   desktop behavior. Neither mechanical result validates Android
   microphone/PWA behavior. See [Delivery](delivery.md) and
   [Visual Design](visual-design.md).
-- Two sibling worktrees of the nested PoC repository exist:
+- Three sibling worktrees of the nested PoC repository exist:
   - `../japanese-repeat-after-me-tts` on `tts/qwen3-metal` — its focused audio
     commit `ad3a356` was rebased and fast-forward merged into nested PoC
     `main`. See [Audio](audio.md).
   - `../japanese-repeat-after-me-recognition` on `recognition/vosk-local-first`
     — commit `18fcf55`, clean and one commit ahead of nested `main`, **not
     merged**. See [Recognition](recognition.md).
+  - `../japanese-repeat-after-me-art-system` on `design/art-pack-system` — the
+    story-neutral seinen frame plus the café art pack. Rebased on 2026-07-30
+    from base `d0bd4bd` onto `ad3a356`; the branch tip is still `ad3a356`, so
+    **the whole art system exists only as uncommitted working-tree changes**
+    there and would be lost by a careless clean or checkout. It was seeded from
+    `poc/`'s dirty state, so it also carries the unrelated scoring/test
+    changes. See [Visual Design](visual-design.md).
 - The separate story/UI working changes remain uncommitted on nested PoC
   `main`. During the audio fast-forward they were stashed, restored, and
   verified byte-for-byte against safety snapshot commit `9f4e9bb`.

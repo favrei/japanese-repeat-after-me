@@ -28,8 +28,13 @@ layout, swappable art slots, and pending asset work.
   reference for the replacement. The user approved the direction and design
   system, not every concrete detail in the mockup. Its known defects must not
   be copied blindly.
-- The replacement has not been ported into `poc/`. The currently modified PoC
-  source still contains the rejected childlike manga frame and placeholder art.
+- On 2026-07-30 the replacement was implemented — as a story-neutral frame plus
+  a swappable art pack — on the sibling worktree branch
+  `design/art-pack-system`, not on nested PoC `main`. Nested `main` still
+  carries the rejected childlike frame in its uncommitted working tree.
+- The implemented frame passed mechanical QA and a production browser pass, but
+  **the user has not reviewed or approved it visually**. Treat it as a
+  candidate, not as the settled frame.
 
 ## Constant frame and swappable layers
 
@@ -98,26 +103,44 @@ The replacement mockup still has unresolved problems:
 - placeholder scene geometry is too sparse on wide screens;
 - the failure caption wraps poorly at `412px`.
 
-## Pending art assets
+## Art pack system
 
-All generated scene art should be monochrome seinen ink on newsprint, contain
-no text or letters, and reserve the red accent for UI rather than the art.
+Implemented on `design/art-pack-system` on 2026-07-30. It makes the
+café-as-example principle structural: the application owns the frame, a pack
+owns the art.
 
-- `poc/public/assets/scene-cafe.png`: approximately `1600×1200`, composed to
-  tolerate full-bleed cropping. Keep the upper-middle quiet for balloon
-  overlays and the lower-left simple for the character; use meaningful café
-  objects rather than a flat black lower band.
-- `poc/public/assets/char-staff-{neutral,happy,sad}.png`: transparent PNGs,
-  approximately `600×880`, showing the same realistically proportioned adult
-  café worker with restrained expression changes.
-- `poc/public/assets/cover-cafe.png`: approximately `1100×690` landscape cover
-  art for the story entry panel.
-- `poc/public/icon-192.png` and `poc/public/icon-512.png`: a monochrome ink app
-  mark on newsprint, replacing scaffold placeholders.
+- Contract lives in `art-system/` — `README.md`, `art-pack.schema.json`,
+  `PROMPT_TEMPLATE.md`, and `pack-template/`. A pack is one manifest
+  `art-packs/<pack-id>.json` plus one asset folder
+  `public/art-packs/<pack-id>/` holding `cover.png`,
+  `scene-{landscape,portrait}.png`, and
+  `character-{neutral,positive,concerned}.png`.
+- The manifest declares titles and labels, asset paths, and a `composition`
+  block: `characterAnchor`, per-orientation `sceneFocus` crop focus,
+  `characterHeightPercent` for mobile and desktop, `characterBottomPercent`,
+  plus generation `provenance`.
+- Scene art is opaque and ships in both orientations; character art must be
+  transparent. Generated art must contain no dialogue, lettering, logos,
+  balloons, UI, or the deep-red accent — the accent belongs to the UI only.
+- `scripts/validate-art-packs.mjs` validates packs and runs first in
+  `npm run qa` as `validate:art`. `app/art-packs.ts` loads packs and
+  `app/ArtReview.tsx` serves a development art-review view at `/?art=1`.
+- This is also the concrete answer sketch for future uploaded chapter art:
+  crop focus, anchoring, scale, and provenance are already manifest fields.
+  See [Content](content.md).
 
-If an agent lacks text-to-image capability, keep the existing placeholders and
-leave one precise inbox note. Do not substitute unrelated stock art or
-known-wrong shipped assets.
+## Generated café assets
+
+The café reference pack — cover, landscape and portrait scenes, three
+transparent character states — plus app icons and a social card were generated
+on 2026-07-30 with OpenAI built-in image generation. Source generations are
+kept outside the repository at
+`~/.codex/generated_images/019fb376-eb0f-7141-b3c7-622e4a05fb44/`.
+
+Earlier per-file placeholder targets under `poc/public/assets/` are superseded
+by the pack layout above. If a later agent lacks text-to-image capability, keep
+existing pack assets and leave one precise inbox note. Do not substitute
+unrelated stock art or known-wrong shipped assets.
 
 The other party's **voice** is part of the same character decision as their
 art. On 2026-07-30 the user parked further reference-voice tuning until the
@@ -138,21 +161,33 @@ story-design line is ready so character and voice can be judged together. See
 - This mechanical pass does not approve the rejected visual treatment or the
   replacement mockup.
 - The 2026-07-30 Chrome audit that produced the defect lists above changed no
-  application source. Create a new `poc/` worktree for the redesign only after
-  its scope is confirmed. Reading the replacement mockup required the file
-  itself; `file://` navigation to it is blocked by browser security policy. See
+  application source. Reading the replacement mockup required the file itself;
+  `file://` navigation to it is blocked by browser security policy. See
+  [Delivery](delivery.md).
+- The redesign was then done in the sibling worktree
+  `../japanese-repeat-after-me-art-system`; the dirty `poc/` checkout was not
+  edited. Because that worktree was seeded from `poc/`'s dirty state, the
+  branch also carries the unrelated uncommitted scoring/test changes.
+- After rebasing onto nested `main` (`ad3a356`, packaged Qwen3 audio), the
+  redesigned `PracticeApp`, service worker, and rendered-HTML tests were
+  reconciled with the bundled audio and the localhost microphone guard.
+  `npm run qa` passes — art validation, typecheck, lint, production build,
+  `13/13` tests — and production browser QA passed at mobile and wide-desktop
+  sizes. Mechanical only; it is not visual approval. See
   [Delivery](delivery.md).
 
 ## Open questions
 
-- Which replacement-mockup defects should be corrected before porting it?
+- Does the user accept the implemented frame and the generated café pack on
+  sight? Nothing else about the redesign is settled until they do.
+- Which of the earlier mockup defects did the implementation actually fix, and
+  which survive into `design/art-pack-system`?
 - How restrained should failure feedback be while remaining noticeable?
 - What exact motion and reduced-motion behavior belong in the frame?
 - Which visual cues distinguish staff, learner autoplay, and learner speaking
   without reintroducing multiple accent colours?
-- Should generated story art be approved before or after the frame port?
-- What crop, focal-point, and safe-area metadata will future uploaded story art
-  require?
+- Does the pack manifest still need safe-area metadata, or do `sceneFocus` and
+  the character fields cover overlay collisions in practice?
 
 ## Sources
 
@@ -165,6 +200,9 @@ story-design line is ready so character and voice can be judged together. See
 - `poc/app/PracticeApp.tsx`
 - `poc/app/scoring.ts`
 - `poc/README.md`
+- `../japanese-repeat-after-me-art-system` on `design/art-pack-system`:
+  `art-system/README.md`, `art-system/art-pack.schema.json`,
+  `art-packs/cafe.json`, `scripts/validate-art-packs.mjs`, `app/ArtReview.tsx`
 
 ## Related cells
 

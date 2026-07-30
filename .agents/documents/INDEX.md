@@ -17,5 +17,8 @@ for material that should be read as a document rather than as active memory.
 - [`stage-design-flow.md`](stage-design-flow.md) — step-by-step flow for
   authoring a new conversation stage: situation, stage cuts, personas,
   dialogue, difficulty control, and the art & voice brief handoff.
+- [`character-separation-gate.md`](character-separation-gate.md) — required
+  review pass over authored dialogue: catches writer reasoning leaking into a
+  character's mouth, and characters sharing one omniscient mind.
 - [`open-questions.md`](open-questions.md) — unresolved decisions that must be
   narrowed before they become implementation requirements.

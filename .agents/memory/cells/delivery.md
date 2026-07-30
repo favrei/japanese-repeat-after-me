@@ -53,10 +53,19 @@ substitute a different artifact after approval.
   QA mode now exposes synthetic success, near-miss, and failure controls. A
   second `412×915` Chrome click-through covered the updated states.
 - The user rejected that frame's childlike visual register and fixed-width
-  desktop behavior. Its green checks remain mechanical evidence only. The
-  approved full-bleed seinen replacement direction has not been ported and its
-  working mockup still contains unresolved design defects. See
-  [Visual Design](visual-design.md).
+  desktop behavior. Its green checks remain mechanical evidence only.
+- The seinen replacement now exists on the sibling worktree branch
+  `design/art-pack-system`. Its `npm run qa` adds a `validate:art` pack-manifest
+  check ahead of typecheck, lint, production build, and `13/13` tests, and
+  passes; production browser QA passed at mobile and wide-desktop sizes. It also
+  adds a development-only art-review view at `/?art=1`, which the release
+  harness rules cover. All of this is mechanical — the user has not approved the
+  frame visually. See [Visual Design](visual-design.md).
+- On that branch `npm audit --omit=dev` reports three high advisories in the
+  existing `next@16.2.6` chain. No upgrade was attempted, because it is outside
+  the art-system scope and could affect Vinext. A release gate must state this,
+  alongside the separate Vosk-branch advisories, rather than claim a clean
+  audit.
 - Nested PoC `main` now bundles locally generated Japanese reference audio,
   precached in service-worker shell v5, with system TTS as playback fallback.
   Its combined `npm run qa` passed typecheck, build, and all 13 tests with the
@@ -167,8 +176,8 @@ server-side requirement justifies it.
 
 ## Open questions
 
-- Which seinen mockup defects and pending art assets should be resolved before
-  porting the replacement frame while preserving the confirmed flow?
+- Should `design/art-pack-system` be committed and fast-forwarded onto nested
+  `main`, and is that gated on the user's visual approval of the frame?
 - What exact commands and evidence make up the initial QA gate?
 - Will Android USB `adb reverse` provide the preferred localhost-secure preview,
   or is trusted LAN HTTPS still needed for real-device QA?

@@ -25,20 +25,26 @@ Canonical detail belongs in linked cells.
   at `.agents/documents/stage-design-flow.md` and covers situation, stage cuts,
   personas, dialogue, difficulty, and an art & voice brief — but never art
   itself. The user expects to revise it. See [Content](cells/content.md).
-- Replace the currently implemented childlike manga frame with the user-chosen
-  full-bleed seinen slice-of-life direction. Preserve the constant-frame plus
-  swappable-art layer model, but correct the reference mockup's known
-  character, feedback, counter, wide-screen, and mobile-wrapping defects
-  rather than copying it verbatim. See
-  [Visual Design](cells/visual-design.md).
+- Character separation is treated as crucial, not stylistic. Dialogue must not
+  leak the writer's reasoning into a character's mouth, and characters must not
+  share one omniscient mind. Character cards are required before writing, and
+  `.agents/documents/character-separation-gate.md` is a required pass/fail gate
+  over the finished lines. See [Content](cells/content.md).
+- The full-bleed seinen replacement for the rejected childlike frame is
+  implemented, as a story-neutral frame plus a swappable café art pack, on the
+  worktree branch `design/art-pack-system`. It passes QA and production browser
+  checks but **the user has not seen it** — showing it and getting a visual
+  verdict is the next step, before any merge. See
+  [Visual Design](cells/visual-design.md) and [Delivery](cells/delivery.md).
 - Do not tune the reference voice further until story design is ready. The user
   accepted the local audio plumbing but still finds the Qwen3 voice
   unsatisfying, and voice belongs to the character decision. See
   [Audio](cells/audio.md).
-- Generate or retain precise placeholders for the pending café scene, staff
-  sprites, cover, and app icons. Future stories can supply their own scene,
-  character, and cover art; the café is only an example. See
-  [Visual Design](cells/visual-design.md) and [Content](cells/content.md).
+- Story art now belongs in an art pack — one manifest under `art-packs/` plus
+  one asset folder under `public/art-packs/` — validated in QA. The café pack
+  is the reference, not a special case; a new story is a new pack, never a
+  layout change. See [Visual Design](cells/visual-design.md) and
+  [Content](cells/content.md).
 - Develop and preview locally. Do not deploy because a build succeeds; release
   only the exact immutable source and artifact that passed the agreed automated
   checks, trusted-HTTPS manual QA, and explicit approval. See
@@ -101,14 +107,18 @@ Canonical detail belongs in linked cells.
   binding strength are untested and need their own experiment. Stage authoring
   proceeds anyway by recording delivery intent in plain words. See
   [Audio](cells/audio.md) and [Experiments](cells/experiments.md).
-- The PoC source is still an uncommitted childlike manga-frame port that the
-  user rejected. The full-bleed seinen replacement is not implemented, and its
-  reference mockup retains known visual defects. See
-  [Visual Design](cells/visual-design.md) and [Delivery](cells/delivery.md).
-- Real seinen café scene, staff, cover, and icon assets remain pending. If an
-  agent lacks image generation, keep placeholders and leave a precise inbox
-  note rather than introducing unrelated stock or known-wrong art. See
-  [Visual Design](cells/visual-design.md).
+- The entire art system is **uncommitted working-tree state** in
+  `../japanese-repeat-after-me-art-system`; its branch tip is still `ad3a356`.
+  A careless clean or checkout there destroys it. It also carries the unrelated
+  scoring/test changes inherited from `poc/`'s dirty state, and nested `main`
+  still holds the rejected childlike frame. See
+  [Project](cells/project.md) and [Visual Design](cells/visual-design.md).
+- That branch's `npm audit --omit=dev` reports three high advisories in the
+  existing `next@16.2.6` chain; no upgrade was attempted because it could
+  affect Vinext. See [Delivery](cells/delivery.md).
+- The character separation gate has never been run on real dialogue — the café
+  stages in `poc/app/stages.ts` are unreviewed. See
+  [Content](cells/content.md).
 - The browser Vosk branch is unmerged, its Android and browser memory are
   unmeasured, and its production `npm audit` cannot be made clean in the
   current dependency graph. Its live evidence is one passing manual test, not
@@ -136,12 +146,18 @@ Canonical detail belongs in linked cells.
 - New stage content must survive a pessimistic run in which every learner
   bubble is skipped or failed out, and every `reading` must be verified against
   its `japanese`. See [Content](cells/content.md).
+- New or edited dialogue must pass the character separation gate — leak scan,
+  knowledge ledger, blind attribution with speaker labels stripped, and a
+  single-speaker read-through per character — run as a separate reading pass
+  over the finished lines with drafting notes out of view. It is pass/fail for
+  the whole stage set, and a failure is fixed in the content, never by changing
+  flow rules. See [Content](cells/content.md).
 - A replacement frame must retain the confirmed flow and pass the PoC's QA
-  command plus browser state inspection at phone and wide-desktop sizes.
-  Specifically verify full-viewport composition, overlay collisions, readable
-  feedback, and reduced-motion behavior rather than relying on a successful
-  build alone. See [Visual Design](cells/visual-design.md) and
-  [Delivery](cells/delivery.md).
+  command — now including art-pack validation — plus browser state inspection
+  at phone and wide-desktop sizes: full-viewport composition, overlay
+  collisions, readable feedback, reduced-motion behavior. Passing all of that
+  is still not approval; the user's visual verdict is a separate gate. See
+  [Visual Design](cells/visual-design.md) and [Delivery](cells/delivery.md).
 - Before any deployment, run one reproducible QA command covering type checks,
   lint, unit tests, build, browser smoke tests, forced WASM fallback, optional
   WebGPU, and artifact-privacy checks. Preview that exact build over trusted

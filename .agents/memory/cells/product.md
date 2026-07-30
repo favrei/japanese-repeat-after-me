@@ -47,9 +47,10 @@ implementation.
 - A manga-storybook frame was subsequently implemented around the confirmed
   flow without changing its progression. The user rejected that frame's
   childlike tone and fixed-width desktop composition, then selected a
-  full-bleed seinen slice-of-life direction. The replacement direction is
-  approved; its concrete mockup still has known defects and has not been ported
-  into `poc/`. See [Visual Design](visual-design.md).
+  full-bleed seinen slice-of-life direction. That replacement is now
+  implemented on the `design/art-pack-system` worktree branch — flow preserved,
+  QA passing — but awaits the user's visual verdict and is not on nested
+  `main`. See [Visual Design](visual-design.md).
 
 The two-stage café script specified by the user on 2026-07-30 is:
 

@@ -49,8 +49,9 @@ It is explicitly a draft the user expects to revise.
   design language, character, persona, voice — which the art work consumes.
   See [Visual Design](visual-design.md).
 - Nine steps: situation criteria, stage cuts by goal-state change, cast and
-  persona, dialogue writing, difficulty dials, a review list, the art & voice
-  brief, encoding into `poc/app/stages.ts`, and validation.
+  persona, dialogue writing, difficulty dials, a review list, the character
+  separation gate, the art & voice brief, encoding into `poc/app/stages.ts`,
+  and validation.
 
 Two constraints were derived from the confirmed flow rather than stated before:
 
@@ -69,6 +70,49 @@ Two constraints were derived from the confirmed flow rather than stated before:
 The flow also captures speech-delivery intent per speaker and per generated
 bubble instead of prescribing TTS prompt text, because prompting is unresolved.
 See [Audio](audio.md).
+
+## Character separation is a first-class content requirement
+
+The user identified, on 2026-07-30, the failure mode they consider most
+dangerous in agent-written dialogue, and asked for a dedicated checking gate
+rather than a bullet inside the flow. Two shapes:
+
+- **Persona leak.** The writer's reasoning surfaces inside a character's mouth
+  — the character explains their own role, register, or the scene's purpose
+  instead of just doing what a real person would do.
+- **Shared mind.** One narrator wearing several name tags: every character
+  draws on one pool of knowledge, vocabulary, rhythm, and intent, so characters
+  know what only the author knows and become interchangeable.
+
+Both are invisible to the author, who silently supplies the missing
+justification while reading. The mitigation is therefore structural, not
+advisory:
+
+- **Character cards are required before dialogue** (Step 3), one per speaker
+  **including the learner**: wants, knows, cannot know, perceives, voice
+  fingerprint as concrete grammar tier, and a short "never says" list. The
+  cards exist so the gate has something to check against.
+- **A required gate at Step 6b**, documented at
+  [`../../documents/character-separation-gate.md`](../../documents/character-separation-gate.md).
+  Four passes: leak scan, knowledge ledger, blind attribution with speaker
+  labels stripped, and a single-speaker read-through per character. It is
+  pass/fail for the whole stage set; any failure means fixing content and
+  rerunning all four.
+- **Run it detached from authoring intent** — a separate reading pass over the
+  finished `speaker`, `japanese`, `reading`, and `translation` only, with
+  drafting notes out of view. A line that cannot be judged without recalling
+  why it was written already fails.
+- Never resolve a gate failure by changing flow rules. The knowledge-ledger
+  pass and skip-safety are the same defect seen from two sides: a bubble Skip
+  can dismiss was never knowledge anyone in the room received.
+- Voice fingerprints carry into the art & voice brief so two characters are not
+  synthesised as the same person. See [Audio](audio.md) and
+  [Visual Design](visual-design.md).
+
+Unverified as of 2026-07-30: the gate has never been run on a real stage set.
+The existing café dialogue in `poc/app/stages.ts` has not been reviewed against
+it, and running it there is the obvious first test of whether the four passes
+are practical.
 
 ## Chapter audio policy
 
@@ -90,17 +134,25 @@ See [Audio](audio.md).
 - The café is only an example story. Future chapter authors may provide a
   scene background, other-party character art, and cover art while the
   application's UI frame remains constant.
-- The first PoC uses placeholders until suitable assets are generated. Do not
-  let future upload and review machinery complicate the current local
+- This is now structural rather than aspirational: the `design/art-pack-system`
+  branch defines an art-pack contract — one manifest plus one asset folder per
+  story — with the café as the reference pack, and a validator that runs in QA.
+  A future chapter's art is a new pack, not a layout change. See
+  [Visual Design](visual-design.md).
+- Do not let future upload and review machinery complicate the current local
   rehearsal implementation.
-- Future upload validation will need crop or focal-point metadata, safe overlay
-  areas, file and dimension limits, accessibility treatment, and copyright and
-  review policy. See [Visual Design](visual-design.md).
+- The pack manifest already carries crop focus, character anchoring and scale,
+  and provenance. Future *upload* validation still needs safe overlay areas,
+  file and dimension limits, accessibility treatment, and copyright and review
+  policy on top of it.
 
 ## Open questions
 
 - Which parts of the drafted stage design flow need revision after it is used
   to author a real stage?
+- Does the character separation gate hold up on a real stage set, and should it
+  become a review criterion for future uploaded chapters as well as for
+  agent-authored ones?
 - What review criteria and automated pre-review checks apply?
 - Is agent approval advisory or technically enforced?
 - Who may revise, withdraw, or resubmit a chapter after review?
@@ -120,7 +172,11 @@ See [Audio](audio.md).
 - User request for a skill-like stage-making flow separated from art, and the
   follow-up that TTS prompting must be handled as unresolved, recorded on
   2026-07-30.
+- User direction that agent cognitive separation — persona leak and the
+  god-like shared mindflow across characters — is crucial and needs its own
+  checking gate over the conversation, recorded on 2026-07-30.
 - `.agents/documents/stage-design-flow.md`
+- `.agents/documents/character-separation-gate.md`
 
 ## Related cells
 

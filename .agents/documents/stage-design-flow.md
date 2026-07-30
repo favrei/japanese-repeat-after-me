@@ -76,6 +76,29 @@ Decide, in words, before any dialogue:
 These three feed Step 7 verbatim. Do not describe how anyone *looks* here;
 appearance is derived by the art work from the persona stated.
 
+### Character cards (required)
+
+You are one writer voicing every person in the scene, which reliably collapses
+them into one mind. Write a card per speaker — **including the learner**, the
+most frequently forgotten character — before writing any line:
+
+- **Wants** — the goal in this scene, one line.
+- **Knows** — what this person knows entering the scene.
+- **Cannot know** — stated explicitly: the other party's plans, and the
+  learner's nationality, name, itinerary, budget, or level unless the scene
+  shows it.
+- **Perceives** — what anyone present can observe in the room. Only these facts
+  may be reacted to.
+- **Voice fingerprint** — politeness tier as concrete grammar
+  (尊敬語・謙譲語 / です・ます / plain), typical sentence length, one habitual
+  word or opener, and who asks the questions.
+- **Never says** — a short banned list. A beginner learner never produces
+  かしこまりました or よろしいでしょうか; café staff never explain grammar.
+
+Scene facts everyone shares go in one separate list, not into any card. The
+cards are what [Step 6b](#step-6b--character-separation-gate-required) checks
+the finished dialogue against, so vague cards make the gate unrunnable.
+
 ## Step 4 — Write the dialogue
 
 Order of work: write the learner's `speak` bubbles first, then write the other
@@ -102,6 +125,14 @@ is scaffolding.
 - **Natural spoken register**, not textbook. Say it aloud; if a real customer
   would not, rewrite it.
 - **Consistent politeness** with the Step 3 persona, across the whole stage.
+- **In character, never about the character.** A line does the thing; it never
+  states the speaker's role as a reason for speaking, explains the scene, or
+  teaches. 「私は店員ですので……」 and 「これは丁寧な言い方です。」 are both the
+  writer talking, not the character. Pedagogy lives in the `translation` field
+  and in which sentence you chose — never in a character's mouth.
+- **No borrowed knowledge.** Each line may use only what its speaker's card
+  says they know or perceive. Nobody knows the learner's nationality, name, or
+  plans because the writer does.
 - **No text in the scene.** Anything the learner reads is UI text, never baked
   into art.
 
@@ -157,6 +188,24 @@ Review the draft against this list before encoding:
   say "sir".
 - A stage that ends mid-transaction with nothing accomplished.
 
+## Step 6b — Character separation gate (required)
+
+Run [`character-separation-gate.md`](character-separation-gate.md) over the
+finished lines before encoding. It is the one check aimed at the failure this
+flow is most exposed to: a single writer voicing several people produces
+characters who share one mind, and lines in which the writer's reasoning
+surfaces inside a character's mouth.
+
+Run it as a separate reading pass over `speaker`, `japanese`, `reading`, and
+`translation` only, with your drafting notes and rationale out of view — the
+point is to lose the author's memory of what each line was *meant* to do. Four
+passes: leak scan, knowledge ledger, blind attribution with the speaker labels
+stripped, and a single-speaker read-through per character. It is pass/fail for
+the whole stage set; on any failure, fix the content and rerun all four.
+
+Never resolve a gate failure by changing flow rules. Record the verdict in the
+Step 9 inbox note.
+
 ## Step 7 — Art and voice brief
 
 Write requirements only. Do not generate, choose, or describe finished art.
@@ -185,6 +234,8 @@ This brief is the handoff to the art work.
 
 ### Voice
 - Per speaker: perceived age, speed, politeness level, regional neutrality
+- Voice fingerprint from the Step 3 card, so two characters are not
+  synthesised as the same person
 - Learner reference-line voice, if it differs
 - Words the synthesiser is likely to mispronounce
 ```
@@ -244,16 +295,21 @@ stage appears to require a flow change, stop and raise it with the user.
   not against the kanji, and confirm the delivery matches the Step 7b intent.
 - Simulate a pessimistic run: skip or fail out *every* learner bubble and
   confirm the remaining dialogue still coheres.
+- Re-run the character separation gate if any line changed after Step 6b.
 - Run the PoC QA command from `poc/README.md`; existing tests stay green.
 - Write an inbox note under `.agents/memory/inbox/` recording the new stage set,
-  its difficulty intent, and anything unresolved. Do not edit memory cells.
+  its difficulty intent, the gate verdict, and anything unresolved. Do not edit
+  memory cells.
 
 ## Definition of done
 
-- Situation, stage cuts, and personas stated in prose.
+- Situation, stage cuts, and personas stated in prose, with a character card
+  per speaker including the learner.
 - Every bubble has validated `japanese`, `reading`, and `translation`; every
   speak bubble has considered `accepted` variants.
 - Skip-safety verified by the pessimistic run.
+- Character separation gate run over the finished lines and passed, with its
+  verdict recorded.
 - Difficulty dials chosen deliberately, not by accident.
 - Art & voice brief written; no art produced here.
 - Speech-delivery intent recorded per speaker and per generated bubble, and the
