@@ -62,3 +62,18 @@ plus a separate manual deployment action is sufficient.
 - Prefer browser-local storage plus export/import if that satisfies the
   product. Keep hosted storage only when cross-device synchronization or
   another proven server-side requirement justifies it.
+
+## Repo-wide agent debugging permission
+
+- Every coding agent in this repository may start or reuse the local client
+  host, open the client, inspect it, and debug it without asking for separate
+  permission each time.
+- Headless debugging may use OpenCLI or conventional frameworks such as
+  Playwright, Puppeteer, or direct CDP tooling.
+- Agents with real-browser control may use it for visual, interaction,
+  permission, WebGPU, audio, and browser-specific checks.
+- Automated checks should prefer fake or synthetic media. This permission does
+  not itself authorize ambient recording, private-data upload, publication, or
+  deployment.
+- Starting and testing the client does not satisfy or bypass the explicit
+  deployment gate.

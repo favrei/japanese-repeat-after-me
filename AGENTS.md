@@ -51,6 +51,26 @@ is subordinate to the marked block above and `$dream-agent-memory`.
 - Use `uv` for Python package management and execution.
 - Keep unit tests as guardrails for development.
 
+## Client Preview and Browser Debugging
+
+- Every coding agent working in this repository is authorized, without
+  additional per-run confirmation, to start or reuse the local client host,
+  open the client, inspect runtime behavior, and debug it.
+- Headless inspection may use OpenCLI, Playwright, Puppeteer, CDP, or another
+  conventional headless browser framework available in the environment.
+- An agent with in-app Browser, Chrome control, or equivalent real-browser
+  capability may use it when visual behavior, interaction, permissions,
+  WebGPU, audio, or browser-specific behavior needs inspection.
+- Use the project's normal host command and the exact local URL it reports.
+  Do not scan ports or interfere with unrelated local servers. Track processes
+  started for debugging and stop them when finished unless an active shared
+  preview should remain available.
+- Prefer fake or synthetic media for automated checks. This permission does
+  not independently authorize ambient microphone/camera capture, uploading
+  private data, external publication, or deployment.
+- Preview and QA never imply deployment. Deployment remains a separate,
+  explicit action after the agreed QA gate.
+
 ## Communication Style
 
 - The user is a fluent professional English speaker, but English is not his native language.
