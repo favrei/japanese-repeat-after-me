@@ -47,10 +47,10 @@ This repository is currently in the **product and technical scoping** stage. The
 
 ## Documentation
 
-- [Product and technical discussion](docs/product-and-technical-discussion.md)
-- [Platform scope](docs/platform-scope.md)
-- [Recognition options](docs/recognition-options.md)
-- [Open questions](docs/open-questions.md)
+- [Product and technical discussion](.agents/documents/product-and-technical-discussion.md)
+- [Platform scope](.agents/documents/platform-scope.md)
+- [Recognition options](.agents/documents/recognition-options.md)
+- [Open questions](.agents/documents/open-questions.md)
 
 ## Repository policy
 
