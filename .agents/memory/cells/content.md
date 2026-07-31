@@ -42,15 +42,16 @@ not required by the current direction.
 
 A repeatable flow for making a new conversation stage was drafted on
 2026-07-30 at [`../../documents/stage-design-flow.md`](../../documents/stage-design-flow.md).
-It is explicitly a draft the user expects to revise.
+It remains revisable, but it has now been exercised on the café redesign and
+the complete taproom story rather than existing only as prose.
 
 - It owns **story, dialogue, and difficulty**. It deliberately does **not**
   produce art; it ends by writing an art & voice *brief* — required background,
   design language, character, persona, voice — which the art work consumes.
   See [Visual Design](visual-design.md).
-- Nine steps: situation criteria, stage cuts by goal-state change, cast and
-  persona, dialogue writing, difficulty dials, a review list, the character
-  separation gate, the art & voice brief, encoding into `poc/app/stages.ts`,
+- The flow covers situation criteria, stage cuts by goal-state change, the cut
+  between stages, cast and persona, dialogue writing, difficulty dials, a
+  review list, the character separation gate, the art & voice brief, encoding,
   and validation.
 
 Two constraints were derived from the confirmed flow rather than stated before:
@@ -70,6 +71,35 @@ Two constraints were derived from the confirmed flow rather than stated before:
 The flow also captures speech-delivery intent per speaker and per generated
 bubble instead of prescribing TTS prompt text, because prompting is unresolved.
 See [Audio](audio.md).
+
+The working agent-assisted authoring loop is: the user states the situation,
+the agent fills the story template, then pauses for concise checkpoints on
+stage cuts, character cards, and the finished dialogue read back in English.
+The demonstrated `stories/<slug>/` bundle supports this loop, but its layout is
+not yet the final upload or lesson-pack contract.
+
+## Scene cuts and narration
+
+The taproom run exposed a missing design step: a stage boundary needs an
+authored break rather than an abrupt background swap. Step 2b now requires each
+stage to declare:
+
+- `sceneId`: the shot or camera position;
+- `castId`: the other party present in that shot;
+- a narrated `transition` with Japanese, reading, translation, and optional
+  bundled audio.
+
+The first stage has a transition too, so the story opens from the cover into a
+scene rather than dropping directly into dialogue. Transition cards are
+separate flow states, not dialogue bubbles, and therefore do not alter bubble
+counts or attempt progression.
+
+Narration is subject to the same knowledge and leak checks as dialogue and is
+also **skip-safe**. A transition after a learner turn may describe only facts
+that remain true if the learner skipped or failed out; it must not assert that
+the learner spoke, was understood, or received the requested result. In the
+taproom, the rejected 「注文を伝えると…」 depended on successful speech, while
+the shipped line describes only the beer being poured.
 
 ## Character separation is a first-class content requirement
 
@@ -109,10 +139,18 @@ advisory:
   synthesised as the same person. See [Audio](audio.md) and
   [Visual Design](visual-design.md).
 
-Unverified as of 2026-07-30: the gate has never been run on a real stage set.
-The existing café dialogue in `poc/app/stages.ts` has not been reviewed against
-it, and running it there is the obvious first test of whether the four passes
-are practical.
+The gate has now been run on real dialogue:
+
+- The café redesign records its cards, skip-safety proof, and four-pass gate in
+  `.agents/documents/cafe-stage-redesign.md`.
+- The taproom bundle at `stories/taproom/` passed all four passes. It forced
+  three real line rejections where staff speech depended on a learner success.
+  The useful repair pattern was to react to something perceivable — visible
+  hesitation at the board — rather than to words the learner may not have
+  delivered.
+- One taproom ambiguity was accepted and documented:
+  `ありがとうございます。` is not blindly attributable to only one speaker, but
+  it is a natural learner autoplay line rather than evidence of a shared mind.
 
 ## Chapter audio policy
 
@@ -135,10 +173,11 @@ are practical.
   scene background, other-party character art, and cover art while the
   application's UI frame remains constant.
 - This is now structural rather than aspirational: the `design/art-pack-system`
-  branch defines an art-pack contract — one manifest plus one asset folder per
-  story — with the café as the reference pack, and a validator that runs in QA.
-  A future chapter's art is a new pack, not a layout change. See
-  [Visual Design](visual-design.md).
+  lineage defines an art-pack contract — one manifest plus one asset folder
+  per story — with café and taproom packs and a validator that runs in QA. The
+  schema-v2 pack exposes named `scenes` and `characters`; a stage selects them
+  by `sceneId` and `castId`. A future chapter's art is a new pack, not a layout
+  change. See [Visual Design](visual-design.md).
 - Do not let future upload and review machinery complicate the current local
   rehearsal implementation.
 - The pack manifest already carries crop focus, character anchoring and scale,
@@ -146,13 +185,28 @@ are practical.
   file and dimension limits, accessibility treatment, and copyright and review
   policy on top of it.
 
+## Demonstrated story bundle
+
+`stories/taproom/` is the first complete authoring bundle:
+
+- `story.md`: template, cuts, scene facts, character cards, dialogue,
+  skip-safety, difficulty, separation-gate verdict, and delivery state;
+- `stages.ts`: two stages, 13 bubbles, five learner-speaking bubbles, and two
+  narrator transitions;
+- `brief.md`: art and voice requirements plus per-bubble delivery intent;
+- `audio/`: ten accepted clips with generation provenance.
+
+The working reading convention is all hiragana, while katakana loanwords are
+written phonetically with `ー` retained, such as `ぺーるえーる`. The bundle
+layout works and fed the story registry implementation, but has not been
+declared the final upload or lesson-pack schema.
+
 ## Open questions
 
-- Which parts of the drafted stage design flow need revision after it is used
-  to author a real stage?
-- Does the character separation gate hold up on a real stage set, and should it
-  become a review criterion for future uploaded chapters as well as for
-  agent-authored ones?
+- Which parts of the stage design flow still need revision after the café and
+  taproom runs?
+- Should the demonstrated character separation gate become an enforced review
+  criterion for future uploaded chapters as well as agent-authored ones?
 - What review criteria and automated pre-review checks apply?
 - Is agent approval advisory or technically enforced?
 - Who may revise, withdraw, or resubmit a chapter after review?
@@ -175,8 +229,13 @@ are practical.
 - User direction that agent cognitive separation — persona leak and the
   god-like shared mindflow across characters — is crucial and needs its own
   checking gate over the conversation, recorded on 2026-07-30.
+- User-confirmed taproom stage cuts, completed taproom authoring, narrator
+  skip-safety correction, and requested stage-selection integration recorded
+  on 2026-07-31.
 - `.agents/documents/stage-design-flow.md`
 - `.agents/documents/character-separation-gate.md`
+- `.agents/documents/cafe-stage-redesign.md`
+- `stories/taproom/`
 
 ## Related cells
 

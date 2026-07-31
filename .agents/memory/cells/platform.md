@@ -137,14 +137,13 @@ large-model delivery, or final-product privacy policy. See
 
 ## Active platform gates
 
-- The user requested an Android Chrome PWA PoC, temporarily reprioritizing
-  product preview without authorizing deployment. The first implemented flow
-  was rejected; the corrected two-stage script and bubble-level progression
-  are now implemented and user-confirmed. The current source still carries a
-  subsequently rejected childlike, fixed-width visual frame; the approved
-  replacement direction is full-bleed seinen and must retain responsive
-  Android behavior. Real-device QA follows when the phone is available. See
-  [Visual Design](visual-design.md).
+- The user requested an Android Chrome PWA PoC without authorizing deployment.
+  The corrected bubble-level progression is user-confirmed. The newest focused
+  candidate is a responsive four-stage café/taproom library on
+  `feature/story-selection`; nested `poc/` main still carries the rejected
+  childlike frame. The candidate passed desktop and `412×915` browser QA, but
+  real Android behavior remains unverified. See [Product](product.md),
+  [Visual Design](visual-design.md), and [Delivery](delivery.md).
 - Android SDK Platform Tools 35.0.1 and the broader local Android SDK are
   installed. A proposed local preview path uses USB debugging plus
   `adb reverse tcp:3000 tcp:3000`, allowing Android Chrome to open the Mac-hosted
@@ -195,6 +194,8 @@ large-model delivery, or final-product privacy policy. See
   recorded on 2026-07-30.
 - User selection of full-bleed responsive desktop behavior and a seinen visual
   register recorded on 2026-07-30.
+- Four-stage selector and responsive phone-browser validation recorded on
+  2026-07-31.
 
 ## Related cells
 

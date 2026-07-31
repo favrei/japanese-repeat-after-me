@@ -17,18 +17,21 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   conservative localized feedback where evidence supports it.
 - The initial product is a focused practical-speaking rehearsal engine, not a
   complete language course or open-ended conversation system.
-- The repository remains in evidence-gathering product and technical scoping.
-  An isolated PoC exists under `poc/`. Its first flow was rejected, then
-  corrected to the specified linear two-stage bubble sequence.
+- The repository remains in evidence-gathering product and technical scoping,
+  but the isolated nested PoC now has a credible four-stage product candidate
+  in a focused worktree: a stage library preserves the café story and adds the
+  taproom story. It is tested but not committed or merged.
 - The first real-corpus recognition baseline is complete and promising as a
   coarse known-sentence content signal. The user parked that lane on
   2026-07-30 pending later review; device-runtime benchmarking also remains
   deferred.
-- On 2026-07-30 the user confirmed that the corrected PoC flow is what they are
-  looking for. Preserve that flow as the baseline. The full-bleed seinen
-  replacement has since been implemented as a story-neutral frame plus a
-  swappable art pack on `design/art-pack-system`, but the user has not yet seen
-  or approved it, and it is not on nested `main`. See
+- On 2026-07-30 the user confirmed the corrected bubble progression. Preserve
+  that behavior as the baseline even as stories and stages are added. The
+  full-bleed seinen frame, café redesign, and schema-v2 art system are committed
+  on `design/art-pack-system`; narrated scene transitions are committed on
+  `design/scene-transitions`; the four-stage selector and complete taproom
+  bundle are uncommitted on `feature/story-selection`. None is on nested
+  `main`. See [Product](product.md), [Content](content.md), and
   [Visual Design](visual-design.md).
 - For learner-speaking bubbles, advance after one correct attempt, the third
   failed attempt, or one Skip press. Skip dismisses exactly one bubble and does
@@ -57,10 +60,13 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   platform constraint or invalidate an assumption.
 - For experiments, preserve the question, replay command, environment,
   machine-readable result, observed facts, interpretation, and limitations.
-- Do not commit model files, virtual environments, generated audio, package
-  caches, or the private voice corpus. The earlier local-commit exception for
-  that corpus was withdrawn on 2026-07-30 when the repository became public;
-  `/datasets/` is now ignored and must stay untracked.
+- Do not commit model files, virtual environments, package caches, the private
+  voice corpus, or disposable TTS candidates and intermediate outputs.
+  Reviewed, provenance-tracked reference clips bundled with the nested PoC are
+  intentional application assets; model weights remain external. The earlier
+  local-commit exception for the private corpus was withdrawn on 2026-07-30
+  when the repository became public; `/datasets/` is ignored and must stay
+  untracked.
 - This repository is published on the public GitHub origin. Treat everything
   committed here as world-readable before adding it.
 - Avoid mandatory per-attempt cloud API costs.
@@ -128,36 +134,37 @@ Out of the initial scope:
 
 - No approved canonical product frontend, root `pyproject.toml`,
   project-wide test suite, or CI workflow exists yet.
-- `poc/` is an isolated, uncommitted Vinext/React/TypeScript Git repository. It
-  contains a flow-first two-stage PWA, temporary Chrome speech adapter,
-  manifest, service worker, development QA controls, and its own `npm run qa`
-  checks.
-- The confirmed-flow baseline passed type checks, lint, build, and 10 tests. A
-  later uncommitted manga-frame and approximate-reading-feedback pass recorded
-  `13/13` passing tests and another `412×915` Chrome click-through. The user
-  confirmed the flow but rejected that frame's childlike tone and fixed-width
-  desktop behavior. Neither mechanical result validates Android
-  microphone/PWA behavior. See [Delivery](delivery.md) and
-  [Visual Design](visual-design.md).
-- Three sibling worktrees of the nested PoC repository exist:
-  - `../japanese-repeat-after-me-tts` on `tts/qwen3-metal` — its focused audio
-    commit `ad3a356` was rebased and fast-forward merged into nested PoC
-    `main`. See [Audio](audio.md).
-  - `../japanese-repeat-after-me-recognition` on `recognition/vosk-local-first`
-    — commit `18fcf55`, clean and one commit ahead of nested `main`, **not
-    merged**. See [Recognition](recognition.md).
-  - `../japanese-repeat-after-me-art-system` on `design/art-pack-system` — the
-    story-neutral seinen frame plus the café art pack. Rebased on 2026-07-30
-    from base `d0bd4bd` onto `ad3a356`; the branch tip is still `ad3a356`, so
-    **the whole art system exists only as uncommitted working-tree changes**
-    there and would be lost by a careless clean or checkout. It was seeded from
-    `poc/`'s dirty state, so it also carries the unrelated scoring/test
-    changes. See [Visual Design](visual-design.md).
-- The separate story/UI working changes remain uncommitted on nested PoC
-  `main`. During the audio fast-forward they were stashed, restored, and
-  verified byte-for-byte against safety snapshot commit `9f4e9bb`.
-- No Android device run, Sites project creation, saved Sites version, or
-  deployment occurred.
+- `poc/` is an isolated Vinext/React/TypeScript Git repository. Nested `main`
+  is at `ad3a356` and remains dirty with the rejected childlike UI, scoring
+  fixtures, and later TTS-tool edits. Do not modify or clean it from another
+  worktree.
+- Five sibling worktrees of the nested PoC repository exist:
+  - `../japanese-repeat-after-me-tts` on `tts/qwen3-metal`, at `ad3a356`; its
+    original six-clip bundled-audio work was fast-forwarded to nested `main`.
+  - `../japanese-repeat-after-me-recognition` on
+    `recognition/vosk-local-first`, clean at `18fcf55`, unmerged. See
+    [Recognition](recognition.md).
+  - `../japanese-repeat-after-me-art-system` on `design/art-pack-system`,
+    **clean at `e37d5c4`**. Commit `51cbcdb` preserved the story-neutral seinen
+    frame and café art-pack system; `e37d5c4` added the redesigned two-stage
+    café story and nine reference clips. This supersedes the old
+    “uncommitted art system” warning. See [Visual Design](visual-design.md).
+  - `../japanese-repeat-after-me-scene-transitions` on
+    `design/scene-transitions`, clean at `6e6b83c`, branched from `e37d5c4`.
+    It adds schema-v2 named scene/cast maps and narrated breaks before every
+    stage. Its `node_modules` is a symlink to the art-system worktree; run
+    `npm ci` there if that source worktree is removed. See [Content](content.md)
+    and [Visual Design](visual-design.md).
+  - `../japanese-repeat-after-me-story-selection` on
+    `feature/story-selection`, based at `6e6b83c`. Its four-stage story
+    library, taproom code, ten accepted clips, and original art pack are
+    **uncommitted working-tree state**. `npm run qa` passes 21/21 tests and
+    desktop/phone production-browser QA passed. See [Delivery](delivery.md).
+- The root `stories/taproom/` authoring bundle and related document edits are
+  also uncommitted. The taproom story is implemented in the focused feature
+  worktree, but its authoring source remains useful evidence.
+- No Android device run, Sites project creation, saved Sites version, push,
+  merge, or deployment occurred.
 - Six numbered experiment directories live under `experiments/`. Experiments
   001, 003, 004, and 006 contain recorded or replayed evidence; experiment 002
   lacks a committed harness; experiment 005 is incomplete and parked.
@@ -196,6 +203,11 @@ Out of the initial scope:
   recorded on 2026-07-30.
 - User selection of a full-bleed seinen replacement for the rejected childlike
   manga frame recorded on 2026-07-30.
+- User-directed café redesign, scene-transition requirement, taproom story,
+  and four-stage selector work recorded on 2026-07-30 and 2026-07-31.
+- `stories/taproom/`
+- Nested PoC branches `design/art-pack-system`, `design/scene-transitions`, and
+  `feature/story-selection`.
 
 ## Related cells
 

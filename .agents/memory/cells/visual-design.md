@@ -28,13 +28,15 @@ layout, swappable art slots, and pending asset work.
   reference for the replacement. The user approved the direction and design
   system, not every concrete detail in the mockup. Its known defects must not
   be copied blindly.
-- On 2026-07-30 the replacement was implemented — as a story-neutral frame plus
-  a swappable art pack — on the sibling worktree branch
-  `design/art-pack-system`, not on nested PoC `main`. Nested `main` still
-  carries the rejected childlike frame in its uncommitted working tree.
-- The implemented frame passed mechanical QA and a production browser pass, but
-  **the user has not reviewed or approved it visually**. Treat it as a
-  candidate, not as the settled frame.
+- The replacement was implemented as a story-neutral frame plus swappable art
+  packs. `design/art-pack-system` is now clean and committed at `e37d5c4`;
+  `design/scene-transitions` is clean at `6e6b83c`; neither is on nested PoC
+  `main`, which still carries the rejected childlike frame in its dirty working
+  tree.
+- The four-stage feature worktree extends the frame with a story library and an
+  original taproom pack. It passed mechanical and production-browser QA, but
+  the finished selector and taproom visuals still need the user's explicit
+  visual verdict. Treat them as candidates, not a deployed or merged frame.
 
 ## Constant frame and swappable layers
 
@@ -105,26 +107,38 @@ The replacement mockup still has unresolved problems:
 
 ## Art pack system
 
-Implemented on `design/art-pack-system` on 2026-07-30. It makes the
+Implemented on the `design/art-pack-system` lineage. It makes the
 café-as-example principle structural: the application owns the frame, a pack
 owns the art.
 
 - Contract lives in `art-system/` — `README.md`, `art-pack.schema.json`,
   `PROMPT_TEMPLATE.md`, and `pack-template/`. A pack is one manifest
-  `art-packs/<pack-id>.json` plus one asset folder
-  `public/art-packs/<pack-id>/` holding `cover.png`,
-  `scene-{landscape,portrait}.png`, and
-  `character-{neutral,positive,concerned}.png`.
-- The manifest declares titles and labels, asset paths, and a `composition`
-  block: `characterAnchor`, per-orientation `sceneFocus` crop focus,
-  `characterHeightPercent` for mobile and desktop, `characterBottomPercent`,
-  plus generation `provenance`.
+  `art-packs/<pack-id>.json` plus one asset folder under
+  `public/art-packs/<pack-id>/`.
+- Schema version 2 replaces the single scene/character fields with named
+  `scenes` and `characters` maps. Each stage selects `sceneId` and `castId`.
+  Scene entries carry landscape/portrait files, per-orientation crop focus, and
+  optional `scale` from 1–2 for a camera push-in. Character entries carry
+  neutral/positive/concerned transparent states, anchoring, mobile/desktop
+  height, and bottom offset. The manifest retains titles, labels, and
+  generation provenance.
+- A stage boundary is a designed scene state. Every stage, including Stage 1,
+  opens on a narrated transition while the incoming scene/cast is visible.
+  Transitions are separate from dialogue bubbles. See [Content](content.md).
+- Named cast changes are implemented by the contract but still not demonstrated
+  within one story: both existing two-stage stories correctly retain the same
+  other party throughout.
+- When one source plate serves two camera positions, a distinct `focus` plus
+  `scale` is legitimate and must be recorded in provenance. Crop focus alone
+  was nearly invisible on wide screens; the push-in made the café register
+  cut legible. A dedicated register plate is still better future art.
 - Scene art is opaque and ships in both orientations; character art must be
   transparent. Generated art must contain no dialogue, lettering, logos,
   balloons, UI, or the deep-red accent — the accent belongs to the UI only.
 - `scripts/validate-art-packs.mjs` validates packs and runs first in
   `npm run qa` as `validate:art`. `app/art-packs.ts` loads packs and
-  `app/ArtReview.tsx` serves a development art-review view at `/?art=1`.
+  `app/ArtReview.tsx` serves a development art-review view. The selector
+  feature accepts `/?art=cafe` and `/?art=taproom` in development.
 - This is also the concrete answer sketch for future uploaded chapter art:
   crop focus, anchoring, scale, and provenance are already manifest fields.
   See [Content](content.md).
@@ -142,10 +156,27 @@ by the pack layout above. If a later agent lacks text-to-image capability, keep
 existing pack assets and leave one precise inbox note. Do not substitute
 unrelated stock art or known-wrong shipped assets.
 
+## Generated taproom assets
+
+The `feature/story-selection` worktree contains an original monochrome
+taproom pack generated with OpenAI built-in image generation:
+
+- `cover.png`;
+- landscape and portrait scene plates;
+- transparent staff states: neutral, positive, concerned.
+
+The pack exposes `board` and `counter` scene keys as two framings of the same
+source scene, with the tighter counter shot using a push-in. Source generations
+remain outside the repository under
+`~/.codex/generated_images/019fb590-d4b9-7d51-978c-bbe022a2c3d9/`.
+Character states were generated against chroma green, then converted to
+transparent PNGs. The implemented assets contain no dialogue text or UI.
+
 The other party's **voice** is part of the same character decision as their
-art. On 2026-07-30 the user parked further reference-voice tuning until the
-story-design line is ready so character and voice can be judged together. See
-[Audio](audio.md) and [Content](content.md).
+art. The taproom run demonstrated this by casting staff, learner, and narrator
+separately and accepting all three by ear. Continue judging art and voice as
+one story-specific character decision rather than defaulting every role to the
+same preset. See [Audio](audio.md) and [Content](content.md).
 
 ## Implementation and QA history
 
@@ -175,13 +206,25 @@ story-design line is ready so character and voice can be judged together. See
   `13/13` tests — and production browser QA passed at mobile and wide-desktop
   sizes. Mechanical only; it is not visual approval. See
   [Delivery](delivery.md).
+- The café art system was committed as `51cbcdb`, followed by the café
+  redesign/audio commit `e37d5c4`. The old “art system is uncommitted at
+  `ad3a356`” warning is obsolete.
+- The transition branch `6e6b83c` passed art validation, typecheck, lint,
+  production build, 19/19 tests, and desktop/phone browser checks.
+- Transition veil opacity was reduced from `0.88` to `0.7`; the darker value
+  hid the incoming background and defeated the purpose of the scene break.
+- The uncommitted four-stage feature worktree passed the same gate with both
+  packs and 21/21 tests. Desktop and `412×915` browser checks covered the
+  library, taproom transition, dialogue, direct Stage 2 entry, and completion.
+  A development HMR error after switching servers in one tab did not reproduce
+  as production behavior.
 
 ## Open questions
 
-- Does the user accept the implemented frame and the generated café pack on
-  sight? Nothing else about the redesign is settled until they do.
-- Which of the earlier mockup defects did the implementation actually fix, and
-  which survive into `design/art-pack-system`?
+- Does the user visually accept the implemented four-stage library and both
+  generated packs on sight?
+- Is the reframed café register shot sufficient, or should it receive a
+  dedicated plate?
 - How restrained should failure feedback be while remaining noticeable?
 - What exact motion and reduced-motion behavior belong in the frame?
 - Which visual cues distinguish staff, learner autoplay, and learner speaking
@@ -194,6 +237,8 @@ story-design line is ready so character and voice can be judged together. See
 - User selection of manga-storybook direction recorded on 2026-07-30.
 - User rejection of the childlike implementation and selection of seinen
   slice-of-life plus full-bleed desktop behavior recorded on 2026-07-30.
+- User request for a designed narrated stage break and for a stage-selection
+  menu retaining both café and taproom, recorded on 2026-07-31.
 - `.agents/resources/seinen-manga-frame/README.md`
 - `.agents/resources/seinen-manga-frame/mock.html`
 - `poc/app/globals.css`
@@ -203,6 +248,8 @@ story-design line is ready so character and voice can be judged together. See
 - `../japanese-repeat-after-me-art-system` on `design/art-pack-system`:
   `art-system/README.md`, `art-system/art-pack.schema.json`,
   `art-packs/cafe.json`, `scripts/validate-art-packs.mjs`, `app/ArtReview.tsx`
+- `../japanese-repeat-after-me-scene-transitions` at `6e6b83c`
+- `../japanese-repeat-after-me-story-selection`
 
 ## Related cells
 

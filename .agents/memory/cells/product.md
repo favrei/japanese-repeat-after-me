@@ -31,12 +31,11 @@ experience. The user subsequently specified the PoC dialogue and bubble
 progression recorded below; do not carry forward conflicting behavior from the
 implementation.
 
-## Confirmed PoC flow
+## Confirmed progression and current story set
 
-- The confirmed PoC boundary remains two default conversation stages, a theme
-  chosen by the assistant, one learner only, a complete open–play–finish
-  session, and Android Chrome PWA delivery. A temporary coarse recognizer was
-  accepted for the PoC.
+- The confirmed progression remains one learner, a linear bubble sequence, a
+  complete open–play–finish session, and Android Chrome PWA delivery. A
+  temporary coarse recognizer remains acceptable for the PoC.
 - The earlier `poc/` navigation, preview, three-round default, and attempt-level
   Skip behavior were rejected. The corrected implementation now follows the
   linear bubble sequence below.
@@ -44,15 +43,29 @@ implementation.
   confirmed that its flow is what they are looking for.
 - The confirmed flow is the baseline for subsequent work. Do not change it
   while addressing UI details unless the user explicitly revises the flow.
-- A manga-storybook frame was subsequently implemented around the confirmed
-  flow without changing its progression. The user rejected that frame's
-  childlike tone and fixed-width desktop composition, then selected a
-  full-bleed seinen slice-of-life direction. That replacement is now
-  implemented on the `design/art-pack-system` worktree branch — flow preserved,
-  QA passing — but awaits the user's visual verdict and is not on nested
-  `main`. See [Visual Design](visual-design.md).
+- The original two-stage café-only boundary was expanded on 2026-07-31 at the
+  user's request: a stage library must keep the café rather than replacing it
+  with the taproom.
+- The current feature candidate exposes four selectable stages across two
+  stories:
+  - café `ご注文` / Ordering: order the house-blend coffee;
+  - café `お会計` / Payment: request a receipt and pay by card;
+  - taproom `選ぶ` / Choosing: admit it is a first visit, ask for a
+    recommendation, and order the pale ale;
+  - taproom `一杯目` / The first glass: receive the drink, ask when to pay, and
+    ask where to drink it.
+- Starting at a first stage continues through the rest of that story. Selecting
+  a second stage directly opens that stage's own narrated transition and runs
+  only the remaining stage. Returning from completion goes to the library.
+- This candidate is mechanically complete on `feature/story-selection` but is
+  not committed or merged to nested `main`. See [Project](project.md) and
+  [Delivery](delivery.md).
 
-The two-stage café script specified by the user on 2026-07-30 is:
+## Superseded café script — historical source of the flow
+
+The two-stage café script specified by the user on 2026-07-30 established the
+confirmed bubble semantics, but its burger-and-beer content was superseded by
+the authored café redesign:
 
 ### Stage 1 — ordering
 
@@ -71,8 +84,8 @@ The two-stage café script specified by the user on 2026-07-30 is:
 3. Learner speaks: “Where is the restroom?”
 4. Finish the conversation.
 
-The English wording above preserves the requested script and may be polished
-only with the user's approval.
+Preserve this as decision history for why the flow behaves as it does; do not
+restore its content over the current coffee/payment story.
 
 ## Authoritative bubble progression
 
@@ -88,8 +101,11 @@ only with the user's approval.
   advances to the next bubble.
 - Skip is not a failed attempt and must not merely increment the attempt
   counter.
-- The current PoC implements this behavior; do not regress to attempt-level or
-  round-level Skip.
+- A stage-transition card is not a dialogue bubble and does not change the
+  stage's bubble count. Each stage, including the first stage of a story, opens
+  on its own transition.
+- The current focused branches implement this behavior; do not regress to
+  attempt-level or round-level Skip.
 
 ## Current product belief
 
@@ -122,10 +138,10 @@ only with the user's approval.
 
 ## Unsettled interaction ideas
 
-The user has approved the flow and the high-level replacement visual direction,
-not every UI behavior or mockup detail. The visual system and art work are
-owned by [Visual Design](visual-design.md). These previously recorded
-interaction ingredients still require separate review:
+The user has approved the flow and requested the stage library, but not every
+UI behavior or final visual detail. The visual system and art work are owned by
+[Visual Design](visual-design.md). These previously recorded interaction
+ingredients still require separate review:
 
 - Present the other party's bubbles on the left and learner-party bubbles on
   the right.
@@ -175,9 +191,8 @@ interaction ingredients still require separate review:
 
 ## Open learning and feedback questions
 
-- Which UI details should be added or changed around the confirmed flow?
-- Which known defects in the seinen frame mockup must be corrected before it is
-  ported into the PoC?
+- Does the user visually approve the four-stage library and the generated
+  café/taproom frame as implemented?
 - Does the intro count as a round?
 - Are difficult turns scheduled earlier in later rounds?
 - Do rounds restart immediately or pause briefly?
@@ -223,7 +238,12 @@ interaction ingredients still require separate review:
 - User selection of manga-storybook direction, later rejection of its
   childlike implementation, and selection of a full-bleed seinen replacement
   recorded on 2026-07-30.
+- User request to preserve the café and add a stage-selection menu for the
+  taproom, recorded on 2026-07-31.
 - `poc/`
+- `stories/taproom/`
+- `../japanese-repeat-after-me-art-system`
+- `../japanese-repeat-after-me-story-selection`
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
 - `README.md`

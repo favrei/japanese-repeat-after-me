@@ -5,13 +5,18 @@ difficulty. Follow it in order when the user asks to add a stage, a chapter, a
 new scene or situation, or to extend the café example with another story.
 
 A **stage** is one conversation scene the learner rehearses aloud: an ordered
-list of bubbles ending when the learner's goal in that scene is reached. The
-café (`ordering`, `meal`) is only the worked example, not the product identity.
+list of bubbles ending when the learner's goal in that scene is reached, plus
+the narrated cut that opens it. The café (`ordering`, `meal`) is only the worked
+example, not the product identity.
 
-This document covers **story, dialogue, and difficulty**. It does **not** cover
-art. It ends by writing an art & voice *brief* — required background, design
-language, character, persona, voice — which the separate art work consumes.
-See [`../memory/cells/visual-design.md`](../memory/cells/visual-design.md).
+This document covers **story, dialogue, transitions, and difficulty**. It does
+**not** cover art. It ends by writing an art & voice *brief* — required
+backgrounds, design language, characters, persona, voice — which the separate
+art work consumes. The cut belongs here rather than to the art work: which shot
+and which other party a stage plays against is a story decision, and the pack
+supplies the plates for it.
+See [`../memory/cells/visual-design.md`](../memory/cells/visual-design.md) and
+[`art-system.md`](art-system.md).
 
 This is a draft. Revise it as stage authoring teaches us more.
 
@@ -61,6 +66,56 @@ Per stage:
 - Open on the other party, so the learner hears the register before producing.
 - Close on a beat of resolution — the acknowledgement, the goal met.
 
+## Step 2b — Write the cut between stages
+
+A stage cut is a **scene change**, and the app makes it visible: it stops on a
+transition card, changes background and other party underneath it, and lets the
+narrator speak. Nothing crosses that break implicitly, so every cut has to be
+authored. Skipping this is what made the café read as abrupt.
+
+Per stage — including the first, which opens the story from the cover — decide:
+
+- **The shot** (`sceneId`). Which background this stage plays against. Two
+  stages may share one; say so deliberately rather than by omission.
+- **The other party** (`castId`). Who the learner is talking to here. A new
+  stage is where the cast may change; within a stage it may not.
+- **The narrator's line** (`transition`). One sentence carrying the time, place,
+  or movement that the dialogue itself cannot state.
+
+The scene and cast keys must exist in the story's art pack. Both are named
+entries in the manifest, not pack-wide constants — see
+[`art-system.md`](art-system.md).
+
+### Rules for the narrator
+
+The narrator is the storyteller, not a person in the room. They are the one
+voice allowed to know the writer's intent — which is exactly why they are easy
+to misuse:
+
+- **Never a character.** The narrator does not greet, answer, instruct, or react
+  to anyone. If a line could be said *to* someone in the scene, it belongs in a
+  bubble.
+- **Only what the story can show.** No line may state what a character knows,
+  intends, or is about to do. The card runs before the stage, so anything it
+  reveals is a spoiler the dialogue then has to redundantly repeat.
+- **No flow narration.** Never explain the app: not attempts, not skipping, not
+  "now you will practise". The card is inside the story.
+- **Cover the change, not the dialogue.** Say what moved — a seat left, a
+  counter reached, an hour passed. Do not summarise the scene you are about to
+  play.
+- **Skip-safe, like every other-party line — and more exposed.** The card runs
+  *between* stages, after the learner may have skipped or failed out of the
+  previous stage's last speak bubble. No line may assert that the learner
+  spoke, was understood, or got what they asked for. 「注文を伝えると、店員は
+  タップの前へ歩いていった。」 reads naturally and is false in a pessimistic
+  run; 「タップからビールが注がれた。」 is true either way. Describe what the
+  scene does, not what the learner achieved.
+- **Second person for the learner.** The app calls the learner あなた; the
+  narrator matches it, and never names them or assigns them a nationality,
+  budget, or reaction.
+- One sentence, with `japanese`, `reading`, and `translation` like any bubble.
+  Narration is read, not spoken by the learner, and is never scored.
+
 ## Step 3 — Cast and persona
 
 Decide, in words, before any dialogue:
@@ -99,6 +154,11 @@ Scene facts everyone shares go in one separate list, not into any card. The
 cards are what [Step 6b](#step-6b--character-separation-gate-required) checks
 the finished dialogue against, so vague cards make the gate unrunnable.
 
+The narrator gets **no card**: they have no wants, know everything, and are
+present in no room. That asymmetry is the point — write them from the Step 2b
+rules instead. If the cast changes between stages, each other party is a
+separate character with a separate card, never one card wearing two roles.
+
 ## Step 4 — Write the dialogue
 
 Order of work: write the learner's `speak` bubbles first, then write the other
@@ -133,8 +193,10 @@ is scaffolding.
 - **No borrowed knowledge.** Each line may use only what its speaker's card
   says they know or perceive. Nobody knows the learner's nationality, name, or
   plans because the writer does.
-- **No text in the scene.** Anything the learner reads is UI text, never baked
-  into art.
+- **Scene lettering is allowed; UI text is separate.** Signage, boards, menus,
+  and labels may be drawn into the art where the setting calls for them. What
+  the learner must read or act on still lives in UI text, and speech still
+  lives in balloons.
 
 ### Fields (see `poc/app/stages.ts`)
 
@@ -203,6 +265,12 @@ passes: leak scan, knowledge ledger, blind attribution with the speaker labels
 stripped, and a single-speaker read-through per character. It is pass/fail for
 the whole stage set; on any failure, fix the content and rerun all four.
 
+Include the transition lines in the leak scan and the knowledge ledger, and
+exclude them from blind attribution — they are attributable by design. The
+failure to look for is the reverse of the usual one: a narrator line that hands
+a character knowledge, or that says something only a character in the room could
+have observed.
+
 Never resolve a gate failure by changing flow rules. Record the verdict in the
 Step 9 inbox note.
 
@@ -214,20 +282,24 @@ This brief is the handoff to the art work.
 ```markdown
 ## Art & voice brief — <stage set name>
 
-### Scene background
+### Scene backgrounds — one block per sceneId from Step 2b
 - Place, time of day, indoor or outdoor, camera framing and distance
 - Mood in one line
 - Palette anchor within the approved system (newsprint paper, black and
   neutral ink, exactly one deep red accent); name any story-specific
   deviation and why
 - Safe overlay zones where balloons and controls must stay readable
-- Constraint: full-bleed, no lettering or signage text baked into the art
+- Continuity with the other shots: same establishment, hour, and weather
+  unless the narrator's line says otherwise
+- Constraint: full-bleed. Signage and lettering are allowed where the setting
+  calls for them; name any text the scene should show
 
-### Other-party character
+### Other-party characters — one block per castId from Step 2b
 - Role, approximate age, build, clothing appropriate to the role
 - Expression range needed across the stages
 - Register they project, taken from Step 3 rather than from styling
-- Constraint: adult seinen proportions, no chibi, no text on the sprite
+- Which scenes they appear in, and that they must read as standing in each
+- Constraint: adult seinen proportions, no chibi
 
 ### Cover art
 - One image summarising the situation, in the same register
@@ -237,6 +309,10 @@ This brief is the handoff to the art work.
 - Voice fingerprint from the Step 3 card, so two characters are not
   synthesised as the same person
 - Learner reference-line voice, if it differs
+- Narrator: state the delivery intent and audition a distinct voice just as for
+  the characters. Leave `audioSrc` unset only while casting is unresolved;
+  once a clip passes the listening gate, bundle it and set `audioSrc`. Never
+  invent an uncast narrator through browser `speechSynthesis`.
 - Words the synthesiser is likely to mispronounce
 ```
 
@@ -283,14 +359,25 @@ Until the prompt approach is settled:
 ## Step 8 — Encode
 
 Add the stages to `poc/app/stages.ts` in the existing shape: `PracticeStage`
-with `id`, `number`, `title`, `jpTitle`, and ordered `bubbles`. `FLOW` derives
-itself; do not hand-maintain it. Do not touch `flow.ts` or `scoring.ts` — if a
-stage appears to require a flow change, stop and raise it with the user.
+with `id`, `number`, `title`, `jpTitle`, `sceneId`, `castId`, `transition`, and
+ordered `bubbles`. All three of `sceneId`, `castId`, and `transition` are
+required — a stage cannot be encoded without its cut. `FLOW` derives itself; do
+not hand-maintain it. Do not touch `flow.ts` or `scoring.ts` — if a stage
+appears to require a flow change, stop and raise it with the user.
+
+The transition is content, not flow: it is a break between bubbles, never an
+attempt, a scored step, or something the learner must pass. Skipping a card
+does not consume the one bubble Skip dismisses.
 
 ## Step 9 — Validate
 
 - Read every bubble aloud in sequence. It must sound like one conversation.
-- Re-verify each `reading` against its `japanese`.
+- Read each transition line in place, before its stage. It must explain the
+  change without pre-empting the dialogue that follows.
+- Re-verify each `reading` against its `japanese`, transitions included.
+- Confirm every `sceneId` and `castId` resolves in the story's art pack, and
+  walk each cut in the browser to see the background and character actually
+  change.
 - Listen to every generated clip. Check pronunciation against the `reading`,
   not against the kanji, and confirm the delivery matches the Step 7b intent.
 - Simulate a pessimistic run: skip or fail out *every* learner bubble and
@@ -305,6 +392,8 @@ stage appears to require a flow change, stop and raise it with the user.
 
 - Situation, stage cuts, and personas stated in prose, with a character card
   per speaker including the learner.
+- Every stage — the first included — names its shot, its other party, and its
+  narrator line, and every key resolves in the art pack.
 - Every bubble has validated `japanese`, `reading`, and `translation`; every
   speak bubble has considered `accepted` variants.
 - Skip-safety verified by the pessimistic run.

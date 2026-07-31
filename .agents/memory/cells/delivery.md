@@ -40,11 +40,9 @@ substitute a different artifact after approval.
   It serves locally at `http://localhost:3000/` and has a PWA manifest, service
   worker, generated placeholder icons, and a development-only synthetic
   speech/flow control.
-- The latest recorded `npm run qa` in `poc/` passes type checks, lint, build,
-  `13/13` unit/rendered tests, and public-artifact privacy assertions. Browser
-  flow testing remains separate from that command. One non-blocking
-  `@next/next/no-page-custom-font` warning remains around app-router font
-  loading.
+- Nested `poc/` main is at `ad3a356` and remains dirty with the rejected UI and
+  later source/tool changes. Its historical checks are not the newest product
+  candidate and it must not be cleaned or overwritten from another worktree.
 - A Chrome run at 412×915 verified one-bubble Skip, one-success progression,
   third-failure progression, the stage boundary, completion, and restart. The
   user confirmed the resulting flow on 2026-07-30.
@@ -54,18 +52,26 @@ substitute a different artifact after approval.
   second `412×915` Chrome click-through covered the updated states.
 - The user rejected that frame's childlike visual register and fixed-width
   desktop behavior. Its green checks remain mechanical evidence only.
-- The seinen replacement now exists on the sibling worktree branch
-  `design/art-pack-system`. Its `npm run qa` adds a `validate:art` pack-manifest
-  check ahead of typecheck, lint, production build, and `13/13` tests, and
-  passes; production browser QA passed at mobile and wide-desktop sizes. It also
-  adds a development-only art-review view at `/?art=1`, which the release
-  harness rules cover. All of this is mechanical — the user has not approved the
-  frame visually. See [Visual Design](visual-design.md).
-- On that branch `npm audit --omit=dev` reports three high advisories in the
-  existing `next@16.2.6` chain. No upgrade was attempted, because it is outside
-  the art-system scope and could affect Vinext. A release gate must state this,
-  alongside the separate Vosk-branch advisories, rather than claim a clean
-  audit.
+- The seinen/art branch is now clean and committed at `e37d5c4`; its QA passes
+  art validation, typecheck, lint, production build, and 13/13 tests. It also
+  contains the redesigned café story and nine reference clips. It remains
+  unmerged.
+- The clean `design/scene-transitions` branch at `6e6b83c` adds schema-v2
+  art/cast selection and a narrated break before every stage. Its full QA passes
+  19/19 tests and desktop/phone browser checks. It remains unmerged.
+- The newest candidate is the uncommitted
+  `../japanese-repeat-after-me-story-selection` worktree on
+  `feature/story-selection`, based at `6e6b83c`. It preserves the café, adds
+  the taproom and a four-stage story library, and bundles ten accepted taproom
+  clips plus original art. `npm run qa` passes both art packs, typecheck, lint,
+  production build, and 21/21 tests. Desktop and `412×915` production-browser
+  QA covered the library, taproom Stage 1, direct Stage 2 entry, and completion.
+  The user still owes the finished visual candidate an explicit visual verdict.
+- `npm ci` in the selector worktree reported 15 audit findings (2 low, 13
+  high) in the existing dependency set. No audit fix or framework upgrade was
+  attempted. Earlier art-branch and Vosk-branch audit counts were taken from
+  different dependency states; a release gate must report the audit of the
+  exact frozen candidate rather than combine or silently dismiss them.
 - Nested PoC `main` now bundles locally generated Japanese reference audio,
   precached in service-worker shell v5, with system TTS as playback fallback.
   Its combined `npm run qa` passed typecheck, build, and all 13 tests with the
@@ -94,6 +100,10 @@ substitute a different artifact after approval.
   - deployment-package privacy checks and a manual release gate are absent.
 - Same-Mac development preview works. Cross-device microphone QA requires
   explicit LAN binding and trusted HTTPS; plain LAN HTTP is insufficient.
+- A development HMR session produced repeated Vite client `send` errors after a
+  server switch in the same controlled-browser tab. Restarting against the
+  production build restored clean behavior. Treat this as a dev-session/tooling
+  incident unless it reproduces from a fresh normal development session.
 
 ## Minimum sufficient QA and release workflow
 
@@ -173,11 +183,16 @@ server-side requirement justifies it.
   `.agents/resources/seinen-manga-frame/mock.html` is blocked by browser
   security policy. Read such references as files, or serve them, rather than
   working around the block.
+- Browser-control viewport resizing through the Chrome extension can silently
+  no-op. The transition worktree successfully exercised real `412×915` media
+  queries through a same-origin iframe; the selector worktree later used the
+  browser viewport capability directly.
 
 ## Open questions
 
-- Should `design/art-pack-system` be committed and fast-forwarded onto nested
-  `main`, and is that gated on the user's visual approval of the frame?
+- Should the branch chain `e37d5c4` → `6e6b83c` →
+  `feature/story-selection` be committed/rebased and fast-forwarded onto
+  nested `main`, and is that gated on the user's visual approval?
 - What exact commands and evidence make up the initial QA gate?
 - Will Android USB `adb reverse` provide the preferred localhost-secure preview,
   or is trusted LAN HTTPS still needed for real-device QA?
@@ -196,7 +211,11 @@ server-side requirement justifies it.
   recorded on 2026-07-30.
 - User rejection of the childlike frame and selection of a full-bleed seinen
   replacement recorded on 2026-07-30.
+- Scene-transition and four-stage selector implementation/QA recorded on
+  2026-07-31.
 - `.agents/resources/seinen-manga-frame/`
+- `../japanese-repeat-after-me-scene-transitions`
+- `../japanese-repeat-after-me-story-selection`
 
 ## Related cells
 

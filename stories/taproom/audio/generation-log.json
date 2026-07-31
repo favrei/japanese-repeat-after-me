@@ -1,0 +1,168 @@
+{
+  "generated_at": "2026-07-31T01:17:23.957920+00:00",
+  "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-6bit",
+  "revision": "1c6c0ff58c43afa8df571facde2efa077efd85e2",
+  "default_voice": "Ono_Anna",
+  "clips": [
+    {
+      "id": "taproom-choose-open",
+      "text": "夜のタップルーム。ドアを開けると、黒板いっぱいにビールの名前が並んでいた。",
+      "file": "taproom-choose-open.mp3",
+      "voice": "aiden",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260738,
+      "duration_seconds": 5.76,
+      "expected_seconds": [
+        3.4,
+        14.6
+      ],
+      "suspect": false,
+      "sha256": "3487b6279ae56f2aedb13578b8f5a55a7b0b18f6110bb8810a420afe0f491781"
+    },
+    {
+      "id": "taproom-choose-welcome",
+      "text": "いらっしゃいませ。ご注文はお決まりですか。",
+      "file": "taproom-choose-welcome.mp3",
+      "voice": "Ono_Anna",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260730,
+      "duration_seconds": 3.6,
+      "expected_seconds": [
+        1.9,
+        8.6
+      ],
+      "suspect": false,
+      "sha256": "708086d0a0437288a1957f6cb55865914fc0498f92b1e39243152d1c53f395ed"
+    },
+    {
+      "id": "taproom-choose-board",
+      "text": "ごゆっくりどうぞ。本日のビールはこちらのボードにございます。",
+      "file": "taproom-choose-board.mp3",
+      "voice": "Ono_Anna",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260731,
+      "duration_seconds": 4.64,
+      "expected_seconds": [
+        2.8,
+        12.2
+      ],
+      "suspect": false,
+      "sha256": "1fbc32342510b153fd82b82e63b18ad20f71887dede44d460822fd69d0fce6b7"
+    },
+    {
+      "id": "taproom-choose-two",
+      "text": "おすすめは、ペールエールと黒ビールです。",
+      "file": "taproom-choose-two.mp3",
+      "voice": "Ono_Anna",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260732,
+      "duration_seconds": 4.75,
+      "expected_seconds": [
+        1.8,
+        8.2
+      ],
+      "suspect": false,
+      "sha256": "ac7ce34dc2d509902e542919404eb8a8e6322d07355ef3ad4fc723fc5b0e7f5e"
+    },
+    {
+      "id": "taproom-choose-bitter",
+      "text": "ペールエールは苦みが少なくて、飲みやすいですよ。",
+      "file": "taproom-choose-bitter.mp3",
+      "voice": "Ono_Anna",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260733,
+      "duration_seconds": 5.04,
+      "expected_seconds": [
+        2.2,
+        9.8
+      ],
+      "suspect": false,
+      "sha256": "5a83c0dbb1c9863cd25d0614f8ff9bc92c6033bc2579906bd6c71f2b425e4a87"
+    },
+    {
+      "id": "taproom-glass-open",
+      "text": "タップからビールが注がれ、白い泡が静かに立ち上がった。",
+      "file": "taproom-glass-open.mp3",
+      "voice": "aiden",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260739,
+      "duration_seconds": 4.48,
+      "expected_seconds": [
+        2.5,
+        11.0
+      ],
+      "suspect": false,
+      "sha256": "36eee2b60d9e377dde466db3d691a79e8a28d281ca6ea78e5d64802fa8b26b83"
+    },
+    {
+      "id": "taproom-glass-served",
+      "text": "お待たせしました。こちらどうぞ。",
+      "file": "taproom-glass-served.mp3",
+      "voice": "Ono_Anna",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20261734,
+      "duration_seconds": 3.44,
+      "expected_seconds": [
+        1.4,
+        6.6
+      ],
+      "suspect": false,
+      "sha256": "5f6f4884a2dea850d7ec326e69a71a58428ea9d60e5c441b5c141e1c69235e49"
+    },
+    {
+      "id": "taproom-glass-thanks",
+      "text": "ありがとうございます。",
+      "file": "taproom-glass-thanks.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260735,
+      "duration_seconds": 1.68,
+      "expected_seconds": [
+        1.0,
+        5.0
+      ],
+      "suspect": false,
+      "sha256": "399f8313ed59b819bba5dbee202387c51de9f064949b9fa0da4ce0f95dac95e0"
+    },
+    {
+      "id": "taproom-glass-later",
+      "text": "お会計は最後にまとめてお願いします。",
+      "file": "taproom-glass-later.mp3",
+      "voice": "Ono_Anna",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260736,
+      "duration_seconds": 4.0,
+      "expected_seconds": [
+        1.7,
+        7.8
+      ],
+      "suspect": false,
+      "sha256": "738aee3fc98ca5391066f70c92a2b4f3ed085e6ac981e129cdce306c8fef1271"
+    },
+    {
+      "id": "taproom-glass-counter",
+      "text": "そちらのカウンターをご自由にお使いください。ごゆっくりどうぞ。",
+      "file": "taproom-glass-counter.mp3",
+      "voice": "Ono_Anna",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 20260737,
+      "duration_seconds": 5.84,
+      "expected_seconds": [
+        2.9,
+        12.6
+      ],
+      "suspect": false,
+      "sha256": "cc1983b9601b27a3adce716713068f20719c7ac043580807a2d07ffd0f03bff6"
+    }
+  ]
+}

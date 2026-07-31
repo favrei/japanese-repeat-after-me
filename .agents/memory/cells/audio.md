@@ -22,6 +22,10 @@ and what remains unsettled about prompting the synthesiser.
 - Reference audio quality is a learning-critical asset, not decoration: a
   mispronounced clip teaches the mistake. Every clip must be judged by ear
   before it becomes a learner reference.
+- Voice casting is per story and per role, not “one documented Japanese
+  preset for the whole application.” The taproom uses three user-selected
+  voices — staff `Ono_Anna`, learner `sohee`, narrator `aiden` — and all ten
+  clips passed the user's listening gate on 2026-07-31.
 
 ## Selected tooling
 
@@ -37,7 +41,10 @@ Measured during selection on the M3:
 
 - first 0.6B 8-bit sample: 3.84 s of audio, 4.45 s processing, 4.34 GB peak;
 - final 1.7B batch completed on the M3;
-- six normalized MP3 autoplay assets total about 160 KB.
+- the first café batch contained six normalized MP3 autoplay assets totaling
+  about 160 KB;
+- the redesigned café branch contains nine staff autoplay clips, and the
+  taproom feature contains eight dialogue clips plus two narrated transitions.
 
 Later comparators, not selected:
 
@@ -51,13 +58,25 @@ Later comparators, not selected:
 
 The generator pins MLX model snapshot
 `1c6c0ff58c43afa8df571facde2efa077efd85e2`, `mlx-audio==0.4.6`,
-`huggingface-hub==1.26.0`, and a per-line stable seed. Regenerating a single
-line (`ordering-menu`) reproduced the batch clip's SHA-256 exactly
+`huggingface-hub==1.26.0`, and a per-line seed. Regenerating a single café line
+(`ordering-menu`) reproduced the batch clip's SHA-256 exactly
 (`f0265af4e902d66a50a06f26f006cdba73a9d2715286436820971aeed26e8e8d`).
 
+Seeds are now explicit per manifest line. If a line lacks one, the generator
+derives a stable fallback from the line id, never from manifest position. This
+corrected a load-bearing order hazard: inserting narrator lines previously
+changed every later take. Moving the taproom narrator lines to story order and
+regenerating all ten clips changed `0/10` file hashes.
+
+The seed selects a reproducible take; the voice preset carries identity. The
+generator is story-bundle aware through a line manifest containing id, text,
+voice, speed, and explicit accepted seed.
+
 Preserve this property. Record the model version, speaker, exact instruction
-text, and seed alongside generated clips; without the prompt text a later
-re-tune cannot separate a bad prompt from a bad model or a bad sentence.
+text, seed, duration, and hash alongside generated clips; without this record a
+later re-tune cannot separate a bad prompt from a bad model or a bad sentence.
+Partial `--only` runs merge the generation log by id rather than erasing
+unrelated provenance.
 
 ## Prompting is unresolved
 
@@ -76,19 +95,39 @@ re-tune cannot separate a bad prompt from a bad model or a bad sentence.
 - Settling the prompt format and lever set needs its own experiment. See
   [Experiments](experiments.md).
 
-## Voice verdict and parking
+## Voice casting after story authoring
 
 On 2026-07-30 the user accepted the local-generation plumbing but judged the
-Qwen3 voice itself still "a little bit gross". **Do not spend more time tuning
-that voice until the parallel story-design line is ready**, so the desired
-character and voice direction can be evaluated together. Voice identity is part
-of the character persona, not an isolated audio setting. See
-[Content](content.md) and [Visual Design](visual-design.md).
+single café Qwen3 voice "a little bit gross" and parked tuning until character
+design existed. The taproom run supplied the missing evidence:
+
+- CustomVoice preset language labels are audition hints, not reliable limits.
+  `sohee`, which has no documented Japanese claim, produced the accepted
+  learner voice; `ryan`, labeled English, produced a visibly overlong broken
+  Japanese take.
+- Audition all seven non-dialect presets (`serena`, `vivian`, `uncle_fu`,
+  `ryan`, `aiden`, `ono_anna`, `sohee`) for a new role and judge by ear.
+  Exclude `eric` and `dylan` from Japanese audition because the model marks
+  them dialect-locked.
+- Both cached CustomVoice model sizes expose the same nine presets. Model size
+  does not expand the voice bank.
+- Qwen3 VoiceDesign has same-size MLX variants and maps a natural-language
+  voice description to timbre, emotion, and prosody. It aligns conceptually
+  with character-card voice fingerprints but is untested.
+- CustomVoice can also accept consented `ref_audio` and `ref_text` for cloning.
+  The private learner corpus is not an acceptable Japanese reference voice:
+  learners must not imitate non-native pronunciation.
+
+The taproom result resolves the immediate “two characters, one voice” problem,
+but it does not prove a universal canonical cast. Continue casting story by
+story and retain the listening gate. See [Content](content.md) and
+[Visual Design](visual-design.md).
 
 ## Delivery in the app
 
-Merged into nested PoC `main` as commit `ad3a356`
-(`Add locally generated Japanese reference audio`), which includes:
+The first bundled-audio implementation was merged into nested PoC `main` as
+commit `ad3a356` (`Add locally generated Japanese reference audio`), which
+includes:
 
 - six locally generated neutral Qwen3-TTS MP3 reference clips;
 - pinned MLX authoring tooling under `tools/tts/`;
@@ -98,13 +137,22 @@ Merged into nested PoC `main` as commit `ad3a356`
 - a redirect from local `0.0.0.0` to trusted `localhost`;
 - an explicit HTTPS/localhost guard for microphone recognition.
 
+Later focused branches add the current story assets:
+
+- `design/art-pack-system` at `e37d5c4` commits the redesigned café story and
+  nine `Ono_Anna` autoplay clips with accepted seeds and metadata.
+- `feature/story-selection` carries the uncommitted taproom integration:
+  eight dialogue clips and two narrator clips under `public/audio/taproom/`,
+  plus metadata. These ten are the first complete three-role audio set accepted
+  by ear.
+
 The `0.0.0.0` origin can prevent Chrome from granting microphone permission;
 preview on `localhost`. See [Delivery](delivery.md).
 
 ## Verification and its limits
 
-- `npm run qa` passed typecheck, build, and all 13 tests with only the
-  pre-existing font lint warning.
+- The original bundled-audio `npm run qa` passed typecheck, build, and all 13
+  tests with only the pre-existing font lint warning.
 - A production-browser timed check found bubble 1 still active at 3 s and
   advanced by 6 s, matching the 5.4-second canonical clip, with no console
   warnings or errors.
@@ -114,19 +162,37 @@ preview on `localhost`. See [Delivery](delivery.md).
   failure: every MP3 was served with HTTP 200 and the service worker source
   pre-caches all six paths. A true offline reload remains a useful manual or
   device QA step.
+- The redesigned café branch passed its nine-clip QA and production autoplay
+  checks. Its clips still require a complete user listening pass unless
+  separately recorded as accepted.
+- The taproom feature passed art validation, typecheck, lint, production build,
+  21/21 tests, desktop/phone browser playback and progression checks, and the
+  user's listening gate for all ten clips.
 
 ## Gotchas
 
 - Run the generator's compile check from `tools/tts/`, or pass
   `tools/tts/generate_audio.py`. Running `py_compile generate_audio.py` from
   the PoC worktree root fails on path, not on code.
+- Qwen may emit several seconds of valid speech followed by tens of seconds of
+  near-silence because it misses its end token. Trim trailing silence before
+  applying the duration guard: 0.05-second frames, 2% of clip-peak threshold,
+  and 0.15 seconds of retained tail padding. Do not trim leading audio or
+  internal pauses.
+- Duration remains a backstop for genuine looping or excess audio. The
+  generator accepts a bounded seconds-per-scoring-character range, retries
+  deterministic seeds, records the actual accepted seed, and caps generation
+  at 256 tokens. Trimming and reseeding solve different failures; both are
+  load-bearing.
+- The trim threshold has not been validated on lines ending in a genuinely
+  quiet mora or on content much longer or shorter than the current stories.
 
 ## Open questions
 
-- What prompt format and lever set should the canonical generator use?
-- Which voice fits the eventual character persona, once story design is ready?
-- Should the learner's reference lines use a different voice from the other
-  party's?
+- Which prompt format and lever set should VoiceDesign or instructed
+  CustomVoice use, if either becomes canonical?
+- Which cast fits each future story, and does the redesigned café voice pass a
+  full listening review?
 - Which words does the synthesiser reliably mispronounce (counters, numbers,
   katakana loanwords, names, 何 readings), and how are those handled?
 - How is per-bubble audio versioned when a stage's text is revised?
@@ -146,8 +212,14 @@ preview on `localhost`. See [Delivery](delivery.md).
   recorded on 2026-07-30.
 - User verdict that the voice remains unsatisfying and should be re-evaluated
   with story design, recorded on 2026-07-30.
+- User selection and listening acceptance of the taproom `Ono_Anna` / `sohee`
+  / `aiden` cast recorded on 2026-07-31.
 - Worktree `/Users/peter/workspaces/japanese-repeat-after-me-tts`, branch
   `tts/qwen3-metal`, merged as nested PoC commit `ad3a356`.
+- `stories/taproom/audio/generation-log.json`
+- `stories/taproom/voices.json`
+- Worktrees `../japanese-repeat-after-me-art-system` and
+  `../japanese-repeat-after-me-story-selection`.
 - `.agents/documents/stage-design-flow.md`, Step 7b.
 
 ## Related cells

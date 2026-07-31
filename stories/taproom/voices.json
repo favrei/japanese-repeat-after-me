@@ -1,0 +1,66 @@
+{
+  "story": "taproom",
+  "note": "Autoplay bubbles only — speak bubbles carry no reference clip, matching the cafe story. Two voices on purpose: the staff use the native Japanese preset Ono_Anna, the learner uses sohee, so the two characters are not synthesised as one person. sohee was chosen by ear on 2026-07-31 from candidates covering all seven non-dialect presets. It carries no Japanese claim in the model card and produces good Japanese anyway — preset language labels are a hint, not a limit. Speed stays at 1.0: this line is an autoplay free ride, not a shadowing target, and 1.0 is what was judged. Each line pins the exact seed that produced its accepted clip; seeds no longer depend on position in this array, so lines may be reordered or inserted freely.",
+  "lines": [
+    {
+      "id": "taproom-choose-open",
+      "text": "夜のタップルーム。ドアを開けると、黒板いっぱいにビールの名前が並んでいた。",
+      "voice": "aiden",
+      "seed": 20260738
+    },
+    {
+      "id": "taproom-choose-welcome",
+      "text": "いらっしゃいませ。ご注文はお決まりですか。",
+      "voice": "Ono_Anna",
+      "seed": 20260730
+    },
+    {
+      "id": "taproom-choose-board",
+      "text": "ごゆっくりどうぞ。本日のビールはこちらのボードにございます。",
+      "voice": "Ono_Anna",
+      "seed": 20260731
+    },
+    {
+      "id": "taproom-choose-two",
+      "text": "おすすめは、ペールエールと黒ビールです。",
+      "voice": "Ono_Anna",
+      "seed": 20260732
+    },
+    {
+      "id": "taproom-choose-bitter",
+      "text": "ペールエールは苦みが少なくて、飲みやすいですよ。",
+      "voice": "Ono_Anna",
+      "seed": 20260733
+    },
+    {
+      "id": "taproom-glass-open",
+      "text": "タップからビールが注がれ、白い泡が静かに立ち上がった。",
+      "voice": "aiden",
+      "seed": 20260739
+    },
+    {
+      "id": "taproom-glass-served",
+      "text": "お待たせしました。こちらどうぞ。",
+      "voice": "Ono_Anna",
+      "seed": 20261734
+    },
+    {
+      "id": "taproom-glass-thanks",
+      "text": "ありがとうございます。",
+      "voice": "sohee",
+      "seed": 20260735
+    },
+    {
+      "id": "taproom-glass-later",
+      "text": "お会計は最後にまとめてお願いします。",
+      "voice": "Ono_Anna",
+      "seed": 20260736
+    },
+    {
+      "id": "taproom-glass-counter",
+      "text": "そちらのカウンターをご自由にお使いください。ごゆっくりどうぞ。",
+      "voice": "Ono_Anna",
+      "seed": 20260737
+    }
+  ]
+}

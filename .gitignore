@@ -6,3 +6,6 @@
 
 # Private voice corpus stays local and is never pushed to the public origin.
 /datasets/
+
+# TTS auditions are disposable; accepted, provenance-tracked story clips remain trackable.
+/stories/*/audio/candidates/
