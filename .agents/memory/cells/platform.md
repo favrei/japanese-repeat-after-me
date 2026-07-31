@@ -20,8 +20,8 @@ runtime capability tiers, and hosting assumptions.
   built-in Mac or phone microphone does not pass.
 - Optional targets: Linux AMD64 Chrome and iOS Chrome or installed PWA, each
   requiring separate validation.
-- Hosting target and current host: GPT Sites. Version 3 of the app is deployed
-  from nested commit `05a986f` at
+- Hosting target and current host: GPT Sites. Version 4 of the app is deployed
+  from root commit `685293d` at
   `https://japanese-speaking-story.zenridge.chatgpt.site`. It passed the
   recorded automated QA gate, but access is public and unauthenticated rather
   than private. See [Delivery](delivery.md) and
@@ -51,9 +51,18 @@ microphone-permission handling.
 Heavier audio and recognition work should run outside the main UI thread.
 When a Bluetooth headset is expected, the capture UI should expose enough
 device identity or route state to detect a wrong input instead of silently
-accepting whichever default the browser selected. Exact browser/OS selection
-and reconnect behavior still needs implementation research and real-device
-proof.
+accepting whichever default the browser selected. Version 4 now exposes an
+explicit selector and browser route evidence; exact physical routing and
+reconnect behavior still need real-device proof.
+
+For the active game session, keep the selected Bluetooth microphone stream
+open continuously rather than stopping it after each learner turn. Recognition
+processing remains enabled only during learner turns, and the stream is
+released on game exit, page teardown, route/device loss, or permission loss.
+This user-selected design avoids repeated AirPods speak/listen-mode transitions
+at turn boundaries. Its accepted costs are a persistent Chrome microphone
+indicator and potentially lower-quality call-mode reference playback. This is
+not implemented in deployed version 4.
 
 Candidate interaction state:
 
@@ -87,6 +96,9 @@ UI
 - AirPods microphone selection and retained routing through permission,
   reconnect, and recording cycles are mandatory acceptance checks. Verify the
   captured signal comes from the headset rather than the Mac microphone.
+- Verify that a persistent game-session stream survives multiple learner and
+  PC turns without reacquisition or playback bursts, and that leaving the game
+  releases it.
 - M3 performance is the first baseline but must not be treated as
   representative of mobile hardware.
 
@@ -100,6 +112,8 @@ eviction.
 AirPods or another connected Bluetooth headset must supply the actual capture
 input. Test route selection, headset reconnect, interruptions, and avoidance of
 silent fallback to the phone microphone on representative Android Chrome.
+Also verify whether Android keeps a persistent web microphone stream alive
+across the complete foreground game session; tab suspension may still end it.
 
 ### Linux Chrome
 
@@ -249,6 +263,8 @@ real-device recognition.
 - User requirement for verified Bluetooth-headset microphone capture on macOS
   and Android, with AirPods as the primary acceptance case, recorded on
   2026-07-31.
+- Root commit `685293d`, Sites version 4, and the user's persistent
+  game-session microphone decision recorded on 2026-07-31.
 
 ## Related cells
 

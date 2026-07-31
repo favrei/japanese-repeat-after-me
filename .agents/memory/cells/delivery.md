@@ -32,7 +32,8 @@ develop locally
 QA and deployment are separate actions. Deployment must not rebuild or
 substitute a different artifact after approval.
 
-The first Sites deployment completed on 2026-07-31. The word “privately” in
+The first Sites deployment completed on 2026-07-31, and version 4 later added
+the explicit microphone-route selector. The word “privately” in
 the intended flow is not the current access state: Sites reports the deployed
 application as public, and the app implements no authentication. Restricting
 access remains an explicit follow-up.
@@ -84,6 +85,16 @@ access remains an explicit follow-up.
   `https://japanese-speaking-story.zenridge.chatgpt.site`. The release candidate
   passed art/model validation, typecheck, lint, production build, and 25/25
   tests. Sites accepted the packaged production artifact.
+- Sites version 4 later deployed exact root commit
+  `685293d99256fc0f17bce0a878236b2945e6702c` to the same public URL. It adds
+  explicit microphone selection and route evidence and passed art/model
+  validation, typecheck, lint, production build, 28 client tests, 2 contract
+  tests, 7 Worker tests, and 5 integration tests. Real AirPods/Bluetooth QA was
+  deliberately left open for the user to close personally.
+- Version 4 still starts and stops microphone capture per learner turn. The
+  subsequently selected persistent-microphone session design is not part of
+  the deployed artifact and requires a new implementation, QA pass, explicit
+  deployment instruction, and saved Sites version.
 - The deployed site is public and unauthenticated. The app has no accounts,
   login, OAuth, or server-side product session. The deployed version has no D1
   or R2 binding; local `app/.openai/hosting.json` now declares `DB` and `PACKS`,
@@ -262,6 +273,8 @@ server-side requirement justifies it.
 - User requirement for verified Bluetooth-headset microphone capture on macOS
   and Android, with AirPods as the primary acceptance case, recorded on
   2026-07-31.
+- Sites version 4 deployment from root commit `685293d`, its 42-test QA pass,
+  and the later persistent-microphone direction recorded on 2026-07-31.
 - `.agents/resources/seinen-manga-frame/`
 - Historical nested commits `e37d5c4`, `6e6b83c`, `7a0f812`, `14cd2b6`,
   `18fcf55`, `3a3b84d`, `19139c6`, `bf2643f`, `a850c3f`, and `05a986f`.

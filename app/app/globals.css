@@ -933,16 +933,22 @@ img {
 /* ---------- practice panel ---------- */
 
 .practice-panel {
+  block-size: calc(158px + env(safe-area-inset-bottom));
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 380px) auto;
+  grid-template-rows: minmax(52px, auto) minmax(38px, auto) minmax(13px, auto);
   align-items: center;
+  align-content: start;
   gap: 10px 24px;
+  overflow-y: auto;
   padding: 15px 28px calc(16px + env(safe-area-inset-bottom));
   border-top: var(--rule) solid var(--ink);
   background: var(--paper);
+  scrollbar-gutter: stable;
 }
 
 .panel-lead {
+  grid-row: 1;
   min-width: 0;
 }
 
@@ -962,6 +968,7 @@ img {
 
 .speak-action {
   grid-column: 2;
+  grid-row: 1;
 }
 
 .mic-mark {
@@ -986,6 +993,7 @@ img {
 }
 
 .attempts {
+  grid-row: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -1015,6 +1023,7 @@ img {
 
 .microphone-route {
   grid-column: 1 / -1;
+  grid-row: 2;
   display: grid;
   grid-template-columns: auto minmax(180px, 1fr) minmax(0, 2fr) auto;
   align-items: center;
@@ -1075,17 +1084,42 @@ img {
 
 .panel-foot {
   grid-column: 1 / -1;
+  grid-row: 3;
   color: var(--ink-3);
   font-size: 9px;
   line-height: 1.4;
   text-align: right;
 }
 
-.autoplay-state {
+.autoplay-controls {
   grid-column: 2 / 4;
+  grid-row: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 12px;
+}
+
+.replay-action {
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid var(--ink-2);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.replay-action:active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.autoplay-state {
+  display: flex;
+  align-items: center;
   gap: 12px;
   color: var(--ink-2);
   font-size: 11px;
@@ -1448,7 +1482,10 @@ img {
   }
 
   .practice-panel {
+    block-size: calc(238px + env(safe-area-inset-bottom));
     grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows:
+      minmax(40px, auto) 52px minmax(70px, auto) minmax(13px, auto);
     gap: 9px 14px;
     padding: 13px 18px calc(15px + env(safe-area-inset-bottom));
   }
@@ -1490,7 +1527,13 @@ img {
   }
 
   .autoplay-state {
-    grid-column: 2;
+    justify-content: flex-end;
+  }
+
+  .autoplay-controls {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
   }
 
   .art-review-section {

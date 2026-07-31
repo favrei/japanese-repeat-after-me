@@ -23,12 +23,12 @@ Canonical detail belongs in linked cells.
   Vosk recognition, and Sites packaging remain intact. See
   [Project](cells/project.md), [Product](cells/product.md), and
   [Delivery](cells/delivery.md).
-- Sites version 3 from exact nested commit
-  `05a986fd0efbcc9337557d8e07b9b295af6aa335` is live at
+- Sites version 4 from exact root commit
+  `685293d99256fc0f17bce0a878236b2945e6702c` is live at
   `https://japanese-speaking-story.zenridge.chatgpt.site`. The artifact passed
-  art/model validation, typecheck, lint, production build, and 25/25 tests,
-  but the site is public and unauthenticated. See [Delivery](cells/delivery.md)
-  and [Backend and Data](cells/backend.md).
+  art/model validation, typecheck, lint, production build, and 42 automated
+  tests, but the site is public and unauthenticated. See
+  [Delivery](cells/delivery.md) and [Backend and Data](cells/backend.md).
 - Frontend/backend separation is implemented locally at nested commit
   `ae92de5`: route shell, client, shared contracts, D1/R2 server helpers, and
   Worker composition have separate ownership. Logical `DB` and `PACKS`
@@ -45,6 +45,13 @@ Canonical detail belongs in linked cells.
   fallback to the Mac or phone microphone is a release failure; actual input
   identity and signal must be verified. See [Platform](cells/platform.md) and
   [Recognition](cells/recognition.md).
+- The deployed microphone selector still opens and stops the selected stream
+  for each learner turn. After a reported AirPods playback burst/dropout at the
+  learner-to-PC boundary, the user selected a persistent microphone session as
+  the next design: keep the chosen stream alive for the active game, process it
+  only during learner turns, and release it on game exit, page close, route
+  loss, or permission loss. This is decided but not implemented or deployed.
+  See [Platform](cells/platform.md) and [Recognition](cells/recognition.md).
 - The library preserves the café rather than replacing it with the taproom.
   Direct Stage 2 entry opens that stage's transition and runs only the rest of
   that story. Every stage owns a `sceneId`, `castId`, and skip-safe narrated
@@ -121,9 +128,11 @@ Canonical detail belongs in linked cells.
   service-worker/offline behavior, installation, and mobile memory remain
   unverified. See [Platform](cells/platform.md).
 - AirPods/Bluetooth-headset microphone routing is unverified on both macOS and
-  Android. Permission or a non-empty recording is insufficient; QA must prove
-  the selected device and captured route without built-in-microphone fallback.
-  See [Platform](cells/platform.md).
+  Android. Version 4 exposes an explicit input selector and browser route
+  evidence, but permission, labels, or a non-empty recording are insufficient;
+  QA must prove the physical captured route without built-in-microphone
+  fallback. The user will close this hardware test item personally. See
+  [Platform](cells/platform.md).
 - The post-separation dependency graph reports 20 total transitive npm audit
   findings; the last recorded production-only audit on deployed-era code found
   five. No automatic or forced audit fix was applied. See
@@ -172,6 +181,12 @@ Canonical detail belongs in linked cells.
   and Android Chrome with evidence of the actual selected input and recorded
   signal, including reconnect and route-change behavior. See
   [Platform](cells/platform.md) and [Recognition](cells/recognition.md).
+- Before the next Bluetooth-focused deployment, implement one selected
+  microphone stream per active game session while enabling recognition
+  processing only on learner turns. Verify that reference speech is not scored,
+  teardown handles exit and route loss, and repeated turns do not reacquire the
+  device. The persistent Chrome microphone indicator and lower-quality AirPods
+  call-mode playback are accepted tradeoffs pending real hardware review.
 - The deployed artifact proves Sites packaging only. It does not close Android
   microphone, recognition, PWA installation, or offline QA.
 - When recognition resumes, label acceptable, intentionally incorrect, and

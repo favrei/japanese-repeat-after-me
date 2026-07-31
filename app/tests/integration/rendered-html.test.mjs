@@ -145,10 +145,16 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.match(localRecognizer, /vosk-model-small-ja-0\.22/);
   assert.match(localRecognizer, /AudioWorkletNode/);
   assert.match(localRecognizer, /acceptWaveformFloat/);
-  assert.match(localRecognizer, /openSelectedMicrophone/);
+  assert.match(localRecognizer, /gameMicrophone\.stream/);
   assert.match(microphoneRoute, /enumerateDevices/);
   assert.match(microphoneRoute, /deviceId: \{ exact: selection\.deviceId \}/);
+  assert.match(microphoneRoute, /class GameMicrophoneSession/);
+  assert.match(app, /openGameMicrophone/);
+  assert.match(app, /game-session mic active/);
   assert.match(app, /data-testid="microphone-route"/);
+  assert.match(app, /const SUCCESS_ADVANCE_HOLD_MS = 500/);
+  assert.match(app, /data-testid="replay-autoplay"/);
+  assert.match(app, /setPlaybackReplayToken/);
   assert.match(app, /hardware test open/i);
   assert.match(app, /addEventListener\("devicechange"/);
   assert.match(app, /audio is not saved/i);
@@ -160,6 +166,9 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.match(app, /data-testid=\{`transition-\$\{stage\.transition\.id\}`\}/);
   assert.doesNotMatch(app, /DEFAULT_ROUNDS|Skip round|manual override/i);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  assert.match(css, /\.practice-panel\s*\{[^}]*block-size:/s);
+  assert.match(css, /\.panel-foot\s*\{[^}]*grid-row:\s*3/s);
+  assert.match(css, /\.autoplay-controls\s*\{[^}]*grid-row:\s*1/s);
   assert.match(css, /\.scene-image/);
   assert.match(css, /\.interlude-card/);
   assert.doesNotMatch(css, /width:\s*min\(100%,\s*680px\)/i);

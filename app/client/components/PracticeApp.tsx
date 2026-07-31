@@ -29,6 +29,8 @@ import {
 import {
   chooseRememberedMicrophone,
   discoverMicrophones,
+  openGameMicrophone,
+  type GameMicrophoneSession,
   MicrophoneRouteError,
   SAVED_MICROPHONE_KEY,
   type MicrophoneInput,
@@ -71,6 +73,8 @@ type InstallPromptEvent = Event & {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 };
+
+const SUCCESS_ADVANCE_HOLD_MS = 500;
 
 function wait(milliseconds: number) {
   return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
@@ -283,6 +287,7 @@ export function PracticeApp() {
     useState<MicrophoneSelection | null>(null);
   const [microphoneRoute, setMicrophoneRoute] =
     useState<MicrophoneRouteEvidence | null>(null);
+  const [playbackReplayToken, setPlaybackReplayToken] = useState(0);
   const [qaMode, setQaMode] = useState(false);
   const [artReviewPackId, setArtReviewPackId] = useState<ArtPackId | null>(
     null,
@@ -291,6 +296,9 @@ export function PracticeApp() {
     useState<InstallPromptEvent | null>(null);
 
   const recognitionRef = useRef<LocalRecognitionSession | null>(null);
+  const gameMicrophoneRef = useRef<GameMicrophoneSession | null>(null);
+  const gameSessionRunRef = useRef(0);
+  const microphoneOpenRunRef = useRef(0);
   const recognitionRunRef = useRef(0);
   const recordingTimerRef = useRef<number | null>(null);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -372,11 +380,19 @@ export function PracticeApp() {
     }
   }, []);
 
+  const closeGameMicrophone = useCallback(() => {
+    microphoneOpenRunRef.current += 1;
+    gameMicrophoneRef.current?.close();
+    gameMicrophoneRef.current = null;
+  }, []);
+
   const reportMicrophoneRouteLost = useCallback(() => {
     const session = recognitionRef.current;
+    gameSessionRunRef.current += 1;
     recognitionRunRef.current += 1;
     recognitionRef.current = null;
     void session?.cancel();
+    closeGameMicrophone();
     setIsListening(false);
     setIsEvaluating(false);
     setPartialTranscript("");
@@ -390,10 +406,11 @@ export function PracticeApp() {
       detail:
         "マイクの せつぞくが かわりました — recording stopped; reconnect and confirm the headset before trying again.",
     });
-  }, []);
+  }, [closeGameMicrophone]);
 
   useEffect(() => {
     if (
+      screen !== "conversation" ||
       !microphoneSelection ||
       !navigator.mediaDevices?.enumerateDevices
     ) {
@@ -423,7 +440,7 @@ export function PracticeApp() {
         handleDeviceChange,
       );
     };
-  }, [microphoneSelection, reportMicrophoneRouteLost]);
+  }, [microphoneSelection, reportMicrophoneRouteLost, screen]);
 
   const advanceBubble = useCallback(() => {
     cancelActiveMedia();
@@ -433,6 +450,8 @@ export function PracticeApp() {
 
     const target = advanceTarget(flow, position);
     if (target.kind === "complete") {
+      gameSessionRunRef.current += 1;
+      closeGameMicrophone();
       setScreen("complete");
       return;
     }
@@ -440,7 +459,7 @@ export function PracticeApp() {
     setPosition(target.position);
     // A stage boundary breaks for the narrator before the next bubble speaks.
     setInterludeStage(target.kind === "interlude" ? target.stageIndex : null);
-  }, [cancelActiveMedia, flow, position]);
+  }, [cancelActiveMedia, closeGameMicrophone, flow, position]);
 
   const releaseInterlude = useCallback(() => {
     cancelActiveMedia();
@@ -522,11 +541,22 @@ export function PracticeApp() {
         window.speechSynthesis?.cancel();
       }
     };
-  }, [advanceBubble, currentBubble, interludeStage, qaMode, screen]);
+  }, [
+    advanceBubble,
+    currentBubble,
+    interludeStage,
+    playbackReplayToken,
+    qaMode,
+    screen,
+  ]);
 
   useEffect(() => {
-    return () => cancelActiveMedia();
-  }, [cancelActiveMedia]);
+    return () => {
+      gameSessionRunRef.current += 1;
+      cancelActiveMedia();
+      closeGameMicrophone();
+    };
+  }, [cancelActiveMedia, closeGameMicrophone]);
 
   const prepareRecognition = useCallback(async () => {
     setRecognitionState("loading");
@@ -547,6 +577,9 @@ export function PracticeApp() {
     if (startPosition < 0) return;
 
     cancelActiveMedia();
+    closeGameMicrophone();
+    const gameSessionRunId = gameSessionRunRef.current + 1;
+    gameSessionRunRef.current = gameSessionRunId;
     const opening = openingTarget(stageIndex);
     setSelectedStoryId(story.id);
     setSessionStartPosition(startPosition);
@@ -557,11 +590,16 @@ export function PracticeApp() {
     setFeedback(null);
     setIsAdvancing(false);
     setScreen("conversation");
-    if (window.isSecureContext) void prepareRecognition();
+    if (window.isSecureContext && !qaMode) {
+      void prepareRecognition();
+      void configureMicrophone(gameSessionRunId);
+    }
   }
 
   function exitConversation() {
+    gameSessionRunRef.current += 1;
     cancelActiveMedia();
+    closeGameMicrophone();
     setScreen("menu");
     setPosition(0);
     setInterludeStage(null);
@@ -570,7 +608,55 @@ export function PracticeApp() {
     setIsAdvancing(false);
   }
 
-  function scheduleAdvance(delay = 450) {
+  async function activateGameMicrophone(
+    selection: MicrophoneSelection,
+    gameSessionRunId = gameSessionRunRef.current,
+  ) {
+    if (gameSessionRunRef.current !== gameSessionRunId) return null;
+
+    const activeMicrophone = gameMicrophoneRef.current;
+    if (
+      activeMicrophone?.active &&
+      activeMicrophone.selection.deviceId === selection.deviceId
+    ) {
+      setMicrophoneRoute(activeMicrophone.route);
+      setMicrophoneState("selected");
+      return activeMicrophone;
+    }
+
+    const openRunId = microphoneOpenRunRef.current + 1;
+    microphoneOpenRunRef.current = openRunId;
+    activeMicrophone?.close();
+    gameMicrophoneRef.current = null;
+    setMicrophoneState("loading");
+    setMicrophoneRoute(null);
+
+    try {
+      const microphone = await openGameMicrophone(
+        selection,
+        reportMicrophoneRouteLost,
+      );
+      if (
+        microphoneOpenRunRef.current !== openRunId ||
+        gameSessionRunRef.current !== gameSessionRunId
+      ) {
+        microphone.close();
+        return null;
+      }
+
+      gameMicrophoneRef.current = microphone;
+      setMicrophoneRoute(microphone.route);
+      setMicrophoneState("selected");
+      return microphone;
+    } catch (error) {
+      if (microphoneOpenRunRef.current === openRunId) {
+        recognitionProblem(error);
+      }
+      return null;
+    }
+  }
+
+  function scheduleAdvance(delay = SUCCESS_ADVANCE_HOLD_MS) {
     if (advanceTimerRef.current !== null) {
       window.clearTimeout(advanceTimerRef.current);
     }
@@ -579,6 +665,13 @@ export function PracticeApp() {
       advanceTimerRef.current = null;
       advanceBubble();
     }, delay);
+  }
+
+  function replayCurrentAutoplay() {
+    if (interludeStage !== null || currentBubble.mode !== "autoplay") return;
+    setIsSpeaking(false);
+    setFeedback(null);
+    setPlaybackReplayToken((token) => token + 1);
   }
 
   function handleTranscripts(transcripts: string[]) {
@@ -679,12 +772,15 @@ export function PracticeApp() {
     });
   }
 
-  async function configureMicrophone() {
+  async function configureMicrophone(
+    gameSessionRunId = gameSessionRunRef.current,
+  ) {
     setMicrophoneState("loading");
     setMicrophoneRoute(null);
 
     try {
       const inputs = await discoverMicrophones();
+      if (gameSessionRunRef.current !== gameSessionRunId) return null;
       const rememberedDeviceId = window.localStorage.getItem(
         SAVED_MICROPHONE_KEY,
       );
@@ -700,8 +796,11 @@ export function PracticeApp() {
           SAVED_MICROPHONE_KEY,
           selection.deviceId,
         );
-        setMicrophoneState("selected");
-        return selection;
+        const microphone = await activateGameMicrophone(
+          selection,
+          gameSessionRunId,
+        );
+        return microphone ? selection : null;
       }
 
       setMicrophoneState("choosing");
@@ -713,6 +812,7 @@ export function PracticeApp() {
       });
       return null;
     } catch (error) {
+      closeGameMicrophone();
       setMicrophoneInputs([]);
       setMicrophoneSelection(null);
       recognitionProblem(error);
@@ -720,7 +820,7 @@ export function PracticeApp() {
     }
   }
 
-  function selectMicrophone(deviceId: string) {
+  async function selectMicrophone(deviceId: string) {
     const selection = microphoneInputs.find(
       (input) => input.deviceId === deviceId,
     );
@@ -728,13 +828,14 @@ export function PracticeApp() {
     setMicrophoneSelection(selection ?? null);
 
     if (!selection) {
+      closeGameMicrophone();
       setMicrophoneState("choosing");
       return;
     }
 
     window.localStorage.setItem(SAVED_MICROPHONE_KEY, selection.deviceId);
-    setMicrophoneState("selected");
     setFeedback(null);
+    await activateGameMicrophone(selection);
   }
 
   async function stopListening() {
@@ -786,10 +887,17 @@ export function PracticeApp() {
     const runId = recognitionRunRef.current + 1;
     recognitionRunRef.current = runId;
 
-    let selectedMicrophone = microphoneSelection;
-    if (!selectedMicrophone) {
-      selectedMicrophone = await configureMicrophone();
-      if (recognitionRunRef.current !== runId || !selectedMicrophone) return;
+    let gameMicrophone = gameMicrophoneRef.current;
+    if (!gameMicrophone?.active) {
+      let selectedMicrophone = microphoneSelection;
+      if (!selectedMicrophone) {
+        selectedMicrophone = await configureMicrophone();
+        if (recognitionRunRef.current !== runId || !selectedMicrophone) return;
+        gameMicrophone = gameMicrophoneRef.current;
+      } else {
+        gameMicrophone = await activateGameMicrophone(selectedMicrophone);
+      }
+      if (recognitionRunRef.current !== runId || !gameMicrophone) return;
     }
 
     if (recognitionState !== "ready") {
@@ -832,12 +940,7 @@ export function PracticeApp() {
             setPartialTranscript(partial);
           }
         },
-        selectedMicrophone,
-        () => {
-          if (recognitionRunRef.current === runId) {
-            reportMicrophoneRouteLost();
-          }
-        },
+        gameMicrophone,
       );
       if (recognitionRunRef.current !== runId) {
         await session.cancel();
@@ -845,7 +948,7 @@ export function PracticeApp() {
       }
 
       recognitionRef.current = session;
-      setMicrophoneRoute(session.microphoneRoute);
+      setMicrophoneRoute(gameMicrophone.route);
       setMicrophoneState("selected");
       setIsListening(true);
       recordingTimerRef.current = window.setTimeout(() => {
@@ -1056,11 +1159,11 @@ export function PracticeApp() {
       : microphoneState === "route-lost"
         ? "Input route changed — reconnection required"
         : microphoneRoute?.status === "matched"
-          ? `${microphoneRoute.activeLabel} · browser route matched · hardware test open`
+          ? `${microphoneRoute.activeLabel} · game-session mic active · browser route matched · hardware test open`
           : microphoneRoute?.status === "browser-default"
-            ? `${microphoneRoute.activeLabel} · system route · hardware test open`
+            ? `${microphoneRoute.activeLabel} · game-session mic active · system route · hardware test open`
             : microphoneRoute?.status === "unverifiable"
-              ? `${microphoneRoute.activeLabel} · browser route unverifiable · hardware test open`
+              ? `${microphoneRoute.activeLabel} · game-session mic active · browser route unverifiable · hardware test open`
               : microphoneSelection
                 ? `${microphoneSelection.label} · selected · hardware test open`
                 : microphoneState === "choosing"
@@ -1209,6 +1312,7 @@ export function PracticeApp() {
               disabled={
                 isAdvancing ||
                 isEvaluating ||
+                microphoneState === "loading" ||
                 recognitionState === "loading"
               }
               onClick={() => {
@@ -1245,7 +1349,9 @@ export function PracticeApp() {
                 <select
                   aria-label="Microphone input"
                   disabled={isListening || isEvaluating}
-                  onChange={(event) => selectMicrophone(event.target.value)}
+                  onChange={(event) => {
+                    void selectMicrophone(event.target.value);
+                  }}
                   value={microphoneSelection?.deviceId ?? ""}
                 >
                   <option value="">マイクを選ぶ</option>
@@ -1339,13 +1445,24 @@ export function PracticeApp() {
                 自動で進みます — autoplay · tap スキップ to move on now.
               </p>
             </div>
-            <div className="autoplay-state">
-              <span className="sound-line" aria-hidden="true">
-                <i />
-                <i />
-                <i />
-              </span>
-              {isSpeaking ? "さいせい中" : "つぎへ"}
+            <div className="autoplay-controls">
+              <button
+                aria-label="Replay this autoplay line"
+                className="replay-action"
+                data-testid="replay-autoplay"
+                onClick={replayCurrentAutoplay}
+                type="button"
+              >
+                ↺ もう一度聞く
+              </button>
+              <div className="autoplay-state">
+                <span className="sound-line" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+                {isSpeaking ? "さいせい中" : "つぎへ"}
+              </div>
             </div>
             <p className="panel-foot">
               ろくおんは のこりません — Audio is not saved by this app.

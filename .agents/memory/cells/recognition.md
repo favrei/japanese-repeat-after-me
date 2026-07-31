@@ -189,6 +189,42 @@ Conversion was deterministic, but only `27/30` surface transcripts and `1/30`
 word/confidence/timestamp arrays matched exactly across runs. Top-one sentence
 identity and aggregate closed-catalog discrimination remained stable.
 
+## Bluetooth capture and session lifecycle
+
+- Root commit `685293d` added explicit Chrome microphone enumeration and
+  selection, a remembered `deviceId`, exact-device capture constraints,
+  browser route evidence, and fail-closed handling for a muted, ended, or lost
+  selected input. Sites version 4 deploys that code. Five new route tests
+  contributed to a complete 42-test automated QA pass.
+- Browser metadata proves which source identifier Chrome selected; it does not
+  prove which physical microphone generated the samples. Real AirPods capture
+  remains an open acceptance test on macOS Chrome and Android Chrome, and only
+  the user will close that item.
+- The deployed implementation acquires and stops the selected microphone for
+  each learner turn. The user reported that after a passing learner turn the
+  following PC/reference clip became extremely loud for 1–2 seconds, stopped
+  for roughly 0.5 seconds, and then played normally. Source inspection found
+  only a 450 ms gap between stopping capture and starting full-volume playback.
+- Current diagnosis: when an AirPods microphone is used, Bluetooth changes
+  between its simultaneous speak/listen mode and higher-quality listening mode.
+  Releasing and reacquiring the microphone every turn repeatedly crosses that
+  boundary; starting the reference clip during the return transition plausibly
+  explains the burst and dropout. Apple documents the two Bluetooth modes at
+  https://support.apple.com/en-ie/102217. This diagnosis still requires the
+  open hardware test.
+- **Decision, 2026-07-31:** prefer one persistent selected microphone stream
+  for the active game session. Keep the stream alive between turns, attach or
+  enable recognition processing only for learner turns, and stop the stream on
+  explicit game exit, page teardown, selected-device loss, track mute/end, or
+  permission loss. A browser or tab close also ends capture.
+- Persistent capture intentionally keeps Chrome's microphone indicator active
+  and may keep AirPods playback in lower-quality call mode. It should avoid the
+  repeated route transitions and is preferred over the earlier proposed
+  2-second cooldown/fade workaround. It must not score or retain the PC's
+  reference speech while processing is inactive.
+- This persistent-session decision is durable direction only; it has not been
+  implemented, tested, committed, or deployed.
+
 ## Local browser Vosk integration (merged)
 
 The local-first lane entered the four-stage app at merge commit `3a3b84d`
@@ -377,6 +413,12 @@ Dependency risk carried by the merged app:
 - User requirement for verified Bluetooth-headset microphone capture on macOS
   and Android, with AirPods as the primary acceptance case, recorded on
   2026-07-31.
+- Root commit `685293d`, its 42-test QA pass, and Sites version 4 deployment
+  recorded on 2026-07-31.
+- User report of the AirPods learner-to-PC playback burst/dropout and selection
+  of a persistent game-session microphone design recorded on 2026-07-31.
+- Apple Bluetooth listening versus speak/listen mode guidance:
+  https://support.apple.com/en-ie/102217.
 
 ## Related cells
 

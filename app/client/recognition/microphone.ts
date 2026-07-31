@@ -19,6 +19,58 @@ export type MicrophoneRouteEvidence = {
   status: "browser-default" | "matched" | "unverifiable";
 };
 
+export class GameMicrophoneSession {
+  private closed = false;
+  private readonly onRouteLost: () => void;
+  private routeLost = false;
+  public readonly route: MicrophoneRouteEvidence;
+  public readonly selection: MicrophoneSelection;
+  public readonly stream: MediaStream;
+  public readonly track: MediaStreamTrack;
+
+  constructor(
+    stream: MediaStream,
+    selection: MicrophoneSelection,
+    route: MicrophoneRouteEvidence,
+    onRouteLost: () => void,
+  ) {
+    this.stream = stream;
+    this.selection = selection;
+    this.route = route;
+    this.onRouteLost = onRouteLost;
+    const track = stream.getAudioTracks()[0];
+    if (!track) {
+      for (const streamTrack of stream.getTracks()) streamTrack.stop();
+      throw new MicrophoneRouteError(
+        "no-input",
+        "Chrome returned no microphone track",
+      );
+    }
+
+    this.track = track;
+    this.track.addEventListener("mute", this.handleRouteLost);
+    this.track.addEventListener("ended", this.handleRouteLost);
+  }
+
+  get active() {
+    return !this.closed && this.track.readyState === "live";
+  }
+
+  private readonly handleRouteLost = () => {
+    if (this.closed || this.routeLost) return;
+    this.routeLost = true;
+    this.onRouteLost();
+  };
+
+  close() {
+    if (this.closed) return;
+    this.closed = true;
+    this.track.removeEventListener("mute", this.handleRouteLost);
+    this.track.removeEventListener("ended", this.handleRouteLost);
+    for (const streamTrack of this.stream.getTracks()) streamTrack.stop();
+  }
+}
+
 export class MicrophoneRouteError extends Error {
   public readonly code: "no-input" | "route-mismatch";
 
@@ -169,6 +221,25 @@ export async function openSelectedMicrophone(
     };
   } catch (error) {
     for (const streamTrack of microphone.getTracks()) streamTrack.stop();
+    throw error;
+  }
+}
+
+export async function openGameMicrophone(
+  selection: MicrophoneSelection,
+  onRouteLost: () => void,
+) {
+  const { evidence, microphone } = await openSelectedMicrophone(selection);
+
+  try {
+    return new GameMicrophoneSession(
+      microphone,
+      selection,
+      evidence,
+      onRouteLost,
+    );
+  } catch (error) {
+    for (const track of microphone.getTracks()) track.stop();
     throw error;
   }
 }

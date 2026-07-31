@@ -3,10 +3,26 @@ import test from "node:test";
 
 import {
   chooseRememberedMicrophone,
+  GameMicrophoneSession,
   inspectMicrophoneRoute,
   listAudioInputs,
   MicrophoneRouteError,
 } from "../../client/recognition/microphone.ts";
+
+class FakeAudioTrack extends EventTarget {
+  label = "Peter's AirPods";
+  readyState = "live";
+  stopCalls = 0;
+
+  getSettings() {
+    return { deviceId: "airpods-id" };
+  }
+
+  stop() {
+    this.stopCalls += 1;
+    this.readyState = "ended";
+  }
+}
 
 const inputs = [
   {
@@ -104,4 +120,38 @@ test("rejects silent fallback to a different browser device", () => {
       error instanceof MicrophoneRouteError &&
       error.code === "route-mismatch",
   );
+});
+
+test("keeps one microphone stream alive until the game session closes", () => {
+  const track = new FakeAudioTrack();
+  const stream = {
+    getAudioTracks: () => [track],
+    getTracks: () => [track],
+  };
+  let routeLostCalls = 0;
+  const session = new GameMicrophoneSession(
+    stream,
+    { deviceId: "airpods-id", label: "Peter's AirPods" },
+    {
+      activeDeviceId: "airpods-id",
+      activeLabel: "Peter's AirPods",
+      requestedDeviceId: "airpods-id",
+      status: "matched",
+    },
+    () => {
+      routeLostCalls += 1;
+    },
+  );
+
+  assert.equal(session.active, true);
+  assert.equal(track.stopCalls, 0);
+
+  track.dispatchEvent(new Event("mute"));
+  track.dispatchEvent(new Event("ended"));
+  assert.equal(routeLostCalls, 1);
+
+  session.close();
+  session.close();
+  assert.equal(session.active, false);
+  assert.equal(track.stopCalls, 1);
 });

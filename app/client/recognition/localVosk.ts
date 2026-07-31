@@ -7,9 +7,9 @@ import {
   type RecordingQualityProblem,
 } from "./quality";
 import {
-  openSelectedMicrophone,
+  MicrophoneRouteError,
+  type GameMicrophoneSession,
   type MicrophoneRouteEvidence,
-  type MicrophoneSelection,
 } from "./microphone";
 
 export const LOCAL_MODEL = {
@@ -148,13 +148,11 @@ export class LocalRecognitionSession {
   constructor(
     private readonly audioContext: AudioContext,
     private readonly captureNode: AudioWorkletNode,
-    private readonly microphone: MediaStream,
     private readonly recognizer: KaldiRecognizer,
     private readonly sourceNode: MediaStreamAudioSourceNode,
     private readonly muteNode: GainNode,
     public readonly microphoneRoute: MicrophoneRouteEvidence,
     onPartial: (partial: string) => void,
-    private readonly onMicrophoneRouteLost: () => void,
   ) {
     this.evidence = {
       clippedSamples: 0,
@@ -210,30 +208,11 @@ export class LocalRecognitionSession {
       console.error("Local Vosk recognizer error", error);
     });
 
-    const microphoneTrack = this.microphone.getAudioTracks()[0];
-    microphoneTrack.addEventListener("mute", this.handleMicrophoneRouteLost);
-    microphoneTrack.addEventListener("ended", this.handleMicrophoneRouteLost);
   }
-
-  private readonly handleMicrophoneRouteLost = () => {
-    if (!this.captureStopped && !this.cancelled) {
-      this.onMicrophoneRouteLost();
-    }
-  };
 
   private stopCapture() {
     if (this.captureStopped) return;
     this.captureStopped = true;
-    const microphoneTrack = this.microphone.getAudioTracks()[0];
-    microphoneTrack.removeEventListener(
-      "mute",
-      this.handleMicrophoneRouteLost,
-    );
-    microphoneTrack.removeEventListener(
-      "ended",
-      this.handleMicrophoneRouteLost,
-    );
-    for (const track of this.microphone.getTracks()) track.stop();
     this.sourceNode.disconnect();
     this.captureNode.disconnect();
     this.muteNode.disconnect();
@@ -314,13 +293,16 @@ export class LocalRecognitionSession {
 
 export async function startLocalRecognition(
   onPartial: (partial: string) => void,
-  microphoneSelection: MicrophoneSelection,
-  onMicrophoneRouteLost: () => void,
+  gameMicrophone: GameMicrophoneSession,
 ) {
   const model = await prepareLocalRecognizer();
-  const { evidence, microphone } = await openSelectedMicrophone(
-    microphoneSelection,
-  );
+
+  if (!gameMicrophone.active) {
+    throw new MicrophoneRouteError(
+      "route-mismatch",
+      "The selected microphone session is no longer active",
+    );
+  }
 
   const audioContext = new AudioContext({ latencyHint: "interactive" });
   let recognizer: KaldiRecognizer | null = null;
@@ -334,7 +316,9 @@ export async function startLocalRecognition(
     recognizer = new model.KaldiRecognizer(audioContext.sampleRate);
     recognizer.setWords(true);
 
-    const sourceNode = audioContext.createMediaStreamSource(microphone);
+    const sourceNode = audioContext.createMediaStreamSource(
+      gameMicrophone.stream,
+    );
     const captureNode = new AudioWorkletNode(
       audioContext,
       "local-voice-capture",
@@ -349,16 +333,13 @@ export async function startLocalRecognition(
     return new LocalRecognitionSession(
       audioContext,
       captureNode,
-      microphone,
       recognizer,
       sourceNode,
       muteNode,
-      evidence,
+      gameMicrophone.route,
       onPartial,
-      onMicrophoneRouteLost,
     );
   } catch (error) {
-    for (const track of microphone.getTracks()) track.stop();
     recognizer?.remove();
     await audioContext.close();
     throw error;
