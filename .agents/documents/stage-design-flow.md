@@ -120,16 +120,20 @@ to misuse:
 
 Decide, in words, before any dialogue:
 
-- **Other party:** role, approximate age, register used toward the learner
-  (business polite, plain polite, brusque), and one trait that shapes word
-  choice (rushed, elderly, over-helpful).
+- **Other party:** role, approximate age, apparent gender, register used toward
+  the learner (business polite, plain polite, brusque), and one trait that
+  shapes word choice (rushed, elderly, over-helpful).
 - **Learner persona:** who the learner *is* in this scene — traveller with a
   companion, resident alone, parent with a child. This decides politeness
   level, pronoun use, and whether a line like "for her" is even possible.
 - **Voice per speaker:** perceived age, speed, politeness, regional neutrality.
 
-These three feed Step 7 verbatim. Do not describe how anyone *looks* here;
-appearance is derived by the art work from the persona stated.
+These three feed Step 7 verbatim. Do not describe clothing, styling, or
+composition here; those are derived by the art work from the persona stated.
+Apparent gender and age band are *not* styling — they are persona, they must be
+stated here, and both the art work and the voice casting read them from this
+one place. Leaving either unstated is what lets the drawn character and the
+cast voice disagree.
 
 ### Character cards (required)
 
@@ -144,9 +148,17 @@ most frequently forgotten character — before writing any line:
   shows it.
 - **Perceives** — what anyone present can observe in the room. Only these facts
   may be reacted to.
+- **Persona (required, never omitted)** — apparent gender, apparent age band,
+  and vocal timbre in plain words (for example "young man, early 20s, light
+  mid-range voice"). This field may hold a stated default, but it may never be
+  absent or "unspecified": art and voice are produced by two separate processes
+  downstream, and each will silently invent its own answer to anything left
+  blank. Write `default: unmarked adult, neutral mid-range` only as a
+  deliberate choice, not as a placeholder to fill in later.
 - **Voice fingerprint** — politeness tier as concrete grammar
   (尊敬語・謙譲語 / です・ます / plain), typical sentence length, one habitual
-  word or opener, and who asks the questions.
+  word or opener, and who asks the questions. This is *what* the character
+  says; Persona above is *who is heard and seen saying it*. Both are required.
 - **Never says** — a short banned list. A beginner learner never produces
   かしこまりました or よろしいでしょうか; café staff never explain grammar.
 
@@ -295,7 +307,9 @@ This brief is the handoff to the art work.
   calls for them; name any text the scene should show
 
 ### Other-party characters — one block per castId from Step 2b
-- Role, approximate age, build, clothing appropriate to the role
+- Persona line copied verbatim from the Step 3 card: apparent gender, apparent
+  age band, vocal timbre. Required in every block; never "unspecified"
+- Role, build, clothing appropriate to the role
 - Expression range needed across the stages
 - Register they project, taken from Step 3 rather than from styling
 - Which scenes they appear in, and that they must read as standing in each
@@ -305,7 +319,14 @@ This brief is the handoff to the art work.
 - One image summarising the situation, in the same register
 
 ### Voice
-- Per speaker: perceived age, speed, politeness level, regional neutrality
+- Per speaker: apparent gender and vocal timbre from the Step 3 persona —
+  required, never blank — then perceived age, speed, politeness level,
+  regional neutrality
+- Cast against that persona *first*, then judge language quality and
+  distinctness by ear. A preset that sounds excellent and speaks clean Japanese
+  is still miscast if it contradicts the drawn character; the preset bank
+  carries no gender metadata, so record each preset's apparent gender by ear
+  the first time it is auditioned
 - Voice fingerprint from the Step 3 card, so two characters are not
   synthesised as the same person
 - Learner reference-line voice, if it differs
@@ -380,6 +401,10 @@ does not consume the one bubble Skip dismisses.
   change.
 - Listen to every generated clip. Check pronunciation against the `reading`,
   not against the kanji, and confirm the delivery matches the Step 7b intent.
+- **Persona agreement:** for each character, look at the drawn art and listen to
+  its cast voice together, and confirm they read as the same person — apparent
+  gender first, then age band. Clip-by-clip listening does not catch this,
+  because each clip sounds fine on its own; only the pairing fails.
 - Simulate a pessimistic run: skip or fail out *every* learner bubble and
   confirm the remaining dialogue still coheres.
 - Re-run the character separation gate if any line changed after Step 6b.
@@ -391,7 +416,9 @@ does not consume the one bubble Skip dismisses.
 ## Definition of done
 
 - Situation, stage cuts, and personas stated in prose, with a character card
-  per speaker including the learner.
+  per speaker including the learner. Every card carries a Persona line —
+  apparent gender, age band, timbre — with a stated default rather than a
+  blank, and the art and the cast voice agree with it.
 - Every stage — the first included — names its shot, its other party, and its
   narrator line, and every key resolves in the art pack.
 - Every bubble has validated `japanese`, `reading`, and `translation`; every

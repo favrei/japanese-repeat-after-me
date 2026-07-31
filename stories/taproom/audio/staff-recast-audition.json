@@ -1,0 +1,66 @@
+{
+  "story": "taproom",
+  "note": "Audition manifest for recasting the taproom staff to a male preset. The staff is drawn as a young man in art-packs/taproom/staff-*.png but every staff clip was cast to the female preset Ono_Anna, because neither the Step 3 card nor the Step 7 voice table carried apparent gender. Candidates are the five presets that plausibly read male; eric and dylan are dialect-locked (Sichuan, Beijing) and are included only to hear whether that lock actually damages Japanese. aiden currently voices the narrator, so a win there forces a narrator recast. Two lines per preset: the routine greeting and the one persuading line, at speed 1.0 to stay comparable with the shipped Ono_Anna takes.",
+  "lines": [
+    {
+      "id": "staff-welcome__uncle_fu",
+      "text": "いらっしゃいませ。ご注文はお決まりですか。",
+      "voice": "uncle_fu",
+      "seed": 20260741
+    },
+    {
+      "id": "staff-welcome__ryan",
+      "text": "いらっしゃいませ。ご注文はお決まりですか。",
+      "voice": "ryan",
+      "seed": 20260742
+    },
+    {
+      "id": "staff-welcome__aiden",
+      "text": "いらっしゃいませ。ご注文はお決まりですか。",
+      "voice": "aiden",
+      "seed": 20260743
+    },
+    {
+      "id": "staff-welcome__eric",
+      "text": "いらっしゃいませ。ご注文はお決まりですか。",
+      "voice": "eric",
+      "seed": 20260744
+    },
+    {
+      "id": "staff-welcome__dylan",
+      "text": "いらっしゃいませ。ご注文はお決まりですか。",
+      "voice": "dylan",
+      "seed": 20260745
+    },
+    {
+      "id": "staff-bitter__uncle_fu",
+      "text": "ペールエールは苦みが少なくて、飲みやすいですよ。",
+      "voice": "uncle_fu",
+      "seed": 20260746
+    },
+    {
+      "id": "staff-bitter__ryan",
+      "text": "ペールエールは苦みが少なくて、飲みやすいですよ。",
+      "voice": "ryan",
+      "seed": 20260747
+    },
+    {
+      "id": "staff-bitter__aiden",
+      "text": "ペールエールは苦みが少なくて、飲みやすいですよ。",
+      "voice": "aiden",
+      "seed": 20260748
+    },
+    {
+      "id": "staff-bitter__eric",
+      "text": "ペールエールは苦みが少なくて、飲みやすいですよ。",
+      "voice": "eric",
+      "seed": 20260749
+    },
+    {
+      "id": "staff-bitter__dylan",
+      "text": "ペールエールは苦みが少なくて、飲みやすいですよ。",
+      "voice": "dylan",
+      "seed": 20260750
+    }
+  ]
+}

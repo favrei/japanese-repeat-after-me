@@ -42,8 +42,12 @@ cheaper and more consistent route here, since both shots are the same room.
 
 ## Other-party character — taproom staff
 
-- Early 20s, working build, apron over a dark tee, sleeves pushed up, hair tied
-  back and out of the way. Dressed to pour, not to greet.
+- **Persona (from the Step 3 card): young man, early 20s, light mid-range
+  voice, even and unhurried.** This line is the single source both the art work
+  and the voice casting read. It was missing in the first pass, which is how a
+  male drawing ended up with a female voice.
+- Working build, apron over a dark tee, sleeves pushed up, hair tied back and
+  out of the way. Dressed to pour, not to greet.
 - Expression range needed: neutral working attention; a brief direct look when
   taking the order; a small acknowledging nod when handing the glass over.
   Nothing broader — this person is efficient, not effusive.
@@ -60,11 +64,14 @@ arrived somewhere you do not yet understand," not as an advertisement.
 
 ## Voice
 
-| Speaker | Perceived age | Speed | Politeness | Accent |
-| --- | --- | --- | --- | --- |
-| Staff | early 20s | slightly fast, even | business-polite です・ます | standard, regionally neutral |
-| Learner | adult, unspecified | slow, hesitant | plain です・ます | non-native is acceptable, not required |
-| Narrator | indeterminate | unhurried, even | plain past-tense prose, not です・ます | standard, regionally neutral |
+Apparent gender and timbre come first, because they are what the art and the
+casting must agree on. Neither may be blank; a stated default is fine.
+
+| Speaker | Apparent gender & timbre | Perceived age | Speed | Politeness | Accent |
+| --- | --- | --- | --- | --- | --- |
+| Staff | male, light mid-range | early 20s | slightly fast, even | business-polite です・ます | standard, regionally neutral |
+| Learner | default: unmarked adult, neutral mid-range | adult, unspecified | slow, hesitant | plain です・ます | non-native is acceptable, not required |
+| Narrator | default: unmarked, neutral low-mid | indeterminate | unhurried, even | plain past-tense prose, not です・ます | standard, regionally neutral |
 
 **Narrator voice: `aiden`** — chosen by ear on 2026-07-31 from the four
 presets not already cast and not known-broken. The narrator is the storyteller,
@@ -73,21 +80,41 @@ conversational: a book read aloud, not someone speaking in the taproom.
 
 Final casting, three distinct voices:
 
-| Role | Preset |
-| --- | --- |
-| Staff | `Ono_Anna` |
-| Learner | `sohee` |
-| Narrator | `aiden` |
+| Role | Preset | Apparent gender by ear |
+| --- | --- | --- |
+| Staff | `dylan` | male |
+| Learner | `sohee` | female |
+| Narrator | `aiden` | male |
 
 Voice fingerprints from the character cards, so the two are not synthesised as
 one person: the staff is even-paced with clean set-phrase delivery; the learner
 is slower, starts on a filler (あの / じゃあ), and lands softly.
 
-**Decision: two voices, not one.** The staff keep `Ono_Anna`, the native
-Japanese preset already validated for this project. The learner's single
-autoplay line is assigned a *different* voice, so the two characters are not
-synthesised as one person — the audio form of exactly what the separation gate
-prevents in text.
+**Decision: three voices, not one.** Each character is a different preset, so
+no two are synthesised as one person — the audio form of exactly what the
+separation gate prevents in text.
+
+**Staff recast to `dylan` on 2026-07-31.** The staff originally used
+`Ono_Anna`, chosen because it was the validated native Japanese preset and
+sounded good. It is female, and the staff is drawn as a young man; the user
+caught it on the first real listen. The casting was not careless — the criteria
+in use were language capability and distinctness, and *no* link in the chain
+carried apparent gender, so the art work and the casting each resolved the
+ambiguity independently and disagreed. The café escaped the same bug only by
+coincidence, its staff being drawn female.
+
+`dylan` is documented as Beijing-dialect-locked and was previously excluded
+from Japanese work on that label alone. Auditioned on the greeting and the
+recommending line, it reads as a young man and speaks clean Japanese, so it was
+accepted by ear. This is the same lesson `sohee` already taught from the other
+direction: **preset labels are a hint, not a limit — in dialect exactly as in
+language.** The audition set covered `uncle_fu`, `ryan`, `aiden`, `eric`, and
+`dylan`; `aiden` was ineligible in practice because it already voices the
+narrator.
+
+Ordering matters and is now written into the flow: cast against persona first,
+then judge language quality and distinctness. A preset that sounds excellent is
+still miscast if it contradicts the drawing.
 
 What the model actually offers, checked in its config and API rather than
 assumed:

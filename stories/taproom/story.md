@@ -98,6 +98,10 @@ cards so the cards stay a test of what each person separately knows.
   the board. Never assumes any of it.
 - **Perceives** — a customer standing at the counter, looking at the board,
   hesitating. Whether they are holding a glass.
+- **Persona** — young man, early 20s; light mid-range voice, even and
+  unhurried. Added on 2026-07-31 after the drawn staff (male) and the cast
+  voice (`Ono_Anna`, female) disagreed. Both the art pack and the voice casting
+  now read apparent gender from this line.
 - **Voice fingerprint** — です・ます plus shop-standard set phrases
   (いらっしゃいませ、お待たせしました、ございます). 8–18 morae. Habitual
   closer: ごゆっくりどうぞ. Asks the questions; offers two concrete options
@@ -116,6 +120,9 @@ cards so the cards stay a test of what each person separately knows.
   system; whether standing there is allowed; the staff's name.
 - **Perceives** — the board, the tap wall, the staff, the glasses other people
   are holding.
+- **Persona** — default: unmarked adult, neutral mid-range. The learner is
+  never drawn, so no art depends on this; it is stated rather than left blank
+  because the learner's one autoplay line is cast from it (`sohee`).
 - **Voice fingerprint** — short です・ます, 9–16 morae. Opens hesitantly with
   あの or じゃあ. Closes requests with お願いします. Asks few questions, but the
   ones that matter.
@@ -216,10 +223,16 @@ Run as a separate pass over speaker, Japanese, reading, and translation only.
 
 ## Delivery status
 
-**Audio is done and accepted.** Ten clips in `audio/`, verified against
-`audio/generation-log.json` by SHA-256. Three distinct voices: staff
-`Ono_Anna`, learner `sohee`, narrator `aiden`. The user accepted them by ear on
-2026-07-31, which clears the listening gate for this story.
+**Audio is regenerated and pending a listening pass.** Ten clips in `audio/`,
+verified against `audio/generation-log.json` by SHA-256. Three distinct voices:
+staff `dylan`, learner `sohee`, narrator `aiden`.
+
+The seven staff clips were regenerated on 2026-07-31 when the staff was recast
+from `Ono_Anna` (female) to `dylan` (male) to match the drawn character — see
+[`brief.md`](brief.md) for the recast and its root cause. The learner and
+narrator clips are untouched and keep their earlier acceptance. **The seven new
+staff clips have not yet passed a listening pass**, so this story no longer
+clears the listening gate outright.
 
 **Art is done.** The registered `taproom` pack contains a cover, landscape and
 portrait scene art, and neutral/positive/concerned staff states. The `board`

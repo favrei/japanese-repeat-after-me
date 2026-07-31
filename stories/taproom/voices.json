@@ -1,6 +1,6 @@
 {
   "story": "taproom",
-  "note": "Autoplay bubbles only — speak bubbles carry no reference clip, matching the cafe story. Two voices on purpose: the staff use the native Japanese preset Ono_Anna, the learner uses sohee, so the two characters are not synthesised as one person. sohee was chosen by ear on 2026-07-31 from candidates covering all seven non-dialect presets. It carries no Japanese claim in the model card and produces good Japanese anyway — preset language labels are a hint, not a limit. Speed stays at 1.0: this line is an autoplay free ride, not a shadowing target, and 1.0 is what was judged. Each line pins the exact seed that produced its accepted clip; seeds no longer depend on position in this array, so lines may be reordered or inserted freely.",
+  "note": "Autoplay bubbles only — speak bubbles carry no reference clip, matching the cafe story. Three voices on purpose, one per character, so no two characters are synthesised as the same person: staff `dylan`, learner `sohee`, narrator `aiden`. The staff was recast from `Ono_Anna` to `dylan` on 2026-07-31 after the user heard a female voice on a character drawn as a young man. Root cause was a missing persona field, not a casting mistake: neither the Step 3 character card nor the Step 7 voice table carried apparent gender, so the art work and the casting each invented their own answer. Persona is now a required, defaultable-but-never-blank field in .agents/documents/stage-design-flow.md, and Step 9 gained a persona-agreement check that looks at the art and listens to the voice together. `dylan` is documented as Beijing-dialect-locked; it was auditioned anyway on the greeting and the recommending line and accepted by ear for Japanese, which extends the existing lesson that preset labels are a hint, not a limit. Speed stays at 1.0: these are autoplay free rides, not shadowing targets, and 1.0 is what was judged. Each line pins the exact seed that produced its accepted clip; seeds do not depend on position in this array, so lines may be reordered or inserted freely.",
   "lines": [
     {
       "id": "taproom-choose-open",
@@ -11,25 +11,25 @@
     {
       "id": "taproom-choose-welcome",
       "text": "いらっしゃいませ。ご注文はお決まりですか。",
-      "voice": "Ono_Anna",
+      "voice": "dylan",
       "seed": 20260730
     },
     {
       "id": "taproom-choose-board",
       "text": "ごゆっくりどうぞ。本日のビールはこちらのボードにございます。",
-      "voice": "Ono_Anna",
+      "voice": "dylan",
       "seed": 20260731
     },
     {
       "id": "taproom-choose-two",
       "text": "おすすめは、ペールエールと黒ビールです。",
-      "voice": "Ono_Anna",
+      "voice": "dylan",
       "seed": 20260732
     },
     {
       "id": "taproom-choose-bitter",
       "text": "ペールエールは苦みが少なくて、飲みやすいですよ。",
-      "voice": "Ono_Anna",
+      "voice": "dylan",
       "seed": 20260733
     },
     {
@@ -41,7 +41,7 @@
     {
       "id": "taproom-glass-served",
       "text": "お待たせしました。こちらどうぞ。",
-      "voice": "Ono_Anna",
+      "voice": "dylan",
       "seed": 20261734
     },
     {
@@ -53,13 +53,13 @@
     {
       "id": "taproom-glass-later",
       "text": "お会計は最後にまとめてお願いします。",
-      "voice": "Ono_Anna",
+      "voice": "dylan",
       "seed": 20260736
     },
     {
       "id": "taproom-glass-counter",
       "text": "そちらのカウンターをご自由にお使いください。ごゆっくりどうぞ。",
-      "voice": "Ono_Anna",
+      "voice": "dylan",
       "seed": 20260737
     }
   ]
