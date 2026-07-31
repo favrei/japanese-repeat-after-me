@@ -120,8 +120,12 @@ advisory:
 
 - **Character cards are required before dialogue** (Step 3), one per speaker
   **including the learner**: wants, knows, cannot know, perceives, voice
-  fingerprint as concrete grammar tier, and a short "never says" list. The
-  cards exist so the gate has something to check against.
+  fingerprint as concrete grammar tier, a short "never says" list, and a
+  required **Persona** line covering apparent gender, apparent age band, and
+  vocal timbre. Persona may use a stated default such as “unmarked adult,
+  neutral mid-range,” but may never be blank or unspecified. The cards exist
+  so the text gate and later art/voice agreement gate have something to check
+  against.
 - **A required gate at Step 6b**, documented at
   [`../../documents/character-separation-gate.md`](../../documents/character-separation-gate.md).
   Four passes: leak scan, knowledge ledger, blind attribution with speaker
@@ -135,8 +139,11 @@ advisory:
 - Never resolve a gate failure by changing flow rules. The knowledge-ledger
   pass and skip-safety are the same defect seen from two sides: a bubble Skip
   can dismiss was never knowledge anyone in the room received.
-- Voice fingerprints carry into the art & voice brief so two characters are not
-  synthesised as the same person. See [Audio](audio.md) and
+- Voice fingerprints and the Persona line carry into the art & voice brief.
+  Persona is copied verbatim; casting evaluates persona before language quality
+  and distinctness. Step 9 then views the art and hears the voice together.
+  Per-clip listening alone cannot catch a plausible voice attached to the wrong
+  depicted character. See [Audio](audio.md) and
   [Visual Design](visual-design.md).
 
 The gate has now been run on real dialogue:
@@ -194,12 +201,18 @@ The gate has now been run on real dialogue:
 - `stages.ts`: two stages, 13 bubbles, five learner-speaking bubbles, and two
   narrator transitions;
 - `brief.md`: art and voice requirements plus per-bubble delivery intent;
-- `audio/`: ten accepted clips with generation provenance.
+- `audio/`: ten shipped clips with generation provenance.
 
 The working reading convention is all hiragana, while katakana loanwords are
 written phonetically with `ー` retained, such as `ぺーるえーる`. The bundle
 layout works and fed the story registry implementation, but has not been
 declared the final upload or lesson-pack schema.
+
+The “ten accepted clips” statement describes the original taproom cast. Staff
+was later recast from female `Ono_Anna` to male `dylan` after the user detected
+an art/voice mismatch. The user accepted `dylan` from two audition lines, but
+the seven regenerated staff clips remain pending a complete listening pass.
+The unchanged learner `sohee` and narrator `aiden` clips retain acceptance.
 
 ## Open questions
 
@@ -232,6 +245,8 @@ declared the final upload or lesson-pack schema.
 - User-confirmed taproom stage cuts, completed taproom authoring, narrator
   skip-safety correction, and requested stage-selection integration recorded
   on 2026-07-31.
+- User requirement that persona must always be present, taproom staff recast,
+  and the pending full listening pass recorded on 2026-07-31.
 - `.agents/documents/stage-design-flow.md`
 - `.agents/documents/character-separation-gate.md`
 - `.agents/documents/cafe-stage-redesign.md`
@@ -243,5 +258,6 @@ declared the final upload or lesson-pack schema.
 - [Project](project.md)
 - [Platform](platform.md)
 - [Delivery](delivery.md)
+- [Backend and Data](backend.md)
 - [Visual Design](visual-design.md)
 - [Audio](audio.md)

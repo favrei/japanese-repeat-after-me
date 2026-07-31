@@ -16,125 +16,126 @@ Canonical detail belongs in linked cells.
   learner bubbles advance after one success, the third failure, or one Skip;
   Skip dismisses exactly one bubble and is not a failure. See
   [Product](cells/product.md).
-- The canonical nested app is `poc/` `main` at merge commit `3a3b84d`. It
-  contains the four-stage café/taproom library, schema-v2 art packs and
-  narrated transitions, bundled reference audio, and local Vosk recognition.
-  `poc/` is the nested repository's only remaining worktree and is clean. See
+- The canonical nested app is clean `poc/` `main` at `05a986f`. It contains
+  the four-stage café/taproom library, schema-v2 art packs, narrated
+  transitions, bundled reference audio, local Vosk recognition, and the Sites
+  packaging fixes. It is the nested repository's only worktree. See
   [Project](cells/project.md) and [Delivery](cells/delivery.md).
-- The library preserves the café instead of replacing it with the taproom.
-  Direct Stage 2 entry opens that stage's own transition and runs only the rest
-  of that story. See [Product](cells/product.md).
-- The taproom story is content-complete: two stages, 13 bubbles, five learner
-  speak bubbles, two narrated transitions, a passed character-separation gate,
-  ten user-accepted clips across staff `Ono_Anna`, learner `sohee`, narrator
-  `aiden`, and an original art pack. See [Content](cells/content.md),
+- Sites version 3 from exact nested commit
+  `05a986fd0efbcc9337557d8e07b9b295af6aa335` is live at
+  `https://japanese-speaking-story.zenridge.chatgpt.site`. The artifact passed
+  art/model validation, typecheck, lint, production build, and 25/25 tests,
+  but the site is public and unauthenticated. See [Delivery](cells/delivery.md)
+  and [Backend and Data](cells/backend.md).
+- Gameplay is currently client-only; D1 and R2 are not provisioned. The agreed
+  future backend owns only identity, catalog, compact progress sync, and
+  chapter-submission intake. A downloaded session must complete offline. See
+  [Backend and Data](cells/backend.md).
+- The library preserves the café rather than replacing it with the taproom.
+  Direct Stage 2 entry opens that stage's transition and runs only the rest of
+  that story. Every stage owns a `sceneId`, `castId`, and skip-safe narrated
+  transition. See [Product](cells/product.md) and [Content](cells/content.md).
+- The taproom has two stages, 13 bubbles, five learner speak bubbles, two
+  narrated transitions, a passed character-separation gate, and an original
+  art pack. Its staff is now male `dylan`, learner `sohee`, and narrator
+  `aiden`. For the recast, only `dylan`'s two-line audition was user-approved,
+  not the seven regenerated shipped staff clips. See [Content](cells/content.md),
   [Audio](cells/audio.md), and [Visual Design](cells/visual-design.md).
-- Every stage now owns a `sceneId`, `castId`, and narrated transition,
-  including Stage 1. Transitions are separate states, not dialogue bubbles.
-  Narration must remain true when preceding learner lines are skipped or failed
-  out. See [Content](cells/content.md).
-- The full-bleed adult seinen frame and art-pack contract are the visual
-  direction. Café and taproom are swappable packs under schema v2; a pack owns
-  named scenes/characters while the app owns the constant frame. The finished
-  selector and taproom visuals still need the user's explicit visual verdict.
-  See [Visual Design](cells/visual-design.md).
-- Develop and preview locally. No build, browser pass, or Sites capability
-  authorizes deployment; release requires an immutable QA-passed artifact and
-  explicit approval. See [Delivery](cells/delivery.md).
-- Local-first Vosk recognition is merged into the four-stage app. It uses
-  AudioWorklet capture, recording-quality checks, and closed-catalog content
-  matching. Treat its result as a coarse known-sentence gate, not
-  pronunciation diagnosis, and keep recognition and feedback replaceable. See
+- The full-bleed adult seinen frame and schema-v2 art-pack contract remain the
+  visual direction. The finished selector and taproom pack have mechanical QA,
+  not the user's explicit visual verdict. See
+  [Visual Design](cells/visual-design.md).
+- Local-first Vosk recognition is the current runtime. Treat it as a coarse
+  known-sentence content gate, not pronunciation diagnosis, and keep
+  recognition and feedback replaceable. See
   [Recognition](cells/recognition.md).
-- Accounts, chapter upload/review, and released canonical audio remain a future
-  phase, not current implementation scope. See [Content](cells/content.md).
 
 ## Active defaults
 
-- New content must be skip-safe and pass the separate four-pass character
+- New content must be skip-safe and pass the detached four-pass character
   separation gate: leak scan, knowledge ledger, blind attribution, and
-  single-speaker read-through. Difficulty lives in sentence length,
-  speak-bubble count, novelty, recycling, accepted variants, and phonetic
-  fragility — never in the fixed attempt budget. See [Content](cells/content.md).
-- Reference audio is generated locally at authoring time, bundled, and judged
-  by ear. Browser TTS is fallback only. Cast all usable non-dialect presets by
-  audition rather than trusting language labels. Keep exact model, voice,
-  instruction, explicit seed, duration, and hash provenance. See
-  [Audio](cells/audio.md).
-- Keep the TTS safeguards at their current simple boundary: trim only trailing
-  silence, retain the duration/reseed guard, merge partial logs, and derive
-  seeds from an explicit per-line value or stable line id — never manifest
-  position. Do not build more reproducibility machinery without a real risk.
-  See [Audio](cells/audio.md).
+  single-speaker read-through. Every character card must also carry a Persona
+  line—apparent gender, age band, and vocal timbre—which may use a stated
+  default but may never be absent. See [Content](cells/content.md).
+- Cast art and voice from the same persona, audition presets rather than
+  trusting language or dialect labels, keep roles distinct within a story, and
+  judge the final art/voice pairing together. Every shipped reference clip
+  still requires a complete human listening pass. See [Audio](cells/audio.md)
+  and [Visual Design](cells/visual-design.md).
+- Reference audio is generated locally at authoring time and bundled. Preserve
+  exact model, voice, instruction, explicit seed, duration, and hash
+  provenance. Partial generation must not leave shipped metadata disagreeing
+  with the canonical generation log. See [Audio](cells/audio.md).
+- Keep the existing TTS safeguards: trim only trailing silence, retain the
+  duration/reseed guard, merge partial logs, and derive fallback seeds from a
+  stable line id rather than manifest position.
 - Use newsprint, black/neutral ink, one deep-red accent, Shippori Mincho B1 and
   Zen Kaku Gothic New, restrained adult proportions, screentone, hard-edged
   panels, and full-viewport scene art. Story art contains no dialogue or UI.
-  See [Visual Design](cells/visual-design.md).
-- Treat transcript-aligned kana hit/miss marks as coarse string guidance, not
-  acoustic phoneme or mora evidence. See [Product](cells/product.md) and
-  [Recognition](cells/recognition.md).
-- Use short-lived sibling worktrees for isolated nested-app work when useful,
-  then integrate deliberately and remove duplicate checkouts after their
-  commits are safely reachable. See [Project](cells/project.md).
+- Keep gameplay, recognition, and the local progress event log in the client.
+  Future pack URLs are immutable and versioned; catalog changes are additive;
+  hosted services must degrade to delayed sync rather than break practice.
+  See [Backend and Data](cells/backend.md).
 - Keep model weights, caches, private recordings, and disposable TTS outputs
-  out of Git and deployment packages. Reviewed bundled reference clips are
-  intentional application assets. The production Vosk archive is a local,
-  ignored preparation output; its six ignored local chunks are served only
-  from that model directory. See [Project](cells/project.md),
-  [Recognition](cells/recognition.md), and [Recordings](cells/recordings.md).
+  out of Git and deployment packages. Reviewed reference clips are intentional
+  application assets; the private corpus remains local and untracked. See
+  [Project](cells/project.md), [Recognition](cells/recognition.md), and
+  [Recordings](cells/recordings.md).
 - Do not proactively invoke or expand the personal `speak-human` skill. Use it
   only when the user explicitly asks, and do not uninstall or modify it.
 
 ## Blockers and open questions
 
-- The finished selector and generated taproom pack have mechanical browser
-  approval, not an explicit user visual verdict. The café register is a
-  provenance-recorded reframe of one plate; a dedicated register plate remains
-  optional art debt. See [Visual Design](cells/visual-design.md).
-- The redesigned café's nine autoplay clips passed structural and browser QA
-  but still need a recorded complete listening pass unless separately accepted.
-  See [Audio](cells/audio.md).
-- The merged app's current dependency graph reports 19 total npm audit findings
-  (2 low, 4 moderate, 13 high); the production-only graph reports 5
-  (2 moderate, 3 high). No audit fix was applied. See
+- The live product URL is public and has no application or Sites
+  authentication. Decide whether and how to restrict access before real use.
+  See [Backend and Data](cells/backend.md) and
   [Delivery](cells/delivery.md).
-- No Android device has been connected. USB `adb reverse`, microphone,
-  service-worker/offline behavior, installability, and mobile memory remain
+- The seven shipped taproom `dylan` staff clips and the redesigned café's nine
+  autoplay clips need complete listening passes. Mechanical QA cannot hear
+  dialect artifacts, wrong pitch accent, or mangled loanwords. See
+  [Audio](cells/audio.md).
+- The selector and both generated packs still need the user's visual verdict.
+  A dedicated café register plate remains optional art debt. See
+  [Visual Design](cells/visual-design.md).
+- No Android device has been connected. Microphone recognition,
+  service-worker/offline behavior, installation, and mobile memory remain
   unverified. See [Platform](cells/platform.md).
-- Recognition quality, human labels, feedback granularity, browser/Android
-  resource use, retention, synchronization, and deployment architecture remain
-  evidence-gated. See [Recognition](cells/recognition.md),
-  [Platform](cells/platform.md), and [Recordings](cells/recordings.md).
-- The nested app has no configured Git remote. Its merge commit therefore
-  exists only locally unless a remote is added later. The outer repository
-  records the handoff, but there is still no approved release artifact and
-  nothing has been deployed. See [Project](cells/project.md) and
+- The dependency graph reports 19 total npm audit findings and five
+  production-only findings. No audit fix was applied. See
   [Delivery](cells/delivery.md).
+- The nested app has no Git remote. Its deployment commits exist locally and
+  in the deployed Sites version but cannot be pushed until a remote is added.
+  See [Project](cells/project.md).
+- D1/R2 durability, automatic migration application, backup/restore, catalog
+  growth, eager whole-library caching, and learner-audio policy remain
+  unresolved. Add tested export/restore in the same change as the first D1
+  table. See [Backend and Data](cells/backend.md).
+- Human-labeled recognition quality, feedback granularity, browser/Android
+  resource use, and synchronization policy remain evidence-gated. See
+  [Recognition](cells/recognition.md), [Platform](cells/platform.md), and
+  [Recordings](cells/recordings.md).
 
 ## Active evaluation gates
 
-- Preserve the full café and taproom flow while integrating or merging: stage
-  transitions must not change bubble counts, one Skip must dismiss one bubble,
-  and direct second-stage selection must begin at its own transition. See
-  [Product](cells/product.md).
-- Every new or edited story must verify each reading, pass a pessimistic
-  all-skip/all-fail run, pass the character-separation gate, and receive an
-  art/voice brief before encoding. See [Content](cells/content.md).
+- Preserve the complete café and taproom flow: transitions must not change
+  bubble counts, one Skip dismisses one bubble, and direct second-stage
+  selection begins at its own transition. See [Product](cells/product.md).
+- Every new or edited story must verify readings, pass a pessimistic
+  all-skip/all-fail run, pass character separation, declare persona, and
+  receive an art/voice agreement review before encoding. See
+  [Content](cells/content.md).
 - Every reference clip must pass human listening before becoming a learner
-  target. Prefer changing a sentence or take over shipping wrong audio. See
+  target. Prefer another take or sentence over wrong audio. See
   [Audio](cells/audio.md).
 - A visual candidate must pass art-pack validation, typecheck, lint, production
   build, tests, and phone/wide-desktop browser inspection, then receive a
-  separate user visual verdict. See [Visual Design](cells/visual-design.md) and
-  [Delivery](cells/delivery.md).
-- The merged app passed art/model validation, typecheck, lint, production
-  build, and 25/25 tests. A production-browser smoke on IPv4 loopback reached
-  the first taproom learner bubble with local recognition ready and recording
-  enabled; microphone permission and real recognition were deliberately not
-  exercised. See [Delivery](cells/delivery.md).
-- Deployment additionally requires trusted-HTTPS real-device QA, a frozen
-  source commit and artifact checksum, privacy/package checks, honest audit
-  disclosure, and explicit approval. See [Delivery](cells/delivery.md).
+  separate user visual verdict. See [Visual Design](cells/visual-design.md).
+- Subsequent deployments require a frozen source commit and artifact,
+  privacy/package checks, honest audit disclosure, real-device trusted-HTTPS
+  QA, explicit approval, and verified private access when privacy is intended.
+  See [Delivery](cells/delivery.md).
+- The deployed artifact proves Sites packaging only. It does not close Android
+  microphone, recognition, PWA installation, or offline QA.
 - When recognition resumes, label acceptable, intentionally incorrect, and
   near-miss attempts before tuning thresholds or claiming pronunciation or
   localized-error precision. See [Recognition](cells/recognition.md).

@@ -16,9 +16,12 @@ runtime capability tiers, and hosting assumptions.
 - Primary runtime target: Android Chrome.
 - Optional targets: Linux AMD64 Chrome and iOS Chrome or installed PWA, each
   requiring separate validation.
-- Intended hosting target: GPT Sites, privately and only after the exact
-  QA-passed artifact receives explicit deployment approval. See
-  [Delivery](delivery.md).
+- Hosting target and current host: GPT Sites. Version 3 of the app is deployed
+  from nested commit `05a986f` at
+  `https://japanese-speaking-story.zenridge.chatgpt.site`. It passed the
+  recorded automated QA gate, but access is public and unauthenticated rather
+  than private. See [Delivery](delivery.md) and
+  [Backend and Data](backend.md).
 - A private GPT Sites test kit has demonstrated authenticated API routes and
   server-side recording storage/export. The intended application may still be
   static or mostly static; this evidence does not establish that its core loop
@@ -127,20 +130,32 @@ large-model delivery, or final-product privacy policy. See
 
 ## Remaining unverified GPT Sites assumptions
 
-- static asset size limits;
-- efficient large-model delivery;
+- D1 and R2 durability across redeploys and retention guarantees;
+- automatic application of packaged D1 migrations;
 - cache-control behavior;
 - MIME types for WebAssembly and model files;
 - configurable cross-origin isolation headers;
-- service-worker support;
-- deployment and cached-update behavior.
+- offline reload and cached-update behavior.
+
+Deployment established two packaging constraints and one positive delivery
+result:
+
+- individual static files must stay at or below 26,214,400 bytes;
+- the Worker must stay at or below 10 MiB;
+- a split 49.7 MB Vosk model, browser-only Vosk bundle, client font assets, and
+  service worker can be packaged successfully when redundant server copies are
+  excluded.
+
+This proves artifact acceptance, not offline behavior, installation, or
+real-device recognition.
 
 ## Active platform gates
 
-- The user requested an Android Chrome PWA PoC without authorizing deployment.
-  The corrected bubble-level progression is user-confirmed. The responsive
+- The original Android Chrome PWA PoC request did not authorize deployment;
+  a later explicit release deployed the Sites candidate. The corrected
+  bubble-level progression is user-confirmed. The responsive
   four-stage café/taproom library and local Vosk runtime are integrated on
-  nested `poc/` `main` at `3a3b84d`. The app passed desktop and `412×915`
+  nested `poc/` `main` at `05a986f`. The app passed desktop and `412×915`
   browser QA, but real Android behavior remains unverified. See
   [Product](product.md), [Visual Design](visual-design.md), and
   [Delivery](delivery.md).
@@ -152,6 +167,10 @@ large-model delivery, or final-product privacy policy. See
   separately prepared Japanese model. Its production transport splits the
   ignored local archive into six manifest-verified parts and has the
   controlling service worker stream them as one logical archive.
+- The deployed app still has no application backend, authentication, D1, or
+  R2. Gameplay is client-owned. The agreed future backend is limited to
+  identity, catalog, progress sync, and submission intake; it must never enter
+  the critical path of a running session. See [Backend and Data](backend.md).
 - Production-browser QA on IPv4 loopback reached a recognition-ready learner
   bubble with recording enabled. This verifies initialization and delivery,
   not microphone capture or recognition quality. Browser and Android memory
@@ -201,6 +220,7 @@ large-model delivery, or final-product privacy policy. See
   2026-07-31.
 - Local Vosk integration, split model delivery, and production-browser
   readiness verification recorded on 2026-07-31.
+- Sites deployment and access inspection recorded on 2026-07-31.
 
 ## Related cells
 
@@ -211,3 +231,4 @@ large-model delivery, or final-product privacy policy. See
 - [Delivery](delivery.md)
 - [Visual Design](visual-design.md)
 - [Audio](audio.md)
+- [Backend and Data](backend.md)

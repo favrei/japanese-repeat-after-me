@@ -185,12 +185,13 @@ identity and aggregate closed-catalog discrimination remained stable.
 
 ## Local browser Vosk integration (merged)
 
-The local-first lane is integrated into the four-stage app on nested `poc/`
-`main` at merge commit `3a3b84d` (`Merge local Vosk recognition into four-stage
-app`). It is a real two-parent merge of the four-stage/TTS lineage at `14cd2b6`
-and recognition commit `18fcf55` (`Replace browser speech with local Vosk
-recognition`). The former recognition and temporary integration worktrees were
-removed after the merge was verified; `poc/` is the only remaining worktree.
+The local-first lane entered the four-stage app at merge commit `3a3b84d`
+(`Merge local Vosk recognition into four-stage app`) and remains on current
+nested `poc/` `main` at `05a986f`. `3a3b84d` is a real two-parent merge of the
+four-stage/TTS lineage at `14cd2b6` and recognition commit `18fcf55`
+(`Replace browser speech with local Vosk recognition`). The former recognition
+and temporary integration worktrees were removed after the merge was verified;
+`poc/` is the only remaining worktree.
 
 The merged implementation replaces Chrome `SpeechRecognition` with:
 
@@ -250,6 +251,10 @@ Verification history:
 - a production-browser smoke on `127.0.0.1` reached the first taproom learner
   bubble with `data-recognition-state="ready"` and recording enabled. It did
   not request microphone permission or capture real speech.
+- Sites deployment version 1 rejected the redundant full model archive for
+  exceeding the 26,214,400-byte per-file limit. Current deployment packaging
+  omits only that full archive while retaining the six chunks and manifest;
+  Sites version 3 accepted the final artifact from `05a986f`.
 
 What that manual pass does **not** cover: the other speaking bubbles,
 wrong-sentence rejection, short/quiet/clipped retry behaviour, Android resource

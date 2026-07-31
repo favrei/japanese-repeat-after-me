@@ -56,8 +56,9 @@ implementation.
 - Starting at a first stage continues through the rest of that story. Selecting
   a second stage directly opens that stage's own narrated transition and runs
   only the remaining stage. Returning from completion goes to the library.
-- This library is merged on nested `poc/` `main` at `3a3b84d`. See
-  [Project](project.md) and [Delivery](delivery.md).
+- This library entered nested `poc/` `main` through `3a3b84d` and remains
+  present at current `05a986f`. See [Project](project.md) and
+  [Delivery](delivery.md).
 
 ## Superseded café script — historical source of the flow
 
@@ -219,6 +220,10 @@ ingredients still require separate review:
 - The private GPT Sites test kit currently retains recordings by session and
   supports authenticated archive export. This is experimental evidence, not a
   product retention decision. See [Recordings](recordings.md).
+- The deployed product app is public, implements no authentication, and has no
+  D1 or R2. The agreed future backend keeps gameplay offline and limits hosted
+  work to identity, catalog, progress sync, and submission intake. See
+  [Backend and Data](backend.md).
 - Are learner recordings deleted immediately after scoring?
 - Can users retain recordings for self-review?
 - Is anonymized collection useful for later model calibration?
@@ -255,3 +260,4 @@ ingredients still require separate review:
 - [Delivery](delivery.md)
 - [Visual Design](visual-design.md)
 - [Audio](audio.md)
+- [Backend and Data](backend.md)

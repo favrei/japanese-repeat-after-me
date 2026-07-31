@@ -23,9 +23,11 @@ and what remains unsettled about prompting the synthesiser.
   mispronounced clip teaches the mistake. Every clip must be judged by ear
   before it becomes a learner reference.
 - Voice casting is per story and per role, not “one documented Japanese
-  preset for the whole application.” The taproom uses three user-selected
-  voices — staff `Ono_Anna`, learner `sohee`, narrator `aiden` — and all ten
-  clips passed the user's listening gate on 2026-07-31.
+  preset for the whole application.” The taproom now uses staff `dylan`,
+  learner `sohee`, and narrator `aiden`. The user selected `dylan` from a
+  two-line audition to resolve an art/voice persona mismatch, but the seven
+  regenerated staff clips have not had a complete listening pass. The
+  unchanged learner and narrator clips retain their earlier acceptance.
 
 ## Selected tooling
 
@@ -105,10 +107,12 @@ design existed. The taproom run supplied the missing evidence:
   `sohee`, which has no documented Japanese claim, produced the accepted
   learner voice; `ryan`, labeled English, produced a visibly overlong broken
   Japanese take.
-- Audition all seven non-dialect presets (`serena`, `vivian`, `uncle_fu`,
-  `ryan`, `aiden`, `ono_anna`, `sohee`) for a new role and judge by ear.
-  Exclude `eric` and `dylan` from Japanese audition because the model marks
-  them dialect-locked.
+- Audition all nine presets (`serena`, `vivian`, `uncle_fu`, `ryan`, `aiden`,
+  `ono_anna`, `sohee`, `eric`, `dylan`) when they plausibly fit the role and
+  judge by ear. Language and dialect labels are hints, not exclusion rules:
+  the user selected the Beijing-dialect-labeled `dylan` after hearing two
+  clean Japanese staff lines. A preset already cast as another character in
+  the same story is ineligible unless that role is also recast.
 - Both cached CustomVoice model sizes expose the same nine presets. Model size
   does not expand the voice bank.
 - Qwen3 VoiceDesign has same-size MLX variants and maps a natural-language
@@ -118,9 +122,11 @@ design existed. The taproom run supplied the missing evidence:
   The private learner corpus is not an acceptable Japanese reference voice:
   learners must not imitate non-native pronunciation.
 
-The taproom result resolves the immediate “two characters, one voice” problem,
-but it does not prove a universal canonical cast. Continue casting story by
-story and retain the listening gate. See [Content](content.md) and
+The taproom result resolves the immediate art/voice gender mismatch and the
+“two characters, one voice” problem, but it does not prove a universal
+canonical cast. Persona must be declared before casting, and the final gate
+must judge art and voice together. Continue casting story by story and retain
+the per-clip listening gate. See [Content](content.md) and
 [Visual Design](visual-design.md).
 
 ## Delivery in the app
@@ -141,11 +147,10 @@ Later commits add the current story assets:
 
 - `design/art-pack-system` at `e37d5c4` commits the redesigned café story and
   nine `Ono_Anna` autoplay clips with accepted seeds and metadata.
-- `feature/story-selection` commit `7a0f812` adds the taproom integration:
-  eight dialogue clips and two narrator clips under `public/audio/taproom/`,
-  plus metadata. These ten are the first complete three-role audio set accepted
-  by ear. This commit is now part of nested `poc/` `main` through merge
-  `3a3b84d`.
+- `feature/story-selection` commit `7a0f812` added eight taproom dialogue clips
+  and two narrator clips. Nested commit `19139c6` later recast all seven staff
+  clips from `Ono_Anna` to `dylan`; learner and narrator clips were not
+  regenerated. The current assets are on nested `poc/` `main` at `05a986f`.
 
 The `0.0.0.0` origin can prevent Chrome from granting microphone permission;
 preview on `localhost`. See [Delivery](delivery.md).
@@ -166,9 +171,13 @@ preview on `localhost`. See [Delivery](delivery.md).
 - The redesigned café branch passed its nine-clip QA and production autoplay
   checks. Its clips still require a complete user listening pass unless
   separately recorded as accepted.
-- The taproom feature passed art validation, typecheck, lint, production build,
-  21/21 tests, desktop/phone browser playback and progression checks, and the
-  user's listening gate for all ten clips.
+- The original taproom feature passed art validation, typecheck, lint,
+  production build, 21/21 tests, desktop/phone browser playback and
+  progression checks, and the user's listening gate for all ten original
+  clips. That result no longer covers the seven regenerated `dylan` staff
+  clips. Only their durations, hashes, provenance, and mechanical 25/25 QA
+  have been checked; the two-line `dylan` audition is not a substitute for a
+  complete pass over the shipped lines.
 - The later integrated local-recognition build passed the expanded art/model,
   typecheck, lint, production-build, and 25/25-test gate.
 
@@ -189,13 +198,19 @@ preview on `localhost`. See [Delivery](delivery.md).
   load-bearing.
 - The trim threshold has not been validated on lines ending in a genuinely
   quiet mora or on content much longer or shorter than the current stories.
+- A partial `generate_audio.py --only` run merges the canonical generation log
+  but does not update the shipped `metadata.json`. The taproom recast therefore
+  left the shipped manifest claiming `Ono_Anna` until it was reconciled from
+  the log. Never regenerate already accepted unrelated clips merely to repair
+  metadata. The tool should merge changed ids into the shipped manifest, and
+  QA should compare voice, seed, and hash between both provenance files.
 
 ## Open questions
 
 - Which prompt format and lever set should VoiceDesign or instructed
   CustomVoice use, if either becomes canonical?
-- Which cast fits each future story, and does the redesigned café voice pass a
-  full listening review?
+- Which cast fits each future story, and do the seven shipped taproom `dylan`
+  clips and nine redesigned café clips pass complete listening reviews?
 - Which words does the synthesiser reliably mispronounce (counters, numbers,
   katakana loanwords, names, 何 readings), and how are those handled?
 - How is per-bubble audio versioned when a stage's text is revised?
@@ -215,13 +230,17 @@ preview on `localhost`. See [Delivery](delivery.md).
   recorded on 2026-07-30.
 - User verdict that the voice remains unsatisfying and should be re-evaluated
   with story design, recorded on 2026-07-30.
-- User selection and listening acceptance of the taproom `Ono_Anna` / `sohee`
-  / `aiden` cast recorded on 2026-07-31.
+- User selection and listening acceptance of the original taproom
+  `Ono_Anna` / `sohee` / `aiden` cast recorded on 2026-07-31.
+- Taproom art/voice mismatch audit, two-line `dylan` audition, staff recast,
+  provenance reconciliation, and deferred seven-clip listening pass recorded
+  on 2026-07-31.
 - Historical branch `tts/qwen3-metal`, merged as nested app commit `ad3a356`;
   its former sibling worktree has been removed.
 - `stories/taproom/audio/generation-log.json`
 - `stories/taproom/voices.json`
-- Historical nested app commits `e37d5c4`, `7a0f812`, and `3a3b84d`.
+- Historical nested app commits `e37d5c4`, `7a0f812`, `3a3b84d`, `19139c6`,
+  and `05a986f`.
 - `.agents/documents/stage-design-flow.md`, Step 7b.
 
 ## Related cells

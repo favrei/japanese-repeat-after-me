@@ -30,8 +30,9 @@ layout, swappable art slots, and pending asset work.
   be copied blindly.
 - The replacement was implemented as a story-neutral frame plus swappable art
   packs at `e37d5c4`, followed by scene transitions at `6e6b83c` and the
-  four-stage library at `7a0f812`. All are now present on nested `poc/` `main`
-  through merge `3a3b84d`.
+  four-stage library at `7a0f812`. All remain present on current nested
+  `poc/` `main` at `05a986f`; the later recast and deployment-packaging commits
+  did not replace the frame or packs.
 - The four-stage app includes an original taproom pack and passed mechanical
   and production-browser QA, but the finished selector and taproom visuals
   still need the user's explicit visual verdict. Treat them as an integrated
@@ -173,10 +174,14 @@ Character states were generated against chroma green, then converted to
 transparent PNGs. The implemented assets contain no dialogue text or UI.
 
 The other party's **voice** is part of the same character decision as their
-art. The taproom run demonstrated this by casting staff, learner, and narrator
-separately and accepting all three by ear. Continue judging art and voice as
-one story-specific character decision rather than defaulting every role to the
-same preset. See [Audio](audio.md) and [Content](content.md).
+art. The first taproom cast violated that rule: the art resolved the
+underspecified staff persona as a young man while the voice used female
+`Ono_Anna`. The user caught the mismatch by seeing and hearing the finished
+story, then chose male `dylan` from a two-line audition. The seven regenerated
+staff clips still need a complete listening pass. Persona is now required in
+the character card and copied into the art & voice brief, and the final gate
+must judge art and voice together. See [Audio](audio.md) and
+[Content](content.md).
 
 ## Implementation and QA history
 
@@ -233,6 +238,8 @@ same preset. See [Audio](audio.md) and [Content](content.md).
   without reintroducing multiple accent colours?
 - Does the pack manifest still need safe-area metadata, or do `sceneFocus` and
   the character fields cover overlay collisions in practice?
+- Do the seven shipped `dylan` staff clips agree with the depicted taproom
+  character throughout a complete listening pass?
 
 ## Sources
 
@@ -241,13 +248,16 @@ same preset. See [Audio](audio.md) and [Content](content.md).
   slice-of-life plus full-bleed desktop behavior recorded on 2026-07-30.
 - User request for a designed narrated stage break and for a stage-selection
   menu retaining both café and taproom, recorded on 2026-07-31.
+- User report of the taproom art/voice gender mismatch, choice to recast the
+  voice, and persona-agreement requirement recorded on 2026-07-31.
 - `.agents/resources/seinen-manga-frame/README.md`
 - `.agents/resources/seinen-manga-frame/mock.html`
 - `poc/app/globals.css`
 - `poc/app/PracticeApp.tsx`
 - `poc/app/scoring.ts`
 - `poc/README.md`
-- Nested app commits `e37d5c4`, `6e6b83c`, `7a0f812`, and merge `3a3b84d`.
+- Nested app commits `e37d5c4`, `6e6b83c`, `7a0f812`, merge `3a3b84d`, and
+  recast `19139c6`.
 - `poc/art-system/README.md`, `poc/art-system/art-pack.schema.json`,
   `poc/art-packs/cafe.json`, `poc/scripts/validate-art-packs.mjs`, and
   `poc/app/ArtReview.tsx`.

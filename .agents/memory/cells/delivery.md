@@ -32,6 +32,11 @@ develop locally
 QA and deployment are separate actions. Deployment must not rebuild or
 substitute a different artifact after approval.
 
+The first Sites deployment completed on 2026-07-31. The word “privately” in
+the intended flow is not the current access state: Sites reports the deployed
+application as public, and the app implements no authentication. Restricting
+access remains an explicit follow-up.
+
 ## Current infrastructure
 
 - The repository root has no approved canonical product frontend or release
@@ -40,13 +45,13 @@ substitute a different artifact after approval.
   It serves locally at `http://localhost:3000/` and has a PWA manifest, service
   worker, bundled art/audio, local Vosk recognition, and development-only
   synthetic speech/flow controls.
-- Nested `poc/` `main` is clean at merge commit `3a3b84d`. The merge combines
-  the four-stage café/taproom app and TTS reconciliation at `14cd2b6` with the
-  local-recognition commit `18fcf55`. `poc/` is the nested repository's only
-  worktree; the earlier TTS, recognition, art, transition, selector, and
-  integration checkouts were removed after their useful work was verified.
-- The nested app has no configured Git remote, so `3a3b84d` is local and
-  cannot be pushed until a remote is deliberately added.
+- Nested `poc/` `main` is clean at `05a986f`
+  (`Trim browser assets from Sites worker`). It includes the four-stage/Vosk
+  merge `3a3b84d`, taproom staff recast `19139c6`, Sites connection `bf2643f`,
+  split-model packaging `a850c3f`, and final Worker packaging fix `05a986f`.
+  `poc/` is the nested repository's only worktree.
+- The nested app has no configured Git remote, so its commits cannot be pushed
+  until a remote is deliberately added.
 - A Chrome run at 412×915 verified one-bubble Skip, one-success progression,
   third-failure progression, the stage boundary, completion, and restart. The
   user confirmed the resulting flow on 2026-07-30.
@@ -55,8 +60,9 @@ substitute a different artifact after approval.
   committed through `e37d5c4`, `6e6b83c`, and `7a0f812` and is present on
   current `main`; the rejected frame is not the current product candidate.
 - The integrated app preserves the café, adds the taproom and a four-stage
-  library, bundles the reviewed story audio and art, and supports direct Stage
-  2 entry. The finished visuals still need the user's explicit visual verdict.
+  library, bundles story audio and art, and supports direct Stage 2 entry. The
+  finished visuals still need the user's explicit visual verdict; the seven
+  recast taproom staff clips also need a complete listening pass.
 - The merged production model path could not serve the original single
   49,654,706-byte ignored Vosk archive and returned HTTP 404. The fix prepares
   six ignored parts—five 8 MiB parts and one 7,711,666-byte part—described by a
@@ -67,6 +73,23 @@ substitute a different artifact after approval.
   loopback reached the first taproom learner-speaking bubble with local
   recognition ready and recording enabled. It did not request microphone
   permission or capture real speech.
+- Sites project `appgprj_6a6c341cd2048191a6bc18824b3a3255` deployed version 3
+  from exact nested commit `05a986fd0efbcc9337557d8e07b9b295af6aa335` at
+  `https://japanese-speaking-story.zenridge.chatgpt.site`. The release candidate
+  passed art/model validation, typecheck, lint, production build, and 25/25
+  tests. Sites accepted the packaged production artifact.
+- The deployed site is public and unauthenticated. The app has no accounts,
+  login, OAuth, or server-side product session, and `hosting.json` has no D1 or
+  R2 binding. See [Backend and Data](backend.md).
+- Deployment version 1 failed because the redundant 49,654,706-byte full model
+  archive exceeded Sites' 26,214,400-byte per-file limit. The deployed package
+  omits that full archive but retains the six verified sub-limit chunks and
+  manifest used by the service worker.
+- Deployment version 2 failed because the Worker exceeded 10 MiB: the SSR build
+  duplicated roughly 32 MB of browser fonts and followed the browser-only
+  dynamic Vosk import into a redundant server chunk. The final build removes
+  duplicate server font assets and excludes Vosk from the Worker;
+  `dist/server/` was 2.3 MB before packaging.
 - The current dependency graph reports 19 total `npm audit` findings
   (2 low, 4 moderate, 13 high) and 5 production-only findings
   (2 moderate, 3 high). These include `vosk-browser`'s `uuid` advisory and
@@ -92,6 +115,10 @@ substitute a different artifact after approval.
   - deployment-package privacy checks and a manual release gate are absent.
 - Same-Mac development preview works. Cross-device microphone QA requires
   explicit LAN binding and trusted HTTPS; plain LAN HTTP is insufficient.
+- The browser-only Vosk SSR guard needs a narrow local type intersection for
+  `ImportMeta.env` because this project does not include Vite's global
+  `ImportMeta` declarations. The guard proved the server Vosk chunk was gone;
+  this was a type-declaration issue, not a bundling failure.
 - A development HMR session produced repeated Vite client `send` errors after a
   server switch in the same controlled-browser tab. Restarting against the
   production build restored clean behavior. Treat this as a dev-session/tooling
@@ -114,6 +141,10 @@ substitute a different artifact after approval.
 
 CI is optional in the current minimalist phase. A trustworthy local QA command
 plus a separate manual deployment action is sufficient.
+
+The first deployed version proved that the package can fit Sites, but it did
+not satisfy real-device QA or private-access intent. Apply the same immutable
+artifact discipline to subsequent releases.
 
 The package check must reject recordings, datasets, secrets, training
 artifacts, development-only fixtures, captured screens, and private debug
@@ -187,6 +218,8 @@ server-side requirement justifies it.
   or is trusted LAN HTTPS still needed for real-device QA?
 - Is browser-local export/import sufficient, or will a server-side requirement
   justify hosted storage?
+- Should the live public URL be restricted before real use, and by which
+  supported Sites access mechanism?
 
 ## Sources
 
@@ -204,9 +237,12 @@ server-side requirement justifies it.
   2026-07-31.
 - Nested app merge `3a3b84d`, split model transport, and final 25/25 QA
   recorded on 2026-07-31.
+- Sites deployment versions 1–3, final commit `05a986f`, packaging constraints,
+  public access inspection, and missing application authentication recorded on
+  2026-07-31.
 - `.agents/resources/seinen-manga-frame/`
 - Historical nested commits `e37d5c4`, `6e6b83c`, `7a0f812`, `14cd2b6`,
-  `18fcf55`, and `3a3b84d`.
+  `18fcf55`, `3a3b84d`, `19139c6`, `bf2643f`, `a850c3f`, and `05a986f`.
 
 ## Related cells
 
@@ -217,3 +253,4 @@ server-side requirement justifies it.
 - [Visual Design](visual-design.md)
 - [Recognition](recognition.md)
 - [Audio](audio.md)
+- [Backend and Data](backend.md)
