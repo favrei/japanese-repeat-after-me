@@ -24,10 +24,10 @@ feedback, and data-policy questions.
 6. Advance after either one correct attempt or three errors.
 7. Repeat the complete conversation for the chosen number of rounds.
 
-On 2026-07-30, after exercising the first implemented PoC, the user said its
-flow was "not correct at all." The numbered loop and interaction ingredients
+On 2026-07-30, after exercising the first implemented prototype, the user said
+its flow was "not correct at all." The numbered loop and interaction ingredients
 below preserve the earlier direction and are not an approved end-to-end
-experience. The user subsequently specified the PoC dialogue and bubble
+experience. The user subsequently specified the application dialogue and bubble
 progression recorded below; do not carry forward conflicting behavior from the
 implementation.
 
@@ -35,9 +35,9 @@ implementation.
 
 - The confirmed progression remains one learner, a linear bubble sequence, a
   complete open–play–finish session, and Android Chrome PWA delivery. A
-  temporary coarse recognizer remains acceptable for the PoC.
-- The earlier `poc/` navigation, preview, three-round default, and attempt-level
-  Skip behavior were rejected. The corrected implementation now follows the
+  coarse known-sentence recognizer remains acceptable for the current app.
+- The earlier application navigation, preview, three-round default, and
+  attempt-level Skip behavior were rejected. The corrected implementation follows the
   linear bubble sequence below.
 - After reviewing the corrected implementation on 2026-07-30, the user
   confirmed that its flow is what they are looking for.
@@ -56,8 +56,8 @@ implementation.
 - Starting at a first stage continues through the rest of that story. Selecting
   a second stage directly opens that stage's own narrated transition and runs
   only the remaining stage. Returning from completion goes to the library.
-- This library entered nested `poc/` `main` through `3a3b84d` and remains
-  present at current `05a986f`. See [Project](project.md) and
+- This library entered nested `app/` `main` through `3a3b84d` and remains
+  present after the later backend separation. See [Project](project.md) and
   [Delivery](delivery.md).
 
 ## Superseded café script — historical source of the flow
@@ -103,7 +103,7 @@ restore its content over the current coffee/payment story.
 - A stage-transition card is not a dialogue bubble and does not change the
   stage's bubble count. Each stage, including the first stage of a story, opens
   on its own transition.
-- Current nested `poc/` `main` implements this behavior; do not regress to
+- Current nested `app/` `main` implements this behavior; do not regress to
   attempt-level or round-level Skip.
 
 ## Current product belief
@@ -112,6 +112,9 @@ restore its content over the current coffee/payment story.
   immediately useful phrases. This is not a grammar course or a conventional
   learning sequence; a learner may rehearse useful language well before
   studying its underlying Japanese.
+- The product should feel like an **adult story/game**, not a classroom drill.
+  Its final public name remains open; `app/` is only the neutral technical
+  directory.
 - The practice unit is a scripted conversation scene, not an isolated sentence
   list or open-ended conversation.
 - Feedback should expose evidence and uncertainty rather than only an opaque
@@ -128,8 +131,8 @@ restore its content over the current coffee/payment story.
   pronunciation failure.
 - Mora-level feedback is desirable but should only be shown when alignment is
   sufficiently reliable. Word or phrase-region highlighting is safer early.
-- At the user's request, the current PoC approximates per-character hit/miss
-  feedback on failed attempts by aligning the recognized transcript to the
+- At the user's request, the current application approximates per-character
+  hit/miss feedback on failed attempts by aligning the recognized transcript to the
   target reading. This is approved as coarse UI guidance, not acoustic
   phoneme evidence, mora-level diagnosis, or a final feedback policy. The
   renderer must remain replaceable by later alignment evidence. See
@@ -233,7 +236,8 @@ ingredients still require separate review:
 ## Sources
 
 - User direction recorded on 2026-07-30.
-- User rejection of the implemented PoC flow recorded on 2026-07-30.
+- User rejection of the first implemented prototype flow recorded on
+  2026-07-30.
 - User's two-stage café script and bubble/Skip clarification recorded on
   2026-07-30.
 - User confirmation that the corrected flow is right, while UI details remain
@@ -243,12 +247,14 @@ ingredients still require separate review:
   recorded on 2026-07-30.
 - User request to preserve the café and add a stage-selection menu for the
   taproom, recorded on 2026-07-31.
-- `poc/`
+- `app/`
 - `stories/taproom/`
 - Nested app commits `e37d5c4`, `6e6b83c`, `7a0f812`, and merge `3a3b84d`.
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
 - `README.md`
+- User selection of an adult story/game naming character and neutral `app/`
+  technical directory recorded on 2026-07-31.
 
 ## Related cells
 

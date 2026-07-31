@@ -9,8 +9,8 @@ which holds the visual register and the decision history behind it.
 
 ## Status — 2026-07-31
 
-Implemented, mechanically green, **not yet seen by the user, and not on nested
-PoC `main`**.
+Implemented and mechanically green. The historical branch details below record
+how the system reached the nested application repository.
 
 - `design/art-pack-system` in `../japanese-repeat-after-me-art-system` is now
   committed and clean at `e37d5c4`. The earlier warning about uncommitted
@@ -24,7 +24,7 @@ PoC `main`**.
 - `npm run qa` passes there — art validation, typecheck, lint, production
   build, `19/19` tests — and the cuts were checked in Chrome at desktop and
   `412×915`. None of that is visual approval.
-- Nested PoC `main` still runs the rejected childlike manga frame.
+- The nested application later absorbed the finished adult seinen frame.
 
 This document describes the contract so it survives the worktrees. The canonical
 copy, while the branches exist, is `art-system/README.md` inside
@@ -48,7 +48,8 @@ change flow logic, state handling, or test selectors. See
 ## Pack contract
 
 One manifest plus one asset folder per story. A pack declares **named scenes and
-named characters**, not one of each, and a stage in `poc/app/stages.ts` names the
+named characters**, not one of each, and a stage under
+`app/client/content/` names the
 `sceneId` and `castId` it plays against:
 
 ```text

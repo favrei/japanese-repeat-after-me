@@ -126,6 +126,12 @@ Measure:
 - false rejection of understandable attempts;
 - stability and usefulness of localized feedback.
 
+For capture-path acceptance, macOS Chrome and Android Chrome must both use the
+microphone of a connected Bluetooth headset, with AirPods as the primary test
+device. QA must verify the actual selected input and captured signal rather
+than infer success from microphone permission or a non-empty recording. Silent
+fallback to a built-in Mac or phone microphone is a release failure.
+
 General ASR character error rate is not the primary product metric. The
 important outcome is consistent, useful decisions and feedback across repeated
 learner attempts. Human pronunciation judgments are required for calibration.
@@ -187,11 +193,11 @@ identity and aggregate closed-catalog discrimination remained stable.
 
 The local-first lane entered the four-stage app at merge commit `3a3b84d`
 (`Merge local Vosk recognition into four-stage app`) and remains on current
-nested `poc/` `main` at `05a986f`. `3a3b84d` is a real two-parent merge of the
+nested `app/` `main`. `3a3b84d` is a real two-parent merge of the
 four-stage/TTS lineage at `14cd2b6` and recognition commit `18fcf55`
 (`Replace browser speech with local Vosk recognition`). The former recognition
 and temporary integration worktrees were removed after the merge was verified;
-`poc/` is the only remaining worktree.
+`app/` is the only remaining worktree.
 
 The merged implementation replaces Chrome `SpeechRecognition` with:
 
@@ -280,11 +286,11 @@ Dependency risk carried by the merged app:
 ## Superseded Chrome recognition adapter
 
 - The user accepted Chrome `SpeechRecognition` as temporary scaffolding for the
-  first Android PWA PoC so recognition research would not block product-loop
+  first Android PWA prototype so recognition research would not block product-loop
   discussion. Historical app versions used Japanese alternatives and a
   normalized character-edit similarity threshold of `0.56`.
 - Merge `3a3b84d` removed that runtime dependency in favor of local Vosk. Do
-  not describe current `poc/` `main` as using Chrome speech recognition.
+  not describe current `app/` `main` as using Chrome speech recognition.
 - Levenshtein backtrace alignment between recognized text and target reading
   remains an approximate per-character hit/miss visualization. This is string
   evidence, not acoustic phoneme scoring, and must stay replaceable by later
@@ -336,6 +342,9 @@ Dependency risk carried by the merged app:
 - Which learner population and human reference process define quality?
 - How many speakers and devices are required before thresholds are trusted?
 - Is false acceptance or false rejection more harmful for the learning loop?
+- Can the app reliably select and retain an AirPods/Bluetooth headset input
+  across permission, reconnect, and route-change events on macOS and Android
+  Chrome without silent built-in-microphone fallback?
 - Which model and training objective, if any, should be adapted after
   human-reference labels and a complete product-decision baseline exist?
 - Which train/validation/test split and human reference labels are required?
@@ -353,8 +362,8 @@ Dependency risk carried by the merged app:
 - `experiments/README.md`
 - `experiments/006-real-corpus-vosk-baseline/README.md`
 - `experiments/006-real-corpus-vosk-baseline/results/`
-- `poc/app/scoring.ts`
-- `poc/app/PracticeApp.tsx`
+- `app/client/gameplay/scoring.ts`
+- `app/client/components/PracticeApp.tsx`
 - User flow rejection recorded on 2026-07-30.
 - User confirmation of the corrected flow recorded on 2026-07-30.
 - User confirmation that Chrome recognition is temporary and the advanced
@@ -364,6 +373,9 @@ Dependency risk carried by the merged app:
 - User report of the first passing live local-recognition test recorded on
   2026-07-30.
 - Integrated model-transport and production-browser verification recorded on
+  2026-07-31.
+- User requirement for verified Bluetooth-headset microphone capture on macOS
+  and Android, with AirPods as the primary acceptance case, recorded on
   2026-07-31.
 
 ## Related cells

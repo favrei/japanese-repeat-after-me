@@ -69,7 +69,7 @@ Evidence exists but does not close the question.
   `0.933` — but its surface transcripts are too inaccurate and unstable to
   carry pronunciation or localized feedback by themselves. Good enough as a
   coarse content check; not established as a pronunciation judge.
-- **Which feedback unit should the UI highlight?** The PoC shows per-character
+- **Which feedback unit should the UI highlight?** The application shows per-character
   kana hit/miss marks derived from transcript-string alignment. That is coarse
   guidance, explicitly not acoustic phoneme or mora judgment, and the real
   granularity policy is still open.
@@ -104,7 +104,7 @@ See [`../memory/cells/recognition.md`](../memory/cells/recognition.md) and
 
 ### Content
 
-- What lesson-pack schema is required for imported chapters? The PoC's
+- What lesson-pack schema is required for imported chapters? The application's
   `stages.ts` shape and the art-pack manifest cover the current cases only.
 - Should the application accept plain text, JSON, or both?
 - Should users be able to edit readings and segmentation manually?

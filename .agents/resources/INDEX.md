@@ -22,6 +22,6 @@ For every added resource, record:
 - [`seinen-manga-frame/`](seinen-manga-frame/README.md) — self-contained static
   mockup (`mock.html`, hash-selected states) of the seinen slice-of-life manga
   frame approved 2026-07-30, plus its colour tokens, font choices, and CSS
-  screentone technique. Design reference for the `poc/` frame port; not
+  screentone technique. Design reference for the `app/` frame port; not
   production code. Authored in-repo 2026-07-30; fonts are Google Fonts under the
   SIL Open Font License.

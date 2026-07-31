@@ -14,6 +14,10 @@ runtime capability tiers, and hosting assumptions.
 
 - Development and first validation: local Apple M3 MacBook with macOS Chrome.
 - Primary runtime target: Android Chrome.
+- **Mandatory input route:** both macOS Chrome and Android Chrome must record
+  learner speech through a connected Bluetooth headset microphone. AirPods are
+  the primary acceptance device. A successful recording that silently used the
+  built-in Mac or phone microphone does not pass.
 - Optional targets: Linux AMD64 Chrome and iOS Chrome or installed PWA, each
   requiring separate validation.
 - Hosting target and current host: GPT Sites. Version 3 of the app is deployed
@@ -45,6 +49,11 @@ explicit model-download flow, recovery after browser cache eviction, and clear
 microphone-permission handling.
 
 Heavier audio and recognition work should run outside the main UI thread.
+When a Bluetooth headset is expected, the capture UI should expose enough
+device identity or route state to detect a wrong input instead of silently
+accepting whichever default the browser selected. Exact browser/OS selection
+and reconnect behavior still needs implementation research and real-device
+proof.
 
 Candidate interaction state:
 
@@ -75,6 +84,9 @@ UI
 - Expected capabilities include microphone access, AudioWorklet, workers,
   WebAssembly, persistent browser storage, service workers, PWA installation,
   and WebGPU on supported configurations.
+- AirPods microphone selection and retained routing through permission,
+  reconnect, and recording cycles are mandatory acceptance checks. Verify the
+  captured signal comes from the headset rather than the Mac microphone.
 - M3 performance is the first baseline but must not be treated as
   representative of mobile hardware.
 
@@ -84,6 +96,10 @@ Important unknowns include variable memory limits, thermal throttling, model
 download and initialization time, device-dependent sample rates, microphone
 interruptions, tab suspension, limited background execution, and storage
 eviction.
+
+AirPods or another connected Bluetooth headset must supply the actual capture
+input. Test route selection, headset reconnect, interruptions, and avoidance of
+silent fallback to the phone microphone on representative Android Chrome.
 
 ### Linux Chrome
 
@@ -151,11 +167,11 @@ real-device recognition.
 
 ## Active platform gates
 
-- The original Android Chrome PWA PoC request did not authorize deployment;
-  a later explicit release deployed the Sites candidate. The corrected
+- The original Android Chrome PWA prototype request did not authorize
+  deployment; a later explicit release deployed the Sites candidate. The corrected
   bubble-level progression is user-confirmed. The responsive
   four-stage café/taproom library and local Vosk runtime are integrated on
-  nested `poc/` `main` at `05a986f`. The app passed desktop and `412×915`
+  nested `app/` `main`. The app passed desktop and `412×915`
   browser QA, but real Android behavior remains unverified. See
   [Product](product.md), [Visual Design](visual-design.md), and
   [Delivery](delivery.md).
@@ -167,16 +183,23 @@ real-device recognition.
   separately prepared Japanese model. Its production transport splits the
   ignored local archive into six manifest-verified parts and has the
   controlling service worker stream them as one logical archive.
-- The deployed app still has no application backend, authentication, D1, or
-  R2. Gameplay is client-owned. The agreed future backend is limited to
-  identity, catalog, progress sync, and submission intake; it must never enter
-  the critical path of a running session. See [Backend and Data](backend.md).
+- The deployed Sites version still has no application backend,
+  authentication, D1, or R2. Local nested `main` now separates client, shared,
+  server, and Worker ownership; its isolated local D1/R2 bindings and first
+  catalog/pack routes remain undeployed. Gameplay is client-owned, and the
+  backend must never enter the critical path of a running session. See
+  [Backend and Data](backend.md).
 - Production-browser QA on IPv4 loopback reached a recognition-ready learner
   bubble with recording enabled. This verifies initialization and delivery,
   not microphone capture or recognition quality. Browser and Android memory
   remain unmeasured and matter more than archive size; extracted model storage
   plus service-worker caching can exceed the download. See
   [Recognition](recognition.md).
+- Before release, prove AirPods/Bluetooth-headset capture on both macOS and
+  Android with evidence of the selected input and the recorded signal. Generic
+  microphone permission, AudioWorklet initialization, or a non-empty waveform
+  is insufficient. Route selection, reconnects, interruptions, and avoidance
+  of silent built-in-microphone fallback remain unverified.
 - Bundled locally generated reference audio removes the dependence on
   device-specific Japanese system voices for playback quality, though system
   TTS remains the fallback. See [Audio](audio.md).
@@ -207,7 +230,7 @@ real-device recognition.
 - `.agents/documents/platform-scope.md`
 - `.agents/documents/open-questions.md`
 - `README.md`
-- `poc/README.md`
+- `app/README.md`
 - `experiments/002-browser-microphone-capture/README.md`
 - [Recordings](recordings.md)
 - User flow rejection recorded on 2026-07-30.
@@ -220,7 +243,12 @@ real-device recognition.
   2026-07-31.
 - Local Vosk integration, split model delivery, and production-browser
   readiness verification recorded on 2026-07-31.
+- Local frontend/backend separation, D1/R2 runtime check, and application
+  directory rename recorded on 2026-07-31.
 - Sites deployment and access inspection recorded on 2026-07-31.
+- User requirement for verified Bluetooth-headset microphone capture on macOS
+  and Android, with AirPods as the primary acceptance case, recorded on
+  2026-07-31.
 
 ## Related cells
 

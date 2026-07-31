@@ -17,7 +17,7 @@ During ordinary work, write memory notes only to `memory/inbox/`.
 
 - [`../README.md`](../README.md) — project overview, product principles, and
   current status.
-- [`../poc/README.md`](../poc/README.md) — isolated Kissa Loop product PoC,
+- [`../app/README.md`](../app/README.md) — canonical Japanese conversation app,
   local QA, and Android USB preview workflow.
 - [`documents/INDEX.md`](documents/INDEX.md) — all durable documents, grouped
   into story authoring and scoping/status.
@@ -51,8 +51,8 @@ During ordinary work, write memory notes only to `memory/inbox/`.
 
 Reviewed 2026-07-30. `memory/current.md` is the authority; this is orientation.
 
-- An isolated product PoC exists under `poc/`. Its two-stage café flow is
-  user-confirmed and bundles locally generated Japanese reference audio.
+- The canonical product application exists under `app/`. Its café and taproom
+  flows bundle locally generated Japanese reference audio.
 - Two significant lanes sit on **unmerged sibling worktrees**: local-first Vosk
   recognition (`recognition/vosk-local-first`, committed) and the seinen art
   system (`design/art-pack-system`, **uncommitted working-tree state**).

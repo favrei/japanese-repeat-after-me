@@ -16,7 +16,7 @@
 >   matching at a descriptive `0.30` threshold. One live microphone test has
 >   passed. Browser and Android memory are still unmeasured, and that gates
 >   more than archive size does.
-> - `poc/` main still runs Chrome `SpeechRecognition` at a `0.56` similarity
+> - The earlier application main ran Chrome `SpeechRecognition` at a `0.56` similarity
 >   threshold, with Levenshtein-backtrace kana hit/miss marks. Those marks are
 >   string alignment, not acoustic evidence, and must stay replaceable.
 > - **Options 2–4** (ONNX, standalone acoustic alignment, a target-conditioned

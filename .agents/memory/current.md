@@ -16,26 +16,35 @@ Canonical detail belongs in linked cells.
   learner bubbles advance after one success, the third failure, or one Skip;
   Skip dismisses exactly one bubble and is not a failure. See
   [Product](cells/product.md).
-- The canonical nested app is clean `poc/` `main` at `05a986f`. It contains
-  the four-stage café/taproom library, schema-v2 art packs, narrated
-  transitions, bundled reference audio, local Vosk recognition, and the Sites
-  packaging fixes. It is the nested repository's only worktree. See
-  [Project](cells/project.md) and [Delivery](cells/delivery.md).
+- The canonical nested repository now lives under neutral directory `app/`;
+  the final product name remains open and should feel like an **adult
+  story/game**, not a classroom drill. Its four-stage café/taproom library,
+  schema-v2 art packs, narrated transitions, bundled reference audio, local
+  Vosk recognition, and Sites packaging remain intact. See
+  [Project](cells/project.md), [Product](cells/product.md), and
+  [Delivery](cells/delivery.md).
 - Sites version 3 from exact nested commit
   `05a986fd0efbcc9337557d8e07b9b295af6aa335` is live at
   `https://japanese-speaking-story.zenridge.chatgpt.site`. The artifact passed
   art/model validation, typecheck, lint, production build, and 25/25 tests,
   but the site is public and unauthenticated. See [Delivery](cells/delivery.md)
   and [Backend and Data](cells/backend.md).
-- Gameplay is currently client-only; D1 and R2 are not provisioned. The agreed
-  future backend owns only identity, catalog, compact progress sync, and
-  chapter-submission intake. A downloaded session must complete offline. See
-  [Backend and Data](cells/backend.md).
-- The next implementation lane is the frontend/backend separation: preserve
-  current behavior while making client, server, shared-contract, and
-  cross-boundary test ownership explicit. Use Cloudflare's local runtime for
-  D1/R2 integration and keep one top-level QA gate. See
-  [Backend and Data](cells/backend.md).
+- Frontend/backend separation is implemented locally at nested commit
+  `ae92de5`: route shell, client, shared contracts, D1/R2 server helpers, and
+  Worker composition have separate ownership. Logical `DB` and `PACKS`
+  bindings, the first catalog migration/route, immutable pack reads, and local
+  export/restore helpers pass the unified QA gate. They remain undeployed; the
+  live Sites version still has no D1 or R2. See
+  [Backend and Data](cells/backend.md) and [Delivery](cells/delivery.md).
+- Gameplay and the complete running session remain client-owned. A downloaded
+  story completes when backend requests fail. Future server work remains
+  limited to identity, catalog, compact progress sync, and submission intake.
+  See [Backend and Data](cells/backend.md).
+- macOS Chrome and Android Chrome must record through a connected Bluetooth
+  headset microphone, with AirPods as the primary acceptance device. Silent
+  fallback to the Mac or phone microphone is a release failure; actual input
+  identity and signal must be verified. See [Platform](cells/platform.md) and
+  [Recognition](cells/recognition.md).
 - The library preserves the café rather than replacing it with the taproom.
   Direct Stage 2 entry opens that stage's transition and runs only the rest of
   that story. Every stage owns a `sceneId`, `castId`, and skip-safe narrated
@@ -85,6 +94,8 @@ Canonical detail belongs in linked cells.
   localized behind natural storage helpers, but do not build a portability
   framework or GCP adapter until a real migration is requested. See
   [Backend and Data](cells/backend.md).
+- Use the shared compatibility date `2026-05-22` for the current Vite Worker
+  and Worker-test runtimes until the Cloudflare Vite plugin is upgraded.
 - Keep model weights, caches, private recordings, and disposable TTS outputs
   out of Git and deployment packages. Reviewed reference clips are intentional
   application assets; the private corpus remains local and untracked. See
@@ -109,16 +120,26 @@ Canonical detail belongs in linked cells.
 - No Android device has been connected. Microphone recognition,
   service-worker/offline behavior, installation, and mobile memory remain
   unverified. See [Platform](cells/platform.md).
-- The dependency graph reports 19 total npm audit findings and five
-  production-only findings. No audit fix was applied. See
+- AirPods/Bluetooth-headset microphone routing is unverified on both macOS and
+  Android. Permission or a non-empty recording is insufficient; QA must prove
+  the selected device and captured route without built-in-microphone fallback.
+  See [Platform](cells/platform.md).
+- The post-separation dependency graph reports 20 total transitive npm audit
+  findings; the last recorded production-only audit on deployed-era code found
+  five. No automatic or forced audit fix was applied. See
   [Delivery](cells/delivery.md).
 - The nested app has no Git remote. Its deployment commits exist locally and
   in the deployed Sites version but cannot be pushed until a remote is added.
   See [Project](cells/project.md).
-- D1/R2 durability, automatic migration application, backup/restore, catalog
-  growth, eager whole-library caching, and learner-audio policy remain
-  unresolved. Add tested export/restore in the same change as the first D1
-  table. See [Backend and Data](cells/backend.md).
+- Hosted D1/R2 provisioning, durability, automatic migration application,
+  protected export/restore operation, catalog growth, eager whole-library
+  caching, and learner-audio policy remain unresolved. Local logical
+  export/restore already round-trips with the first table. See
+  [Backend and Data](cells/backend.md).
+- Direct Cloudflare deployments expose a Bindings canvas and Workers Traces;
+  GPT Sites currently does not expose that underlying control plane and
+  documents no equivalent topology view. See
+  [Backend and Data](cells/backend.md).
 - Human-labeled recognition quality, feedback granularity, browser/Android
   resource use, and synchronization policy remain evidence-gated. See
   [Recognition](cells/recognition.md), [Platform](cells/platform.md), and
@@ -143,10 +164,14 @@ Canonical detail belongs in linked cells.
   privacy/package checks, honest audit disclosure, real-device trusted-HTTPS
   QA, explicit approval, and verified private access when privacy is intended.
   See [Delivery](cells/delivery.md).
-- Separation must retain the existing characterization tests, add local
-  Worker/D1/R2 and contract coverage, and prove that a downloaded session
-  completes when the backend is unavailable. See
+- The separated app must retain 23 client, 2 contract, 7 Worker/D1/R2, and 5
+  cross-boundary integration tests under one `npm run qa` gate. A downloaded
+  session must continue to complete when the backend is unavailable. See
   [Backend and Data](cells/backend.md).
+- Before release, verify AirPods/Bluetooth-headset capture on both macOS Chrome
+  and Android Chrome with evidence of the actual selected input and recorded
+  signal, including reconnect and route-change behavior. See
+  [Platform](cells/platform.md) and [Recognition](cells/recognition.md).
 - The deployed artifact proves Sites packaging only. It does not close Android
   microphone, recognition, PWA installation, or offline QA.
 - When recognition resumes, label acceptable, intentionally incorrect, and

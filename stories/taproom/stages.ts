@@ -3,16 +3,18 @@
 // Authored per .agents/documents/stage-design-flow.md. Design rationale,
 // character cards, and the separation-gate verdict live in ./story.md.
 //
-// NOT REGISTERED. The app still loads poc/app/stages.ts. This file exists as
+// Historical encoded deliverable. The app now loads app/client/content/taproom.ts.
+// This file exists as
 // the bundle's encoded deliverable; wiring a story registry is separate,
 // unapproved work.
 //
 // Types are declared locally rather than imported. The schemaVersion 2 shape
 // this story targets — sceneId, castId, transition — lives on the unmerged
 // branch design/scene-transitions in the sibling worktree
-// japanese-repeat-after-me-scene-transitions, not in poc/app/stages.ts, which
+// japanese-repeat-after-me-scene-transitions, not in the former application
+// stages module, which
 // is still v1. Replace these declarations with an import once v2 reaches the
-// nested PoC main; they are copied from that branch verbatim so the swap is
+// nested application main; they are copied from that branch verbatim so the swap is
 // mechanical.
 
 export type Speaker = "staff" | "learner";

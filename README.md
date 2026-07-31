@@ -1,16 +1,17 @@
-# Japanese Repeat-After-Me
+# Japanese conversation story application
 
-A web-first Japanese speaking-practice application built around repeated, verified sentence exercises.
+A web-first adult story game for practising spoken Japanese through short,
+illustrated conversations. The final product name is still open.
 
 ## Status
 
-The repository now contains an isolated first product PoC under [`poc/`](poc/).
-It implements two bundled café-conversation stages and a complete
-open–practice–finish loop for an Android Chrome PWA. Recognition remains a
-temporary coarse browser-speech adapter rather than the final local model.
+The canonical application lives in its own nested Git repository under
+[`app/`](app/). It contains a four-stage café and taproom library, a complete
+open–practice–finish loop, local Vosk recognition, bundled reference audio, and
+an offline-capable Android Chrome PWA.
 
 Research documents and experiments still describe the evidence, constraints,
-and unresolved technical questions behind the PoC.
+and unresolved technical questions behind the application.
 
 ## Core experience
 
@@ -53,7 +54,7 @@ and unresolved technical questions behind the PoC.
 
 ## Documentation
 
-- [Kissa Loop PoC](poc/README.md)
+- [Application](app/README.md)
 - [Product and technical discussion](.agents/documents/product-and-technical-discussion.md)
 - [Platform scope](.agents/documents/platform-scope.md)
 - [Recognition options](.agents/documents/recognition-options.md)

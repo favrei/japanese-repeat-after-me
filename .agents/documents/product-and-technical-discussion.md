@@ -8,10 +8,10 @@
 >   replaced by the confirmed bubble flow: one success, the third failure, or
 >   one Skip advances. See [`../memory/cells/product.md`](../memory/cells/product.md).
 > - **§3** — the lesson-item JSON with `requiredSuccesses` is not the shipped
->   shape. Stages live in `poc/app/stages.ts`, authored through
+>   shape. Stages live under `app/client/content/`, authored through
 >   [`stage-design-flow.md`](stage-design-flow.md) and gated by
 >   [`character-separation-gate.md`](character-separation-gate.md).
-> - **§4** — the PoC is Vinext/React/TypeScript, not Vite.
+> - **§4** — the application is Vinext/React/TypeScript, not Vite.
 > - **§9** — reference audio is now generated locally at authoring time and
 >   bundled; browser TTS is a fallback only. See
 >   [`../memory/cells/audio.md`](../memory/cells/audio.md).

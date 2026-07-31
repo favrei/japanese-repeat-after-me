@@ -39,17 +39,20 @@ access remains an explicit follow-up.
 
 ## Current infrastructure
 
-- The repository root has no approved canonical product frontend or release
-  toolchain.
-- An isolated Vinext/React/TypeScript implementation now exists under `poc/`.
-  It serves locally at `http://localhost:3000/` and has a PWA manifest, service
+- The repository root has no product frontend or release toolchain; the
+  canonical application is the nested repository under `app/`.
+- The isolated Vinext/React/TypeScript implementation under `app/` serves
+  locally at `http://localhost:3000/` and has a PWA manifest, service
   worker, bundled art/audio, local Vosk recognition, and development-only
   synthetic speech/flow controls.
-- Nested `poc/` `main` is clean at `05a986f`
-  (`Trim browser assets from Sites worker`). It includes the four-stage/Vosk
-  merge `3a3b84d`, taproom staff recast `19139c6`, Sites connection `bf2643f`,
-  split-model packaging `a850c3f`, and final Worker packaging fix `05a986f`.
-  `poc/` is the nested repository's only worktree.
+- Nested `app/` `main` now includes separation commit `ae92de5`
+  (`Separate client and Cloudflare backend`) after the deployed
+  `05a986f` (`Trim browser assets from Sites worker`). Its history includes the
+  four-stage/Vosk merge `3a3b84d`, taproom staff recast `19139c6`, Sites
+  connection `bf2643f`, split-model packaging `a850c3f`, and final Worker
+  packaging fix `05a986f`.
+  `app/` is the nested repository's only worktree. The folder, package, cache,
+  and active documentation names no longer use prototype terminology.
 - The nested app has no configured Git remote, so its commits cannot be pushed
   until a remote is deliberately added.
 - A Chrome run at 412×915 verified one-bubble Skip, one-success progression,
@@ -68,19 +71,24 @@ access remains an explicit follow-up.
   six ignored parts—five 8 MiB parts and one 7,711,666-byte part—described by a
   manifest. The controlling service worker streams them as the logical archive
   response, and recognition initialization waits for service-worker control.
-- Current nested-main QA passes art/model validation, typecheck, lint,
-  production build, and 25/25 tests. A production-browser smoke on IPv4
-  loopback reached the first taproom learner-speaking bubble with local
-  recognition ready and recording enabled. It did not request microphone
-  permission or capture real speech.
+- Current local QA passes art/model validation, typecheck, lint, production
+  build, 23 client tests, 2 shared-contract tests, 7 workerd D1/R2 tests, and
+  5 integration tests. A live local development check also applied the first
+  D1 migration, returned an empty catalog over the real Worker route, and
+  confirmed that the bundled library rendered independently.
+- Earlier production-browser smoke on IPv4 loopback reached the first taproom
+  learner-speaking bubble with local recognition ready and recording enabled.
+  It did not request microphone permission or capture real speech.
 - Sites project `appgprj_6a6c341cd2048191a6bc18824b3a3255` deployed version 3
   from exact nested commit `05a986fd0efbcc9337557d8e07b9b295af6aa335` at
   `https://japanese-speaking-story.zenridge.chatgpt.site`. The release candidate
   passed art/model validation, typecheck, lint, production build, and 25/25
   tests. Sites accepted the packaged production artifact.
 - The deployed site is public and unauthenticated. The app has no accounts,
-  login, OAuth, or server-side product session, and `hosting.json` has no D1 or
-  R2 binding. See [Backend and Data](backend.md).
+  login, OAuth, or server-side product session. The deployed version has no D1
+  or R2 binding; local `app/.openai/hosting.json` now declares `DB` and `PACKS`,
+  but no post-separation version has been saved or deployed. See
+  [Backend and Data](backend.md).
 - Deployment version 1 failed because the redundant 49,654,706-byte full model
   archive exceeded Sites' 26,214,400-byte per-file limit. The deployed package
   omits that full archive but retains the six verified sub-limit chunks and
@@ -90,11 +98,14 @@ access remains an explicit follow-up.
   dynamic Vosk import into a redundant server chunk. The final build removes
   duplicate server font assets and excludes Vosk from the Worker;
   `dist/server/` was 2.3 MB before packaging.
-- The current dependency graph reports 19 total `npm audit` findings
-  (2 low, 4 moderate, 13 high) and 5 production-only findings
-  (2 moderate, 3 high). These include `vosk-browser`'s `uuid` advisory and
-  transitive Next.js `postcss`/`sharp` findings. No audit fix was applied; a
-  release gate must report the exact frozen candidate honestly. See
+- The post-separation install reports 20 total transitive `npm audit` findings
+  (1 low, 6 moderate, 13 high), down from an initial lock resolution with 22.
+  The last recorded production-only audit on deployed-era code reported 5
+  findings (2 moderate, 3 high). These include `vosk-browser`'s `uuid` advisory
+  and transitive Next.js `postcss`/`sharp` findings. New Drizzle and
+  Cloudflare/Vitest packages are exact-pinned for repeatable local runtime
+  behavior. No automatic or forced audit rewrite was applied; a release gate
+  must report the exact frozen candidate honestly. See
   [Recognition](recognition.md).
 - Preview on `http://localhost:...`. A local `0.0.0.0` origin can block Chrome
   microphone permission; the app now redirects `0.0.0.0` to `localhost` and
@@ -103,6 +114,10 @@ access remains an explicit follow-up.
   Android SDK Platform Tools are installed and `adb reverse tcp:3000 tcp:3000`
   is a candidate no-deployment localhost bridge, but no phone was connected to
   validate it.
+- Bluetooth-headset capture is now a release requirement on both macOS Chrome
+  and Android Chrome, with AirPods as the primary acceptance device. QA must
+  prove the actual selected input and captured signal and fail any silent
+  fallback to the built-in Mac or phone microphone.
 - Parked experiment 005 supplies useful Vinext/Vite/Sites, D1, WASM, and WebGPU
   scaffold pieces, but it is not a release foundation:
   - its production-like local start command fails;
@@ -133,7 +148,8 @@ access remains an explicit follow-up.
    tests, build, browser smoke tests, forced WASM fallback, optional WebGPU,
    and deployment-artifact privacy checks.
 4. Perform explicit real-device QA over trusted local HTTPS for microphone and
-   runtime behavior.
+   runtime behavior, including verified AirPods/Bluetooth input on macOS and
+   Android rather than permission-only or generic recording checks.
 5. Freeze the QA-passed commit and packaged artifact and record their
    checksums.
 6. Save an immutable Sites version from that exact source state.
@@ -192,7 +208,8 @@ server-side requirement justifies it.
   package may request a newer cached `chromium_headless_shell` than is
   installed. Launching Playwright with `{ channel: "chrome" }` uses the
   installed Google Chrome and has worked for screenshots and click-through QA.
-- `?qa=1` exposes the PoC's synthetic success, near-miss, and failure controls.
+- `?qa=1` exposes the application's synthetic success, near-miss, and failure
+  controls.
   Headless Chrome may stall on speech autoplay when no TTS voice is available;
   use the one-bubble Skip control to reach a learner-speaking state.
 - Use the exact port reported by the normal development server. Port `3001`
@@ -225,7 +242,7 @@ server-side requirement justifies it.
 
 - User direction recorded on 2026-07-30.
 - `AGENTS.md`
-- `poc/README.md`
+- `app/README.md`
 - `experiments/005-device-runtime-benchmark/`
 - User flow rejection recorded on 2026-07-30.
 - User's corrected dialogue and Skip semantics recorded on 2026-07-30.
@@ -237,8 +254,13 @@ server-side requirement justifies it.
   2026-07-31.
 - Nested app merge `3a3b84d`, split model transport, and final 25/25 QA
   recorded on 2026-07-31.
+- Frontend/backend separation `ae92de5`, local D1/R2 QA, dependency pinning,
+  and the `app/` rename recorded on 2026-07-31.
 - Sites deployment versions 1–3, final commit `05a986f`, packaging constraints,
   public access inspection, and missing application authentication recorded on
+  2026-07-31.
+- User requirement for verified Bluetooth-headset microphone capture on macOS
+  and Android, with AirPods as the primary acceptance case, recorded on
   2026-07-31.
 - `.agents/resources/seinen-manga-frame/`
 - Historical nested commits `e37d5c4`, `6e6b83c`, `7a0f812`, `14cd2b6`,

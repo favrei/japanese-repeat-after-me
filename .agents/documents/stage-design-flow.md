@@ -26,7 +26,8 @@ This is a draft. Revise it as stage authoring teaches us more.
    at minimum [`../memory/cells/product.md`](../memory/cells/product.md) for
    flow rules and [`../memory/cells/visual-design.md`](../memory/cells/visual-design.md)
    for frame limits.
-2. Read `poc/app/stages.ts` for the live data shape and the café example.
+2. Read `app/shared/story.ts` for the live data shape and
+   `app/client/content/cafe.ts` for the café example.
 3. Do not change flow logic, state handling, or test selectors. A stage is
    content; the progression rules are fixed and owned by the product cell.
 
@@ -210,7 +211,7 @@ is scaffolding.
   the learner must read or act on still lives in UI text, and speech still
   lives in balloons.
 
-### Fields (see `poc/app/stages.ts`)
+### Fields (see `app/shared/story.ts`)
 
 - `japanese` — the target sentence. One sentence, normal punctuation.
 - `reading` — full kana reading. **Validate it.** AI-generated readings are the
@@ -379,7 +380,7 @@ Until the prompt approach is settled:
 
 ## Step 8 — Encode
 
-Add the stages to `poc/app/stages.ts` in the existing shape: `PracticeStage`
+Add the stages under `app/client/content/` in the existing shape: `PracticeStage`
 with `id`, `number`, `title`, `jpTitle`, `sceneId`, `castId`, `transition`, and
 ordered `bubbles`. All three of `sceneId`, `castId`, and `transition` are
 required — a stage cannot be encoded without its cut. `FLOW` derives itself; do
@@ -408,7 +409,7 @@ does not consume the one bubble Skip dismisses.
 - Simulate a pessimistic run: skip or fail out *every* learner bubble and
   confirm the remaining dialogue still coheres.
 - Re-run the character separation gate if any line changed after Step 6b.
-- Run the PoC QA command from `poc/README.md`; existing tests stay green.
+- Run the application QA command from `app/README.md`; existing tests stay green.
 - Write an inbox note under `.agents/memory/inbox/` recording the new stage set,
   its difficulty intent, the gate verdict, and anything unresolved. Do not edit
   memory cells.

@@ -11,10 +11,10 @@ Brief: [`brief.md`](brief.md) · Encoded: [`stages.ts`](stages.ts)
 Status: **implemented in the focused feature worktree** — stage cuts and
 dialogue were confirmed by the user on 2026-07-31. Character cards, dialogue,
 difficulty, the separation gate, audio, original art, story registration, and
-the full PoC QA gate are complete. The implementation lives on
+the full application QA gate are complete. The implementation lives on
 `feature/story-selection` in
 `/Users/peter/workspaces/japanese-repeat-after-me-story-selection`; it has not
-been merged into the dirty nested `poc/` checkout.
+been merged into the dirty nested `app/` checkout.
 
 ## Template
 

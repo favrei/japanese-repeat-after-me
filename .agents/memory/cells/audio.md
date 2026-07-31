@@ -17,7 +17,7 @@ and what remains unsettled about prompting the synthesiser.
   synthesised per playback. Browser `speechSynthesis` is a runtime fallback
   only, never the authoring target. This avoids voice and pronunciation drift
   across browsers and devices. See [Content](content.md).
-- Before 2026-07-30 the PoC's playback was in fact browser `speechSynthesis`,
+- Before 2026-07-30 the prototype's playback was in fact browser `speechSynthesis`,
   not a bundled model. That has been replaced.
 - Reference audio quality is a learning-critical asset, not decoration: a
   mispronounced clip teaches the mistake. Every clip must be judged by ear
@@ -37,7 +37,7 @@ and what remains unsettled about prompting the synthesiser.
   MLX/Metal, using the **1.7B CustomVoice 6-bit** model and the native Japanese
   speaker **`Ono_Anna`** from the official CustomVoice config.
 - Model weights stay in the Hugging Face user cache and are never committed.
-- Authoring tooling lives under the nested PoC's `tools/tts/`.
+- Authoring tooling lives under the nested app's `tools/tts/`.
 
 Measured during selection on the M3:
 
@@ -131,7 +131,7 @@ the per-clip listening gate. See [Content](content.md) and
 
 ## Delivery in the app
 
-The first bundled-audio implementation was merged into nested PoC `main` as
+The first bundled-audio implementation was merged into nested app `main` as
 commit `ad3a356` (`Add locally generated Japanese reference audio`), which
 includes:
 
@@ -150,7 +150,7 @@ Later commits add the current story assets:
 - `feature/story-selection` commit `7a0f812` added eight taproom dialogue clips
   and two narrator clips. Nested commit `19139c6` later recast all seven staff
   clips from `Ono_Anna` to `dylan`; learner and narrator clips were not
-  regenerated. The current assets are on nested `poc/` `main` at `05a986f`.
+  regenerated. The current assets remain on nested `app/` `main`.
 
 The `0.0.0.0` origin can prevent Chrome from granting microphone permission;
 preview on `localhost`. See [Delivery](delivery.md).
@@ -185,7 +185,7 @@ preview on `localhost`. See [Delivery](delivery.md).
 
 - Run the generator's compile check from `tools/tts/`, or pass
   `tools/tts/generate_audio.py`. Running `py_compile generate_audio.py` from
-  the PoC worktree root fails on path, not on code.
+  the application worktree root fails on path, not on code.
 - Qwen may emit several seconds of valid speech followed by tens of seconds of
   near-silence because it misses its end token. Trim trailing silence before
   applying the duration guard: 0.05-second frames, 2% of clip-peak threshold,

@@ -5,7 +5,7 @@ a stage is a single agent voicing several people at once, and that reliably
 produces two defects that a fluent-sounding script hides.
 
 Run it on every new or edited stage set, before encoding into
-`poc/app/stages.ts`. It reviews **the conversation**. It never changes flow
+`app/client/content/`. It reviews **the conversation**. It never changes flow
 logic, state handling, or test selectors — see
 [`stage-design-flow.md`](stage-design-flow.md).
 

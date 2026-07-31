@@ -19,7 +19,7 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   complete language course or open-ended conversation system.
 - The repository remains in evidence-gathering product and technical scoping,
   but the isolated nested app now has a deployed integrated candidate on
-  `poc/` `main`: a stage library preserves the café story, adds the taproom
+  `app/` `main`: a stage library preserves the café story, adds the taproom
   story, and uses local Vosk recognition.
 - The first real-corpus recognition baseline is complete and promising as a
   coarse known-sentence content signal. The user parked that lane on
@@ -30,7 +30,8 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   full-bleed seinen frame, café redesign, schema-v2 art system, narrated scene
   transitions, four-stage selector, complete taproom bundle, and local Vosk
   recognition are integrated. Later commits recast the taproom staff and made
-  the build fit Sites; nested `main` is now `05a986f`.
+  the build fit Sites. Frontend/backend separation was implemented later at
+  `ae92de5`; that local state has not been deployed.
   See [Product](product.md), [Content](content.md), [Recognition](recognition.md),
   and [Visual Design](visual-design.md).
 - For learner-speaking bubbles, advance after one correct attempt, the third
@@ -49,7 +50,7 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   committed to the repository and the consolidated handoff.
 - The cloud work produced 17 commits through `02d3a5d`, four experimental
   spikes, and no application implementation.
-- Subsequent local work created the isolated `poc/` implementation. The first
+- Subsequent local work created the isolated application implementation. The first
   version's flow was rejected; the corrected version was user-confirmed.
 
 ## Operating rules
@@ -62,7 +63,7 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   machine-readable result, observed facts, interpretation, and limitations.
 - Do not commit model files, virtual environments, package caches, the private
   voice corpus, or disposable TTS candidates and intermediate outputs.
-  Reviewed, provenance-tracked reference clips bundled with the nested PoC are
+  Reviewed, provenance-tracked reference clips bundled with the nested app are
   intentional application assets; model weights remain external. The earlier
   local-commit exception for the private corpus was withdrawn on 2026-07-30
   when the repository became public; `/datasets/` is ignored and must stay
@@ -80,7 +81,7 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   user rejected a `.claude/skills/` placement for exactly this reason: such
   material must follow the project and stay in Git.
 - Use short-lived sibling worktrees for focused, apples-to-apples changes to
-  the nested `poc/` repository when useful. Integrate finished commits
+  the nested `app/` repository when useful. Integrate finished commits
   deliberately, verify that useful work is reachable, and remove duplicate
   checkouts after integration.
 - In zsh, lowercase `path` is tied to the `PATH` command-search array. Do not
@@ -132,6 +133,14 @@ Out of the initial scope:
   to identity, catalog, compact progress sync, and submission intake; an
   offline downloaded session must not depend on it. See
   [Backend and Data](backend.md).
+- The local app now makes that boundary explicit through route-shell, client,
+  shared-contract, server, and Worker layers. The initial server slice owns a
+  D1 catalog and immutable R2 pack reads; identity, progress sync, submission,
+  and hosted provisioning remain future work.
+- The final public product name remains open. Use `app/` as the neutral
+  technical directory and `japanese-conversation-app` as the internal package
+  identifier. The intended product character is an **adult story/game**, not a
+  classroom drill.
 - Future model training or fine-tuning should use the local Apple M3 with Metal
   acceleration when evidence supports it. Quantization follows a measured
   unquantized baseline; framework, format, and precision remain open.
@@ -140,36 +149,40 @@ Out of the initial scope:
 
 - No root product frontend, root `pyproject.toml`, project-wide test suite, or
   CI workflow exists. The canonical application implementation is the isolated
-  Vinext/React/TypeScript Git repository under `poc/`.
-- Nested `poc/` `main` is clean at `05a986f`
-  (`Trim browser assets from Sites worker`). Its history includes the real
+  Vinext/React/TypeScript Git repository under `app/`.
+- Nested `app/` `main` contains separation commit `ae92de5`
+  (`Separate client and Cloudflare backend`). Its history includes the real
   four-stage/Vosk merge `3a3b84d`, taproom staff recast `19139c6`, Sites
   connection `bf2643f`, split-model packaging `a850c3f`, and final Worker
-  packaging fix `05a986f`.
+  packaging fix `05a986f`. The directory and current-facing identifiers were
+  renamed from prototype terminology on 2026-07-31; that cleanup passed full
+  QA.
 - The earlier focused lineage remains useful history:
   `51cbcdb`/`e37d5c4` for the art-pack and redesigned café work,
   `6e6b83c` for scene transitions, `7a0f812` for the four-stage selector and
   taproom integration, `14cd2b6` for TTS reconciliation, and `18fcf55` for
   local recognition. A safety branch,
   `safety/pre-story-selection-main-20260731`, preserves `06b5291`.
-- `poc/` is now the nested repository's only worktree. The former TTS,
+- `app/` is now the nested repository's only worktree. The former TTS,
   recognition, art-system, transition, selector, and temporary integration
   checkouts were removed after their useful commits were verified as reachable
   or their changes were reconciled.
 - The nested app has no configured Git remote. Its commits and model
   preparation outputs are local. The outer repository is public and records
   the implementation handoff.
-- The prepared Vosk archive and split model assets under `poc/public/models/`
+- The prepared Vosk archive and split model assets under `app/public/models/`
   are ignored local outputs, not committed application assets. The application
   manifest records six verified chunks for service-worker streaming.
-- The integrated app passed art/model validation, typecheck, lint, production
-  build, and 25/25 tests. Production-browser QA on IPv4 loopback reached the
+- The separated app passed art/model validation, typecheck, lint, production
+  build, 23 client tests, 2 contract tests, 7 Worker/D1/R2 tests, and 5
+  integration tests. Earlier production-browser QA on IPv4 loopback reached the
   first taproom learner bubble with recognition ready and recording enabled;
   no microphone permission or real speech capture was performed.
 - Sites project `appgprj_6a6c341cd2048191a6bc18824b3a3255` deployed version 3
   from exact nested commit `05a986fd0efbcc9337557d8e07b9b295af6aa335` at
   `https://japanese-speaking-story.zenridge.chatgpt.site`. The live site is
-  public and unauthenticated. There is no application backend, D1, or R2.
+  public and unauthenticated. That deployed version has no application backend,
+  D1, or R2; the local separation and bindings remain undeployed.
 - No Android device run has occurred. The deployment does not verify Android
   microphone capture, recognition, service-worker/offline behavior, or PWA
   installation.
@@ -201,7 +214,7 @@ Out of the initial scope:
 - `.agents/INDEX.md`
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
-- `poc/README.md`
+- `app/README.md`
 - `experiments/README.md`
 - Root Git history through `1da4175`
 - User correction recorded on 2026-07-30.
@@ -216,6 +229,9 @@ Out of the initial scope:
 - `stories/taproom/`
 - Nested app merge `3a3b84d`, recast `19139c6`, and deployment commit
   `05a986f`.
+- Nested separation commit `ae92de5`, complete 37-test QA, application
+  directory rename, and adult story/game naming direction recorded on
+  2026-07-31.
 - Sites deployment and access inspection recorded on 2026-07-31.
 
 ## Related cells

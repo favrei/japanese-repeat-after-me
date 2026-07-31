@@ -18,7 +18,7 @@
 > - **Not verified:** the capability tiers below. No runtime tier detection
 >   exists; the recognizer that would define Tier A/B is on an unmerged branch.
 >   See [`../memory/cells/recognition.md`](../memory/cells/recognition.md).
-> - **Changed:** the PoC is Vinext/React/TypeScript. WebGPU has not been used
+> - **Changed:** the application is Vinext/React/TypeScript. WebGPU has not been used
 >   for anything yet.
 >
 > See [`../memory/cells/platform.md`](../memory/cells/platform.md) and

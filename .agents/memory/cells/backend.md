@@ -13,15 +13,27 @@ backup, and recovery.
 
 ## Current implementation
 
-- The deployed `poc/` app has no application backend. `worker/index.ts` wires
-  Vinext's SSR/RSC handler and image optimizer, but there are no application
-  route handlers, database calls, or fetches from the client application.
-- `app/PracticeApp.tsx` is the client component that owns gameplay. Its local
-  modules own flow, scoring, stories, stages, and art packs; art-pack JSON is
-  imported at build time, so the story catalog ships in JavaScript.
-- `poc/.openai/hosting.json` declares `d1: null` and `r2: null`.
-  `poc/drizzle/` and `poc/examples/d1/` are empty. There is no server-side
-  product state to back up or migrate.
+- The local nested repository under `app/` now has explicit `app/` route-shell,
+  `client/`, `shared/`, `server/`, and `worker/` boundaries. The separation was
+  implemented on nested `main` at `ae92de5` (`Separate client and Cloudflare
+  backend`).
+- `client/` owns bundled stories, gameplay, playback, capture, Vosk
+  recognition, scoring, and presentation. It has no dependency on `server/`,
+  and a downloaded story completes when backend requests fail.
+- `shared/` owns the provider-independent story-pack and catalog payload
+  contracts. `server/` owns the localized D1 catalog and R2 pack access.
+  `worker/index.ts` routes backend requests before falling through to Vinext
+  rendering and asset handling.
+- The first D1 schema and generated migration create the catalog. The local
+  Worker exposes `GET /api/catalog`; immutable
+  `/packs/:id/:version/*` requests read R2 without querying D1. Logical catalog
+  export/restore helpers are implemented and tested but are not public HTTP
+  routes.
+- `app/.openai/hosting.json` now declares logical bindings `DB` and `PACKS`.
+  This activates isolated local resources and requests hosted resources on a
+  later Sites deployment.
+- The live Sites version 3 still runs older commit `05a986f`, with no
+  application backend, D1, or R2. No deployment occurred during separation.
 - There is no account, login, session, OAuth, or user-identity implementation.
   Recognition sessions are in-memory audio-capture objects, not user sessions.
 - The deployed Sites project is publicly accessible and has no Sites sign-in
@@ -44,7 +56,9 @@ backup, and recovery.
 
 ## Agreed target boundary
 
-This is the negotiated end state, not current implementation:
+This is the negotiated end state. The catalog/pack slice is now implemented
+locally; identity, progress sync, submission, remote-pack publication, and
+hosted provisioning remain future work:
 
 - The frontend owns the frame, bubble state machine, playback, capture, Vosk
   recognition, scoring, offline cache policy, and the complete running
@@ -88,15 +102,14 @@ This is the negotiated end state, not current implementation:
   independently active project topic with enough durable decisions to pass the
   normal cell gate. GCP is currently a hypothetical reference only.
 
-## Separation and test boundary
+## Implemented separation and test boundary
 
 - Frontend/backend separation is intended to reduce local reasoning scope and
   contain system-wide failures at a small explicit contract. Do not frame the
   split as making every test harder or duplicate subsystem tests end to end.
-- Preserve the existing `flow`, `scoring`, `recognition-quality`, and
-  `rendered-html` tests as characterization coverage while responsibilities
-  move.
-- Separate test ownership into:
+- Existing flow, scoring, recognition-quality, and rendered-HTML
+  characterization coverage was retained while responsibilities moved.
+- Test ownership is separated into:
   - client tests for gameplay, playback, recognition, caching, and offline
     progress;
   - server tests for identity, catalog, progress sync, and submission intake;
@@ -108,21 +121,34 @@ This is the negotiated end state, not current implementation:
 - The essential invariant is that a downloaded practice session completes with
   the backend unavailable. Reconnection may synchronize progress but must not
   change gameplay results.
+- Post-separation QA passes art/model validation, typecheck, lint, production
+  build, 23 client tests, 2 contract tests, 7 Worker/D1/R2 tests, and 5
+  integration tests.
 
 ## Cloudflare local-runtime testing
 
-- `poc/vite.config.ts` imports `@cloudflare/vite-plugin`, selects
+- `app/vite.config.ts` imports `@cloudflare/vite-plugin`, selects
   `worker/index.ts` as the Worker entry, and derives local D1/R2 bindings from
   logical names in `.openai/hosting.json`.
 - `npm run dev` and `npm run build` load that Vite configuration. Miniflare and
   workerd are owned by the Cloudflare plugin; the application does not import
   them directly.
-- D1/R2 are currently inactive because `.openai/hosting.json` declares both
-  bindings `null`. The Worker environment currently exposes only static assets
-  and image processing.
-- Existing automated tests build through the Cloudflare plugin, then run as
-  ordinary Node tests. No test currently starts a Cloudflare test runtime or
-  exercises local D1/R2.
+- Backend tests use exact-pinned Vitest 4.1 and
+  `@cloudflare/vitest-pool-workers`. They run in workerd through Miniflare,
+  apply the generated migration to an isolated D1 database, and exercise D1
+  and R2 bindings with per-test-file storage isolation.
+- A live local check applied `drizzle/0000_overrated_otto_octavius.sql`, started
+  the actual Vinext/Cloudflare host, received HTTP 200 and an empty
+  schema-versioned catalog from D1, and confirmed that the bundled library
+  still rendered independently. The host was stopped afterward.
+- The Vite plugin's bundled Worker runtime supports compatibility dates only
+  through `2026-05-22`; a live development run failed with `2026-07-31`.
+  Production/local Vite and Worker tests therefore share `2026-05-22` until
+  that runtime is upgraded.
+- Drizzle Kit may print an ENOENT for a pre-existing empty
+  `drizzle/meta/_journal.json` yet exit successfully. On the first generation,
+  remove only empty starter directories and verify that migration files were
+  actually created; do not trust the exit status alone.
 - Local and hosted application source must remain the same. Local and Sites
   environments differ in resource identity, data, secrets, and binding wiring,
   not business logic or route source.
@@ -144,6 +170,10 @@ This is the negotiated end state, not current implementation:
 - OpenAI owns the underlying Cloudflare account. The project has no direct
   Cloudflare console, Wrangler access, database metrics, export control, or
   reachable point-in-time recovery.
+- Direct Cloudflare accounts provide an architecture-style **Bindings canvas**
+  and opt-in Workers **Traces** for runtime request flow. GPT Sites currently
+  documents no equivalent topology view, and this managed project cannot open
+  the underlying Cloudflare dashboard.
 - Sites documentation does not state whether D1 or R2 survives every redeploy
   or promise a retention period. There is no documented data-residency support
   for Sites code, D1, R2, generated artifacts, or logs.
@@ -157,7 +187,7 @@ This is the negotiated end state, not current implementation:
 
 ## Migration and stale-client policy
 
-- `poc/build/sites-vite-plugin.ts` copies `drizzle/` into
+- `app/build/sites-vite-plugin.ts` copies `drizzle/` into
   `dist/.openai/drizzle` beside `hosting.json`. The packaging code implies
   Sites applies those migrations, but Sites documentation does not confirm it.
   Verify the mechanism on the first real D1 deploy.
@@ -179,8 +209,10 @@ This is the negotiated end state, not current implementation:
 
 ## Backup and recovery plan
 
-No backup implementation is needed until the first table exists. Add it in the
-same change that creates that table:
+The first table now exists locally. Logical catalog export/restore functions
+round-trip in the isolated D1 test runtime, satisfying the same-change local
+recovery requirement. A protected operator route, real export destination,
+pre-deploy invocation, and hosted restore drill remain unimplemented:
 
 - Provide an authenticated admin export that queries every table and returns
   JSON, plus a matching import path or conversion script.
@@ -208,6 +240,9 @@ same change that creates that table:
 - When should D1 and R2 be provisioned?
 - Does the first D1 deployment confirm automatic migration application and
   durable state across redeploys?
+- How will the project obtain sufficient topology, tracing, database, and
+  recovery visibility while GPT Sites does not expose the underlying
+  Cloudflare control plane?
 - Does learner audio ever leave the device?
 - Will content ever be paid?
 - Where will submitted art and reference audio come from, and what review and
@@ -217,17 +252,21 @@ same change that creates that table:
 
 ## Sources
 
-- Read-only `poc/` client/server and download-profile audit on 2026-07-31.
+- Read-only `app/` client/server and download-profile audit on 2026-07-31.
 - Target frontend/backend discussion recorded on 2026-07-31.
 - Schema migration, stale-client, and backup discussion recorded on
   2026-07-31.
+- Frontend/backend separation commit `ae92de5`, post-separation QA, and live
+  local D1 check recorded on 2026-07-31.
+- Cloudflare Vitest, compatibility-date, Drizzle generation, and dashboard
+  visualization research recorded on 2026-07-31.
 - GPT Sites documentation research recorded on 2026-07-31:
   https://learn.chatgpt.com/docs/sites
-- `poc/.openai/hosting.json`
-- `poc/build/sites-vite-plugin.ts`
-- `poc/worker/index.ts`
-- `poc/public/sw.js`
-- `poc/app/PracticeApp.tsx`
+- `app/.openai/hosting.json`
+- `app/build/sites-vite-plugin.ts`
+- `app/worker/index.ts`
+- `app/public/sw.js`
+- `app/client/components/PracticeApp.tsx`
 - `.agents/resources/backend/cloudflare.md`
 - `.agents/resources/backend/gcp.md`
 - User testing and separation clarification recorded on 2026-07-31.

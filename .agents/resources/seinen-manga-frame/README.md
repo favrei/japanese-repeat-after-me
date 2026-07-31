@@ -2,7 +2,7 @@
 
 `mock.html` is a self-contained static mockup of the seinen slice-of-life manga
 frame the user approved on 2026-07-30, replacing the earlier kawaii/storybook
-tone shipped in `poc/`. Open it directly in a browser; states are selected by
+tone shipped in `app/`. Open it directly in a browser; states are selected by
 the location hash:
 
 ```
@@ -16,9 +16,9 @@ panel collapses to a single row above 760px.
 
 ## Why it matters
 
-It is the reference for porting the frame into `poc/app/globals.css` and
-`poc/app/PracticeApp.tsx`. It is a **design reference, not production code** —
-flow logic, testids, and state handling in `poc/` are authoritative and must not
+It is the reference for porting the frame into `app/app/globals.css` and
+`app/app/PracticeApp.tsx`. It is a **design reference, not production code** —
+flow logic, testids, and state handling in `app/` are authoritative and must not
 be changed to match the mockup.
 
 ## Design tokens it establishes

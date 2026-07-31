@@ -19,7 +19,8 @@ layout, swappable art slots, and pending asset work.
   frame surrounds swappable scene, character, and cover art; later chapter
   authors may supply story-specific assets.
 - The user initially selected a manga-storybook frame on 2026-07-30. That frame
-  was implemented in `poc/`, but the user then rejected its childlike register
+  was implemented in the application, but the user then rejected its childlike
+  register
   and reported that its centered `680px` column was not full screen on desktop.
 - The approved replacement direction is **seinen slice-of-life manga** with a
   **full-bleed responsive desktop scene**. This supersedes the earlier kawaii
@@ -31,8 +32,8 @@ layout, swappable art slots, and pending asset work.
 - The replacement was implemented as a story-neutral frame plus swappable art
   packs at `e37d5c4`, followed by scene transitions at `6e6b83c` and the
   four-stage library at `7a0f812`. All remain present on current nested
-  `poc/` `main` at `05a986f`; the later recast and deployment-packaging commits
-  did not replace the frame or packs.
+  `app/` `main`; the later recast, deployment-packaging, and backend-separation
+  commits did not replace the frame or packs.
 - The four-stage app includes an original taproom pack and passed mechanical
   and production-browser QA, but the finished selector and taproom visuals
   still need the user's explicit visual verdict. Treat them as an integrated
@@ -137,9 +138,9 @@ the frame, a pack owns the art.
   transparent. Generated art must contain no dialogue, lettering, logos,
   balloons, UI, or the deep-red accent — the accent belongs to the UI only.
 - `scripts/validate-art-packs.mjs` validates packs and runs first in
-  `npm run qa` as `validate:art`. `app/art-packs.ts` loads packs and
-  `app/ArtReview.tsx` serves a development art-review view. The selector
-  feature accepts `/?art=cafe` and `/?art=taproom` in development.
+  `npm run qa` as `validate:art`. `client/content/art-packs.ts` loads packs and
+  `client/components/ArtReview.tsx` serves a development art-review view. The
+  selector feature accepts `/?art=cafe` and `/?art=taproom` in development.
 - This is also the concrete answer sketch for future uploaded chapter art:
   crop focus, anchoring, scale, and provenance are already manifest fields.
   See [Content](content.md).
@@ -152,7 +153,7 @@ on 2026-07-30 with OpenAI built-in image generation. Source generations are
 kept outside the repository at
 `~/.codex/generated_images/019fb376-eb0f-7141-b3c7-622e4a05fb44/`.
 
-Earlier per-file placeholder targets under `poc/public/assets/` are superseded
+Earlier per-file placeholder targets under `app/public/assets/` are superseded
 by the pack layout above. If a later agent lacks text-to-image capability, keep
 existing pack assets and leave one precise inbox note. Do not substitute
 unrelated stock art or known-wrong shipped assets.
@@ -185,7 +186,7 @@ must judge art and voice together. See [Audio](audio.md) and
 
 ## Implementation and QA history
 
-- The rejected manga-storybook port changed `poc/app/globals.css`,
+- The rejected manga-storybook port changed `app/app/globals.css`,
   `PracticeApp.tsx`, layout metadata, stage titles, manifest, service worker,
   tests, and README while preserving gameplay.
 - It introduced mood-specific placeholder character states and approximate
@@ -201,8 +202,8 @@ must judge art and voice together. See [Audio](audio.md) and
   `file://` navigation to it is blocked by browser security policy. See
   [Delivery](delivery.md).
 - The redesign was developed in the former sibling art-system worktree so the
-  then-dirty `poc/` checkout was not edited. That worktree was later reconciled,
-  committed, integrated, and removed.
+  then-dirty application checkout was not edited. That worktree was later
+  reconciled, committed, integrated, and removed.
 - After rebasing onto nested `main` (`ad3a356`, packaged Qwen3 audio), the
   redesigned `PracticeApp`, service worker, and rendered-HTML tests were
   reconciled with the bundled audio and the localhost microphone guard.
@@ -252,15 +253,15 @@ must judge art and voice together. See [Audio](audio.md) and
   voice, and persona-agreement requirement recorded on 2026-07-31.
 - `.agents/resources/seinen-manga-frame/README.md`
 - `.agents/resources/seinen-manga-frame/mock.html`
-- `poc/app/globals.css`
-- `poc/app/PracticeApp.tsx`
-- `poc/app/scoring.ts`
-- `poc/README.md`
+- `app/app/globals.css`
+- `app/client/components/PracticeApp.tsx`
+- `app/client/gameplay/scoring.ts`
+- `app/README.md`
 - Nested app commits `e37d5c4`, `6e6b83c`, `7a0f812`, merge `3a3b84d`, and
   recast `19139c6`.
-- `poc/art-system/README.md`, `poc/art-system/art-pack.schema.json`,
-  `poc/art-packs/cafe.json`, `poc/scripts/validate-art-packs.mjs`, and
-  `poc/app/ArtReview.tsx`.
+- `app/art-system/README.md`, `app/art-system/art-pack.schema.json`,
+  `app/art-packs/cafe.json`, `app/scripts/validate-art-packs.mjs`, and
+  `app/client/components/ArtReview.tsx`.
 
 ## Related cells
 

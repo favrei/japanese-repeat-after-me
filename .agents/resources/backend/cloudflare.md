@@ -10,20 +10,20 @@ Last checked: 2026-07-31.
 
 - GPT Sites packages the application as a Cloudflare Worker plus static assets,
   with optional D1 and R2 bindings.
-- [`poc/vite.config.ts`](../../../poc/vite.config.ts) loads
+- [`app/vite.config.ts`](../../../app/vite.config.ts) loads
   `@cloudflare/vite-plugin`, selects `worker/index.ts` as the Worker entry, and
   derives local D1/R2 binding names from `.openai/hosting.json`.
-- [`poc/.openai/hosting.json`](../../../poc/.openai/hosting.json) currently
+- [`app/.openai/hosting.json`](../../../app/.openai/hosting.json) currently
   declares logical bindings `DB` and `PACKS`. This activates isolated local
   D1/R2 resources now and asks Sites to provision hosted resources on a future
   deployment; no such deployment was made during the separation change.
-- [`poc/build/sites-vite-plugin.ts`](../../../poc/build/sites-vite-plugin.ts)
+- [`app/build/sites-vite-plugin.ts`](../../../app/build/sites-vite-plugin.ts)
   packages Sites metadata and Drizzle migrations. It is a deployment packager,
   not the local test runtime.
-- [`poc/worker/index.ts`](../../../poc/worker/index.ts) passes `DB` and `PACKS`
+- [`app/worker/index.ts`](../../../app/worker/index.ts) passes `DB` and `PACKS`
   from the Worker `env` object into the backend router before falling through to
   image handling and Vinext rendering.
-- [`poc/server/`](../../../poc/server/) contains the localized Cloudflare
+- [`app/server/`](../../../app/server/) contains the localized Cloudflare
   storage boundary. D1 serves the public catalog and R2 serves immutable
   versioned pack objects.
 
@@ -41,14 +41,14 @@ Last checked: 2026-07-31.
 
 ## Implemented testing boundary
 
-- `poc/tests/client/` keeps flow, scoring, and recognition checks in fast Node
+- `app/tests/client/` keeps flow, scoring, and recognition checks in fast Node
   tests.
-- `poc/tests/contracts/` checks provider-independent catalog and story-pack
+- `app/tests/contracts/` checks provider-independent catalog and story-pack
   payloads in Node.
-- `poc/tests/server/` runs inside workerd through
+- `app/tests/server/` runs inside workerd through
   `@cloudflare/vitest-pool-workers`, applies generated migrations to isolated
   local D1, and exercises D1/R2 through a Worker entry.
-- `poc/tests/integration/` verifies the built production Worker, packaged Sites
+- `app/tests/integration/` verifies the built production Worker, packaged Sites
   bindings/migration, the absence of client-to-server imports, and completion
   of downloaded story flows while backend fetches fail.
 - The D1 suite also round-trips a logical catalog export/restore. It does not
