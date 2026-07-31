@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/tts/generate_audio.py",
+  "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-6bit",
+  "revision": "1c6c0ff58c43afa8df571facde2efa077efd85e2",
+  "baseSeed": 20260730,
+  "maxTokens": 256,
+  "maxAttempts": 5,
+  "clips": [
+    {
+      "id": "ordering-welcome",
+      "text": "いらっしゃいませ。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Warm but routine greeting.",
+      "seed": 20261730
+    },
+    {
+      "id": "ordering-question",
+      "text": "ご注文はお決まりですか。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Routine service question with a natural questioning rise.",
+      "seed": 20260731
+    },
+    {
+      "id": "ordering-second",
+      "text": "本日のおすすめは、ブレンドコーヒーです。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Matter-of-fact recommendation.",
+      "seed": 20260732
+    },
+    {
+      "id": "ordering-ready",
+      "text": "お決まりになりましたら、お呼びください。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Unhurried service instruction.",
+      "seed": 20261733
+    },
+    {
+      "id": "ordering-thanks",
+      "text": "ありがとうございます。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Brief polite acknowledgement.",
+      "seed": 20260734
+    },
+    {
+      "id": "meal-arrives",
+      "text": "お会計は、レジでお願いします。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Clear register instruction.",
+      "seed": 20260735
+    },
+    {
+      "id": "meal-payment-options",
+      "text": "現金とカードが使えます。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Matter-of-fact payment information.",
+      "seed": 20260736
+    },
+    {
+      "id": "meal-thanks",
+      "text": "ありがとうございました。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Warm closing thanks.",
+      "seed": 20260737
+    },
+    {
+      "id": "meal-return",
+      "text": "またお越しくださいませ。",
+      "speaker": "staff",
+      "voice": "Ono_Anna",
+      "instruction": "",
+      "deliveryIntent": "Polite farewell.",
+      "seed": 20260738
+    }
+  ]
+}

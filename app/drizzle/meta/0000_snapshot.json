@@ -1,0 +1,133 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "5d3db2cd-9293-48a5-a437-bb9505c5f2eb",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "catalog_entries": {
+      "name": "catalog_entries",
+      "columns": {
+        "story_id": {
+          "name": "story_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "version": {
+          "name": "version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title_ja": {
+          "name": "title_ja",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title_en": {
+          "name": "title_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "pack_key": {
+          "name": "pack_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'draft'"
+        },
+        "is_current": {
+          "name": "is_current",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "published_at": {
+          "name": "published_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "catalog_entries_current_story_unique": {
+          "name": "catalog_entries_current_story_unique",
+          "columns": [
+            "story_id"
+          ],
+          "isUnique": true,
+          "where": "\"catalog_entries\".\"is_current\" = 1"
+        },
+        "catalog_entries_public_idx": {
+          "name": "catalog_entries_public_idx",
+          "columns": [
+            "status",
+            "is_current",
+            "updated_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "catalog_entries_story_id_version_pk": {
+          "columns": [
+            "story_id",
+            "version"
+          ],
+          "name": "catalog_entries_story_id_version_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "catalog_entries_status_check": {
+          "name": "catalog_entries_status_check",
+          "value": "\"catalog_entries\".\"status\" IN ('draft', 'published', 'retired')"
+        },
+        "catalog_entries_current_published_check": {
+          "name": "catalog_entries_current_published_check",
+          "value": "\"catalog_entries\".\"is_current\" = 0 OR \"catalog_entries\".\"status\" = 'published'"
+        },
+        "catalog_entries_published_timestamp_check": {
+          "name": "catalog_entries_published_timestamp_check",
+          "value": "\"catalog_entries\".\"status\" != 'published' OR \"catalog_entries\".\"published_at\" IS NOT NULL"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

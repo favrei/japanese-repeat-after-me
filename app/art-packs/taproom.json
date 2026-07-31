@@ -1,0 +1,56 @@
+{
+  "$schema": "../art-system/art-pack.schema.json",
+  "schemaVersion": 2,
+  "id": "taproom",
+  "title": {
+    "ja": "初めての一杯",
+    "en": "The first glass"
+  },
+  "labels": {
+    "volume": "第2巻"
+  },
+  "cover": "/art-packs/taproom/cover.png",
+  "scenes": {
+    "board": {
+      "landscape": "/art-packs/taproom/scene-landscape.png",
+      "portrait": "/art-packs/taproom/scene-portrait.png",
+      "focus": {
+        "landscape": "54% 50%",
+        "portrait": "52% 50%"
+      },
+      "scale": 1
+    },
+    "counter": {
+      "landscape": "/art-packs/taproom/scene-landscape.png",
+      "portrait": "/art-packs/taproom/scene-portrait.png",
+      "focus": {
+        "landscape": "70% 54%",
+        "portrait": "68% 55%"
+      },
+      "scale": 1.28
+    }
+  },
+  "characters": {
+    "staff": {
+      "label": "店員",
+      "anchor": "left",
+      "heightPercent": {
+        "mobile": 58,
+        "desktop": 72
+      },
+      "bottomPercent": -2,
+      "art": {
+        "neutral": "/art-packs/taproom/staff-neutral.png",
+        "positive": "/art-packs/taproom/staff-positive.png",
+        "concerned": "/art-packs/taproom/staff-concerned.png"
+      }
+    }
+  },
+  "provenance": {
+    "creator": "OpenAI Codex",
+    "generator": "OpenAI built-in image generation",
+    "generatedAt": "2026-07-31",
+    "promptGuide": "/art-system/PROMPT_TEMPLATE.md",
+    "notes": "The board and counter are deliberate reframes of one matched landscape/portrait taproom plate. The second-stage 1.28x push-in makes the hand-over beat visible without inventing a different establishment."
+  }
+}

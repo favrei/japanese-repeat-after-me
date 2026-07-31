@@ -1,0 +1,46 @@
+{
+  "$schema": "../art-system/art-pack.schema.json",
+  "schemaVersion": 2,
+  "id": "replace-me",
+  "title": {
+    "ja": "物語タイトル",
+    "en": "Story title"
+  },
+  "labels": {
+    "volume": "第1巻"
+  },
+  "cover": "/art-packs/replace-me/cover.png",
+  "scenes": {
+    "main": {
+      "landscape": "/art-packs/replace-me/scene-landscape.png",
+      "portrait": "/art-packs/replace-me/scene-portrait.png",
+      "focus": {
+        "landscape": "50% 50%",
+        "portrait": "50% 50%"
+      },
+      "scale": 1
+    }
+  },
+  "characters": {
+    "other-party": {
+      "label": "相手",
+      "anchor": "left",
+      "heightPercent": {
+        "mobile": 58,
+        "desktop": 68
+      },
+      "bottomPercent": 2,
+      "art": {
+        "neutral": "/art-packs/replace-me/character-neutral.png",
+        "positive": "/art-packs/replace-me/character-positive.png",
+        "concerned": "/art-packs/replace-me/character-concerned.png"
+      }
+    }
+  },
+  "provenance": {
+    "creator": "replace-me",
+    "generator": "replace-me",
+    "generatedAt": "YYYY-MM-DD",
+    "promptGuide": "/art-system/PROMPT_TEMPLATE.md"
+  }
+}

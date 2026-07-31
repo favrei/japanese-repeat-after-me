@@ -1,9 +1,6 @@
 # Parked Sites experiment is preserved in its own local Git repository.
 /experiments/005-device-runtime-benchmark/
 
-# Canonical application is preserved in its own local Git repository.
-/app/
-
 # Private voice corpus stays local and is never pushed to the public origin.
 /datasets/
 

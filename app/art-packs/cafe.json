@@ -1,0 +1,56 @@
+{
+  "$schema": "../art-system/art-pack.schema.json",
+  "schemaVersion": 2,
+  "id": "cafe",
+  "title": {
+    "ja": "喫茶店のひととき",
+    "en": "A moment at the café"
+  },
+  "labels": {
+    "volume": "第1巻"
+  },
+  "cover": "/art-packs/cafe/cover.png",
+  "scenes": {
+    "hall": {
+      "landscape": "/art-packs/cafe/scene-landscape.png",
+      "portrait": "/art-packs/cafe/scene-portrait.png",
+      "focus": {
+        "landscape": "52% 52%",
+        "portrait": "58% 48%"
+      },
+      "scale": 1
+    },
+    "register": {
+      "landscape": "/art-packs/cafe/scene-landscape.png",
+      "portrait": "/art-packs/cafe/scene-portrait.png",
+      "focus": {
+        "landscape": "86% 44%",
+        "portrait": "82% 46%"
+      },
+      "scale": 1.55
+    }
+  },
+  "characters": {
+    "server": {
+      "label": "店員",
+      "anchor": "left",
+      "heightPercent": {
+        "mobile": 56,
+        "desktop": 70
+      },
+      "bottomPercent": 1,
+      "art": {
+        "neutral": "/art-packs/cafe/character-neutral.png",
+        "positive": "/art-packs/cafe/character-positive.png",
+        "concerned": "/art-packs/cafe/character-concerned.png"
+      }
+    }
+  },
+  "provenance": {
+    "creator": "OpenAI Codex",
+    "generator": "OpenAI built-in image generation",
+    "generatedAt": "2026-07-30",
+    "promptGuide": "/art-system/PROMPT_TEMPLATE.md",
+    "notes": "Only one scene plate was generated for this pack. `register` is a reframe of that plate — same files, tighter camera on the till end of the counter — so the stage-2 shot change is real but provisional. Generate a dedicated register plate before treating this pack as finished. The pack also ships a single cast member; a second character is a new `characters` entry with its own art, never a variation of `server`."
+  }
+}
