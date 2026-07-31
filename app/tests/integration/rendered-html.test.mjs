@@ -95,6 +95,7 @@ test("ships a local-only PWA shell without private development artifacts", async
   const [
     app,
     localRecognizer,
+    microphoneRoute,
     css,
     page,
     layout,
@@ -116,6 +117,10 @@ test("ships a local-only PWA shell without private development artifacts", async
     ),
     readFile(
       new URL("../../client/recognition/localVosk.ts", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../../client/recognition/microphone.ts", import.meta.url),
       "utf8",
     ),
     readFile(new URL("../../app/globals.css", import.meta.url), "utf8"),
@@ -140,6 +145,12 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.match(localRecognizer, /vosk-model-small-ja-0\.22/);
   assert.match(localRecognizer, /AudioWorkletNode/);
   assert.match(localRecognizer, /acceptWaveformFloat/);
+  assert.match(localRecognizer, /openSelectedMicrophone/);
+  assert.match(microphoneRoute, /enumerateDevices/);
+  assert.match(microphoneRoute, /deviceId: \{ exact: selection\.deviceId \}/);
+  assert.match(app, /data-testid="microphone-route"/);
+  assert.match(app, /hardware test open/i);
+  assert.match(app, /addEventListener\("devicechange"/);
   assert.match(app, /audio is not saved/i);
   assert.match(app, /data-testid="skip-bubble"/);
   assert.match(app, /getArtPack\(selectedStory\.artPackId\)/);
@@ -181,7 +192,7 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.equal(parsedManifest.display, "standalone");
   assert.equal(parsedManifest.orientation, "portrait");
   assert.equal(parsedManifest.icons.length, 2);
-  assert.match(serviceWorker, /conversation-app-shell-v10/);
+  assert.match(serviceWorker, /conversation-app-shell-v11/);
   assert.match(serviceWorker, /conversation-app-model-v3/);
   assert.match(serviceWorker, /vosk-model-small-ja-0\.22\.parts\.json/);
   assert.match(serviceWorker, /new ReadableStream/);

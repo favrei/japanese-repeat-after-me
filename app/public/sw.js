@@ -1,4 +1,4 @@
-const CACHE_NAME = "conversation-app-shell-v10";
+const CACHE_NAME = "conversation-app-shell-v11";
 const MODEL_CACHE_NAME = "conversation-app-model-v3";
 const MODEL_PATH = "/models/vosk-model-small-ja-0.22.tar.gz";
 const MODEL_PARTS_MANIFEST =

@@ -74,6 +74,14 @@ pronunciation diagnosis. Recording-quality failures ask for a retry and do not
 consume one of the three speaking attempts. The app does not store or upload
 recordings.
 
+Before first capture, the app requests microphone permission, lists the inputs
+Chrome exposes, and asks the learner to select one when more than one is
+available. Capture requests that exact browser `deviceId`, displays whether the
+active track matches it, and stops an attempt when the selected input
+disconnects or becomes muted. This browser evidence does not close the
+Bluetooth hardware test: AirPods capture and avoidance of built-in-microphone
+fallback remain open until verified on macOS Chrome and Android Chrome.
+
 Autoplay uses pre-generated Qwen3-TTS clips rather than browser
 `speechSynthesis`. The clips are generated locally on Apple Silicon through
 MLX, bundled with the PWA, and cached for offline playback. Browser TTS remains
@@ -145,4 +153,6 @@ npm run start
 Then open `http://localhost:3000` in Android Chrome and allow microphone access.
 The first Android run should verify model initialization, memory pressure,
 AudioWorklet capture, recognition latency, service-worker caching, and PWA
-installation. Local QA is not deployment approval.
+installation. It should also close the explicitly open Bluetooth route test
+only after input identity and captured signal are independently confirmed.
+Local QA is not deployment approval.

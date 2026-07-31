@@ -27,6 +27,15 @@ import {
   type LocalRecognitionSession,
 } from "../recognition/localVosk";
 import {
+  chooseRememberedMicrophone,
+  discoverMicrophones,
+  MicrophoneRouteError,
+  SAVED_MICROPHONE_KEY,
+  type MicrophoneInput,
+  type MicrophoneRouteEvidence,
+  type MicrophoneSelection,
+} from "../recognition/microphone";
+import {
   markReadingHits,
   normalizeJapanese,
   scoreAttempt,
@@ -43,6 +52,13 @@ import type { FlowBubble, PracticeStage } from "../../shared/story";
 type Screen = "menu" | "conversation" | "complete";
 type FeedbackTone = "success" | "failure" | "notice";
 type RecognitionState = "error" | "idle" | "loading" | "ready";
+type MicrophoneState =
+  | "choosing"
+  | "error"
+  | "idle"
+  | "loading"
+  | "route-lost"
+  | "selected";
 
 type Feedback = {
   tone: FeedbackTone;
@@ -258,6 +274,15 @@ export function PracticeApp() {
   const [partialTranscript, setPartialTranscript] = useState("");
   const [recognitionState, setRecognitionState] =
     useState<RecognitionState>("idle");
+  const [microphoneState, setMicrophoneState] =
+    useState<MicrophoneState>("idle");
+  const [microphoneInputs, setMicrophoneInputs] = useState<
+    MicrophoneInput[]
+  >([]);
+  const [microphoneSelection, setMicrophoneSelection] =
+    useState<MicrophoneSelection | null>(null);
+  const [microphoneRoute, setMicrophoneRoute] =
+    useState<MicrophoneRouteEvidence | null>(null);
   const [qaMode, setQaMode] = useState(false);
   const [artReviewPackId, setArtReviewPackId] = useState<ArtPackId | null>(
     null,
@@ -346,6 +371,59 @@ export function PracticeApp() {
       advanceTimerRef.current = null;
     }
   }, []);
+
+  const reportMicrophoneRouteLost = useCallback(() => {
+    const session = recognitionRef.current;
+    recognitionRunRef.current += 1;
+    recognitionRef.current = null;
+    void session?.cancel();
+    setIsListening(false);
+    setIsEvaluating(false);
+    setPartialTranscript("");
+    setMicrophoneInputs([]);
+    setMicrophoneSelection(null);
+    setMicrophoneRoute(null);
+    setMicrophoneState("route-lost");
+    setFeedback({
+      tone: "failure",
+      kind: "error",
+      detail:
+        "マイクの せつぞくが かわりました — recording stopped; reconnect and confirm the headset before trying again.",
+    });
+  }, []);
+
+  useEffect(() => {
+    if (
+      !microphoneSelection ||
+      !navigator.mediaDevices?.enumerateDevices
+    ) {
+      return;
+    }
+
+    const handleDeviceChange = () => {
+      if (microphoneSelection.deviceId === "default") {
+        reportMicrophoneRouteLost();
+        return;
+      }
+
+      void navigator.mediaDevices.enumerateDevices().then((devices) => {
+        const selectedInputStillExists = devices.some(
+          (device) =>
+            device.kind === "audioinput" &&
+            device.deviceId === microphoneSelection.deviceId,
+        );
+        if (!selectedInputStillExists) reportMicrophoneRouteLost();
+      });
+    };
+
+    navigator.mediaDevices.addEventListener("devicechange", handleDeviceChange);
+    return () => {
+      navigator.mediaDevices.removeEventListener(
+        "devicechange",
+        handleDeviceChange,
+      );
+    };
+  }, [microphoneSelection, reportMicrophoneRouteLost]);
 
   const advanceBubble = useCallback(() => {
     cancelActiveMedia();
@@ -553,9 +631,17 @@ export function PracticeApp() {
       ["NotAllowedError", "PermissionDeniedError"].includes(error.name);
     const localCode =
       error instanceof LocalRecognitionError ? error.code : undefined;
+    const microphoneCode =
+      error instanceof MicrophoneRouteError ? error.code : undefined;
 
     if (localCode === "model-unavailable") {
       setRecognitionState("error");
+    }
+    if (microphoneCode) {
+      setMicrophoneRoute(null);
+      setMicrophoneState(
+        microphoneCode === "route-mismatch" ? "route-lost" : "error",
+      );
     }
 
     let detail =
@@ -578,6 +664,12 @@ export function PracticeApp() {
     } else if (localCode === "empty-transcript") {
       detail =
         "ことばを みつけられませんでした — no speech was recognized; please try again.";
+    } else if (microphoneCode === "route-mismatch") {
+      detail =
+        "えらんだ マイクを つかえません — Chrome changed the input; confirm the headset before trying again.";
+    } else if (microphoneCode === "no-input") {
+      detail =
+        "マイクが みつかりません — connect a headset or microphone, then check again.";
     }
 
     setFeedback({
@@ -585,6 +677,64 @@ export function PracticeApp() {
       kind: "error",
       detail,
     });
+  }
+
+  async function configureMicrophone() {
+    setMicrophoneState("loading");
+    setMicrophoneRoute(null);
+
+    try {
+      const inputs = await discoverMicrophones();
+      const rememberedDeviceId = window.localStorage.getItem(
+        SAVED_MICROPHONE_KEY,
+      );
+      const selection = chooseRememberedMicrophone(
+        inputs,
+        rememberedDeviceId,
+      );
+
+      setMicrophoneInputs(inputs);
+      setMicrophoneSelection(selection);
+      if (selection) {
+        window.localStorage.setItem(
+          SAVED_MICROPHONE_KEY,
+          selection.deviceId,
+        );
+        setMicrophoneState("selected");
+        return selection;
+      }
+
+      setMicrophoneState("choosing");
+      setFeedback({
+        tone: "notice",
+        kind: "error",
+        detail:
+          "つかう マイクを えらんでください — choose the connected headset microphone, then press record again.",
+      });
+      return null;
+    } catch (error) {
+      setMicrophoneInputs([]);
+      setMicrophoneSelection(null);
+      recognitionProblem(error);
+      return null;
+    }
+  }
+
+  function selectMicrophone(deviceId: string) {
+    const selection = microphoneInputs.find(
+      (input) => input.deviceId === deviceId,
+    );
+    setMicrophoneRoute(null);
+    setMicrophoneSelection(selection ?? null);
+
+    if (!selection) {
+      setMicrophoneState("choosing");
+      return;
+    }
+
+    window.localStorage.setItem(SAVED_MICROPHONE_KEY, selection.deviceId);
+    setMicrophoneState("selected");
+    setFeedback(null);
   }
 
   async function stopListening() {
@@ -636,6 +786,12 @@ export function PracticeApp() {
     const runId = recognitionRunRef.current + 1;
     recognitionRunRef.current = runId;
 
+    let selectedMicrophone = microphoneSelection;
+    if (!selectedMicrophone) {
+      selectedMicrophone = await configureMicrophone();
+      if (recognitionRunRef.current !== runId || !selectedMicrophone) return;
+    }
+
     if (recognitionState !== "ready") {
       setFeedback({
         tone: "notice",
@@ -670,17 +826,27 @@ export function PracticeApp() {
     setPartialTranscript("");
 
     try {
-      const session = await startLocalRecognition((partial) => {
-        if (recognitionRunRef.current === runId) {
-          setPartialTranscript(partial);
-        }
-      });
+      const session = await startLocalRecognition(
+        (partial) => {
+          if (recognitionRunRef.current === runId) {
+            setPartialTranscript(partial);
+          }
+        },
+        selectedMicrophone,
+        () => {
+          if (recognitionRunRef.current === runId) {
+            reportMicrophoneRouteLost();
+          }
+        },
+      );
       if (recognitionRunRef.current !== runId) {
         await session.cancel();
         return;
       }
 
       recognitionRef.current = session;
+      setMicrophoneRoute(session.microphoneRoute);
+      setMicrophoneState("selected");
       setIsListening(true);
       recordingTimerRef.current = window.setTimeout(() => {
         recordingTimerRef.current = null;
@@ -884,6 +1050,23 @@ export function PracticeApp() {
           ? "もう一度はなす"
           : "はなす";
 
+  const microphoneStatus =
+    microphoneState === "loading"
+      ? "Checking available microphone inputs…"
+      : microphoneState === "route-lost"
+        ? "Input route changed — reconnection required"
+        : microphoneRoute?.status === "matched"
+          ? `${microphoneRoute.activeLabel} · browser route matched · hardware test open`
+          : microphoneRoute?.status === "browser-default"
+            ? `${microphoneRoute.activeLabel} · system route · hardware test open`
+            : microphoneRoute?.status === "unverifiable"
+              ? `${microphoneRoute.activeLabel} · browser route unverifiable · hardware test open`
+              : microphoneSelection
+                ? `${microphoneSelection.label} · selected · hardware test open`
+                : microphoneState === "choosing"
+                  ? "Choose the connected headset microphone"
+                  : "Microphone not confirmed · hardware test open";
+
   // The stage owns the shot: during a transition the position has already moved
   // to the incoming stage, so the card is drawn over the background it opens on.
   const activeStage = stages[currentBubble.stageIndex];
@@ -1050,6 +1233,54 @@ export function PracticeApp() {
                   ? `のこり ${3 - failedAttempts}かい`
                   : `${Math.min(failedAttempts + 1, 3)} / 3`}
               </small>
+            </div>
+
+            <div
+              className={`microphone-route state-${microphoneState}`}
+              data-microphone-state={microphoneState}
+              data-testid="microphone-route"
+            >
+              <span>MIC INPUT</span>
+              {microphoneInputs.length > 0 ? (
+                <select
+                  aria-label="Microphone input"
+                  disabled={isListening || isEvaluating}
+                  onChange={(event) => selectMicrophone(event.target.value)}
+                  value={microphoneSelection?.deviceId ?? ""}
+                >
+                  <option value="">マイクを選ぶ</option>
+                  {microphoneInputs.map((input) => (
+                    <option key={input.deviceId} value={input.deviceId}>
+                      {input.label}
+                      {input.deviceId === "default" ? " — system route" : ""}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <button
+                  disabled={
+                    isListening ||
+                    isEvaluating ||
+                    microphoneState === "loading"
+                  }
+                  onClick={() => void configureMicrophone()}
+                  type="button"
+                >
+                  {microphoneState === "loading"
+                    ? "確認中"
+                    : "マイクを確認"}
+                </button>
+              )}
+              <small>{microphoneStatus}</small>
+              {microphoneInputs.length > 0 ? (
+                <button
+                  disabled={isListening || isEvaluating}
+                  onClick={() => void configureMicrophone()}
+                  type="button"
+                >
+                  再確認
+                </button>
+              ) : null}
             </div>
 
             <p className="panel-foot">
