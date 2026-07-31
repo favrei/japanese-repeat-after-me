@@ -138,23 +138,26 @@ large-model delivery, or final-product privacy policy. See
 ## Active platform gates
 
 - The user requested an Android Chrome PWA PoC without authorizing deployment.
-  The corrected bubble-level progression is user-confirmed. The newest focused
-  candidate is a responsive four-stage café/taproom library on
-  `feature/story-selection`; nested `poc/` main still carries the rejected
-  childlike frame. The candidate passed desktop and `412×915` browser QA, but
-  real Android behavior remains unverified. See [Product](product.md),
-  [Visual Design](visual-design.md), and [Delivery](delivery.md).
+  The corrected bubble-level progression is user-confirmed. The responsive
+  four-stage café/taproom library and local Vosk runtime are integrated on
+  nested `poc/` `main` at `3a3b84d`. The app passed desktop and `412×915`
+  browser QA, but real Android behavior remains unverified. See
+  [Product](product.md), [Visual Design](visual-design.md), and
+  [Delivery](delivery.md).
 - Android SDK Platform Tools 35.0.1 and the broader local Android SDK are
   installed. A proposed local preview path uses USB debugging plus
   `adb reverse tcp:3000 tcp:3000`, allowing Android Chrome to open the Mac-hosted
   app at `http://localhost:3000`. No attached phone has validated this path.
-- Model evidence remains parked after experiment 006. The PoC's browser speech
-  adapter does not resolve local model/runtime questions.
-- An unmerged branch now runs `vosk-browser` with AudioWorklet capture and a
-  ~49.7 MB separately prepared Japanese model. Browser and Android memory for
-  that path are still unmeasured and matter more than archive size; extracted
-  model storage plus the service-worker archive cache can exceed the download.
-  See [Recognition](recognition.md).
+- The merged app runs `vosk-browser` with AudioWorklet capture and a ~49.7 MB
+  separately prepared Japanese model. Its production transport splits the
+  ignored local archive into six manifest-verified parts and has the
+  controlling service worker stream them as one logical archive.
+- Production-browser QA on IPv4 loopback reached a recognition-ready learner
+  bubble with recording enabled. This verifies initialization and delivery,
+  not microphone capture or recognition quality. Browser and Android memory
+  remain unmeasured and matter more than archive size; extracted model storage
+  plus service-worker caching can exceed the download. See
+  [Recognition](recognition.md).
 - Bundled locally generated reference audio removes the dependence on
   device-specific Japanese system voices for playback quality, though system
   TTS remains the fallback. See [Audio](audio.md).
@@ -196,6 +199,8 @@ large-model delivery, or final-product privacy policy. See
   register recorded on 2026-07-30.
 - Four-stage selector and responsive phone-browser validation recorded on
   2026-07-31.
+- Local Vosk integration, split model delivery, and production-browser
+  readiness verification recorded on 2026-07-31.
 
 ## Related cells
 

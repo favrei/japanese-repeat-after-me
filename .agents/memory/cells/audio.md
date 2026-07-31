@@ -137,14 +137,15 @@ includes:
 - a redirect from local `0.0.0.0` to trusted `localhost`;
 - an explicit HTTPS/localhost guard for microphone recognition.
 
-Later focused branches add the current story assets:
+Later commits add the current story assets:
 
 - `design/art-pack-system` at `e37d5c4` commits the redesigned café story and
   nine `Ono_Anna` autoplay clips with accepted seeds and metadata.
-- `feature/story-selection` carries the uncommitted taproom integration:
+- `feature/story-selection` commit `7a0f812` adds the taproom integration:
   eight dialogue clips and two narrator clips under `public/audio/taproom/`,
   plus metadata. These ten are the first complete three-role audio set accepted
-  by ear.
+  by ear. This commit is now part of nested `poc/` `main` through merge
+  `3a3b84d`.
 
 The `0.0.0.0` origin can prevent Chrome from granting microphone permission;
 preview on `localhost`. See [Delivery](delivery.md).
@@ -168,6 +169,8 @@ preview on `localhost`. See [Delivery](delivery.md).
 - The taproom feature passed art validation, typecheck, lint, production build,
   21/21 tests, desktop/phone browser playback and progression checks, and the
   user's listening gate for all ten clips.
+- The later integrated local-recognition build passed the expanded art/model,
+  typecheck, lint, production-build, and 25/25-test gate.
 
 ## Gotchas
 
@@ -214,12 +217,11 @@ preview on `localhost`. See [Delivery](delivery.md).
   with story design, recorded on 2026-07-30.
 - User selection and listening acceptance of the taproom `Ono_Anna` / `sohee`
   / `aiden` cast recorded on 2026-07-31.
-- Worktree `/Users/peter/workspaces/japanese-repeat-after-me-tts`, branch
-  `tts/qwen3-metal`, merged as nested PoC commit `ad3a356`.
+- Historical branch `tts/qwen3-metal`, merged as nested app commit `ad3a356`;
+  its former sibling worktree has been removed.
 - `stories/taproom/audio/generation-log.json`
 - `stories/taproom/voices.json`
-- Worktrees `../japanese-repeat-after-me-art-system` and
-  `../japanese-repeat-after-me-story-selection`.
+- Historical nested app commits `e37d5c4`, `7a0f812`, and `3a3b84d`.
 - `.agents/documents/stage-design-flow.md`, Step 7b.
 
 ## Related cells

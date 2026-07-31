@@ -16,20 +16,14 @@ Canonical detail belongs in linked cells.
   learner bubbles advance after one success, the third failure, or one Skip;
   Skip dismisses exactly one bubble and is not a failure. See
   [Product](cells/product.md).
-- The newest product candidate is a four-stage library in
-  `../japanese-repeat-after-me-story-selection` on
-  `feature/story-selection`: café Ordering/Payment plus taproom Choosing/The
-  first glass. It preserves the café instead of replacing it. Direct Stage 2
-  entry opens that stage's own transition and runs only the rest of that story.
-  The worktree is QA-passed but uncommitted and unmerged. See
-  [Product](cells/product.md), [Project](cells/project.md), and
-  [Delivery](cells/delivery.md).
-- The implemented branch chain is:
-  `design/art-pack-system` (`e37d5c4`, clean) →
-  `design/scene-transitions` (`6e6b83c`, clean) →
-  `feature/story-selection` (uncommitted at `6e6b83c`). Nested `poc/` main is
-  dirty at `ad3a356`; do not edit or clean it from another worktree. See
-  [Project](cells/project.md).
+- The canonical nested app is `poc/` `main` at merge commit `3a3b84d`. It
+  contains the four-stage café/taproom library, schema-v2 art packs and
+  narrated transitions, bundled reference audio, and local Vosk recognition.
+  `poc/` is the nested repository's only remaining worktree and is clean. See
+  [Project](cells/project.md) and [Delivery](cells/delivery.md).
+- The library preserves the café instead of replacing it with the taproom.
+  Direct Stage 2 entry opens that stage's own transition and runs only the rest
+  of that story. See [Product](cells/product.md).
 - The taproom story is content-complete: two stages, 13 bubbles, five learner
   speak bubbles, two narrated transitions, a passed character-separation gate,
   ten user-accepted clips across staff `Ono_Anna`, learner `sohee`, narrator
@@ -47,9 +41,10 @@ Canonical detail belongs in linked cells.
 - Develop and preview locally. No build, browser pass, or Sites capability
   authorizes deployment; release requires an immutable QA-passed artifact and
   explicit approval. See [Delivery](cells/delivery.md).
-- Local-first Vosk recognition remains parked on the clean unmerged
-  `recognition/vosk-local-first` branch. Nested main still uses Chrome
-  `SpeechRecognition`. Keep recognition and feedback replaceable. See
+- Local-first Vosk recognition is merged into the four-stage app. It uses
+  AudioWorklet capture, recording-quality checks, and closed-catalog content
+  matching. Treat its result as a coarse known-sentence gate, not
+  pronunciation diagnosis, and keep recognition and feedback replaceable. See
   [Recognition](cells/recognition.md).
 - Accounts, chapter upload/review, and released canonical audio remain a future
   phase, not current implementation scope. See [Content](cells/content.md).
@@ -78,19 +73,20 @@ Canonical detail belongs in linked cells.
 - Treat transcript-aligned kana hit/miss marks as coarse string guidance, not
   acoustic phoneme or mora evidence. See [Product](cells/product.md) and
   [Recognition](cells/recognition.md).
-- Do focused nested-PoC work in sibling worktrees, then rebase and
-  fast-forward only after the candidate and merge gate are agreed. Preserve
-  the dirty nested main. See [Project](cells/project.md).
+- Use short-lived sibling worktrees for isolated nested-app work when useful,
+  then integrate deliberately and remove duplicate checkouts after their
+  commits are safely reachable. See [Project](cells/project.md).
 - Keep model weights, caches, private recordings, and disposable TTS outputs
   out of Git and deployment packages. Reviewed bundled reference clips are
-  intentional application assets. See [Project](cells/project.md) and
-  [Recordings](cells/recordings.md).
+  intentional application assets. The production Vosk archive is a local,
+  ignored preparation output; its six ignored local chunks are served only
+  from that model directory. See [Project](cells/project.md),
+  [Recognition](cells/recognition.md), and [Recordings](cells/recordings.md).
+- Do not proactively invoke or expand the personal `speak-human` skill. Use it
+  only when the user explicitly asks, and do not uninstall or modify it.
 
 ## Blockers and open questions
 
-- The four-stage selector is uncommitted working-tree state. Decide whether the
-  user wants a visual review first, then commit/rebase/fast-forward the branch
-  chain without disturbing dirty nested main. See [Delivery](cells/delivery.md).
 - The finished selector and generated taproom pack have mechanical browser
   approval, not an explicit user visual verdict. The café register is a
   provenance-recorded reframe of one plate; a dedicated register plate remains
@@ -98,9 +94,9 @@ Canonical detail belongs in linked cells.
 - The redesigned café's nine autoplay clips passed structural and browser QA
   but still need a recorded complete listening pass unless separately accepted.
   See [Audio](cells/audio.md).
-- The selector worktree's existing dependency set reports 15 npm audit findings
-  (2 low, 13 high). No upgrade was attempted. Audit the exact frozen release
-  candidate and report unresolved advisories honestly. See
+- The merged app's current dependency graph reports 19 total npm audit findings
+  (2 low, 4 moderate, 13 high); the production-only graph reports 5
+  (2 moderate, 3 high). No audit fix was applied. See
   [Delivery](cells/delivery.md).
 - No Android device has been connected. USB `adb reverse`, microphone,
   service-worker/offline behavior, installability, and mobile memory remain
@@ -109,8 +105,10 @@ Canonical detail belongs in linked cells.
   resource use, retention, synchronization, and deployment architecture remain
   evidence-gated. See [Recognition](cells/recognition.md),
   [Platform](cells/platform.md), and [Recordings](cells/recordings.md).
-- There is still no approved canonical merged frontend or release artifact,
-  and nothing has been deployed. See [Project](cells/project.md) and
+- The nested app has no configured Git remote. Its merge commit therefore
+  exists only locally unless a remote is added later. The outer repository
+  records the handoff, but there is still no approved release artifact and
+  nothing has been deployed. See [Project](cells/project.md) and
   [Delivery](cells/delivery.md).
 
 ## Active evaluation gates
@@ -129,6 +127,11 @@ Canonical detail belongs in linked cells.
   build, tests, and phone/wide-desktop browser inspection, then receive a
   separate user visual verdict. See [Visual Design](cells/visual-design.md) and
   [Delivery](cells/delivery.md).
+- The merged app passed art/model validation, typecheck, lint, production
+  build, and 25/25 tests. A production-browser smoke on IPv4 loopback reached
+  the first taproom learner bubble with local recognition ready and recording
+  enabled; microphone permission and real recognition were deliberately not
+  exercised. See [Delivery](cells/delivery.md).
 - Deployment additionally requires trusted-HTTPS real-device QA, a frozen
   source commit and artifact checksum, privacy/package checks, honest audit
   disclosure, and explicit approval. See [Delivery](cells/delivery.md).

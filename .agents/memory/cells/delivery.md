@@ -38,52 +38,44 @@ substitute a different artifact after approval.
   toolchain.
 - An isolated Vinext/React/TypeScript implementation now exists under `poc/`.
   It serves locally at `http://localhost:3000/` and has a PWA manifest, service
-  worker, generated placeholder icons, and a development-only synthetic
-  speech/flow control.
-- Nested `poc/` main is at `ad3a356` and remains dirty with the rejected UI and
-  later source/tool changes. Its historical checks are not the newest product
-  candidate and it must not be cleaned or overwritten from another worktree.
+  worker, bundled art/audio, local Vosk recognition, and development-only
+  synthetic speech/flow controls.
+- Nested `poc/` `main` is clean at merge commit `3a3b84d`. The merge combines
+  the four-stage café/taproom app and TTS reconciliation at `14cd2b6` with the
+  local-recognition commit `18fcf55`. `poc/` is the nested repository's only
+  worktree; the earlier TTS, recognition, art, transition, selector, and
+  integration checkouts were removed after their useful work was verified.
+- The nested app has no configured Git remote, so `3a3b84d` is local and
+  cannot be pushed until a remote is deliberately added.
 - A Chrome run at 412×915 verified one-bubble Skip, one-success progression,
   third-failure progression, the stage boundary, completion, and restart. The
   user confirmed the resulting flow on 2026-07-30.
-- Subsequent uncommitted changes added a manga-storybook frame, mood-specific
-  placeholder art, and approximate target-reading marks while preserving flow.
-  QA mode now exposes synthetic success, near-miss, and failure controls. A
-  second `412×915` Chrome click-through covered the updated states.
-- The user rejected that frame's childlike visual register and fixed-width
-  desktop behavior. Its green checks remain mechanical evidence only.
-- The seinen/art branch is now clean and committed at `e37d5c4`; its QA passes
-  art validation, typecheck, lint, production build, and 13/13 tests. It also
-  contains the redesigned café story and nine reference clips. It remains
-  unmerged.
-- The clean `design/scene-transitions` branch at `6e6b83c` adds schema-v2
-  art/cast selection and a narrated break before every stage. Its full QA passes
-  19/19 tests and desktop/phone browser checks. It remains unmerged.
-- The newest candidate is the uncommitted
-  `../japanese-repeat-after-me-story-selection` worktree on
-  `feature/story-selection`, based at `6e6b83c`. It preserves the café, adds
-  the taproom and a four-stage story library, and bundles ten accepted taproom
-  clips plus original art. `npm run qa` passes both art packs, typecheck, lint,
-  production build, and 21/21 tests. Desktop and `412×915` production-browser
-  QA covered the library, taproom Stage 1, direct Stage 2 entry, and completion.
-  The user still owes the finished visual candidate an explicit visual verdict.
-- `npm ci` in the selector worktree reported 15 audit findings (2 low, 13
-  high) in the existing dependency set. No audit fix or framework upgrade was
-  attempted. Earlier art-branch and Vosk-branch audit counts were taken from
-  different dependency states; a release gate must report the audit of the
-  exact frozen candidate rather than combine or silently dismiss them.
-- Nested PoC `main` now bundles locally generated Japanese reference audio,
-  precached in service-worker shell v5, with system TTS as playback fallback.
-  Its combined `npm run qa` passed typecheck, build, and all 13 tests with the
-  pre-existing font warning only. See [Audio](audio.md).
+- The rejected childlike frame, the art-pack redesign, scene transitions, and
+  selector branch are now implementation history. Their useful work was
+  committed through `e37d5c4`, `6e6b83c`, and `7a0f812` and is present on
+  current `main`; the rejected frame is not the current product candidate.
+- The integrated app preserves the café, adds the taproom and a four-stage
+  library, bundles the reviewed story audio and art, and supports direct Stage
+  2 entry. The finished visuals still need the user's explicit visual verdict.
+- The merged production model path could not serve the original single
+  49,654,706-byte ignored Vosk archive and returned HTTP 404. The fix prepares
+  six ignored parts—five 8 MiB parts and one 7,711,666-byte part—described by a
+  manifest. The controlling service worker streams them as the logical archive
+  response, and recognition initialization waits for service-worker control.
+- Current nested-main QA passes art/model validation, typecheck, lint,
+  production build, and 25/25 tests. A production-browser smoke on IPv4
+  loopback reached the first taproom learner-speaking bubble with local
+  recognition ready and recording enabled. It did not request microphone
+  permission or capture real speech.
+- The current dependency graph reports 19 total `npm audit` findings
+  (2 low, 4 moderate, 13 high) and 5 production-only findings
+  (2 moderate, 3 high). These include `vosk-browser`'s `uuid` advisory and
+  transitive Next.js `postcss`/`sharp` findings. No audit fix was applied; a
+  release gate must report the exact frozen candidate honestly. See
+  [Recognition](recognition.md).
 - Preview on `http://localhost:...`. A local `0.0.0.0` origin can block Chrome
   microphone permission; the app now redirects `0.0.0.0` to `localhost` and
   rejects recording on untrusted origins with an explicit message.
-- The unmerged `recognition/vosk-local-first` branch raises `npm run qa` to
-  17/17 tests plus a model-archive check, but carries an unresolvable
-  production `npm audit` (transitive `postcss`/`sharp`, and `vosk-browser`'s
-  `uuid` 9.0.0). Any release gate must state this explicitly rather than claim
-  a clean audit. See [Recognition](recognition.md).
 - No real Android microphone, service-worker, or installation QA has occurred.
   Android SDK Platform Tools are installed and `adb reverse tcp:3000 tcp:3000`
   is a candidate no-deployment localhost bridge, but no phone was connected to
@@ -190,9 +182,6 @@ server-side requirement justifies it.
 
 ## Open questions
 
-- Should the branch chain `e37d5c4` → `6e6b83c` →
-  `feature/story-selection` be committed/rebased and fast-forwarded onto
-  nested `main`, and is that gated on the user's visual approval?
 - What exact commands and evidence make up the initial QA gate?
 - Will Android USB `adb reverse` provide the preferred localhost-secure preview,
   or is trusted LAN HTTPS still needed for real-device QA?
@@ -213,9 +202,11 @@ server-side requirement justifies it.
   replacement recorded on 2026-07-30.
 - Scene-transition and four-stage selector implementation/QA recorded on
   2026-07-31.
+- Nested app merge `3a3b84d`, split model transport, and final 25/25 QA
+  recorded on 2026-07-31.
 - `.agents/resources/seinen-manga-frame/`
-- `../japanese-repeat-after-me-scene-transitions`
-- `../japanese-repeat-after-me-story-selection`
+- Historical nested commits `e37d5c4`, `6e6b83c`, `7a0f812`, `14cd2b6`,
+  `18fcf55`, and `3a3b84d`.
 
 ## Related cells
 

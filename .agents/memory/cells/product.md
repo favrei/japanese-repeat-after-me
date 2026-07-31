@@ -46,8 +46,7 @@ implementation.
 - The original two-stage café-only boundary was expanded on 2026-07-31 at the
   user's request: a stage library must keep the café rather than replacing it
   with the taproom.
-- The current feature candidate exposes four selectable stages across two
-  stories:
+- The current app exposes four selectable stages across two stories:
   - café `ご注文` / Ordering: order the house-blend coffee;
   - café `お会計` / Payment: request a receipt and pay by card;
   - taproom `選ぶ` / Choosing: admit it is a first visit, ask for a
@@ -57,9 +56,8 @@ implementation.
 - Starting at a first stage continues through the rest of that story. Selecting
   a second stage directly opens that stage's own narrated transition and runs
   only the remaining stage. Returning from completion goes to the library.
-- This candidate is mechanically complete on `feature/story-selection` but is
-  not committed or merged to nested `main`. See [Project](project.md) and
-  [Delivery](delivery.md).
+- This library is merged on nested `poc/` `main` at `3a3b84d`. See
+  [Project](project.md) and [Delivery](delivery.md).
 
 ## Superseded café script — historical source of the flow
 
@@ -104,7 +102,7 @@ restore its content over the current coffee/payment story.
 - A stage-transition card is not a dialogue bubble and does not change the
   stage's bubble count. Each stage, including the first stage of a story, opens
   on its own transition.
-- The current focused branches implement this behavior; do not regress to
+- Current nested `poc/` `main` implements this behavior; do not regress to
   attempt-level or round-level Skip.
 
 ## Current product belief
@@ -242,8 +240,7 @@ ingredients still require separate review:
   taproom, recorded on 2026-07-31.
 - `poc/`
 - `stories/taproom/`
-- `../japanese-repeat-after-me-art-system`
-- `../japanese-repeat-after-me-story-selection`
+- Nested app commits `e37d5c4`, `6e6b83c`, `7a0f812`, and merge `3a3b84d`.
 - `.agents/documents/product-and-technical-discussion.md`
 - `.agents/documents/open-questions.md`
 - `README.md`

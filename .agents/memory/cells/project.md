@@ -18,21 +18,20 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
 - The initial product is a focused practical-speaking rehearsal engine, not a
   complete language course or open-ended conversation system.
 - The repository remains in evidence-gathering product and technical scoping,
-  but the isolated nested PoC now has a credible four-stage product candidate
-  in a focused worktree: a stage library preserves the café story and adds the
-  taproom story. It is tested but not committed or merged.
+  but the isolated nested app now has a credible integrated candidate on
+  `poc/` `main`: a stage library preserves the café story, adds the taproom
+  story, and uses local Vosk recognition.
 - The first real-corpus recognition baseline is complete and promising as a
   coarse known-sentence content signal. The user parked that lane on
   2026-07-30 pending later review; device-runtime benchmarking also remains
   deferred.
 - On 2026-07-30 the user confirmed the corrected bubble progression. Preserve
   that behavior as the baseline even as stories and stages are added. The
-  full-bleed seinen frame, café redesign, and schema-v2 art system are committed
-  on `design/art-pack-system`; narrated scene transitions are committed on
-  `design/scene-transitions`; the four-stage selector and complete taproom
-  bundle are uncommitted on `feature/story-selection`. None is on nested
-  `main`. See [Product](product.md), [Content](content.md), and
-  [Visual Design](visual-design.md).
+  full-bleed seinen frame, café redesign, schema-v2 art system, narrated scene
+  transitions, four-stage selector, complete taproom bundle, and local Vosk
+  recognition are now integrated on nested `main` at merge commit `3a3b84d`.
+  See [Product](product.md), [Content](content.md), [Recognition](recognition.md),
+  and [Visual Design](visual-design.md).
 - For learner-speaking bubbles, advance after one correct attempt, the third
   failed attempt, or one Skip press. Skip dismisses exactly one bubble and does
   not count as a failure. See [Product](product.md).
@@ -80,13 +79,12 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   user rejected a `.claude/skills/` placement for exactly this reason: such
   material must follow the project and stay in Git.
 - Use short-lived sibling worktrees for focused, apples-to-apples changes to
-  the nested `poc/` repository, then rebase and fast-forward the finished
-  commit onto nested `main`. Do not modify the dirty `poc/` checkout from
-  another worktree.
-- A personal `speak-human` skill is installed at user level for both Claude
-  (`~/.claude/skills/speak-human/`) and Codex
-  (`~/.codex/skills/speak-human/`). It is a one-off decode pass over dense
-  agent output, not a standing change to communication style.
+  the nested `poc/` repository when useful. Integrate finished commits
+  deliberately, verify that useful work is reachable, and remove duplicate
+  checkouts after integration.
+- Do not proactively invoke, analyze, or expand the personal `speak-human`
+  skill. Use it only when the user explicitly asks. Do not uninstall or modify
+  it.
 
 ## Scope boundaries
 
@@ -132,39 +130,36 @@ Out of the initial scope:
 
 ## Repository state
 
-- No approved canonical product frontend, root `pyproject.toml`,
-  project-wide test suite, or CI workflow exists yet.
-- `poc/` is an isolated Vinext/React/TypeScript Git repository. Nested `main`
-  is at `ad3a356` and remains dirty with the rejected childlike UI, scoring
-  fixtures, and later TTS-tool edits. Do not modify or clean it from another
-  worktree.
-- Five sibling worktrees of the nested PoC repository exist:
-  - `../japanese-repeat-after-me-tts` on `tts/qwen3-metal`, at `ad3a356`; its
-    original six-clip bundled-audio work was fast-forwarded to nested `main`.
-  - `../japanese-repeat-after-me-recognition` on
-    `recognition/vosk-local-first`, clean at `18fcf55`, unmerged. See
-    [Recognition](recognition.md).
-  - `../japanese-repeat-after-me-art-system` on `design/art-pack-system`,
-    **clean at `e37d5c4`**. Commit `51cbcdb` preserved the story-neutral seinen
-    frame and café art-pack system; `e37d5c4` added the redesigned two-stage
-    café story and nine reference clips. This supersedes the old
-    “uncommitted art system” warning. See [Visual Design](visual-design.md).
-  - `../japanese-repeat-after-me-scene-transitions` on
-    `design/scene-transitions`, clean at `6e6b83c`, branched from `e37d5c4`.
-    It adds schema-v2 named scene/cast maps and narrated breaks before every
-    stage. Its `node_modules` is a symlink to the art-system worktree; run
-    `npm ci` there if that source worktree is removed. See [Content](content.md)
-    and [Visual Design](visual-design.md).
-  - `../japanese-repeat-after-me-story-selection` on
-    `feature/story-selection`, based at `6e6b83c`. Its four-stage story
-    library, taproom code, ten accepted clips, and original art pack are
-    **uncommitted working-tree state**. `npm run qa` passes 21/21 tests and
-    desktop/phone production-browser QA passed. See [Delivery](delivery.md).
-- The root `stories/taproom/` authoring bundle and related document edits are
-  also uncommitted. The taproom story is implemented in the focused feature
-  worktree, but its authoring source remains useful evidence.
-- No Android device run, Sites project creation, saved Sites version, push,
-  merge, or deployment occurred.
+- No root product frontend, root `pyproject.toml`, project-wide test suite, or
+  CI workflow exists. The canonical application implementation is the isolated
+  Vinext/React/TypeScript Git repository under `poc/`.
+- Nested `poc/` `main` is clean at `3a3b84d`
+  (`Merge local Vosk recognition into four-stage app`). It is a real merge with
+  parents `14cd2b6` and `18fcf55`: the first parent contains the four-stage
+  café/taproom app and reconciled TTS history; the second is the local Vosk
+  recognition commit.
+- The earlier focused lineage remains useful history:
+  `51cbcdb`/`e37d5c4` for the art-pack and redesigned café work,
+  `6e6b83c` for scene transitions, `7a0f812` for the four-stage selector and
+  taproom integration, `14cd2b6` for TTS reconciliation, and `18fcf55` for
+  local recognition. A safety branch,
+  `safety/pre-story-selection-main-20260731`, preserves `06b5291`.
+- `poc/` is now the nested repository's only worktree. The former TTS,
+  recognition, art-system, transition, selector, and temporary integration
+  checkouts were removed after their useful commits were verified as reachable
+  or their changes were reconciled.
+- The nested app has no configured Git remote. Its merge commit and model
+  preparation outputs are local. The outer repository is public and records
+  the implementation handoff.
+- The prepared Vosk archive and split model assets under `poc/public/models/`
+  are ignored local outputs, not committed application assets. The application
+  manifest records six verified chunks for service-worker streaming.
+- The integrated app passed art/model validation, typecheck, lint, production
+  build, and 25/25 tests. Production-browser QA on IPv4 loopback reached the
+  first taproom learner bubble with recognition ready and recording enabled;
+  no microphone permission or real speech capture was performed.
+- No Android device run, Sites project creation, saved Sites version, app push,
+  or deployment occurred.
 - Six numbered experiment directories live under `experiments/`. Experiments
   001, 003, 004, and 006 contain recorded or replayed evidence; experiment 002
   lacks a committed harness; experiment 005 is incomplete and parked.
@@ -195,7 +190,7 @@ Out of the initial scope:
 - `.agents/documents/open-questions.md`
 - `poc/README.md`
 - `experiments/README.md`
-- Git history through `f7a71d4`
+- Root Git history through `1da4175`
 - User correction recorded on 2026-07-30.
 - User's two-stage dialogue and bubble-progression clarification recorded on
   2026-07-30.
@@ -206,8 +201,7 @@ Out of the initial scope:
 - User-directed café redesign, scene-transition requirement, taproom story,
   and four-stage selector work recorded on 2026-07-30 and 2026-07-31.
 - `stories/taproom/`
-- Nested PoC branches `design/art-pack-system`, `design/scene-transitions`, and
-  `feature/story-selection`.
+- Nested app merge `3a3b84d` and its parents `14cd2b6` and `18fcf55`.
 
 ## Related cells
 

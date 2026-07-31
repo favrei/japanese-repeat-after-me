@@ -183,21 +183,22 @@ Conversion was deterministic, but only `27/30` surface transcripts and `1/30`
 word/confidence/timestamp arrays matched exactly across runs. Top-one sentence
 identity and aggregate closed-catalog discrimination remained stable.
 
-## Local browser Vosk integration (branch, unmerged)
+## Local browser Vosk integration (merged)
 
-The local-first lane now has a working browser implementation, built in worktree
-`/Users/peter/workspaces/japanese-repeat-after-me-recognition` on branch
-`recognition/vosk-local-first` and committed as nested PoC commit `18fcf55`
-(`Replace browser speech with local Vosk recognition`). The branch is clean and
-one commit ahead of nested `main`; the rebase onto `main` was an up-to-date
-no-op because both shared base `d0bd4bd`. It is **not merged**, and the dirty
-`poc/` main worktree was left untouched.
+The local-first lane is integrated into the four-stage app on nested `poc/`
+`main` at merge commit `3a3b84d` (`Merge local Vosk recognition into four-stage
+app`). It is a real two-parent merge of the four-stage/TTS lineage at `14cd2b6`
+and recognition commit `18fcf55` (`Replace browser speech with local Vosk
+recognition`). The former recognition and temporary integration worktrees were
+removed after the merge was verified; `poc/` is the only remaining worktree.
 
-What it replaces Chrome `SpeechRecognition` with:
+The merged implementation replaces Chrome `SpeechRecognition` with:
 
 - `vosk-browser` 0.0.8 with AudioWorklet PCM capture;
 - separately prepared `vosk-model-small-ja-0.22`;
 - recording-quality retry checks;
+- scoring against the currently selected story's catalog rather than every
+  story in the library;
 - experiment-006-style closed-catalog target matching at the descriptive `0.30`
   content threshold.
 
@@ -208,6 +209,14 @@ Model hosting and preparation:
 - The official Vosk Japanese asset is a ZIP, while `vosk-browser` requires a
   gzipped tar archive rooted at `model/`. A checksum-pinned local prepare/check
   script therefore produces the browser archive, which stays out of Git.
+- The initial production-browser path tried to fetch that single 49,654,706-byte
+  archive and received HTTP 404. The production transport now exposes six
+  ignored local parts described by a manifest: five 8 MiB parts and one
+  7,711,666-byte part. The service worker streams those parts as the logical
+  archive response and validates their combined size.
+- The app waits for service-worker control before initializing recognition.
+  This is necessary because the model library requests the logical archive URL,
+  which only the controlling service worker can assemble.
 
 Size and memory:
 
@@ -224,17 +233,23 @@ Size and memory:
   peak process RSS on the M3. **Browser and Android memory remain unmeasured
   and are the more important gate than archive size.**
 
-Verification so far:
+Verification history:
 
 - the first `npm run test` built the app and passed 16/17, the single failure
   being a stale case-sensitive assertion for `Audio is not saved` against
   lowercase `audio` UI copy — not an implementation or build failure;
-- after that fix, `npm run qa` passed the model archive check, TypeScript, lint
-  (existing font warning only), build, and 17/17 tests;
+- after that fix, the recognition branch passed the model archive check,
+  TypeScript, lint (existing font warning only), build, and 17/17 tests;
 - on 2026-07-30 the user reported the **first local-recognition test passing in
   a live worktree preview**. This is the first positive real
   browser/microphone smoke result for the AudioWorklet + `vosk-browser` +
   `vosk-model-small-ja-0.22` path.
+- after integration and the production model-transport fix, nested `main`
+  passed art/model validation, TypeScript, lint, production build, and 25/25
+  tests;
+- a production-browser smoke on `127.0.0.1` reached the first taproom learner
+  bubble with `data-recognition-state="ready"` and recording enabled. It did
+  not request microphone permission or capture real speech.
 
 What that manual pass does **not** cover: the other speaking bubbles,
 wrong-sentence rejection, short/quiet/clipped retry behaviour, Android resource
@@ -242,9 +257,11 @@ use, and repeatability. Continue the Vosk content-verification lane first; do
 not promote synthetic DTW into the product gate until the browser and
 human-labeled evidence is stronger.
 
-Dependency risk carried by this branch:
+Dependency risk carried by the merged app:
 
-- `npm audit --omit=dev` exits nonzero in the worktree.
+- `npm audit` reports 19 findings in the full dependency graph: 2 low,
+  4 moderate, and 13 high.
+- `npm audit --omit=dev` reports 5 production findings: 2 moderate and 3 high.
 - Next.js was updated 16.2.6 → 16.2.12 for the available framework advisory
   fixes; a production audit still reports high transitive `postcss`/`sharp`
   advisories with no non-breaking resolution in the current graph.
@@ -255,34 +272,24 @@ Dependency risk carried by this branch:
   no audit fix. Keep this as an explicit browser-runtime maintenance risk
   rather than claiming a clean production audit. See [Delivery](delivery.md).
 
-## Temporary PoC adapter
+## Superseded Chrome recognition adapter
 
-- The user accepted a temporary coarse recognizer for the first Android PWA
-  PoC so recognition research would not block discussion of the product loop.
-  On 2026-07-30 the user confirmed that Chrome `SpeechRecognition` remains
-  acceptable for now but is expected to be replaced by the more advanced
-  local-first lane. That replacement now exists on an unmerged branch; see
-  the local browser Vosk section above. Until it merges, the description below
-  is what `poc/` main actually runs.
-- `poc/` uses Chrome's `SpeechRecognition` interface with Japanese alternatives
-  and a normalized character-edit similarity threshold of `0.56`. The app
-  itself does not retain audio, but Chrome may use a network speech service.
-- `poc/` also uses Levenshtein backtrace alignment between the recognized
-  transcript and target reading to display approximate per-character hit/miss
-  marks after a failed attempt. This is string evidence, not acoustic phoneme
-  scoring. It must be presented as coarse guidance rather than precise
-  pronunciation diagnosis.
-- Automated and desktop flow QA used exact-target simulated transcripts. There
-  has been no real Android microphone run, human acceptance comparison, false
+- The user accepted Chrome `SpeechRecognition` as temporary scaffolding for the
+  first Android PWA PoC so recognition research would not block product-loop
+  discussion. Historical app versions used Japanese alternatives and a
+  normalized character-edit similarity threshold of `0.56`.
+- Merge `3a3b84d` removed that runtime dependency in favor of local Vosk. Do
+  not describe current `poc/` `main` as using Chrome speech recognition.
+- Levenshtein backtrace alignment between recognized text and target reading
+  remains an approximate per-character hit/miss visualization. This is string
+  evidence, not acoustic phoneme scoring, and must stay replaceable by later
+  alignment evidence.
+- Automated flow QA still relies on synthetic transcripts. There has been no
+  real Android microphone run, human acceptance comparison, false
   acceptance/rejection measurement, or threshold calibration.
-- The first product flow was rejected and then corrected; on 2026-07-30 the
-  user confirmed the corrected flow. Preserve the adapter as replaceable
-  implementation scaffolding only: synthetic flow acceptance does not make it
-  recognition evidence or select the final scoring architecture.
-- Keep Chrome-specific behavior behind the recognition boundary. `scoreAttempt`,
-  the hit/miss renderer, and feedback UI must remain able to consume later
-  constrained-recognition and acoustic-alignment results without adopting
-  browser-service assumptions.
+- Preserve the recognition boundary: `scoreAttempt`, the hit/miss renderer, and
+  feedback UI must remain able to consume later constrained-recognition and
+  acoustic-alignment results without coupling product flow to one runtime.
 - When the user resumes this lane, begin with the human-label protocol and the
   evidence sequence below, not another uncalibrated model experiment.
 
@@ -347,10 +354,12 @@ Dependency risk carried by this branch:
 - User confirmation of the corrected flow recorded on 2026-07-30.
 - User confirmation that Chrome recognition is temporary and the advanced
   local-first lane will resume later, recorded on 2026-07-30.
-- Worktree `/Users/peter/workspaces/japanese-repeat-after-me-recognition`,
-  branch `recognition/vosk-local-first`, nested PoC commit `18fcf55`.
+- Historical branch `recognition/vosk-local-first`, nested app commit `18fcf55`,
+  merged by `3a3b84d`.
 - User report of the first passing live local-recognition test recorded on
   2026-07-30.
+- Integrated model-transport and production-browser verification recorded on
+  2026-07-31.
 
 ## Related cells
 

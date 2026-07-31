@@ -29,14 +29,13 @@ layout, swappable art slots, and pending asset work.
   system, not every concrete detail in the mockup. Its known defects must not
   be copied blindly.
 - The replacement was implemented as a story-neutral frame plus swappable art
-  packs. `design/art-pack-system` is now clean and committed at `e37d5c4`;
-  `design/scene-transitions` is clean at `6e6b83c`; neither is on nested PoC
-  `main`, which still carries the rejected childlike frame in its dirty working
-  tree.
-- The four-stage feature worktree extends the frame with a story library and an
-  original taproom pack. It passed mechanical and production-browser QA, but
-  the finished selector and taproom visuals still need the user's explicit
-  visual verdict. Treat them as candidates, not a deployed or merged frame.
+  packs at `e37d5c4`, followed by scene transitions at `6e6b83c` and the
+  four-stage library at `7a0f812`. All are now present on nested `poc/` `main`
+  through merge `3a3b84d`.
+- The four-stage app includes an original taproom pack and passed mechanical
+  and production-browser QA, but the finished selector and taproom visuals
+  still need the user's explicit visual verdict. Treat them as an integrated
+  local candidate, not an approved or deployed frame.
 
 ## Constant frame and swappable layers
 
@@ -80,10 +79,11 @@ but it is design evidence rather than production code.
 
 ## Rejected implementation and audit evidence
 
-The uncommitted frame currently in `poc/` uses Hachi Maru Pop, Klee One, a warm
+The earlier rejected frame used Hachi Maru Pop, Klee One, a warm
 paper/yellow/pink/blue palette, rounded controls, thick outlines, a chibi SVG
 staff character, and `width: min(100%, 680px)` containers. The user rejected
-that tone as looking intended for a very young child.
+that tone as looking intended for a very young child. It is preserved only as
+history; it is not the current nested-main frame.
 
 Its visual audit also found:
 
@@ -107,9 +107,9 @@ The replacement mockup still has unresolved problems:
 
 ## Art pack system
 
-Implemented on the `design/art-pack-system` lineage. It makes the
-café-as-example principle structural: the application owns the frame, a pack
-owns the art.
+Implemented on the `design/art-pack-system` lineage and now merged to nested
+`main`. It makes the café-as-example principle structural: the application owns
+the frame, a pack owns the art.
 
 - Contract lives in `art-system/` — `README.md`, `art-pack.schema.json`,
   `PROMPT_TEMPLATE.md`, and `pack-template/`. A pack is one manifest
@@ -158,8 +158,8 @@ unrelated stock art or known-wrong shipped assets.
 
 ## Generated taproom assets
 
-The `feature/story-selection` worktree contains an original monochrome
-taproom pack generated with OpenAI built-in image generation:
+Nested app commit `7a0f812` contains an original monochrome taproom pack
+generated with OpenAI built-in image generation:
 
 - `cover.png`;
 - landscape and portrait scene plates;
@@ -195,10 +195,9 @@ same preset. See [Audio](audio.md) and [Content](content.md).
   application source. Reading the replacement mockup required the file itself;
   `file://` navigation to it is blocked by browser security policy. See
   [Delivery](delivery.md).
-- The redesign was then done in the sibling worktree
-  `../japanese-repeat-after-me-art-system`; the dirty `poc/` checkout was not
-  edited. Because that worktree was seeded from `poc/`'s dirty state, the
-  branch also carries the unrelated uncommitted scoring/test changes.
+- The redesign was developed in the former sibling art-system worktree so the
+  then-dirty `poc/` checkout was not edited. That worktree was later reconciled,
+  committed, integrated, and removed.
 - After rebasing onto nested `main` (`ad3a356`, packaged Qwen3 audio), the
   redesigned `PracticeApp`, service worker, and rendered-HTML tests were
   reconciled with the bundled audio and the localhost microphone guard.
@@ -213,11 +212,14 @@ same preset. See [Audio](audio.md) and [Content](content.md).
   production build, 19/19 tests, and desktop/phone browser checks.
 - Transition veil opacity was reduced from `0.88` to `0.7`; the darker value
   hid the incoming background and defeated the purpose of the scene break.
-- The uncommitted four-stage feature worktree passed the same gate with both
-  packs and 21/21 tests. Desktop and `412×915` browser checks covered the
-  library, taproom transition, dialogue, direct Stage 2 entry, and completion.
-  A development HMR error after switching servers in one tab did not reproduce
+- The four-stage feature commit `7a0f812` passed the same gate with both packs
+  and 21/21 tests. Desktop and `412×915` browser checks covered the library,
+  taproom transition, dialogue, direct Stage 2 entry, and completion. A
+  development HMR error after switching servers in one tab did not reproduce
   as production behavior.
+- The later integrated local-recognition build at `3a3b84d` passed the expanded
+  art/model, typecheck, lint, production-build, and 25/25-test gate. Its visual
+  status is unchanged: mechanical QA is not the user's visual verdict.
 
 ## Open questions
 
@@ -245,11 +247,10 @@ same preset. See [Audio](audio.md) and [Content](content.md).
 - `poc/app/PracticeApp.tsx`
 - `poc/app/scoring.ts`
 - `poc/README.md`
-- `../japanese-repeat-after-me-art-system` on `design/art-pack-system`:
-  `art-system/README.md`, `art-system/art-pack.schema.json`,
-  `art-packs/cafe.json`, `scripts/validate-art-packs.mjs`, `app/ArtReview.tsx`
-- `../japanese-repeat-after-me-scene-transitions` at `6e6b83c`
-- `../japanese-repeat-after-me-story-selection`
+- Nested app commits `e37d5c4`, `6e6b83c`, `7a0f812`, and merge `3a3b84d`.
+- `poc/art-system/README.md`, `poc/art-system/art-pack.schema.json`,
+  `poc/art-packs/cafe.json`, `poc/scripts/validate-art-packs.mjs`, and
+  `poc/app/ArtReview.tsx`.
 
 ## Related cells
 
