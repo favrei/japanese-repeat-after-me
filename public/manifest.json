@@ -1,14 +1,14 @@
 {
-  "name": "Japanese conversation — UX flow PoC",
-  "short_name": "Conversation PoC",
-  "description": "Validate a two-stage Japanese conversation flow.",
+  "name": "にほんごものがたり — Japanese story practice",
+  "short_name": "にほんごものがたり",
+  "description": "Speak-the-line Japanese story practice in a manga frame.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f4f4f2",
-  "theme_color": "#f4f4f2",
-  "lang": "en",
+  "background_color": "#fffdf4",
+  "theme_color": "#fffdf4",
+  "lang": "ja",
   "categories": ["education"],
   "icons": [
     {

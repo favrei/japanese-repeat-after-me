@@ -16,6 +16,7 @@ export type PracticeStage = {
   id: string;
   number: number;
   title: string;
+  jpTitle: string;
   bubbles: DialogueBubble[];
 };
 
@@ -24,6 +25,7 @@ export const STAGES: PracticeStage[] = [
     id: "ordering",
     number: 1,
     title: "Ordering",
+    jpTitle: "ご注文",
     bubbles: [
       {
         id: "ordering-welcome",
@@ -88,6 +90,7 @@ export const STAGES: PracticeStage[] = [
     id: "meal",
     number: 2,
     title: "The meal",
+    jpTitle: "お食事",
     bubbles: [
       {
         id: "meal-arrives",
@@ -129,6 +132,7 @@ export type FlowBubble = DialogueBubble & {
   stageId: string;
   stageNumber: number;
   stageTitle: string;
+  stageJpTitle: string;
 };
 
 export const FLOW: FlowBubble[] = STAGES.flatMap((stage) =>
@@ -137,5 +141,6 @@ export const FLOW: FlowBubble[] = STAGES.flatMap((stage) =>
     stageId: stage.id,
     stageNumber: stage.number,
     stageTitle: stage.title,
+    stageJpTitle: stage.jpTitle,
   })),
 );

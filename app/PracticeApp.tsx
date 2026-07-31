@@ -2,7 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { resolveBubbleEvent } from "./flow";
-import { scoreAttempt } from "./scoring";
+import {
+  markReadingHits,
+  normalizeJapanese,
+  scoreAttempt,
+  type ReadingMark,
+} from "./scoring";
 import { FLOW, STAGES, type FlowBubble } from "./stages";
 
 type Screen = "welcome" | "conversation" | "complete";
@@ -10,7 +15,7 @@ type FeedbackTone = "success" | "failure" | "notice";
 
 type Feedback = {
   tone: FeedbackTone;
-  title: string;
+  kind: "attempt" | "error";
   detail: string;
   transcript?: string;
 };
@@ -65,6 +70,13 @@ declare global {
 
 function wait(milliseconds: number) {
   return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+}
+
+/** Development-only: a half-right version of the line for near-miss QA. */
+function nearMissTranscript(reading: string) {
+  return Array.from(normalizeJapanese(reading))
+    .map((char, index) => (index % 2 === 0 ? "ま" : char))
+    .join("");
 }
 
 function playSystemJapanese(text: string) {
@@ -127,32 +139,153 @@ function playJapanese(
   });
 }
 
-function DialogueBubble({
+type CharMood = "neutral" | "happy" | "sad";
+
+function StaffCharacter({ mood, dim }: { mood: CharMood; dim: boolean }) {
+  return (
+    <svg
+      className={`char${dim ? " dim" : ""}`}
+      viewBox="0 0 150 220"
+      aria-hidden="true"
+    >
+      <ellipse
+        cx="118"
+        cy="130"
+        rx="26"
+        ry="8"
+        fill="#8a5a34"
+        stroke="#1c1a17"
+        strokeWidth="3"
+      />
+      <rect
+        x="40"
+        y="92"
+        width="70"
+        height="128"
+        rx="20"
+        fill="#fff"
+        stroke="#1c1a17"
+        strokeWidth="3"
+      />
+      <path
+        d="M48 108 h54 v112 h-54 z"
+        fill="#6b4225"
+        stroke="#1c1a17"
+        strokeWidth="3"
+      />
+      <rect
+        x="66"
+        y="108"
+        width="18"
+        height="30"
+        fill="#ffd23f"
+        stroke="#1c1a17"
+        strokeWidth="2.5"
+      />
+      <circle
+        cx="75"
+        cy="56"
+        r="32"
+        fill="#ffe8d6"
+        stroke="#1c1a17"
+        strokeWidth="3"
+      />
+      <path
+        d="M43 52 a32 32 0 0 1 64 0 l-6 2 a26 24 0 0 0 -52 0 z"
+        fill="#1c1a17"
+      />
+      {mood === "happy" ? (
+        <>
+          <path
+            d="M58 56 q6 -6 12 0"
+            fill="none"
+            stroke="#1c1a17"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M80 56 q6 -6 12 0"
+            fill="none"
+            stroke="#1c1a17"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M66 68 q9 8 18 0"
+            fill="none"
+            stroke="#1c1a17"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        </>
+      ) : (
+        <>
+          <circle cx="64" cy="58" r="3.2" fill="#1c1a17" />
+          <circle cx="86" cy="58" r="3.2" fill="#1c1a17" />
+          {mood === "sad" ? (
+            <path
+              d="M68 72 q7 -5 14 0"
+              fill="none"
+              stroke="#1c1a17"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          ) : (
+            <path
+              d="M68 70 q7 6 14 0"
+              fill="none"
+              stroke="#1c1a17"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          )}
+        </>
+      )}
+      {mood !== "sad" ? (
+        <>
+          <circle cx="56" cy="66" r="4" fill="#ffb3a7" opacity=".7" />
+          <circle cx="94" cy="66" r="4" fill="#ffb3a7" opacity=".7" />
+        </>
+      ) : null}
+    </svg>
+  );
+}
+
+function DialogueBalloon({
   bubble,
   showStatus,
+  marks,
 }: {
   bubble: FlowBubble;
   showStatus: boolean;
+  marks?: ReadingMark[];
 }) {
   const isLearner = bubble.speaker === "learner";
 
   return (
     <article
-      className={`dialogue-bubble ${isLearner ? "is-learner" : "is-staff"}`}
+      className={`bl ${isLearner ? "right" : "left"}`}
       data-testid={`bubble-${bubble.id}`}
     >
-      <div className="bubble-label">
-        <span>{isLearner ? "You" : "Staff"}</span>
-        {bubble.mode === "autoplay" ? <span>Autoplay</span> : null}
-      </div>
-      <p className="bubble-japanese">{bubble.japanese}</p>
-      <p className="bubble-reading">{bubble.reading}</p>
-      <p className="bubble-translation">{bubble.translation}</p>
-      {showStatus ? (
-        <p className="bubble-status" aria-live="polite">
-          Playing automatically…
-        </p>
+      <span className={`who ${isLearner ? "you" : "staff"}`}>
+        {isLearner ? "あなた" : "てんいん"}
+      </span>
+      {bubble.mode === "autoplay" && showStatus ? (
+        <span className="playing">♪ AUTO</span>
       ) : null}
+      <p className="jp">{bubble.japanese}</p>
+      {marks ? (
+        <p className="rd marked">
+          {marks.map((mark, index) => (
+            <span className={mark.state} key={`${mark.char}-${index}`}>
+              {mark.char}
+            </span>
+          ))}
+        </p>
+      ) : (
+        <p className="rd">{bubble.reading}</p>
+      )}
+      <p className="en">{bubble.translation}</p>
     </article>
   );
 }
@@ -325,8 +458,8 @@ export function PracticeApp() {
     if (result.passed) {
       setFeedback({
         tone: "success",
-        title: "Success",
-        detail: "Moving to the next bubble.",
+        kind: "attempt",
+        detail: "つぎの ふきだしへ すすみます — moving to the next bubble…",
         transcript: result.transcript,
       });
       window.navigator.vibrate?.(40);
@@ -338,19 +471,20 @@ export function PracticeApp() {
     if (decision.advance) {
       setFeedback({
         tone: "notice",
-        title: "Three failed attempts",
-        detail: "Moving to the next bubble.",
+        kind: "attempt",
+        detail: "3かい だめでも すすみます — the third miss still moves on.",
         transcript: result.transcript,
       });
       scheduleAdvance(650);
       return;
     }
 
+    const remaining = 3 - decision.failedAttempts;
     setFeedback({
       tone: "failure",
-      title: "Try again",
-      detail: `${3 - decision.failedAttempts} ${
-        3 - decision.failedAttempts === 1 ? "attempt" : "attempts"
+      kind: "attempt",
+      detail: `のこり ${remaining}かい — ${remaining} ${
+        remaining === 1 ? "attempt" : "attempts"
       } remaining.`,
       transcript: result.transcript,
     });
@@ -361,12 +495,10 @@ export function PracticeApp() {
       error === "not-allowed" || error === "service-not-allowed";
     setFeedback({
       tone: "failure",
-      title: permissionDenied
-        ? "Microphone permission is needed"
-        : "Speech was not captured",
+      kind: "error",
       detail: permissionDenied
-        ? "Allow microphone access in Chrome, then try again or use Skip."
-        : "This technical error does not count as a failed attempt.",
+        ? "マイクの きょかが ひつようです — allow microphone access in Chrome, then try again or use Skip."
+        : "きこえませんでした — technical error; this does not count as a failed attempt.",
     });
   }
 
@@ -389,9 +521,9 @@ export function PracticeApp() {
     if (!window.isSecureContext) {
       setFeedback({
         tone: "failure",
-        title: "Trusted local URL required",
+        kind: "error",
         detail:
-          "Microphone access needs HTTPS or localhost. Open this app on a trusted HTTPS or localhost URL.",
+          "マイクには HTTPS または localhost が必要です — open this app on a trusted HTTPS or localhost URL.",
       });
       return;
     }
@@ -401,8 +533,9 @@ export function PracticeApp() {
     if (!Recognition) {
       setFeedback({
         tone: "failure",
-        title: "Speech recognition is unavailable",
-        detail: "Use Android Chrome for this PoC, or use Skip.",
+        kind: "error",
+        detail:
+          "この ブラウザでは おんせいにんしきが つかえません — use Android Chrome for this PoC, or use Skip.",
       });
       return;
     }
@@ -453,56 +586,57 @@ export function PracticeApp() {
 
   if (screen === "welcome") {
     return (
-      <main className="poc-shell welcome-screen">
-        <header className="plain-header">
-          <span>UX flow PoC</span>
-          <span>Android Chrome PWA</span>
-        </header>
-
-        <section className="welcome-content">
-          <p className="overline">Japanese conversation</p>
-          <h1>Café conversation</h1>
-          <p className="welcome-copy">
-            One continuous conversation across two stages. Autoplay bubbles move
-            on by themselves. You speak when prompted.
-          </p>
-
-          <ol className="stage-summary" aria-label="Conversation stages">
+      <main className="cover-screen">
+        <div className="book">
+          <span className="vol">第1巻</span>
+          <h1>
+            にほんご
+            <br />
+            <span className="hl">ものがたり</span>
+          </h1>
+          <p className="sub">SPEAK-THE-LINE STORY PRACTICE</p>
+          <div className="art">
+            <span>STORY COVER — 喫茶店</span>
+            <span>(swappable story art slot)</span>
+          </div>
+          <ol className="chapters" aria-label="Conversation stages">
             {STAGES.map((stage) => (
               <li key={stage.id}>
-                <span>Stage {stage.number}</span>
-                <strong>{stage.title}</strong>
+                <b>
+                  第{stage.number}話 {stage.jpTitle}
+                </b>
                 <small>
                   {stage.bubbles.length} bubbles ·{" "}
                   {
                     stage.bubbles.filter((bubble) => bubble.mode === "speak")
                       .length
                   }{" "}
-                  for you to speak
+                  to speak
                 </small>
               </li>
             ))}
           </ol>
+        </div>
 
+        <footer className="cover-foot">
           <button
-            className="primary-action"
+            className="cta"
             data-testid="start-conversation"
             onClick={beginConversation}
             type="button"
           >
-            Start conversation
+            📖 はじめる！
           </button>
-
           <p className="flow-rule">
-            A speaking bubble ends after one success, three failed attempts, or
-            Skip. Skip always dismisses exactly one bubble.
+            1かい せいこう、3かい しっぱい、または スキップで すすみます。
+            <br />A speaking bubble ends after one success, three failed
+            attempts, or Skip. Skip always dismisses exactly one bubble.
           </p>
-        </section>
-
-        <footer className="plain-footer">
-          <span>Audio is not saved by this app.</span>
+          <p className="note">
+            ろくおんは のこりません — Audio is not saved by this app.
+          </p>
           {installPrompt ? (
-            <button onClick={installApp} type="button">
+            <button className="ghost" onClick={installApp} type="button">
               Install app
             </button>
           ) : null}
@@ -513,63 +647,124 @@ export function PracticeApp() {
 
   if (screen === "complete") {
     return (
-      <main className="poc-shell complete-screen">
-        <div className="complete-content">
-          <p className="overline">Finished</p>
-          <h1>Conversation complete</h1>
-          <p>You reached the end of both stages.</p>
+      <main className="end-screen">
+        <span
+          className="star"
+          style={{ left: "12%", top: "22%", fontSize: 30, rotate: "-14deg" }}
+        >
+          ✦
+        </span>
+        <span
+          className="star"
+          style={{ right: "14%", top: "30%", fontSize: 22, rotate: "10deg" }}
+        >
+          ✦
+        </span>
+        <span
+          className="star"
+          style={{ left: "18%", bottom: "28%", fontSize: 18, rotate: "8deg" }}
+        >
+          ✦
+        </span>
+        <div className="big">おしまい！</div>
+        <p className="cont">— The End —</p>
+        <p className="cap">
+          You reached the end of both stages.
+          <br />
+          よく がんばりました！
+        </p>
+        <div className="btns">
           <button
-            className="primary-action"
+            className="cta"
             data-testid="start-again"
             onClick={beginConversation}
             type="button"
           >
-            Start again
+            🔁 もういっかい！
           </button>
-          <button className="secondary-action" onClick={exitConversation} type="button">
-            Back to start
+          <button className="ghost" onClick={exitConversation} type="button">
+            表紙にもどる
           </button>
         </div>
       </main>
     );
   }
 
+  const attemptSucceeded = feedback?.kind === "attempt" && feedback.tone === "success";
+  const attemptMissed = feedback?.kind === "attempt" && feedback.tone !== "success";
+  const charMood: CharMood = attemptSucceeded
+    ? "happy"
+    : attemptMissed
+      ? "sad"
+      : "neutral";
+  const charDim = currentBubble.mode === "speak" && !attemptSucceeded;
+
+  const failureMarks =
+    attemptMissed && feedback.transcript
+      ? markReadingHits(currentBubble.reading, feedback.transcript)
+      : undefined;
+
+  const sfx: { text: string; className: string } = isListening
+    ? { text: "ゴゴゴ…", className: "listen" }
+    : attemptSucceeded
+      ? { text: "キラキラ✦", className: "win" }
+      : attemptMissed
+        ? { text: "しょぼん…", className: "miss" }
+        : currentBubble.mode === "speak"
+          ? { text: "ドキドキ…", className: "speak" }
+          : { text: "ざわざわ…", className: "calm" };
+
+  const panelTitle = isListening
+    ? "聞いている…"
+    : attemptSucceeded
+      ? "いいね！"
+      : feedback?.kind === "attempt"
+        ? feedback.tone === "notice"
+          ? "つぎへ！"
+          : "もういちど！"
+        : feedback?.kind === "error"
+          ? "あれれ？"
+          : "話してみて！";
+
   return (
     <main className="conversation-screen">
-      <header className="conversation-header">
-        <button onClick={exitConversation} type="button">
-          Exit
+      <header className="hd">
+        <button className="chip" onClick={exitConversation} type="button">
+          やめる
         </button>
-        <div>
-          <span>
-            Stage {currentBubble.stageNumber} of {STAGES.length}
-          </span>
-          <strong>{currentBubble.stageTitle}</strong>
+        <div className="ttl">
+          <small>
+            STAGE {currentBubble.stageNumber} / {STAGES.length}
+          </small>
+          <strong>{currentBubble.stageJpTitle}！</strong>
         </div>
         <button
+          className="chip"
           data-testid="skip-bubble"
           onClick={skipBubble}
           type="button"
         >
-          Skip
+          スキップ
         </button>
       </header>
 
       <div
-        className="bubble-progress"
+        className="pg"
         aria-label={`Bubble ${position + 1} of ${FLOW.length}`}
       >
         <span>
-          Bubble {position + 1} of {FLOW.length}
+          {position + 1}/{FLOW.length}
         </span>
-        <div>
+        <div className="cells">
           {FLOW.map((bubble, index) => (
             <i
               className={
                 index < position
-                  ? "is-complete"
+                  ? "done"
                   : index === position
-                    ? "is-current"
+                    ? attemptSucceeded
+                      ? "win"
+                      : "now"
                     : ""
               }
               key={bubble.id}
@@ -578,48 +773,86 @@ export function PracticeApp() {
         </div>
       </div>
 
-      <section className="bubble-stage" aria-label="Current dialogue bubble">
-        <DialogueBubble
+      <section className="scene" aria-label="Current dialogue bubble">
+        <span className={`sfx ${sfx.className}`}>{sfx.text}</span>
+        <StaffCharacter mood={charMood} dim={charDim} />
+        <div className="wood-counter" aria-hidden="true" />
+        <DialogueBalloon
           bubble={currentBubble}
           showStatus={currentBubble.mode === "autoplay" && isSpeaking}
+          marks={failureMarks}
         />
+        {attemptSucceeded ? <div className="burst win">ピンポン！</div> : null}
+        {attemptMissed ? <div className="burst miss">ざんねん…</div> : null}
+        {isListening ? (
+          <div className="mic-bars" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
+        ) : null}
       </section>
 
-      <section className="interaction-panel">
+      <section className="pn">
         {currentBubble.mode === "speak" ? (
           <>
-            <div className="attempt-heading">
-              <div>
-                <p className="overline">Your turn</p>
-                <h2>Speak this sentence</h2>
+            <div className="row">
+              <h2>{panelTitle}</h2>
+              <div className="tries">
+                {attemptSucceeded ? (
+                  <>
+                    <i className="clear" />
+                    <i />
+                    <i />
+                    <small>clear!</small>
+                  </>
+                ) : (
+                  <>
+                    <i className={failedAttempts >= 1 ? "on" : ""} />
+                    <i className={failedAttempts >= 2 ? "on" : ""} />
+                    <i className={failedAttempts >= 3 ? "on" : ""} />
+                    <small>
+                      {feedback?.kind === "attempt" &&
+                      feedback.tone === "failure"
+                        ? `のこり ${3 - failedAttempts}かい`
+                        : `${Math.min(failedAttempts + 1, 3)}/3`}
+                    </small>
+                  </>
+                )}
               </div>
-              <span>Attempt {Math.min(failedAttempts + 1, 3)} of 3</span>
             </div>
 
             {feedback ? (
-              <div
-                className={`feedback ${feedback.tone}`}
-                data-testid="feedback"
-                role="status"
-              >
-                <strong>{feedback.title}</strong>
-                <span>{feedback.detail}</span>
-                {feedback.transcript ? (
-                  <small>Chrome heard: 「{feedback.transcript}」</small>
-                ) : null}
-              </div>
+              <p className="cap" data-testid="feedback" role="status">
+                {feedback.detail}
+              </p>
             ) : null}
 
             <button
-              className={`speak-action ${isListening ? "is-listening" : ""}`}
+              className={`cta${isListening ? " live" : ""}`}
               data-testid="record"
               disabled={isAdvancing}
               onClick={isListening ? stopListening : startListening}
               type="button"
             >
-              {isListening ? "Stop listening" : "Start speaking"}
-              <small>Audio is not saved</small>
+              {isListening
+                ? "● 録音中 — おわったら おしてね"
+                : failedAttempts > 0
+                  ? "🎤 もういちど はなす"
+                  : "🎤 はなす！"}
             </button>
+
+            <p className="note">
+              ろくおんは のこりません — Audio is not saved
+              {feedback?.transcript ? (
+                <>
+                  <br />
+                  Chrome heard: 「{feedback.transcript}」
+                </>
+              ) : null}
+            </p>
 
             {qaMode ? (
               <div className="qa-controls" aria-label="Development flow controls">
@@ -630,6 +863,16 @@ export function PracticeApp() {
                   type="button"
                 >
                   QA success
+                </button>
+                <button
+                  data-testid="qa-near"
+                  disabled={isAdvancing}
+                  onClick={() =>
+                    handleTranscripts([nearMissTranscript(currentBubble.reading)])
+                  }
+                  type="button"
+                >
+                  QA near-miss
                 </button>
                 <button
                   data-testid="qa-fail"
@@ -643,10 +886,17 @@ export function PracticeApp() {
             ) : null}
           </>
         ) : (
-          <div className="autoplay-panel" aria-live="polite">
-            <p className="overline">Autoplay</p>
-            <h2>{isSpeaking ? "Playing this bubble" : "Moving on"}</h2>
-            <p>You can tap Skip to dismiss it immediately.</p>
+          <div aria-live="polite">
+            <div className="row">
+              <h2>聞いてみよう</h2>
+              <span className="playing-chip">
+                {isSpeaking ? "♪ さいせい中" : "つぎへ…"}
+              </span>
+            </div>
+            <p className="cap">
+              この ふきだしは じどうで すすみます — autoplay · tap スキップ to
+              move on now
+            </p>
           </div>
         )}
       </section>

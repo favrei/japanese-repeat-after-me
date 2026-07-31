@@ -11,6 +11,7 @@ const SHELL = [
   "/audio/qwen3/ordering-thanks.mp3",
   "/audio/qwen3/meal-arrives.mp3",
 ];
+const FONT_HOSTS = new Set(["fonts.googleapis.com", "fonts.gstatic.com"]);
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL)));
@@ -37,6 +38,26 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
 
   const url = new URL(request.url);
+
+  // Cache-first for Google Fonts CSS/files so the manga frame fonts keep
+  // working offline after the first visit.
+  if (FONT_HOSTS.has(url.host)) {
+    event.respondWith(
+      caches.match(request).then(
+        (cached) =>
+          cached ||
+          fetch(request).then((response) => {
+            if (response.ok) {
+              const copy = response.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+            }
+            return response;
+          }),
+      ),
+    );
+    return;
+  }
+
   if (url.origin !== self.location.origin) return;
 
   if (request.mode === "navigate") {
