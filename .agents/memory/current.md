@@ -31,6 +31,11 @@ Canonical detail belongs in linked cells.
   future backend owns only identity, catalog, compact progress sync, and
   chapter-submission intake. A downloaded session must complete offline. See
   [Backend and Data](cells/backend.md).
+- The next implementation lane is the frontend/backend separation: preserve
+  current behavior while making client, server, shared-contract, and
+  cross-boundary test ownership explicit. Use Cloudflare's local runtime for
+  D1/R2 integration and keep one top-level QA gate. See
+  [Backend and Data](cells/backend.md).
 - The library preserves the café rather than replacing it with the taproom.
   Direct Stage 2 entry opens that stage's transition and runs only the rest of
   that story. Every stage owns a `sceneId`, `castId`, and skip-safe narrated
@@ -76,6 +81,10 @@ Canonical detail belongs in linked cells.
   Future pack URLs are immutable and versioned; catalog changes are additive;
   hosted services must degrade to delayed sync rather than break practice.
   See [Backend and Data](cells/backend.md).
+- Stay Cloudflare-native for the current backend. Keep provider-specific access
+  localized behind natural storage helpers, but do not build a portability
+  framework or GCP adapter until a real migration is requested. See
+  [Backend and Data](cells/backend.md).
 - Keep model weights, caches, private recordings, and disposable TTS outputs
   out of Git and deployment packages. Reviewed reference clips are intentional
   application assets; the private corpus remains local and untracked. See
@@ -134,6 +143,10 @@ Canonical detail belongs in linked cells.
   privacy/package checks, honest audit disclosure, real-device trusted-HTTPS
   QA, explicit approval, and verified private access when privacy is intended.
   See [Delivery](cells/delivery.md).
+- Separation must retain the existing characterization tests, add local
+  Worker/D1/R2 and contract coverage, and prove that a downloaded session
+  completes when the backend is unavailable. See
+  [Backend and Data](cells/backend.md).
 - The deployed artifact proves Sites packaging only. It does not close Android
   microphone, recognition, PWA installation, or offline QA.
 - When recognition resumes, label acceptable, intentionally incorrect, and

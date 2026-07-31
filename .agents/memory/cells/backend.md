@@ -72,6 +72,71 @@ This is the negotiated end state, not current implementation:
   an R2 `drafts/` key plus a D1 status row. Review remains out of band unless a
   later proven need justifies queue or scheduled-job machinery.
 
+## Provider choice and research routing
+
+- Use Cloudflare Workers, D1, R2, and their local test tooling for the current
+  implementation. The dependency is accepted and should remain visible and
+  localized.
+- Preserve natural seams—HTTP contracts and small catalog, progress, and pack
+  storage helpers—but do not build a provider-neutral framework or unused GCP
+  adapter.
+- Detailed vendor research and external links live under `.agents/resources/`:
+  [Cloudflare backend reference](../../resources/backend/cloudflare.md) and
+  [GCP backend reference](../../resources/backend/gcp.md).
+- Keep canonical project decisions and active consequences in this cell.
+  Create a separate provider memory cell only when that provider becomes an
+  independently active project topic with enough durable decisions to pass the
+  normal cell gate. GCP is currently a hypothetical reference only.
+
+## Separation and test boundary
+
+- Frontend/backend separation is intended to reduce local reasoning scope and
+  contain system-wide failures at a small explicit contract. Do not frame the
+  split as making every test harder or duplicate subsystem tests end to end.
+- Preserve the existing `flow`, `scoring`, `recognition-quality`, and
+  `rendered-html` tests as characterization coverage while responsibilities
+  move.
+- Separate test ownership into:
+  - client tests for gameplay, playback, recognition, caching, and offline
+    progress;
+  - server tests for identity, catalog, progress sync, and submission intake;
+  - shared contract tests for pack, catalog, and progress payloads;
+  - a small cross-boundary suite for real HTTP, offline failure containment,
+    reconnection, and synchronization.
+- Retain one top-level `npm run qa` gate. Separation is organizational, not a
+  reason to create multiple repositories or unrelated test frameworks.
+- The essential invariant is that a downloaded practice session completes with
+  the backend unavailable. Reconnection may synchronize progress but must not
+  change gameplay results.
+
+## Cloudflare local-runtime testing
+
+- `poc/vite.config.ts` imports `@cloudflare/vite-plugin`, selects
+  `worker/index.ts` as the Worker entry, and derives local D1/R2 bindings from
+  logical names in `.openai/hosting.json`.
+- `npm run dev` and `npm run build` load that Vite configuration. Miniflare and
+  workerd are owned by the Cloudflare plugin; the application does not import
+  them directly.
+- D1/R2 are currently inactive because `.openai/hosting.json` declares both
+  bindings `null`. The Worker environment currently exposes only static assets
+  and image processing.
+- Existing automated tests build through the Cloudflare plugin, then run as
+  ordinary Node tests. No test currently starts a Cloudflare test runtime or
+  exercises local D1/R2.
+- Local and hosted application source must remain the same. Local and Sites
+  environments differ in resource identity, data, secrets, and binding wiring,
+  not business logic or route source.
+- Test D1 by applying migrations to a fresh isolated local database, seeding
+  fixtures, exercising Worker routes, restarting to verify persistence, and
+  testing upgrade from the previous schema.
+- Test R2 by uploading fixture packs locally and exercising put/get/list,
+  missing-object, metadata, and immutable-version behavior.
+- Keep a small post-deploy smoke for real Sites binding provisioning,
+  persistence, and migration wiring. Do not rerun the whole local suite against
+  production or point routine local tests at production data.
+- `build/sites-vite-plugin.ts` packages hosting metadata and migrations; it is
+  not the local Cloudflare test runtime.
+
 ## Sites durability constraints
 
 - GPT Sites supplies one Cloudflare Worker, one D1, one R2, and the separate
@@ -163,6 +228,9 @@ same change that creates that table:
 - `poc/worker/index.ts`
 - `poc/public/sw.js`
 - `poc/app/PracticeApp.tsx`
+- `.agents/resources/backend/cloudflare.md`
+- `.agents/resources/backend/gcp.md`
+- User testing and separation clarification recorded on 2026-07-31.
 
 ## Related cells
 
