@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-08-01T07:38:24.717676+00:00",
+  "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-6bit",
+  "revision": "1c6c0ff58c43afa8df571facde2efa077efd85e2",
+  "default_voice": "Ono_Anna",
+  "max_tokens": 256,
+  "max_attempts": 5,
+  "clips": [
+    {
+      "id": "ordering-open",
+      "text": "昼下がりの喫茶店。ドアを開けると、コーヒーの香りがした。",
+      "file": "ordering-open.mp3",
+      "voice": "aiden",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 1990034780,
+      "duration_seconds": 4.64,
+      "expected_seconds": [
+        2.5,
+        11.0
+      ],
+      "suspect": false,
+      "sha256": "4384dc7ec6076203226a6dda0ace6252d9008916324efe87e04e14963f825f19"
+    },
+    {
+      "id": "meal-open",
+      "text": "カップが空になった。あなたは伝票を持って、席を立った。",
+      "file": "meal-open.mp3",
+      "voice": "aiden",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 720458274,
+      "duration_seconds": 5.04,
+      "expected_seconds": [
+        2.4,
+        10.6
+      ],
+      "suspect": false,
+      "sha256": "5e4c2b9bdc03ef11db28111fd95af23a734e5b8a7383b37190ebf04f499e1536"
+    }
+  ]
+}

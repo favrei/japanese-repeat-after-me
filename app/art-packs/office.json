@@ -1,0 +1,74 @@
+{
+  "$schema": "../art-system/art-pack.schema.json",
+  "schemaVersion": 2,
+  "id": "office",
+  "title": {
+    "ja": "土曜日のライブ",
+    "en": "Saturday's gig"
+  },
+  "labels": {
+    "volume": "第3巻"
+  },
+  "cover": "/art-packs/office/cover.png",
+  "scenes": {
+    "lounge": {
+      "landscape": "/art-packs/office/lounge-landscape.png",
+      "portrait": "/art-packs/office/lounge-portrait.png",
+      "focus": {
+        "landscape": "50% 52%",
+        "portrait": "50% 54%"
+      },
+      "scale": 1
+    },
+    "lounge-close": {
+      "landscape": "/art-packs/office/lounge-landscape.png",
+      "portrait": "/art-packs/office/lounge-portrait.png",
+      "focus": {
+        "landscape": "52% 52%",
+        "portrait": "50% 54%"
+      },
+      "scale": 1.24
+    },
+    "entrance": {
+      "landscape": "/art-packs/office/entrance-landscape.png",
+      "portrait": "/art-packs/office/entrance-portrait.png",
+      "focus": {
+        "landscape": "42% 54%",
+        "portrait": "44% 56%"
+      },
+      "scale": 1
+    },
+    "entrance-close": {
+      "landscape": "/art-packs/office/entrance-landscape.png",
+      "portrait": "/art-packs/office/entrance-portrait.png",
+      "focus": {
+        "landscape": "42% 54%",
+        "portrait": "44% 56%"
+      },
+      "scale": 1.24
+    }
+  },
+  "characters": {
+    "coworker": {
+      "label": "同僚",
+      "anchor": "left",
+      "heightPercent": {
+        "mobile": 58,
+        "desktop": 72
+      },
+      "bottomPercent": -2,
+      "art": {
+        "neutral": "/art-packs/office/coworker-neutral.png",
+        "positive": "/art-packs/office/coworker-positive.png",
+        "concerned": "/art-packs/office/coworker-concerned.png"
+      }
+    }
+  },
+  "provenance": {
+    "creator": "OpenAI Codex",
+    "generator": "OpenAI built-in image generation",
+    "generatedAt": "2026-08-01",
+    "promptGuide": "/art-system/PROMPT_TEMPLATE.md",
+    "notes": "Source generations are under ~/.codex/generated_images/019fbd43-baf5-7b10-9160-4febfeb690a0/. `lounge-close` and `entrance-close` deliberately reframe their matching landscape/portrait plates with a 1.24x push-in. Character states were identity-preserving edits of one chroma-key anchor and were converted to alpha locally with the imagegen skill helper. The canonical pack contract keeps story art monochrome, so the band T-shirt is the darkest visual anchor and the single deep-red accent remains UI-only."
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T03:58:36.166701+00:00",
+  "generated_at": "2026-08-01T06:39:56.109976+00:00",
   "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-6bit",
   "revision": "1c6c0ff58c43afa8df571facde2efa077efd85e2",
   "default_voice": "Ono_Anna",
@@ -165,6 +165,86 @@
       ],
       "suspect": false,
       "sha256": "108ecf9abad56f564fd84c017839b3705d486b3c20928dbfda229de834778cbf"
+    },
+    {
+      "id": "taproom-choose-firsttime",
+      "text": "あの、初めてなんです。",
+      "file": "taproom-choose-firsttime.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 1890149488,
+      "duration_seconds": 2.16,
+      "expected_seconds": [
+        0.9,
+        4.6
+      ],
+      "suspect": false,
+      "sha256": "7b3a11818115aa13431793cc138136f0453571e48b33c76d03ecaab13481968a"
+    },
+    {
+      "id": "taproom-choose-recommend",
+      "text": "おすすめはどれですか。",
+      "file": "taproom-choose-recommend.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 245380995,
+      "duration_seconds": 2.08,
+      "expected_seconds": [
+        1.0,
+        5.0
+      ],
+      "suspect": false,
+      "sha256": "3a5e37ccb604a3f9a9db34538d27594e1aba1bc283c6bae0da961d81ec0dd73f"
+    },
+    {
+      "id": "taproom-choose-order",
+      "text": "じゃあ、ペールエールをお願いします。",
+      "file": "taproom-choose-order.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 1423410741,
+      "duration_seconds": 4.96,
+      "expected_seconds": [
+        1.6,
+        7.4
+      ],
+      "suspect": false,
+      "sha256": "75532b793bed27454585a5885849333ad01d0fc40938665314a07a2099d87568"
+    },
+    {
+      "id": "taproom-glass-pay",
+      "text": "お会計は今ですか。",
+      "file": "taproom-glass-pay.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 1186458420,
+      "duration_seconds": 2.32,
+      "expected_seconds": [
+        0.8,
+        4.2
+      ],
+      "suspect": false,
+      "sha256": "3596592d5c73a6ee8ec07d8d46443cc74cb80574eb50ce259f347c65d1e37a76"
+    },
+    {
+      "id": "taproom-glass-here",
+      "text": "ここで飲んでもいいですか。",
+      "file": "taproom-glass-here.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": null,
+      "seed": 846453844,
+      "duration_seconds": 1.76,
+      "expected_seconds": [
+        1.2,
+        5.8
+      ],
+      "suspect": false,
+      "sha256": "ebe6f353f74d0fc31bb8a3026362437374a61763f16bbff0f19020db90d372cf"
     }
   ]
 }

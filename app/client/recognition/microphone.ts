@@ -19,8 +19,24 @@ export type MicrophoneRouteEvidence = {
   status: "browser-default" | "matched" | "unverifiable";
 };
 
+/**
+ * How long a track may sit muted before it counts as a lost route.
+ *
+ * `muted` is the spec's "the source cannot deliver data right now" flag, and a
+ * microphone raises it both when the route really dies and while it is still
+ * warming up — a Bluetooth headset renegotiating to its capture profile can
+ * stay muted for the better part of a second. Treating the first `mute` as a
+ * lost route killed sessions that were only starting; only a mute that never
+ * recovers is a real loss.
+ */
+const MUTE_GRACE_MS = 1500;
+
+/** Ceiling on waiting for a warming microphone before recording anyway. */
+export const MICROPHONE_READY_TIMEOUT_MS = 2000;
+
 export class GameMicrophoneSession {
   private closed = false;
+  private muteTimer: ReturnType<typeof setTimeout> | null = null;
   private readonly onRouteLost: () => void;
   private routeLost = false;
   public readonly route: MicrophoneRouteEvidence;
@@ -48,7 +64,8 @@ export class GameMicrophoneSession {
     }
 
     this.track = track;
-    this.track.addEventListener("mute", this.handleRouteLost);
+    this.track.addEventListener("mute", this.handleMuted);
+    this.track.addEventListener("unmute", this.handleUnmuted);
     this.track.addEventListener("ended", this.handleRouteLost);
   }
 
@@ -56,16 +73,67 @@ export class GameMicrophoneSession {
     return !this.closed && this.track.readyState === "live";
   }
 
+  /** The track is live and the source says it can deliver audio right now. */
+  get ready() {
+    return this.active && !this.track.muted;
+  }
+
+  /**
+   * Resolves once the source reports it can deliver audio, or `false` when the
+   * device never says so. Status-driven, with the timeout only as a ceiling so
+   * a device that never reports cannot hang the turn.
+   */
+  waitUntilReady(timeoutMs = MICROPHONE_READY_TIMEOUT_MS) {
+    if (this.ready) return Promise.resolve(true);
+    if (!this.active) return Promise.resolve(false);
+
+    return new Promise<boolean>((resolve) => {
+      const settle = (ready: boolean) => {
+        clearTimeout(timer);
+        this.track.removeEventListener("unmute", handleUnmute);
+        this.track.removeEventListener("ended", handleEnded);
+        resolve(ready);
+      };
+      const handleUnmute = () => settle(this.ready);
+      const handleEnded = () => settle(false);
+      const timer = setTimeout(() => settle(this.ready), timeoutMs);
+
+      this.track.addEventListener("unmute", handleUnmute);
+      this.track.addEventListener("ended", handleEnded);
+    });
+  }
+
+  private readonly handleMuted = () => {
+    if (this.closed || this.routeLost || this.muteTimer !== null) return;
+    this.muteTimer = setTimeout(() => {
+      this.muteTimer = null;
+      if (this.track.muted) this.handleRouteLost();
+    }, MUTE_GRACE_MS);
+  };
+
+  private readonly handleUnmuted = () => {
+    this.clearMuteTimer();
+  };
+
   private readonly handleRouteLost = () => {
     if (this.closed || this.routeLost) return;
+    this.clearMuteTimer();
     this.routeLost = true;
     this.onRouteLost();
   };
 
+  private clearMuteTimer() {
+    if (this.muteTimer === null) return;
+    clearTimeout(this.muteTimer);
+    this.muteTimer = null;
+  }
+
   close() {
     if (this.closed) return;
     this.closed = true;
-    this.track.removeEventListener("mute", this.handleRouteLost);
+    this.clearMuteTimer();
+    this.track.removeEventListener("mute", this.handleMuted);
+    this.track.removeEventListener("unmute", this.handleUnmuted);
     this.track.removeEventListener("ended", this.handleRouteLost);
     for (const streamTrack of this.stream.getTracks()) streamTrack.stop();
   }

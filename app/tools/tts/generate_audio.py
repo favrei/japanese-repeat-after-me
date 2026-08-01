@@ -396,7 +396,7 @@ def main() -> None:
     if args.log:
         merged_log(args.log, lines, log_entries, args)
 
-    if not args.lines and not args.only:
+    if not args.only:
         entry_by_id = {str(entry["id"]): entry for entry in log_entries}
         metadata = {
             "schemaVersion": 1,

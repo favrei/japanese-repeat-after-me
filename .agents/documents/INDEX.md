@@ -13,6 +13,9 @@ Read in this order when making new conversation content.
 - [`stage-design-flow.md`](stage-design-flow.md) — step-by-step flow for
   authoring a new conversation stage: situation, stage cuts, personas,
   dialogue, difficulty control, and the art & voice brief handoff.
+- [`japanese-conversation-difficulty-guideline.md`](japanese-conversation-difficulty-guideline.md)
+  — JLPT-anchored N5-N1 profiles, authored calibration examples, and the
+  repeatable test for assigning and explaining a conversation level.
 - [`character-separation-gate.md`](character-separation-gate.md) — required
   review pass over authored dialogue: catches writer reasoning leaking into a
   character's mouth, and characters sharing one omniscient mind.

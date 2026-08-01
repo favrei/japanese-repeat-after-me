@@ -1,0 +1,255 @@
+{
+  "story": "office-gig",
+  "note": "The user selected `serena` for the coworker after listening to the `serena`/`vivian` two-line audition and the adjacent `sohee` learner reference on 2026-08-01. Learner is `sohee` and narrator is `aiden`, matching the taproom so the learner and the storyteller are the same person across the app. The first complete batch pins its stable line-id-derived seeds so the integrated candidate is reproducible; the required full human listening pass over all 27 shipped clips remains open until the user hears them in the app. `speed` is deliberately absent — it is a no-op on the CustomVoice path. This is the first manifest to ship `instruct` direction; section-level direction sets each speaker's baseline and per-line direction overrides it only where needed. Clips ship to app/public/audio/office-gig/.",
+  "instruct": "Natural, relaxed spoken Japanese. Two coworkers on a Friday, not a service counter.",
+  "sections": {
+    "coworker": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+    "learner": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+    "narrator": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone."
+  },
+  "lines": [
+    {
+      "id": "gig-notice-open",
+      "text": "金曜日の昼休み。休憩室で、同僚が音楽を聞いていた。",
+      "voice": "aiden",
+      "speaker": "narrator",
+      "section": "narrator",
+      "deliveryIntent": "Opens the story from the cover. Unhurried, no warmth.",
+      "seed": 295383715
+    },
+    {
+      "id": "gig-notice-hello",
+      "text": "あ、おつかれさまです。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "A greeting on noticing someone. Brief, not performed.",
+      "seed": 1380265701
+    },
+    {
+      "id": "gig-notice-hello-back",
+      "text": "おつかれさまです。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "Plain and even; a free ride that models the register.",
+      "seed": 2012337679
+    },
+    {
+      "id": "gig-notice-shirt",
+      "text": "そのTシャツ、何のバンドですか。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "Curious, a little tentative at the head of the line.",
+      "seed": 2002044228
+    },
+    {
+      "id": "gig-notice-highschool",
+      "text": "高校のときからずっと好きなバンドなんですよ。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Fond, slightly amused at herself. The warmest line in stage 1.",
+      "seed": 1033108092
+    },
+    {
+      "id": "gig-notice-rock",
+      "text": "私もロック、好きなんです。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "Offering something about yourself; small lift on 好き.",
+      "seed": 961867110
+    },
+    {
+      "id": "gig-notice-guitar",
+      "text": "じつは私、ギターをやってるんですよ。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "A small confession she is pleased to make; じつは carries it.",
+      "seed": 2134450386
+    },
+    {
+      "id": "gig-taste-open",
+      "text": "自動販売機の前に、缶コーヒーが二つ並んだ。",
+      "voice": "aiden",
+      "speaker": "narrator",
+      "section": "narrator",
+      "deliveryIntent": "Quiet, marking that the break has settled.",
+      "seed": 1453237231
+    },
+    {
+      "id": "gig-taste-ask",
+      "text": "ふだんはどんなの聞くんですか。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Genuine curiosity, casual. ふだん should sound offhand.",
+      "seed": 1492838360
+    },
+    {
+      "id": "gig-taste-why",
+      "text": "ギターの音が好きで、よくロックを聞きます。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "The longest learner line. Even pace, a clear break at the comma.",
+      "seed": 1841240151
+    },
+    {
+      "id": "gig-taste-agree",
+      "text": "ギターがいいと、それだけで聞いちゃいますよね。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Opinionated and companionable; the よね reaches for agreement.",
+      "seed": 1017408739
+    },
+    {
+      "id": "gig-taste-recommend",
+      "text": "じゃあ、おすすめはなんですか。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "Asking someone who clearly knows more. Light questioning rise.",
+      "seed": 516699742
+    },
+    {
+      "id": "gig-taste-saturday",
+      "text": "ちょうど土曜日にライブがあるんですよ。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "The hinge of the story. Offhand, as if it just occurred to her.",
+      "seed": 96345606
+    },
+    {
+      "id": "gig-taste-venue",
+      "text": "小さいライブハウスなんですけど、音がいいんですよ。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Fondly qualifying — small place, good sound.",
+      "seed": 1139863458
+    },
+    {
+      "id": "gig-join-open",
+      "text": "夕方、会社の玄関でまた会った。",
+      "voice": "aiden",
+      "speaker": "narrator",
+      "section": "narrator",
+      "deliveryIntent": "Marks the jump to evening. Flatter than the other three cards.",
+      "seed": 871572140
+    },
+    {
+      "id": "gig-join-earlier",
+      "text": "あ、さっきの話なんですけど。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Catching someone on the way out. Slight rise on けど.",
+      "seed": 1293922557
+    },
+    {
+      "id": "gig-join-spare",
+      "text": "じつは、チケットが一枚あまってるんです。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Matter-of-fact, not pleading. She is offering, not asking a favour.",
+      "seed": 2050417538
+    },
+    {
+      "id": "gig-join-come",
+      "text": "私も行ってもいいですか。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "Asking permission to join. Polite, a little hopeful.",
+      "seed": 2037489813
+    },
+    {
+      "id": "gig-join-together",
+      "text": "ぜひ、一緒に行きましょう。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Warm and immediate. ぜひ is the whole line.",
+      "seed": 248507141
+    },
+    {
+      "id": "gig-join-price",
+      "text": "チケットはいくらですか。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "Practical question, no hesitation.",
+      "seed": 1290858571
+    },
+    {
+      "id": "gig-join-cash",
+      "text": "三千円ですけど、当日でいいですよ。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Practical, reassuring on the second half.",
+      "seed": 386679220
+    },
+    {
+      "id": "gig-meet-open",
+      "text": "外は、もう暗くなっていた。",
+      "voice": "aiden",
+      "speaker": "narrator",
+      "section": "narrator",
+      "deliveryIntent": "The quietest of the four cards.",
+      "seed": 499788117
+    },
+    {
+      "id": "gig-meet-six",
+      "text": "土曜日、六時でいいですか。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Checking, not proposing. Small rise at the end.",
+      "seed": 1395557095
+    },
+    {
+      "id": "gig-meet-where",
+      "text": "じゃあ、どこで待ち合わせしますか。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "Settling a detail. Even, unhurried.",
+      "seed": 649096948
+    },
+    {
+      "id": "gig-meet-east",
+      "text": "駅の東口はどうですか。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Easy suggestion, no emphasis.",
+      "seed": 2103110588
+    },
+    {
+      "id": "gig-meet-forward",
+      "text": "楽しみにしています。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "section": "learner",
+      "deliveryIntent": "The closing beat of the learner's arc. Warm, unhurried.",
+      "seed": 1657553479
+    },
+    {
+      "id": "gig-meet-bye",
+      "text": "では、また土曜日に。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "section": "coworker",
+      "deliveryIntent": "Closing beat, lighter and shorter than everything before it.",
+      "seed": 1694086095
+    }
+  ]
+}

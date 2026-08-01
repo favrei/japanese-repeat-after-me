@@ -1,0 +1,3447 @@
+Using raw vosk-model-small-ja-0.22 with one fresh model per condition stream; evaluating 160 sources x 11 conditions
+[1/1760] clean / ao / weather-exact
+[2/1760] clean / ao / job-exact
+[3/1760] clean / ao / coffee-long-vowel-deletion
+[4/1760] clean / ao / station-small-tsu-deletion
+[5/1760] clean / ao / repeat-mora-deletion
+[6/1760] clean / ao / job-voicing-substitution
+[7/1760] clean / ao / reservation-insertion
+[8/1760] clean / ao / explain-lexical-substitution
+[9/1760] clean / ren / weather-exact
+[10/1760] clean / ren / job-exact
+[11/1760] clean / ren / coffee-long-vowel-deletion
+[12/1760] clean / ren / station-small-tsu-deletion
+[13/1760] clean / ren / repeat-mora-deletion
+[14/1760] clean / ren / job-voicing-substitution
+[15/1760] clean / ren / reservation-insertion
+[16/1760] clean / ren / explain-lexical-substitution
+[17/1760] clean / mio / weather-exact
+[18/1760] clean / mio / job-exact
+[19/1760] clean / mio / coffee-long-vowel-deletion
+[20/1760] clean / mio / station-small-tsu-deletion
+[21/1760] clean / mio / repeat-mora-deletion
+[22/1760] clean / mio / job-voicing-substitution
+[23/1760] clean / mio / reservation-insertion
+[24/1760] clean / mio / explain-lexical-substitution
+[25/1760] clean / kai / weather-exact
+[26/1760] clean / kai / job-exact
+[27/1760] clean / kai / coffee-long-vowel-deletion
+[28/1760] clean / kai / station-small-tsu-deletion
+[29/1760] clean / kai / repeat-mora-deletion
+[30/1760] clean / kai / job-voicing-substitution
+[31/1760] clean / kai / reservation-insertion
+[32/1760] clean / kai / explain-lexical-substitution
+[33/1760] clean / aya / weather-exact
+[34/1760] clean / aya / job-exact
+[35/1760] clean / aya / coffee-long-vowel-deletion
+[36/1760] clean / aya / station-small-tsu-deletion
+[37/1760] clean / aya / repeat-mora-deletion
+[38/1760] clean / aya / job-voicing-substitution
+[39/1760] clean / aya / reservation-insertion
+[40/1760] clean / aya / explain-lexical-substitution
+[41/1760] clean / jun / weather-exact
+[42/1760] clean / jun / job-exact
+[43/1760] clean / jun / coffee-long-vowel-deletion
+[44/1760] clean / jun / station-small-tsu-deletion
+[45/1760] clean / jun / repeat-mora-deletion
+[46/1760] clean / jun / job-voicing-substitution
+[47/1760] clean / jun / reservation-insertion
+[48/1760] clean / jun / explain-lexical-substitution
+[49/1760] clean / nami / weather-exact
+[50/1760] clean / nami / job-exact
+[51/1760] clean / nami / coffee-long-vowel-deletion
+[52/1760] clean / nami / station-small-tsu-deletion
+[53/1760] clean / nami / repeat-mora-deletion
+[54/1760] clean / nami / job-voicing-substitution
+[55/1760] clean / nami / reservation-insertion
+[56/1760] clean / nami / explain-lexical-substitution
+[57/1760] clean / sota / weather-exact
+[58/1760] clean / sota / job-exact
+[59/1760] clean / sota / coffee-long-vowel-deletion
+[60/1760] clean / sota / station-small-tsu-deletion
+[61/1760] clean / sota / repeat-mora-deletion
+[62/1760] clean / sota / job-voicing-substitution
+[63/1760] clean / sota / reservation-insertion
+[64/1760] clean / sota / explain-lexical-substitution
+[65/1760] clean / eri / weather-exact
+[66/1760] clean / eri / job-exact
+[67/1760] clean / eri / coffee-long-vowel-deletion
+[68/1760] clean / eri / station-small-tsu-deletion
+[69/1760] clean / eri / repeat-mora-deletion
+[70/1760] clean / eri / job-voicing-substitution
+[71/1760] clean / eri / reservation-insertion
+[72/1760] clean / eri / explain-lexical-substitution
+[73/1760] clean / taku / weather-exact
+[74/1760] clean / taku / job-exact
+[75/1760] clean / taku / coffee-long-vowel-deletion
+[76/1760] clean / taku / station-small-tsu-deletion
+[77/1760] clean / taku / repeat-mora-deletion
+[78/1760] clean / taku / job-voicing-substitution
+[79/1760] clean / taku / reservation-insertion
+[80/1760] clean / taku / explain-lexical-substitution
+[81/1760] clean / risa / weather-exact
+[82/1760] clean / risa / job-exact
+[83/1760] clean / risa / coffee-long-vowel-deletion
+[84/1760] clean / risa / station-small-tsu-deletion
+[85/1760] clean / risa / repeat-mora-deletion
+[86/1760] clean / risa / job-voicing-substitution
+[87/1760] clean / risa / reservation-insertion
+[88/1760] clean / risa / explain-lexical-substitution
+[89/1760] clean / makoto / weather-exact
+[90/1760] clean / makoto / job-exact
+[91/1760] clean / makoto / coffee-long-vowel-deletion
+[92/1760] clean / makoto / station-small-tsu-deletion
+[93/1760] clean / makoto / repeat-mora-deletion
+[94/1760] clean / makoto / job-voicing-substitution
+[95/1760] clean / makoto / reservation-insertion
+[96/1760] clean / makoto / explain-lexical-substitution
+[97/1760] clean / keiko / weather-exact
+[98/1760] clean / keiko / job-exact
+[99/1760] clean / keiko / coffee-long-vowel-deletion
+[100/1760] clean / keiko / station-small-tsu-deletion
+[101/1760] clean / keiko / repeat-mora-deletion
+[102/1760] clean / keiko / job-voicing-substitution
+[103/1760] clean / keiko / reservation-insertion
+[104/1760] clean / keiko / explain-lexical-substitution
+[105/1760] clean / osamu / weather-exact
+[106/1760] clean / osamu / job-exact
+[107/1760] clean / osamu / coffee-long-vowel-deletion
+[108/1760] clean / osamu / station-small-tsu-deletion
+[109/1760] clean / osamu / repeat-mora-deletion
+[110/1760] clean / osamu / job-voicing-substitution
+[111/1760] clean / osamu / reservation-insertion
+[112/1760] clean / osamu / explain-lexical-substitution
+[113/1760] clean / yui / weather-exact
+[114/1760] clean / yui / job-exact
+[115/1760] clean / yui / coffee-long-vowel-deletion
+[116/1760] clean / yui / station-small-tsu-deletion
+[117/1760] clean / yui / repeat-mora-deletion
+[118/1760] clean / yui / job-voicing-substitution
+[119/1760] clean / yui / reservation-insertion
+[120/1760] clean / yui / explain-lexical-substitution
+[121/1760] clean / hiro / weather-exact
+[122/1760] clean / hiro / job-exact
+[123/1760] clean / hiro / coffee-long-vowel-deletion
+[124/1760] clean / hiro / station-small-tsu-deletion
+[125/1760] clean / hiro / repeat-mora-deletion
+[126/1760] clean / hiro / job-voicing-substitution
+[127/1760] clean / hiro / reservation-insertion
+[128/1760] clean / hiro / explain-lexical-substitution
+[129/1760] clean / fumi / weather-exact
+[130/1760] clean / fumi / job-exact
+[131/1760] clean / fumi / coffee-long-vowel-deletion
+[132/1760] clean / fumi / station-small-tsu-deletion
+[133/1760] clean / fumi / repeat-mora-deletion
+[134/1760] clean / fumi / job-voicing-substitution
+[135/1760] clean / fumi / reservation-insertion
+[136/1760] clean / fumi / explain-lexical-substitution
+[137/1760] clean / gen / weather-exact
+[138/1760] clean / gen / job-exact
+[139/1760] clean / gen / coffee-long-vowel-deletion
+[140/1760] clean / gen / station-small-tsu-deletion
+[141/1760] clean / gen / repeat-mora-deletion
+[142/1760] clean / gen / job-voicing-substitution
+[143/1760] clean / gen / reservation-insertion
+[144/1760] clean / gen / explain-lexical-substitution
+[145/1760] clean / chiyo / weather-exact
+[146/1760] clean / chiyo / job-exact
+[147/1760] clean / chiyo / coffee-long-vowel-deletion
+[148/1760] clean / chiyo / station-small-tsu-deletion
+[149/1760] clean / chiyo / repeat-mora-deletion
+[150/1760] clean / chiyo / job-voicing-substitution
+[151/1760] clean / chiyo / reservation-insertion
+[152/1760] clean / chiyo / explain-lexical-substitution
+[153/1760] clean / issei / weather-exact
+[154/1760] clean / issei / job-exact
+[155/1760] clean / issei / coffee-long-vowel-deletion
+[156/1760] clean / issei / station-small-tsu-deletion
+[157/1760] clean / issei / repeat-mora-deletion
+[158/1760] clean / issei / job-voicing-substitution
+[159/1760] clean / issei / reservation-insertion
+[160/1760] clean / issei / explain-lexical-substitution
+[161/1760] quiet_room / ao / weather-exact
+[162/1760] quiet_room / ao / job-exact
+[163/1760] quiet_room / ao / coffee-long-vowel-deletion
+[164/1760] quiet_room / ao / station-small-tsu-deletion
+[165/1760] quiet_room / ao / repeat-mora-deletion
+[166/1760] quiet_room / ao / job-voicing-substitution
+[167/1760] quiet_room / ao / reservation-insertion
+[168/1760] quiet_room / ao / explain-lexical-substitution
+[169/1760] quiet_room / ren / weather-exact
+[170/1760] quiet_room / ren / job-exact
+[171/1760] quiet_room / ren / coffee-long-vowel-deletion
+[172/1760] quiet_room / ren / station-small-tsu-deletion
+[173/1760] quiet_room / ren / repeat-mora-deletion
+[174/1760] quiet_room / ren / job-voicing-substitution
+[175/1760] quiet_room / ren / reservation-insertion
+[176/1760] quiet_room / ren / explain-lexical-substitution
+[177/1760] quiet_room / mio / weather-exact
+[178/1760] quiet_room / mio / job-exact
+[179/1760] quiet_room / mio / coffee-long-vowel-deletion
+[180/1760] quiet_room / mio / station-small-tsu-deletion
+[181/1760] quiet_room / mio / repeat-mora-deletion
+[182/1760] quiet_room / mio / job-voicing-substitution
+[183/1760] quiet_room / mio / reservation-insertion
+[184/1760] quiet_room / mio / explain-lexical-substitution
+[185/1760] quiet_room / kai / weather-exact
+[186/1760] quiet_room / kai / job-exact
+[187/1760] quiet_room / kai / coffee-long-vowel-deletion
+[188/1760] quiet_room / kai / station-small-tsu-deletion
+[189/1760] quiet_room / kai / repeat-mora-deletion
+[190/1760] quiet_room / kai / job-voicing-substitution
+[191/1760] quiet_room / kai / reservation-insertion
+[192/1760] quiet_room / kai / explain-lexical-substitution
+[193/1760] quiet_room / aya / weather-exact
+[194/1760] quiet_room / aya / job-exact
+[195/1760] quiet_room / aya / coffee-long-vowel-deletion
+[196/1760] quiet_room / aya / station-small-tsu-deletion
+[197/1760] quiet_room / aya / repeat-mora-deletion
+[198/1760] quiet_room / aya / job-voicing-substitution
+[199/1760] quiet_room / aya / reservation-insertion
+[200/1760] quiet_room / aya / explain-lexical-substitution
+[201/1760] quiet_room / jun / weather-exact
+[202/1760] quiet_room / jun / job-exact
+[203/1760] quiet_room / jun / coffee-long-vowel-deletion
+[204/1760] quiet_room / jun / station-small-tsu-deletion
+[205/1760] quiet_room / jun / repeat-mora-deletion
+[206/1760] quiet_room / jun / job-voicing-substitution
+[207/1760] quiet_room / jun / reservation-insertion
+[208/1760] quiet_room / jun / explain-lexical-substitution
+[209/1760] quiet_room / nami / weather-exact
+[210/1760] quiet_room / nami / job-exact
+[211/1760] quiet_room / nami / coffee-long-vowel-deletion
+[212/1760] quiet_room / nami / station-small-tsu-deletion
+[213/1760] quiet_room / nami / repeat-mora-deletion
+[214/1760] quiet_room / nami / job-voicing-substitution
+[215/1760] quiet_room / nami / reservation-insertion
+[216/1760] quiet_room / nami / explain-lexical-substitution
+[217/1760] quiet_room / sota / weather-exact
+[218/1760] quiet_room / sota / job-exact
+[219/1760] quiet_room / sota / coffee-long-vowel-deletion
+[220/1760] quiet_room / sota / station-small-tsu-deletion
+[221/1760] quiet_room / sota / repeat-mora-deletion
+[222/1760] quiet_room / sota / job-voicing-substitution
+[223/1760] quiet_room / sota / reservation-insertion
+[224/1760] quiet_room / sota / explain-lexical-substitution
+[225/1760] quiet_room / eri / weather-exact
+[226/1760] quiet_room / eri / job-exact
+[227/1760] quiet_room / eri / coffee-long-vowel-deletion
+[228/1760] quiet_room / eri / station-small-tsu-deletion
+[229/1760] quiet_room / eri / repeat-mora-deletion
+[230/1760] quiet_room / eri / job-voicing-substitution
+[231/1760] quiet_room / eri / reservation-insertion
+[232/1760] quiet_room / eri / explain-lexical-substitution
+[233/1760] quiet_room / taku / weather-exact
+[234/1760] quiet_room / taku / job-exact
+[235/1760] quiet_room / taku / coffee-long-vowel-deletion
+[236/1760] quiet_room / taku / station-small-tsu-deletion
+[237/1760] quiet_room / taku / repeat-mora-deletion
+[238/1760] quiet_room / taku / job-voicing-substitution
+[239/1760] quiet_room / taku / reservation-insertion
+[240/1760] quiet_room / taku / explain-lexical-substitution
+[241/1760] quiet_room / risa / weather-exact
+[242/1760] quiet_room / risa / job-exact
+[243/1760] quiet_room / risa / coffee-long-vowel-deletion
+[244/1760] quiet_room / risa / station-small-tsu-deletion
+[245/1760] quiet_room / risa / repeat-mora-deletion
+[246/1760] quiet_room / risa / job-voicing-substitution
+[247/1760] quiet_room / risa / reservation-insertion
+[248/1760] quiet_room / risa / explain-lexical-substitution
+[249/1760] quiet_room / makoto / weather-exact
+[250/1760] quiet_room / makoto / job-exact
+[251/1760] quiet_room / makoto / coffee-long-vowel-deletion
+[252/1760] quiet_room / makoto / station-small-tsu-deletion
+[253/1760] quiet_room / makoto / repeat-mora-deletion
+[254/1760] quiet_room / makoto / job-voicing-substitution
+[255/1760] quiet_room / makoto / reservation-insertion
+[256/1760] quiet_room / makoto / explain-lexical-substitution
+[257/1760] quiet_room / keiko / weather-exact
+[258/1760] quiet_room / keiko / job-exact
+[259/1760] quiet_room / keiko / coffee-long-vowel-deletion
+[260/1760] quiet_room / keiko / station-small-tsu-deletion
+[261/1760] quiet_room / keiko / repeat-mora-deletion
+[262/1760] quiet_room / keiko / job-voicing-substitution
+[263/1760] quiet_room / keiko / reservation-insertion
+[264/1760] quiet_room / keiko / explain-lexical-substitution
+[265/1760] quiet_room / osamu / weather-exact
+[266/1760] quiet_room / osamu / job-exact
+[267/1760] quiet_room / osamu / coffee-long-vowel-deletion
+[268/1760] quiet_room / osamu / station-small-tsu-deletion
+[269/1760] quiet_room / osamu / repeat-mora-deletion
+[270/1760] quiet_room / osamu / job-voicing-substitution
+[271/1760] quiet_room / osamu / reservation-insertion
+[272/1760] quiet_room / osamu / explain-lexical-substitution
+[273/1760] quiet_room / yui / weather-exact
+[274/1760] quiet_room / yui / job-exact
+[275/1760] quiet_room / yui / coffee-long-vowel-deletion
+[276/1760] quiet_room / yui / station-small-tsu-deletion
+[277/1760] quiet_room / yui / repeat-mora-deletion
+[278/1760] quiet_room / yui / job-voicing-substitution
+[279/1760] quiet_room / yui / reservation-insertion
+[280/1760] quiet_room / yui / explain-lexical-substitution
+[281/1760] quiet_room / hiro / weather-exact
+[282/1760] quiet_room / hiro / job-exact
+[283/1760] quiet_room / hiro / coffee-long-vowel-deletion
+[284/1760] quiet_room / hiro / station-small-tsu-deletion
+[285/1760] quiet_room / hiro / repeat-mora-deletion
+[286/1760] quiet_room / hiro / job-voicing-substitution
+[287/1760] quiet_room / hiro / reservation-insertion
+[288/1760] quiet_room / hiro / explain-lexical-substitution
+[289/1760] quiet_room / fumi / weather-exact
+[290/1760] quiet_room / fumi / job-exact
+[291/1760] quiet_room / fumi / coffee-long-vowel-deletion
+[292/1760] quiet_room / fumi / station-small-tsu-deletion
+[293/1760] quiet_room / fumi / repeat-mora-deletion
+[294/1760] quiet_room / fumi / job-voicing-substitution
+[295/1760] quiet_room / fumi / reservation-insertion
+[296/1760] quiet_room / fumi / explain-lexical-substitution
+[297/1760] quiet_room / gen / weather-exact
+[298/1760] quiet_room / gen / job-exact
+[299/1760] quiet_room / gen / coffee-long-vowel-deletion
+[300/1760] quiet_room / gen / station-small-tsu-deletion
+[301/1760] quiet_room / gen / repeat-mora-deletion
+[302/1760] quiet_room / gen / job-voicing-substitution
+[303/1760] quiet_room / gen / reservation-insertion
+[304/1760] quiet_room / gen / explain-lexical-substitution
+[305/1760] quiet_room / chiyo / weather-exact
+[306/1760] quiet_room / chiyo / job-exact
+[307/1760] quiet_room / chiyo / coffee-long-vowel-deletion
+[308/1760] quiet_room / chiyo / station-small-tsu-deletion
+[309/1760] quiet_room / chiyo / repeat-mora-deletion
+[310/1760] quiet_room / chiyo / job-voicing-substitution
+[311/1760] quiet_room / chiyo / reservation-insertion
+[312/1760] quiet_room / chiyo / explain-lexical-substitution
+[313/1760] quiet_room / issei / weather-exact
+[314/1760] quiet_room / issei / job-exact
+[315/1760] quiet_room / issei / coffee-long-vowel-deletion
+[316/1760] quiet_room / issei / station-small-tsu-deletion
+[317/1760] quiet_room / issei / repeat-mora-deletion
+[318/1760] quiet_room / issei / job-voicing-substitution
+[319/1760] quiet_room / issei / reservation-insertion
+[320/1760] quiet_room / issei / explain-lexical-substitution
+[321/1760] cafe_crosstalk / ao / weather-exact
+[322/1760] cafe_crosstalk / ao / job-exact
+[323/1760] cafe_crosstalk / ao / coffee-long-vowel-deletion
+[324/1760] cafe_crosstalk / ao / station-small-tsu-deletion
+[325/1760] cafe_crosstalk / ao / repeat-mora-deletion
+[326/1760] cafe_crosstalk / ao / job-voicing-substitution
+[327/1760] cafe_crosstalk / ao / reservation-insertion
+[328/1760] cafe_crosstalk / ao / explain-lexical-substitution
+[329/1760] cafe_crosstalk / ren / weather-exact
+[330/1760] cafe_crosstalk / ren / job-exact
+[331/1760] cafe_crosstalk / ren / coffee-long-vowel-deletion
+[332/1760] cafe_crosstalk / ren / station-small-tsu-deletion
+[333/1760] cafe_crosstalk / ren / repeat-mora-deletion
+[334/1760] cafe_crosstalk / ren / job-voicing-substitution
+[335/1760] cafe_crosstalk / ren / reservation-insertion
+[336/1760] cafe_crosstalk / ren / explain-lexical-substitution
+[337/1760] cafe_crosstalk / mio / weather-exact
+[338/1760] cafe_crosstalk / mio / job-exact
+[339/1760] cafe_crosstalk / mio / coffee-long-vowel-deletion
+[340/1760] cafe_crosstalk / mio / station-small-tsu-deletion
+[341/1760] cafe_crosstalk / mio / repeat-mora-deletion
+[342/1760] cafe_crosstalk / mio / job-voicing-substitution
+[343/1760] cafe_crosstalk / mio / reservation-insertion
+[344/1760] cafe_crosstalk / mio / explain-lexical-substitution
+[345/1760] cafe_crosstalk / kai / weather-exact
+[346/1760] cafe_crosstalk / kai / job-exact
+[347/1760] cafe_crosstalk / kai / coffee-long-vowel-deletion
+[348/1760] cafe_crosstalk / kai / station-small-tsu-deletion
+[349/1760] cafe_crosstalk / kai / repeat-mora-deletion
+[350/1760] cafe_crosstalk / kai / job-voicing-substitution
+[351/1760] cafe_crosstalk / kai / reservation-insertion
+[352/1760] cafe_crosstalk / kai / explain-lexical-substitution
+[353/1760] cafe_crosstalk / aya / weather-exact
+[354/1760] cafe_crosstalk / aya / job-exact
+[355/1760] cafe_crosstalk / aya / coffee-long-vowel-deletion
+[356/1760] cafe_crosstalk / aya / station-small-tsu-deletion
+[357/1760] cafe_crosstalk / aya / repeat-mora-deletion
+[358/1760] cafe_crosstalk / aya / job-voicing-substitution
+[359/1760] cafe_crosstalk / aya / reservation-insertion
+[360/1760] cafe_crosstalk / aya / explain-lexical-substitution
+[361/1760] cafe_crosstalk / jun / weather-exact
+[362/1760] cafe_crosstalk / jun / job-exact
+[363/1760] cafe_crosstalk / jun / coffee-long-vowel-deletion
+[364/1760] cafe_crosstalk / jun / station-small-tsu-deletion
+[365/1760] cafe_crosstalk / jun / repeat-mora-deletion
+[366/1760] cafe_crosstalk / jun / job-voicing-substitution
+[367/1760] cafe_crosstalk / jun / reservation-insertion
+[368/1760] cafe_crosstalk / jun / explain-lexical-substitution
+[369/1760] cafe_crosstalk / nami / weather-exact
+[370/1760] cafe_crosstalk / nami / job-exact
+[371/1760] cafe_crosstalk / nami / coffee-long-vowel-deletion
+[372/1760] cafe_crosstalk / nami / station-small-tsu-deletion
+[373/1760] cafe_crosstalk / nami / repeat-mora-deletion
+[374/1760] cafe_crosstalk / nami / job-voicing-substitution
+[375/1760] cafe_crosstalk / nami / reservation-insertion
+[376/1760] cafe_crosstalk / nami / explain-lexical-substitution
+[377/1760] cafe_crosstalk / sota / weather-exact
+[378/1760] cafe_crosstalk / sota / job-exact
+[379/1760] cafe_crosstalk / sota / coffee-long-vowel-deletion
+[380/1760] cafe_crosstalk / sota / station-small-tsu-deletion
+[381/1760] cafe_crosstalk / sota / repeat-mora-deletion
+[382/1760] cafe_crosstalk / sota / job-voicing-substitution
+[383/1760] cafe_crosstalk / sota / reservation-insertion
+[384/1760] cafe_crosstalk / sota / explain-lexical-substitution
+[385/1760] cafe_crosstalk / eri / weather-exact
+[386/1760] cafe_crosstalk / eri / job-exact
+[387/1760] cafe_crosstalk / eri / coffee-long-vowel-deletion
+[388/1760] cafe_crosstalk / eri / station-small-tsu-deletion
+[389/1760] cafe_crosstalk / eri / repeat-mora-deletion
+[390/1760] cafe_crosstalk / eri / job-voicing-substitution
+[391/1760] cafe_crosstalk / eri / reservation-insertion
+[392/1760] cafe_crosstalk / eri / explain-lexical-substitution
+[393/1760] cafe_crosstalk / taku / weather-exact
+[394/1760] cafe_crosstalk / taku / job-exact
+[395/1760] cafe_crosstalk / taku / coffee-long-vowel-deletion
+[396/1760] cafe_crosstalk / taku / station-small-tsu-deletion
+[397/1760] cafe_crosstalk / taku / repeat-mora-deletion
+[398/1760] cafe_crosstalk / taku / job-voicing-substitution
+[399/1760] cafe_crosstalk / taku / reservation-insertion
+[400/1760] cafe_crosstalk / taku / explain-lexical-substitution
+[401/1760] cafe_crosstalk / risa / weather-exact
+[402/1760] cafe_crosstalk / risa / job-exact
+[403/1760] cafe_crosstalk / risa / coffee-long-vowel-deletion
+[404/1760] cafe_crosstalk / risa / station-small-tsu-deletion
+[405/1760] cafe_crosstalk / risa / repeat-mora-deletion
+[406/1760] cafe_crosstalk / risa / job-voicing-substitution
+[407/1760] cafe_crosstalk / risa / reservation-insertion
+[408/1760] cafe_crosstalk / risa / explain-lexical-substitution
+[409/1760] cafe_crosstalk / makoto / weather-exact
+[410/1760] cafe_crosstalk / makoto / job-exact
+[411/1760] cafe_crosstalk / makoto / coffee-long-vowel-deletion
+[412/1760] cafe_crosstalk / makoto / station-small-tsu-deletion
+[413/1760] cafe_crosstalk / makoto / repeat-mora-deletion
+[414/1760] cafe_crosstalk / makoto / job-voicing-substitution
+[415/1760] cafe_crosstalk / makoto / reservation-insertion
+[416/1760] cafe_crosstalk / makoto / explain-lexical-substitution
+[417/1760] cafe_crosstalk / keiko / weather-exact
+[418/1760] cafe_crosstalk / keiko / job-exact
+[419/1760] cafe_crosstalk / keiko / coffee-long-vowel-deletion
+[420/1760] cafe_crosstalk / keiko / station-small-tsu-deletion
+[421/1760] cafe_crosstalk / keiko / repeat-mora-deletion
+[422/1760] cafe_crosstalk / keiko / job-voicing-substitution
+[423/1760] cafe_crosstalk / keiko / reservation-insertion
+[424/1760] cafe_crosstalk / keiko / explain-lexical-substitution
+[425/1760] cafe_crosstalk / osamu / weather-exact
+[426/1760] cafe_crosstalk / osamu / job-exact
+[427/1760] cafe_crosstalk / osamu / coffee-long-vowel-deletion
+[428/1760] cafe_crosstalk / osamu / station-small-tsu-deletion
+[429/1760] cafe_crosstalk / osamu / repeat-mora-deletion
+[430/1760] cafe_crosstalk / osamu / job-voicing-substitution
+[431/1760] cafe_crosstalk / osamu / reservation-insertion
+[432/1760] cafe_crosstalk / osamu / explain-lexical-substitution
+[433/1760] cafe_crosstalk / yui / weather-exact
+[434/1760] cafe_crosstalk / yui / job-exact
+[435/1760] cafe_crosstalk / yui / coffee-long-vowel-deletion
+[436/1760] cafe_crosstalk / yui / station-small-tsu-deletion
+[437/1760] cafe_crosstalk / yui / repeat-mora-deletion
+[438/1760] cafe_crosstalk / yui / job-voicing-substitution
+[439/1760] cafe_crosstalk / yui / reservation-insertion
+[440/1760] cafe_crosstalk / yui / explain-lexical-substitution
+[441/1760] cafe_crosstalk / hiro / weather-exact
+[442/1760] cafe_crosstalk / hiro / job-exact
+[443/1760] cafe_crosstalk / hiro / coffee-long-vowel-deletion
+[444/1760] cafe_crosstalk / hiro / station-small-tsu-deletion
+[445/1760] cafe_crosstalk / hiro / repeat-mora-deletion
+[446/1760] cafe_crosstalk / hiro / job-voicing-substitution
+[447/1760] cafe_crosstalk / hiro / reservation-insertion
+[448/1760] cafe_crosstalk / hiro / explain-lexical-substitution
+[449/1760] cafe_crosstalk / fumi / weather-exact
+[450/1760] cafe_crosstalk / fumi / job-exact
+[451/1760] cafe_crosstalk / fumi / coffee-long-vowel-deletion
+[452/1760] cafe_crosstalk / fumi / station-small-tsu-deletion
+[453/1760] cafe_crosstalk / fumi / repeat-mora-deletion
+[454/1760] cafe_crosstalk / fumi / job-voicing-substitution
+[455/1760] cafe_crosstalk / fumi / reservation-insertion
+[456/1760] cafe_crosstalk / fumi / explain-lexical-substitution
+[457/1760] cafe_crosstalk / gen / weather-exact
+[458/1760] cafe_crosstalk / gen / job-exact
+[459/1760] cafe_crosstalk / gen / coffee-long-vowel-deletion
+[460/1760] cafe_crosstalk / gen / station-small-tsu-deletion
+[461/1760] cafe_crosstalk / gen / repeat-mora-deletion
+[462/1760] cafe_crosstalk / gen / job-voicing-substitution
+[463/1760] cafe_crosstalk / gen / reservation-insertion
+[464/1760] cafe_crosstalk / gen / explain-lexical-substitution
+[465/1760] cafe_crosstalk / chiyo / weather-exact
+[466/1760] cafe_crosstalk / chiyo / job-exact
+[467/1760] cafe_crosstalk / chiyo / coffee-long-vowel-deletion
+[468/1760] cafe_crosstalk / chiyo / station-small-tsu-deletion
+[469/1760] cafe_crosstalk / chiyo / repeat-mora-deletion
+[470/1760] cafe_crosstalk / chiyo / job-voicing-substitution
+[471/1760] cafe_crosstalk / chiyo / reservation-insertion
+[472/1760] cafe_crosstalk / chiyo / explain-lexical-substitution
+[473/1760] cafe_crosstalk / issei / weather-exact
+[474/1760] cafe_crosstalk / issei / job-exact
+[475/1760] cafe_crosstalk / issei / coffee-long-vowel-deletion
+[476/1760] cafe_crosstalk / issei / station-small-tsu-deletion
+[477/1760] cafe_crosstalk / issei / repeat-mora-deletion
+[478/1760] cafe_crosstalk / issei / job-voicing-substitution
+[479/1760] cafe_crosstalk / issei / reservation-insertion
+[480/1760] cafe_crosstalk / issei / explain-lexical-substitution
+[481/1760] street_noise / ao / weather-exact
+[482/1760] street_noise / ao / job-exact
+[483/1760] street_noise / ao / coffee-long-vowel-deletion
+[484/1760] street_noise / ao / station-small-tsu-deletion
+[485/1760] street_noise / ao / repeat-mora-deletion
+[486/1760] street_noise / ao / job-voicing-substitution
+[487/1760] street_noise / ao / reservation-insertion
+[488/1760] street_noise / ao / explain-lexical-substitution
+[489/1760] street_noise / ren / weather-exact
+[490/1760] street_noise / ren / job-exact
+[491/1760] street_noise / ren / coffee-long-vowel-deletion
+[492/1760] street_noise / ren / station-small-tsu-deletion
+[493/1760] street_noise / ren / repeat-mora-deletion
+[494/1760] street_noise / ren / job-voicing-substitution
+[495/1760] street_noise / ren / reservation-insertion
+[496/1760] street_noise / ren / explain-lexical-substitution
+[497/1760] street_noise / mio / weather-exact
+[498/1760] street_noise / mio / job-exact
+[499/1760] street_noise / mio / coffee-long-vowel-deletion
+[500/1760] street_noise / mio / station-small-tsu-deletion
+[501/1760] street_noise / mio / repeat-mora-deletion
+[502/1760] street_noise / mio / job-voicing-substitution
+[503/1760] street_noise / mio / reservation-insertion
+[504/1760] street_noise / mio / explain-lexical-substitution
+[505/1760] street_noise / kai / weather-exact
+[506/1760] street_noise / kai / job-exact
+[507/1760] street_noise / kai / coffee-long-vowel-deletion
+[508/1760] street_noise / kai / station-small-tsu-deletion
+[509/1760] street_noise / kai / repeat-mora-deletion
+[510/1760] street_noise / kai / job-voicing-substitution
+[511/1760] street_noise / kai / reservation-insertion
+[512/1760] street_noise / kai / explain-lexical-substitution
+[513/1760] street_noise / aya / weather-exact
+[514/1760] street_noise / aya / job-exact
+[515/1760] street_noise / aya / coffee-long-vowel-deletion
+[516/1760] street_noise / aya / station-small-tsu-deletion
+[517/1760] street_noise / aya / repeat-mora-deletion
+[518/1760] street_noise / aya / job-voicing-substitution
+[519/1760] street_noise / aya / reservation-insertion
+[520/1760] street_noise / aya / explain-lexical-substitution
+[521/1760] street_noise / jun / weather-exact
+[522/1760] street_noise / jun / job-exact
+[523/1760] street_noise / jun / coffee-long-vowel-deletion
+[524/1760] street_noise / jun / station-small-tsu-deletion
+[525/1760] street_noise / jun / repeat-mora-deletion
+[526/1760] street_noise / jun / job-voicing-substitution
+[527/1760] street_noise / jun / reservation-insertion
+[528/1760] street_noise / jun / explain-lexical-substitution
+[529/1760] street_noise / nami / weather-exact
+[530/1760] street_noise / nami / job-exact
+[531/1760] street_noise / nami / coffee-long-vowel-deletion
+[532/1760] street_noise / nami / station-small-tsu-deletion
+[533/1760] street_noise / nami / repeat-mora-deletion
+[534/1760] street_noise / nami / job-voicing-substitution
+[535/1760] street_noise / nami / reservation-insertion
+[536/1760] street_noise / nami / explain-lexical-substitution
+[537/1760] street_noise / sota / weather-exact
+[538/1760] street_noise / sota / job-exact
+[539/1760] street_noise / sota / coffee-long-vowel-deletion
+[540/1760] street_noise / sota / station-small-tsu-deletion
+[541/1760] street_noise / sota / repeat-mora-deletion
+[542/1760] street_noise / sota / job-voicing-substitution
+[543/1760] street_noise / sota / reservation-insertion
+[544/1760] street_noise / sota / explain-lexical-substitution
+[545/1760] street_noise / eri / weather-exact
+[546/1760] street_noise / eri / job-exact
+[547/1760] street_noise / eri / coffee-long-vowel-deletion
+[548/1760] street_noise / eri / station-small-tsu-deletion
+[549/1760] street_noise / eri / repeat-mora-deletion
+[550/1760] street_noise / eri / job-voicing-substitution
+[551/1760] street_noise / eri / reservation-insertion
+[552/1760] street_noise / eri / explain-lexical-substitution
+[553/1760] street_noise / taku / weather-exact
+[554/1760] street_noise / taku / job-exact
+[555/1760] street_noise / taku / coffee-long-vowel-deletion
+[556/1760] street_noise / taku / station-small-tsu-deletion
+[557/1760] street_noise / taku / repeat-mora-deletion
+[558/1760] street_noise / taku / job-voicing-substitution
+[559/1760] street_noise / taku / reservation-insertion
+[560/1760] street_noise / taku / explain-lexical-substitution
+[561/1760] street_noise / risa / weather-exact
+[562/1760] street_noise / risa / job-exact
+[563/1760] street_noise / risa / coffee-long-vowel-deletion
+[564/1760] street_noise / risa / station-small-tsu-deletion
+[565/1760] street_noise / risa / repeat-mora-deletion
+[566/1760] street_noise / risa / job-voicing-substitution
+[567/1760] street_noise / risa / reservation-insertion
+[568/1760] street_noise / risa / explain-lexical-substitution
+[569/1760] street_noise / makoto / weather-exact
+[570/1760] street_noise / makoto / job-exact
+[571/1760] street_noise / makoto / coffee-long-vowel-deletion
+[572/1760] street_noise / makoto / station-small-tsu-deletion
+[573/1760] street_noise / makoto / repeat-mora-deletion
+[574/1760] street_noise / makoto / job-voicing-substitution
+[575/1760] street_noise / makoto / reservation-insertion
+[576/1760] street_noise / makoto / explain-lexical-substitution
+[577/1760] street_noise / keiko / weather-exact
+[578/1760] street_noise / keiko / job-exact
+[579/1760] street_noise / keiko / coffee-long-vowel-deletion
+[580/1760] street_noise / keiko / station-small-tsu-deletion
+[581/1760] street_noise / keiko / repeat-mora-deletion
+[582/1760] street_noise / keiko / job-voicing-substitution
+[583/1760] street_noise / keiko / reservation-insertion
+[584/1760] street_noise / keiko / explain-lexical-substitution
+[585/1760] street_noise / osamu / weather-exact
+[586/1760] street_noise / osamu / job-exact
+[587/1760] street_noise / osamu / coffee-long-vowel-deletion
+[588/1760] street_noise / osamu / station-small-tsu-deletion
+[589/1760] street_noise / osamu / repeat-mora-deletion
+[590/1760] street_noise / osamu / job-voicing-substitution
+[591/1760] street_noise / osamu / reservation-insertion
+[592/1760] street_noise / osamu / explain-lexical-substitution
+[593/1760] street_noise / yui / weather-exact
+[594/1760] street_noise / yui / job-exact
+[595/1760] street_noise / yui / coffee-long-vowel-deletion
+[596/1760] street_noise / yui / station-small-tsu-deletion
+[597/1760] street_noise / yui / repeat-mora-deletion
+[598/1760] street_noise / yui / job-voicing-substitution
+[599/1760] street_noise / yui / reservation-insertion
+[600/1760] street_noise / yui / explain-lexical-substitution
+[601/1760] street_noise / hiro / weather-exact
+[602/1760] street_noise / hiro / job-exact
+[603/1760] street_noise / hiro / coffee-long-vowel-deletion
+[604/1760] street_noise / hiro / station-small-tsu-deletion
+[605/1760] street_noise / hiro / repeat-mora-deletion
+[606/1760] street_noise / hiro / job-voicing-substitution
+[607/1760] street_noise / hiro / reservation-insertion
+[608/1760] street_noise / hiro / explain-lexical-substitution
+[609/1760] street_noise / fumi / weather-exact
+[610/1760] street_noise / fumi / job-exact
+[611/1760] street_noise / fumi / coffee-long-vowel-deletion
+[612/1760] street_noise / fumi / station-small-tsu-deletion
+[613/1760] street_noise / fumi / repeat-mora-deletion
+[614/1760] street_noise / fumi / job-voicing-substitution
+[615/1760] street_noise / fumi / reservation-insertion
+[616/1760] street_noise / fumi / explain-lexical-substitution
+[617/1760] street_noise / gen / weather-exact
+[618/1760] street_noise / gen / job-exact
+[619/1760] street_noise / gen / coffee-long-vowel-deletion
+[620/1760] street_noise / gen / station-small-tsu-deletion
+[621/1760] street_noise / gen / repeat-mora-deletion
+[622/1760] street_noise / gen / job-voicing-substitution
+[623/1760] street_noise / gen / reservation-insertion
+[624/1760] street_noise / gen / explain-lexical-substitution
+[625/1760] street_noise / chiyo / weather-exact
+[626/1760] street_noise / chiyo / job-exact
+[627/1760] street_noise / chiyo / coffee-long-vowel-deletion
+[628/1760] street_noise / chiyo / station-small-tsu-deletion
+[629/1760] street_noise / chiyo / repeat-mora-deletion
+[630/1760] street_noise / chiyo / job-voicing-substitution
+[631/1760] street_noise / chiyo / reservation-insertion
+[632/1760] street_noise / chiyo / explain-lexical-substitution
+[633/1760] street_noise / issei / weather-exact
+[634/1760] street_noise / issei / job-exact
+[635/1760] street_noise / issei / coffee-long-vowel-deletion
+[636/1760] street_noise / issei / station-small-tsu-deletion
+[637/1760] street_noise / issei / repeat-mora-deletion
+[638/1760] street_noise / issei / job-voicing-substitution
+[639/1760] street_noise / issei / reservation-insertion
+[640/1760] street_noise / issei / explain-lexical-substitution
+[641/1760] hvac_hum / ao / weather-exact
+[642/1760] hvac_hum / ao / job-exact
+[643/1760] hvac_hum / ao / coffee-long-vowel-deletion
+[644/1760] hvac_hum / ao / station-small-tsu-deletion
+[645/1760] hvac_hum / ao / repeat-mora-deletion
+[646/1760] hvac_hum / ao / job-voicing-substitution
+[647/1760] hvac_hum / ao / reservation-insertion
+[648/1760] hvac_hum / ao / explain-lexical-substitution
+[649/1760] hvac_hum / ren / weather-exact
+[650/1760] hvac_hum / ren / job-exact
+[651/1760] hvac_hum / ren / coffee-long-vowel-deletion
+[652/1760] hvac_hum / ren / station-small-tsu-deletion
+[653/1760] hvac_hum / ren / repeat-mora-deletion
+[654/1760] hvac_hum / ren / job-voicing-substitution
+[655/1760] hvac_hum / ren / reservation-insertion
+[656/1760] hvac_hum / ren / explain-lexical-substitution
+[657/1760] hvac_hum / mio / weather-exact
+[658/1760] hvac_hum / mio / job-exact
+[659/1760] hvac_hum / mio / coffee-long-vowel-deletion
+[660/1760] hvac_hum / mio / station-small-tsu-deletion
+[661/1760] hvac_hum / mio / repeat-mora-deletion
+[662/1760] hvac_hum / mio / job-voicing-substitution
+[663/1760] hvac_hum / mio / reservation-insertion
+[664/1760] hvac_hum / mio / explain-lexical-substitution
+[665/1760] hvac_hum / kai / weather-exact
+[666/1760] hvac_hum / kai / job-exact
+[667/1760] hvac_hum / kai / coffee-long-vowel-deletion
+[668/1760] hvac_hum / kai / station-small-tsu-deletion
+[669/1760] hvac_hum / kai / repeat-mora-deletion
+[670/1760] hvac_hum / kai / job-voicing-substitution
+[671/1760] hvac_hum / kai / reservation-insertion
+[672/1760] hvac_hum / kai / explain-lexical-substitution
+[673/1760] hvac_hum / aya / weather-exact
+[674/1760] hvac_hum / aya / job-exact
+[675/1760] hvac_hum / aya / coffee-long-vowel-deletion
+[676/1760] hvac_hum / aya / station-small-tsu-deletion
+[677/1760] hvac_hum / aya / repeat-mora-deletion
+[678/1760] hvac_hum / aya / job-voicing-substitution
+[679/1760] hvac_hum / aya / reservation-insertion
+[680/1760] hvac_hum / aya / explain-lexical-substitution
+[681/1760] hvac_hum / jun / weather-exact
+[682/1760] hvac_hum / jun / job-exact
+[683/1760] hvac_hum / jun / coffee-long-vowel-deletion
+[684/1760] hvac_hum / jun / station-small-tsu-deletion
+[685/1760] hvac_hum / jun / repeat-mora-deletion
+[686/1760] hvac_hum / jun / job-voicing-substitution
+[687/1760] hvac_hum / jun / reservation-insertion
+[688/1760] hvac_hum / jun / explain-lexical-substitution
+[689/1760] hvac_hum / nami / weather-exact
+[690/1760] hvac_hum / nami / job-exact
+[691/1760] hvac_hum / nami / coffee-long-vowel-deletion
+[692/1760] hvac_hum / nami / station-small-tsu-deletion
+[693/1760] hvac_hum / nami / repeat-mora-deletion
+[694/1760] hvac_hum / nami / job-voicing-substitution
+[695/1760] hvac_hum / nami / reservation-insertion
+[696/1760] hvac_hum / nami / explain-lexical-substitution
+[697/1760] hvac_hum / sota / weather-exact
+[698/1760] hvac_hum / sota / job-exact
+[699/1760] hvac_hum / sota / coffee-long-vowel-deletion
+[700/1760] hvac_hum / sota / station-small-tsu-deletion
+[701/1760] hvac_hum / sota / repeat-mora-deletion
+[702/1760] hvac_hum / sota / job-voicing-substitution
+[703/1760] hvac_hum / sota / reservation-insertion
+[704/1760] hvac_hum / sota / explain-lexical-substitution
+[705/1760] hvac_hum / eri / weather-exact
+[706/1760] hvac_hum / eri / job-exact
+[707/1760] hvac_hum / eri / coffee-long-vowel-deletion
+[708/1760] hvac_hum / eri / station-small-tsu-deletion
+[709/1760] hvac_hum / eri / repeat-mora-deletion
+[710/1760] hvac_hum / eri / job-voicing-substitution
+[711/1760] hvac_hum / eri / reservation-insertion
+[712/1760] hvac_hum / eri / explain-lexical-substitution
+[713/1760] hvac_hum / taku / weather-exact
+[714/1760] hvac_hum / taku / job-exact
+[715/1760] hvac_hum / taku / coffee-long-vowel-deletion
+[716/1760] hvac_hum / taku / station-small-tsu-deletion
+[717/1760] hvac_hum / taku / repeat-mora-deletion
+[718/1760] hvac_hum / taku / job-voicing-substitution
+[719/1760] hvac_hum / taku / reservation-insertion
+[720/1760] hvac_hum / taku / explain-lexical-substitution
+[721/1760] hvac_hum / risa / weather-exact
+[722/1760] hvac_hum / risa / job-exact
+[723/1760] hvac_hum / risa / coffee-long-vowel-deletion
+[724/1760] hvac_hum / risa / station-small-tsu-deletion
+[725/1760] hvac_hum / risa / repeat-mora-deletion
+[726/1760] hvac_hum / risa / job-voicing-substitution
+[727/1760] hvac_hum / risa / reservation-insertion
+[728/1760] hvac_hum / risa / explain-lexical-substitution
+[729/1760] hvac_hum / makoto / weather-exact
+[730/1760] hvac_hum / makoto / job-exact
+[731/1760] hvac_hum / makoto / coffee-long-vowel-deletion
+[732/1760] hvac_hum / makoto / station-small-tsu-deletion
+[733/1760] hvac_hum / makoto / repeat-mora-deletion
+[734/1760] hvac_hum / makoto / job-voicing-substitution
+[735/1760] hvac_hum / makoto / reservation-insertion
+[736/1760] hvac_hum / makoto / explain-lexical-substitution
+[737/1760] hvac_hum / keiko / weather-exact
+[738/1760] hvac_hum / keiko / job-exact
+[739/1760] hvac_hum / keiko / coffee-long-vowel-deletion
+[740/1760] hvac_hum / keiko / station-small-tsu-deletion
+[741/1760] hvac_hum / keiko / repeat-mora-deletion
+[742/1760] hvac_hum / keiko / job-voicing-substitution
+[743/1760] hvac_hum / keiko / reservation-insertion
+[744/1760] hvac_hum / keiko / explain-lexical-substitution
+[745/1760] hvac_hum / osamu / weather-exact
+[746/1760] hvac_hum / osamu / job-exact
+[747/1760] hvac_hum / osamu / coffee-long-vowel-deletion
+[748/1760] hvac_hum / osamu / station-small-tsu-deletion
+[749/1760] hvac_hum / osamu / repeat-mora-deletion
+[750/1760] hvac_hum / osamu / job-voicing-substitution
+[751/1760] hvac_hum / osamu / reservation-insertion
+[752/1760] hvac_hum / osamu / explain-lexical-substitution
+[753/1760] hvac_hum / yui / weather-exact
+[754/1760] hvac_hum / yui / job-exact
+[755/1760] hvac_hum / yui / coffee-long-vowel-deletion
+[756/1760] hvac_hum / yui / station-small-tsu-deletion
+[757/1760] hvac_hum / yui / repeat-mora-deletion
+[758/1760] hvac_hum / yui / job-voicing-substitution
+[759/1760] hvac_hum / yui / reservation-insertion
+[760/1760] hvac_hum / yui / explain-lexical-substitution
+[761/1760] hvac_hum / hiro / weather-exact
+[762/1760] hvac_hum / hiro / job-exact
+[763/1760] hvac_hum / hiro / coffee-long-vowel-deletion
+[764/1760] hvac_hum / hiro / station-small-tsu-deletion
+[765/1760] hvac_hum / hiro / repeat-mora-deletion
+[766/1760] hvac_hum / hiro / job-voicing-substitution
+[767/1760] hvac_hum / hiro / reservation-insertion
+[768/1760] hvac_hum / hiro / explain-lexical-substitution
+[769/1760] hvac_hum / fumi / weather-exact
+[770/1760] hvac_hum / fumi / job-exact
+[771/1760] hvac_hum / fumi / coffee-long-vowel-deletion
+[772/1760] hvac_hum / fumi / station-small-tsu-deletion
+[773/1760] hvac_hum / fumi / repeat-mora-deletion
+[774/1760] hvac_hum / fumi / job-voicing-substitution
+[775/1760] hvac_hum / fumi / reservation-insertion
+[776/1760] hvac_hum / fumi / explain-lexical-substitution
+[777/1760] hvac_hum / gen / weather-exact
+[778/1760] hvac_hum / gen / job-exact
+[779/1760] hvac_hum / gen / coffee-long-vowel-deletion
+[780/1760] hvac_hum / gen / station-small-tsu-deletion
+[781/1760] hvac_hum / gen / repeat-mora-deletion
+[782/1760] hvac_hum / gen / job-voicing-substitution
+[783/1760] hvac_hum / gen / reservation-insertion
+[784/1760] hvac_hum / gen / explain-lexical-substitution
+[785/1760] hvac_hum / chiyo / weather-exact
+[786/1760] hvac_hum / chiyo / job-exact
+[787/1760] hvac_hum / chiyo / coffee-long-vowel-deletion
+[788/1760] hvac_hum / chiyo / station-small-tsu-deletion
+[789/1760] hvac_hum / chiyo / repeat-mora-deletion
+[790/1760] hvac_hum / chiyo / job-voicing-substitution
+[791/1760] hvac_hum / chiyo / reservation-insertion
+[792/1760] hvac_hum / chiyo / explain-lexical-substitution
+[793/1760] hvac_hum / issei / weather-exact
+[794/1760] hvac_hum / issei / job-exact
+[795/1760] hvac_hum / issei / coffee-long-vowel-deletion
+[796/1760] hvac_hum / issei / station-small-tsu-deletion
+[797/1760] hvac_hum / issei / repeat-mora-deletion
+[798/1760] hvac_hum / issei / job-voicing-substitution
+[799/1760] hvac_hum / issei / reservation-insertion
+[800/1760] hvac_hum / issei / explain-lexical-substitution
+[801/1760] strong_hiss / ao / weather-exact
+[802/1760] strong_hiss / ao / job-exact
+[803/1760] strong_hiss / ao / coffee-long-vowel-deletion
+[804/1760] strong_hiss / ao / station-small-tsu-deletion
+[805/1760] strong_hiss / ao / repeat-mora-deletion
+[806/1760] strong_hiss / ao / job-voicing-substitution
+[807/1760] strong_hiss / ao / reservation-insertion
+[808/1760] strong_hiss / ao / explain-lexical-substitution
+[809/1760] strong_hiss / ren / weather-exact
+[810/1760] strong_hiss / ren / job-exact
+[811/1760] strong_hiss / ren / coffee-long-vowel-deletion
+[812/1760] strong_hiss / ren / station-small-tsu-deletion
+[813/1760] strong_hiss / ren / repeat-mora-deletion
+[814/1760] strong_hiss / ren / job-voicing-substitution
+[815/1760] strong_hiss / ren / reservation-insertion
+[816/1760] strong_hiss / ren / explain-lexical-substitution
+[817/1760] strong_hiss / mio / weather-exact
+[818/1760] strong_hiss / mio / job-exact
+[819/1760] strong_hiss / mio / coffee-long-vowel-deletion
+[820/1760] strong_hiss / mio / station-small-tsu-deletion
+[821/1760] strong_hiss / mio / repeat-mora-deletion
+[822/1760] strong_hiss / mio / job-voicing-substitution
+[823/1760] strong_hiss / mio / reservation-insertion
+[824/1760] strong_hiss / mio / explain-lexical-substitution
+[825/1760] strong_hiss / kai / weather-exact
+[826/1760] strong_hiss / kai / job-exact
+[827/1760] strong_hiss / kai / coffee-long-vowel-deletion
+[828/1760] strong_hiss / kai / station-small-tsu-deletion
+[829/1760] strong_hiss / kai / repeat-mora-deletion
+[830/1760] strong_hiss / kai / job-voicing-substitution
+[831/1760] strong_hiss / kai / reservation-insertion
+[832/1760] strong_hiss / kai / explain-lexical-substitution
+[833/1760] strong_hiss / aya / weather-exact
+[834/1760] strong_hiss / aya / job-exact
+[835/1760] strong_hiss / aya / coffee-long-vowel-deletion
+[836/1760] strong_hiss / aya / station-small-tsu-deletion
+[837/1760] strong_hiss / aya / repeat-mora-deletion
+[838/1760] strong_hiss / aya / job-voicing-substitution
+[839/1760] strong_hiss / aya / reservation-insertion
+[840/1760] strong_hiss / aya / explain-lexical-substitution
+[841/1760] strong_hiss / jun / weather-exact
+[842/1760] strong_hiss / jun / job-exact
+[843/1760] strong_hiss / jun / coffee-long-vowel-deletion
+[844/1760] strong_hiss / jun / station-small-tsu-deletion
+[845/1760] strong_hiss / jun / repeat-mora-deletion
+[846/1760] strong_hiss / jun / job-voicing-substitution
+[847/1760] strong_hiss / jun / reservation-insertion
+[848/1760] strong_hiss / jun / explain-lexical-substitution
+[849/1760] strong_hiss / nami / weather-exact
+[850/1760] strong_hiss / nami / job-exact
+[851/1760] strong_hiss / nami / coffee-long-vowel-deletion
+[852/1760] strong_hiss / nami / station-small-tsu-deletion
+[853/1760] strong_hiss / nami / repeat-mora-deletion
+[854/1760] strong_hiss / nami / job-voicing-substitution
+[855/1760] strong_hiss / nami / reservation-insertion
+[856/1760] strong_hiss / nami / explain-lexical-substitution
+[857/1760] strong_hiss / sota / weather-exact
+[858/1760] strong_hiss / sota / job-exact
+[859/1760] strong_hiss / sota / coffee-long-vowel-deletion
+[860/1760] strong_hiss / sota / station-small-tsu-deletion
+[861/1760] strong_hiss / sota / repeat-mora-deletion
+[862/1760] strong_hiss / sota / job-voicing-substitution
+[863/1760] strong_hiss / sota / reservation-insertion
+[864/1760] strong_hiss / sota / explain-lexical-substitution
+[865/1760] strong_hiss / eri / weather-exact
+[866/1760] strong_hiss / eri / job-exact
+[867/1760] strong_hiss / eri / coffee-long-vowel-deletion
+[868/1760] strong_hiss / eri / station-small-tsu-deletion
+[869/1760] strong_hiss / eri / repeat-mora-deletion
+[870/1760] strong_hiss / eri / job-voicing-substitution
+[871/1760] strong_hiss / eri / reservation-insertion
+[872/1760] strong_hiss / eri / explain-lexical-substitution
+[873/1760] strong_hiss / taku / weather-exact
+[874/1760] strong_hiss / taku / job-exact
+[875/1760] strong_hiss / taku / coffee-long-vowel-deletion
+[876/1760] strong_hiss / taku / station-small-tsu-deletion
+[877/1760] strong_hiss / taku / repeat-mora-deletion
+[878/1760] strong_hiss / taku / job-voicing-substitution
+[879/1760] strong_hiss / taku / reservation-insertion
+[880/1760] strong_hiss / taku / explain-lexical-substitution
+[881/1760] strong_hiss / risa / weather-exact
+[882/1760] strong_hiss / risa / job-exact
+[883/1760] strong_hiss / risa / coffee-long-vowel-deletion
+[884/1760] strong_hiss / risa / station-small-tsu-deletion
+[885/1760] strong_hiss / risa / repeat-mora-deletion
+[886/1760] strong_hiss / risa / job-voicing-substitution
+[887/1760] strong_hiss / risa / reservation-insertion
+[888/1760] strong_hiss / risa / explain-lexical-substitution
+[889/1760] strong_hiss / makoto / weather-exact
+[890/1760] strong_hiss / makoto / job-exact
+[891/1760] strong_hiss / makoto / coffee-long-vowel-deletion
+[892/1760] strong_hiss / makoto / station-small-tsu-deletion
+[893/1760] strong_hiss / makoto / repeat-mora-deletion
+[894/1760] strong_hiss / makoto / job-voicing-substitution
+[895/1760] strong_hiss / makoto / reservation-insertion
+[896/1760] strong_hiss / makoto / explain-lexical-substitution
+[897/1760] strong_hiss / keiko / weather-exact
+[898/1760] strong_hiss / keiko / job-exact
+[899/1760] strong_hiss / keiko / coffee-long-vowel-deletion
+[900/1760] strong_hiss / keiko / station-small-tsu-deletion
+[901/1760] strong_hiss / keiko / repeat-mora-deletion
+[902/1760] strong_hiss / keiko / job-voicing-substitution
+[903/1760] strong_hiss / keiko / reservation-insertion
+[904/1760] strong_hiss / keiko / explain-lexical-substitution
+[905/1760] strong_hiss / osamu / weather-exact
+[906/1760] strong_hiss / osamu / job-exact
+[907/1760] strong_hiss / osamu / coffee-long-vowel-deletion
+[908/1760] strong_hiss / osamu / station-small-tsu-deletion
+[909/1760] strong_hiss / osamu / repeat-mora-deletion
+[910/1760] strong_hiss / osamu / job-voicing-substitution
+[911/1760] strong_hiss / osamu / reservation-insertion
+[912/1760] strong_hiss / osamu / explain-lexical-substitution
+[913/1760] strong_hiss / yui / weather-exact
+[914/1760] strong_hiss / yui / job-exact
+[915/1760] strong_hiss / yui / coffee-long-vowel-deletion
+[916/1760] strong_hiss / yui / station-small-tsu-deletion
+[917/1760] strong_hiss / yui / repeat-mora-deletion
+[918/1760] strong_hiss / yui / job-voicing-substitution
+[919/1760] strong_hiss / yui / reservation-insertion
+[920/1760] strong_hiss / yui / explain-lexical-substitution
+[921/1760] strong_hiss / hiro / weather-exact
+[922/1760] strong_hiss / hiro / job-exact
+[923/1760] strong_hiss / hiro / coffee-long-vowel-deletion
+[924/1760] strong_hiss / hiro / station-small-tsu-deletion
+[925/1760] strong_hiss / hiro / repeat-mora-deletion
+[926/1760] strong_hiss / hiro / job-voicing-substitution
+[927/1760] strong_hiss / hiro / reservation-insertion
+[928/1760] strong_hiss / hiro / explain-lexical-substitution
+[929/1760] strong_hiss / fumi / weather-exact
+[930/1760] strong_hiss / fumi / job-exact
+[931/1760] strong_hiss / fumi / coffee-long-vowel-deletion
+[932/1760] strong_hiss / fumi / station-small-tsu-deletion
+[933/1760] strong_hiss / fumi / repeat-mora-deletion
+[934/1760] strong_hiss / fumi / job-voicing-substitution
+[935/1760] strong_hiss / fumi / reservation-insertion
+[936/1760] strong_hiss / fumi / explain-lexical-substitution
+[937/1760] strong_hiss / gen / weather-exact
+[938/1760] strong_hiss / gen / job-exact
+[939/1760] strong_hiss / gen / coffee-long-vowel-deletion
+[940/1760] strong_hiss / gen / station-small-tsu-deletion
+[941/1760] strong_hiss / gen / repeat-mora-deletion
+[942/1760] strong_hiss / gen / job-voicing-substitution
+[943/1760] strong_hiss / gen / reservation-insertion
+[944/1760] strong_hiss / gen / explain-lexical-substitution
+[945/1760] strong_hiss / chiyo / weather-exact
+[946/1760] strong_hiss / chiyo / job-exact
+[947/1760] strong_hiss / chiyo / coffee-long-vowel-deletion
+[948/1760] strong_hiss / chiyo / station-small-tsu-deletion
+[949/1760] strong_hiss / chiyo / repeat-mora-deletion
+[950/1760] strong_hiss / chiyo / job-voicing-substitution
+[951/1760] strong_hiss / chiyo / reservation-insertion
+[952/1760] strong_hiss / chiyo / explain-lexical-substitution
+[953/1760] strong_hiss / issei / weather-exact
+[954/1760] strong_hiss / issei / job-exact
+[955/1760] strong_hiss / issei / coffee-long-vowel-deletion
+[956/1760] strong_hiss / issei / station-small-tsu-deletion
+[957/1760] strong_hiss / issei / repeat-mora-deletion
+[958/1760] strong_hiss / issei / job-voicing-substitution
+[959/1760] strong_hiss / issei / reservation-insertion
+[960/1760] strong_hiss / issei / explain-lexical-substitution
+[961/1760] clipped_mic / ao / weather-exact
+[962/1760] clipped_mic / ao / job-exact
+[963/1760] clipped_mic / ao / coffee-long-vowel-deletion
+[964/1760] clipped_mic / ao / station-small-tsu-deletion
+[965/1760] clipped_mic / ao / repeat-mora-deletion
+[966/1760] clipped_mic / ao / job-voicing-substitution
+[967/1760] clipped_mic / ao / reservation-insertion
+[968/1760] clipped_mic / ao / explain-lexical-substitution
+[969/1760] clipped_mic / ren / weather-exact
+[970/1760] clipped_mic / ren / job-exact
+[971/1760] clipped_mic / ren / coffee-long-vowel-deletion
+[972/1760] clipped_mic / ren / station-small-tsu-deletion
+[973/1760] clipped_mic / ren / repeat-mora-deletion
+[974/1760] clipped_mic / ren / job-voicing-substitution
+[975/1760] clipped_mic / ren / reservation-insertion
+[976/1760] clipped_mic / ren / explain-lexical-substitution
+[977/1760] clipped_mic / mio / weather-exact
+[978/1760] clipped_mic / mio / job-exact
+[979/1760] clipped_mic / mio / coffee-long-vowel-deletion
+[980/1760] clipped_mic / mio / station-small-tsu-deletion
+[981/1760] clipped_mic / mio / repeat-mora-deletion
+[982/1760] clipped_mic / mio / job-voicing-substitution
+[983/1760] clipped_mic / mio / reservation-insertion
+[984/1760] clipped_mic / mio / explain-lexical-substitution
+[985/1760] clipped_mic / kai / weather-exact
+[986/1760] clipped_mic / kai / job-exact
+[987/1760] clipped_mic / kai / coffee-long-vowel-deletion
+[988/1760] clipped_mic / kai / station-small-tsu-deletion
+[989/1760] clipped_mic / kai / repeat-mora-deletion
+[990/1760] clipped_mic / kai / job-voicing-substitution
+[991/1760] clipped_mic / kai / reservation-insertion
+[992/1760] clipped_mic / kai / explain-lexical-substitution
+[993/1760] clipped_mic / aya / weather-exact
+[994/1760] clipped_mic / aya / job-exact
+[995/1760] clipped_mic / aya / coffee-long-vowel-deletion
+[996/1760] clipped_mic / aya / station-small-tsu-deletion
+[997/1760] clipped_mic / aya / repeat-mora-deletion
+[998/1760] clipped_mic / aya / job-voicing-substitution
+[999/1760] clipped_mic / aya / reservation-insertion
+[1000/1760] clipped_mic / aya / explain-lexical-substitution
+[1001/1760] clipped_mic / jun / weather-exact
+[1002/1760] clipped_mic / jun / job-exact
+[1003/1760] clipped_mic / jun / coffee-long-vowel-deletion
+[1004/1760] clipped_mic / jun / station-small-tsu-deletion
+[1005/1760] clipped_mic / jun / repeat-mora-deletion
+[1006/1760] clipped_mic / jun / job-voicing-substitution
+[1007/1760] clipped_mic / jun / reservation-insertion
+[1008/1760] clipped_mic / jun / explain-lexical-substitution
+[1009/1760] clipped_mic / nami / weather-exact
+[1010/1760] clipped_mic / nami / job-exact
+[1011/1760] clipped_mic / nami / coffee-long-vowel-deletion
+[1012/1760] clipped_mic / nami / station-small-tsu-deletion
+[1013/1760] clipped_mic / nami / repeat-mora-deletion
+[1014/1760] clipped_mic / nami / job-voicing-substitution
+[1015/1760] clipped_mic / nami / reservation-insertion
+[1016/1760] clipped_mic / nami / explain-lexical-substitution
+[1017/1760] clipped_mic / sota / weather-exact
+[1018/1760] clipped_mic / sota / job-exact
+[1019/1760] clipped_mic / sota / coffee-long-vowel-deletion
+[1020/1760] clipped_mic / sota / station-small-tsu-deletion
+[1021/1760] clipped_mic / sota / repeat-mora-deletion
+[1022/1760] clipped_mic / sota / job-voicing-substitution
+[1023/1760] clipped_mic / sota / reservation-insertion
+[1024/1760] clipped_mic / sota / explain-lexical-substitution
+[1025/1760] clipped_mic / eri / weather-exact
+[1026/1760] clipped_mic / eri / job-exact
+[1027/1760] clipped_mic / eri / coffee-long-vowel-deletion
+[1028/1760] clipped_mic / eri / station-small-tsu-deletion
+[1029/1760] clipped_mic / eri / repeat-mora-deletion
+[1030/1760] clipped_mic / eri / job-voicing-substitution
+[1031/1760] clipped_mic / eri / reservation-insertion
+[1032/1760] clipped_mic / eri / explain-lexical-substitution
+[1033/1760] clipped_mic / taku / weather-exact
+[1034/1760] clipped_mic / taku / job-exact
+[1035/1760] clipped_mic / taku / coffee-long-vowel-deletion
+[1036/1760] clipped_mic / taku / station-small-tsu-deletion
+[1037/1760] clipped_mic / taku / repeat-mora-deletion
+[1038/1760] clipped_mic / taku / job-voicing-substitution
+[1039/1760] clipped_mic / taku / reservation-insertion
+[1040/1760] clipped_mic / taku / explain-lexical-substitution
+[1041/1760] clipped_mic / risa / weather-exact
+[1042/1760] clipped_mic / risa / job-exact
+[1043/1760] clipped_mic / risa / coffee-long-vowel-deletion
+[1044/1760] clipped_mic / risa / station-small-tsu-deletion
+[1045/1760] clipped_mic / risa / repeat-mora-deletion
+[1046/1760] clipped_mic / risa / job-voicing-substitution
+[1047/1760] clipped_mic / risa / reservation-insertion
+[1048/1760] clipped_mic / risa / explain-lexical-substitution
+[1049/1760] clipped_mic / makoto / weather-exact
+[1050/1760] clipped_mic / makoto / job-exact
+[1051/1760] clipped_mic / makoto / coffee-long-vowel-deletion
+[1052/1760] clipped_mic / makoto / station-small-tsu-deletion
+[1053/1760] clipped_mic / makoto / repeat-mora-deletion
+[1054/1760] clipped_mic / makoto / job-voicing-substitution
+[1055/1760] clipped_mic / makoto / reservation-insertion
+[1056/1760] clipped_mic / makoto / explain-lexical-substitution
+[1057/1760] clipped_mic / keiko / weather-exact
+[1058/1760] clipped_mic / keiko / job-exact
+[1059/1760] clipped_mic / keiko / coffee-long-vowel-deletion
+[1060/1760] clipped_mic / keiko / station-small-tsu-deletion
+[1061/1760] clipped_mic / keiko / repeat-mora-deletion
+[1062/1760] clipped_mic / keiko / job-voicing-substitution
+[1063/1760] clipped_mic / keiko / reservation-insertion
+[1064/1760] clipped_mic / keiko / explain-lexical-substitution
+[1065/1760] clipped_mic / osamu / weather-exact
+[1066/1760] clipped_mic / osamu / job-exact
+[1067/1760] clipped_mic / osamu / coffee-long-vowel-deletion
+[1068/1760] clipped_mic / osamu / station-small-tsu-deletion
+[1069/1760] clipped_mic / osamu / repeat-mora-deletion
+[1070/1760] clipped_mic / osamu / job-voicing-substitution
+[1071/1760] clipped_mic / osamu / reservation-insertion
+[1072/1760] clipped_mic / osamu / explain-lexical-substitution
+[1073/1760] clipped_mic / yui / weather-exact
+[1074/1760] clipped_mic / yui / job-exact
+[1075/1760] clipped_mic / yui / coffee-long-vowel-deletion
+[1076/1760] clipped_mic / yui / station-small-tsu-deletion
+[1077/1760] clipped_mic / yui / repeat-mora-deletion
+[1078/1760] clipped_mic / yui / job-voicing-substitution
+[1079/1760] clipped_mic / yui / reservation-insertion
+[1080/1760] clipped_mic / yui / explain-lexical-substitution
+[1081/1760] clipped_mic / hiro / weather-exact
+[1082/1760] clipped_mic / hiro / job-exact
+[1083/1760] clipped_mic / hiro / coffee-long-vowel-deletion
+[1084/1760] clipped_mic / hiro / station-small-tsu-deletion
+[1085/1760] clipped_mic / hiro / repeat-mora-deletion
+[1086/1760] clipped_mic / hiro / job-voicing-substitution
+[1087/1760] clipped_mic / hiro / reservation-insertion
+[1088/1760] clipped_mic / hiro / explain-lexical-substitution
+[1089/1760] clipped_mic / fumi / weather-exact
+[1090/1760] clipped_mic / fumi / job-exact
+[1091/1760] clipped_mic / fumi / coffee-long-vowel-deletion
+[1092/1760] clipped_mic / fumi / station-small-tsu-deletion
+[1093/1760] clipped_mic / fumi / repeat-mora-deletion
+[1094/1760] clipped_mic / fumi / job-voicing-substitution
+[1095/1760] clipped_mic / fumi / reservation-insertion
+[1096/1760] clipped_mic / fumi / explain-lexical-substitution
+[1097/1760] clipped_mic / gen / weather-exact
+[1098/1760] clipped_mic / gen / job-exact
+[1099/1760] clipped_mic / gen / coffee-long-vowel-deletion
+[1100/1760] clipped_mic / gen / station-small-tsu-deletion
+[1101/1760] clipped_mic / gen / repeat-mora-deletion
+[1102/1760] clipped_mic / gen / job-voicing-substitution
+[1103/1760] clipped_mic / gen / reservation-insertion
+[1104/1760] clipped_mic / gen / explain-lexical-substitution
+[1105/1760] clipped_mic / chiyo / weather-exact
+[1106/1760] clipped_mic / chiyo / job-exact
+[1107/1760] clipped_mic / chiyo / coffee-long-vowel-deletion
+[1108/1760] clipped_mic / chiyo / station-small-tsu-deletion
+[1109/1760] clipped_mic / chiyo / repeat-mora-deletion
+[1110/1760] clipped_mic / chiyo / job-voicing-substitution
+[1111/1760] clipped_mic / chiyo / reservation-insertion
+[1112/1760] clipped_mic / chiyo / explain-lexical-substitution
+[1113/1760] clipped_mic / issei / weather-exact
+[1114/1760] clipped_mic / issei / job-exact
+[1115/1760] clipped_mic / issei / coffee-long-vowel-deletion
+[1116/1760] clipped_mic / issei / station-small-tsu-deletion
+[1117/1760] clipped_mic / issei / repeat-mora-deletion
+[1118/1760] clipped_mic / issei / job-voicing-substitution
+[1119/1760] clipped_mic / issei / reservation-insertion
+[1120/1760] clipped_mic / issei / explain-lexical-substitution
+[1121/1760] packet_dropouts / ao / weather-exact
+[1122/1760] packet_dropouts / ao / job-exact
+[1123/1760] packet_dropouts / ao / coffee-long-vowel-deletion
+[1124/1760] packet_dropouts / ao / station-small-tsu-deletion
+[1125/1760] packet_dropouts / ao / repeat-mora-deletion
+[1126/1760] packet_dropouts / ao / job-voicing-substitution
+[1127/1760] packet_dropouts / ao / reservation-insertion
+[1128/1760] packet_dropouts / ao / explain-lexical-substitution
+[1129/1760] packet_dropouts / ren / weather-exact
+[1130/1760] packet_dropouts / ren / job-exact
+[1131/1760] packet_dropouts / ren / coffee-long-vowel-deletion
+[1132/1760] packet_dropouts / ren / station-small-tsu-deletion
+[1133/1760] packet_dropouts / ren / repeat-mora-deletion
+[1134/1760] packet_dropouts / ren / job-voicing-substitution
+[1135/1760] packet_dropouts / ren / reservation-insertion
+[1136/1760] packet_dropouts / ren / explain-lexical-substitution
+[1137/1760] packet_dropouts / mio / weather-exact
+[1138/1760] packet_dropouts / mio / job-exact
+[1139/1760] packet_dropouts / mio / coffee-long-vowel-deletion
+[1140/1760] packet_dropouts / mio / station-small-tsu-deletion
+[1141/1760] packet_dropouts / mio / repeat-mora-deletion
+[1142/1760] packet_dropouts / mio / job-voicing-substitution
+[1143/1760] packet_dropouts / mio / reservation-insertion
+[1144/1760] packet_dropouts / mio / explain-lexical-substitution
+[1145/1760] packet_dropouts / kai / weather-exact
+[1146/1760] packet_dropouts / kai / job-exact
+[1147/1760] packet_dropouts / kai / coffee-long-vowel-deletion
+[1148/1760] packet_dropouts / kai / station-small-tsu-deletion
+[1149/1760] packet_dropouts / kai / repeat-mora-deletion
+[1150/1760] packet_dropouts / kai / job-voicing-substitution
+[1151/1760] packet_dropouts / kai / reservation-insertion
+[1152/1760] packet_dropouts / kai / explain-lexical-substitution
+[1153/1760] packet_dropouts / aya / weather-exact
+[1154/1760] packet_dropouts / aya / job-exact
+[1155/1760] packet_dropouts / aya / coffee-long-vowel-deletion
+[1156/1760] packet_dropouts / aya / station-small-tsu-deletion
+[1157/1760] packet_dropouts / aya / repeat-mora-deletion
+[1158/1760] packet_dropouts / aya / job-voicing-substitution
+[1159/1760] packet_dropouts / aya / reservation-insertion
+[1160/1760] packet_dropouts / aya / explain-lexical-substitution
+[1161/1760] packet_dropouts / jun / weather-exact
+[1162/1760] packet_dropouts / jun / job-exact
+[1163/1760] packet_dropouts / jun / coffee-long-vowel-deletion
+[1164/1760] packet_dropouts / jun / station-small-tsu-deletion
+[1165/1760] packet_dropouts / jun / repeat-mora-deletion
+[1166/1760] packet_dropouts / jun / job-voicing-substitution
+[1167/1760] packet_dropouts / jun / reservation-insertion
+[1168/1760] packet_dropouts / jun / explain-lexical-substitution
+[1169/1760] packet_dropouts / nami / weather-exact
+[1170/1760] packet_dropouts / nami / job-exact
+[1171/1760] packet_dropouts / nami / coffee-long-vowel-deletion
+[1172/1760] packet_dropouts / nami / station-small-tsu-deletion
+[1173/1760] packet_dropouts / nami / repeat-mora-deletion
+[1174/1760] packet_dropouts / nami / job-voicing-substitution
+[1175/1760] packet_dropouts / nami / reservation-insertion
+[1176/1760] packet_dropouts / nami / explain-lexical-substitution
+[1177/1760] packet_dropouts / sota / weather-exact
+[1178/1760] packet_dropouts / sota / job-exact
+[1179/1760] packet_dropouts / sota / coffee-long-vowel-deletion
+[1180/1760] packet_dropouts / sota / station-small-tsu-deletion
+[1181/1760] packet_dropouts / sota / repeat-mora-deletion
+[1182/1760] packet_dropouts / sota / job-voicing-substitution
+[1183/1760] packet_dropouts / sota / reservation-insertion
+[1184/1760] packet_dropouts / sota / explain-lexical-substitution
+[1185/1760] packet_dropouts / eri / weather-exact
+[1186/1760] packet_dropouts / eri / job-exact
+[1187/1760] packet_dropouts / eri / coffee-long-vowel-deletion
+[1188/1760] packet_dropouts / eri / station-small-tsu-deletion
+[1189/1760] packet_dropouts / eri / repeat-mora-deletion
+[1190/1760] packet_dropouts / eri / job-voicing-substitution
+[1191/1760] packet_dropouts / eri / reservation-insertion
+[1192/1760] packet_dropouts / eri / explain-lexical-substitution
+[1193/1760] packet_dropouts / taku / weather-exact
+[1194/1760] packet_dropouts / taku / job-exact
+[1195/1760] packet_dropouts / taku / coffee-long-vowel-deletion
+[1196/1760] packet_dropouts / taku / station-small-tsu-deletion
+[1197/1760] packet_dropouts / taku / repeat-mora-deletion
+[1198/1760] packet_dropouts / taku / job-voicing-substitution
+[1199/1760] packet_dropouts / taku / reservation-insertion
+[1200/1760] packet_dropouts / taku / explain-lexical-substitution
+[1201/1760] packet_dropouts / risa / weather-exact
+[1202/1760] packet_dropouts / risa / job-exact
+[1203/1760] packet_dropouts / risa / coffee-long-vowel-deletion
+[1204/1760] packet_dropouts / risa / station-small-tsu-deletion
+[1205/1760] packet_dropouts / risa / repeat-mora-deletion
+[1206/1760] packet_dropouts / risa / job-voicing-substitution
+[1207/1760] packet_dropouts / risa / reservation-insertion
+[1208/1760] packet_dropouts / risa / explain-lexical-substitution
+[1209/1760] packet_dropouts / makoto / weather-exact
+[1210/1760] packet_dropouts / makoto / job-exact
+[1211/1760] packet_dropouts / makoto / coffee-long-vowel-deletion
+[1212/1760] packet_dropouts / makoto / station-small-tsu-deletion
+[1213/1760] packet_dropouts / makoto / repeat-mora-deletion
+[1214/1760] packet_dropouts / makoto / job-voicing-substitution
+[1215/1760] packet_dropouts / makoto / reservation-insertion
+[1216/1760] packet_dropouts / makoto / explain-lexical-substitution
+[1217/1760] packet_dropouts / keiko / weather-exact
+[1218/1760] packet_dropouts / keiko / job-exact
+[1219/1760] packet_dropouts / keiko / coffee-long-vowel-deletion
+[1220/1760] packet_dropouts / keiko / station-small-tsu-deletion
+[1221/1760] packet_dropouts / keiko / repeat-mora-deletion
+[1222/1760] packet_dropouts / keiko / job-voicing-substitution
+[1223/1760] packet_dropouts / keiko / reservation-insertion
+[1224/1760] packet_dropouts / keiko / explain-lexical-substitution
+[1225/1760] packet_dropouts / osamu / weather-exact
+[1226/1760] packet_dropouts / osamu / job-exact
+[1227/1760] packet_dropouts / osamu / coffee-long-vowel-deletion
+[1228/1760] packet_dropouts / osamu / station-small-tsu-deletion
+[1229/1760] packet_dropouts / osamu / repeat-mora-deletion
+[1230/1760] packet_dropouts / osamu / job-voicing-substitution
+[1231/1760] packet_dropouts / osamu / reservation-insertion
+[1232/1760] packet_dropouts / osamu / explain-lexical-substitution
+[1233/1760] packet_dropouts / yui / weather-exact
+[1234/1760] packet_dropouts / yui / job-exact
+[1235/1760] packet_dropouts / yui / coffee-long-vowel-deletion
+[1236/1760] packet_dropouts / yui / station-small-tsu-deletion
+[1237/1760] packet_dropouts / yui / repeat-mora-deletion
+[1238/1760] packet_dropouts / yui / job-voicing-substitution
+[1239/1760] packet_dropouts / yui / reservation-insertion
+[1240/1760] packet_dropouts / yui / explain-lexical-substitution
+[1241/1760] packet_dropouts / hiro / weather-exact
+[1242/1760] packet_dropouts / hiro / job-exact
+[1243/1760] packet_dropouts / hiro / coffee-long-vowel-deletion
+[1244/1760] packet_dropouts / hiro / station-small-tsu-deletion
+[1245/1760] packet_dropouts / hiro / repeat-mora-deletion
+[1246/1760] packet_dropouts / hiro / job-voicing-substitution
+[1247/1760] packet_dropouts / hiro / reservation-insertion
+[1248/1760] packet_dropouts / hiro / explain-lexical-substitution
+[1249/1760] packet_dropouts / fumi / weather-exact
+[1250/1760] packet_dropouts / fumi / job-exact
+[1251/1760] packet_dropouts / fumi / coffee-long-vowel-deletion
+[1252/1760] packet_dropouts / fumi / station-small-tsu-deletion
+[1253/1760] packet_dropouts / fumi / repeat-mora-deletion
+[1254/1760] packet_dropouts / fumi / job-voicing-substitution
+[1255/1760] packet_dropouts / fumi / reservation-insertion
+[1256/1760] packet_dropouts / fumi / explain-lexical-substitution
+[1257/1760] packet_dropouts / gen / weather-exact
+[1258/1760] packet_dropouts / gen / job-exact
+[1259/1760] packet_dropouts / gen / coffee-long-vowel-deletion
+[1260/1760] packet_dropouts / gen / station-small-tsu-deletion
+[1261/1760] packet_dropouts / gen / repeat-mora-deletion
+[1262/1760] packet_dropouts / gen / job-voicing-substitution
+[1263/1760] packet_dropouts / gen / reservation-insertion
+[1264/1760] packet_dropouts / gen / explain-lexical-substitution
+[1265/1760] packet_dropouts / chiyo / weather-exact
+[1266/1760] packet_dropouts / chiyo / job-exact
+[1267/1760] packet_dropouts / chiyo / coffee-long-vowel-deletion
+[1268/1760] packet_dropouts / chiyo / station-small-tsu-deletion
+[1269/1760] packet_dropouts / chiyo / repeat-mora-deletion
+[1270/1760] packet_dropouts / chiyo / job-voicing-substitution
+[1271/1760] packet_dropouts / chiyo / reservation-insertion
+[1272/1760] packet_dropouts / chiyo / explain-lexical-substitution
+[1273/1760] packet_dropouts / issei / weather-exact
+[1274/1760] packet_dropouts / issei / job-exact
+[1275/1760] packet_dropouts / issei / coffee-long-vowel-deletion
+[1276/1760] packet_dropouts / issei / station-small-tsu-deletion
+[1277/1760] packet_dropouts / issei / repeat-mora-deletion
+[1278/1760] packet_dropouts / issei / job-voicing-substitution
+[1279/1760] packet_dropouts / issei / reservation-insertion
+[1280/1760] packet_dropouts / issei / explain-lexical-substitution
+[1281/1760] phone_band / ao / weather-exact
+[1282/1760] phone_band / ao / job-exact
+[1283/1760] phone_band / ao / coffee-long-vowel-deletion
+[1284/1760] phone_band / ao / station-small-tsu-deletion
+[1285/1760] phone_band / ao / repeat-mora-deletion
+[1286/1760] phone_band / ao / job-voicing-substitution
+[1287/1760] phone_band / ao / reservation-insertion
+[1288/1760] phone_band / ao / explain-lexical-substitution
+[1289/1760] phone_band / ren / weather-exact
+[1290/1760] phone_band / ren / job-exact
+[1291/1760] phone_band / ren / coffee-long-vowel-deletion
+[1292/1760] phone_band / ren / station-small-tsu-deletion
+[1293/1760] phone_band / ren / repeat-mora-deletion
+[1294/1760] phone_band / ren / job-voicing-substitution
+[1295/1760] phone_band / ren / reservation-insertion
+[1296/1760] phone_band / ren / explain-lexical-substitution
+[1297/1760] phone_band / mio / weather-exact
+[1298/1760] phone_band / mio / job-exact
+[1299/1760] phone_band / mio / coffee-long-vowel-deletion
+[1300/1760] phone_band / mio / station-small-tsu-deletion
+[1301/1760] phone_band / mio / repeat-mora-deletion
+[1302/1760] phone_band / mio / job-voicing-substitution
+[1303/1760] phone_band / mio / reservation-insertion
+[1304/1760] phone_band / mio / explain-lexical-substitution
+[1305/1760] phone_band / kai / weather-exact
+[1306/1760] phone_band / kai / job-exact
+[1307/1760] phone_band / kai / coffee-long-vowel-deletion
+[1308/1760] phone_band / kai / station-small-tsu-deletion
+[1309/1760] phone_band / kai / repeat-mora-deletion
+[1310/1760] phone_band / kai / job-voicing-substitution
+[1311/1760] phone_band / kai / reservation-insertion
+[1312/1760] phone_band / kai / explain-lexical-substitution
+[1313/1760] phone_band / aya / weather-exact
+[1314/1760] phone_band / aya / job-exact
+[1315/1760] phone_band / aya / coffee-long-vowel-deletion
+[1316/1760] phone_band / aya / station-small-tsu-deletion
+[1317/1760] phone_band / aya / repeat-mora-deletion
+[1318/1760] phone_band / aya / job-voicing-substitution
+[1319/1760] phone_band / aya / reservation-insertion
+[1320/1760] phone_band / aya / explain-lexical-substitution
+[1321/1760] phone_band / jun / weather-exact
+[1322/1760] phone_band / jun / job-exact
+[1323/1760] phone_band / jun / coffee-long-vowel-deletion
+[1324/1760] phone_band / jun / station-small-tsu-deletion
+[1325/1760] phone_band / jun / repeat-mora-deletion
+[1326/1760] phone_band / jun / job-voicing-substitution
+[1327/1760] phone_band / jun / reservation-insertion
+[1328/1760] phone_band / jun / explain-lexical-substitution
+[1329/1760] phone_band / nami / weather-exact
+[1330/1760] phone_band / nami / job-exact
+[1331/1760] phone_band / nami / coffee-long-vowel-deletion
+[1332/1760] phone_band / nami / station-small-tsu-deletion
+[1333/1760] phone_band / nami / repeat-mora-deletion
+[1334/1760] phone_band / nami / job-voicing-substitution
+[1335/1760] phone_band / nami / reservation-insertion
+[1336/1760] phone_band / nami / explain-lexical-substitution
+[1337/1760] phone_band / sota / weather-exact
+[1338/1760] phone_band / sota / job-exact
+[1339/1760] phone_band / sota / coffee-long-vowel-deletion
+[1340/1760] phone_band / sota / station-small-tsu-deletion
+[1341/1760] phone_band / sota / repeat-mora-deletion
+[1342/1760] phone_band / sota / job-voicing-substitution
+[1343/1760] phone_band / sota / reservation-insertion
+[1344/1760] phone_band / sota / explain-lexical-substitution
+[1345/1760] phone_band / eri / weather-exact
+[1346/1760] phone_band / eri / job-exact
+[1347/1760] phone_band / eri / coffee-long-vowel-deletion
+[1348/1760] phone_band / eri / station-small-tsu-deletion
+[1349/1760] phone_band / eri / repeat-mora-deletion
+[1350/1760] phone_band / eri / job-voicing-substitution
+[1351/1760] phone_band / eri / reservation-insertion
+[1352/1760] phone_band / eri / explain-lexical-substitution
+[1353/1760] phone_band / taku / weather-exact
+[1354/1760] phone_band / taku / job-exact
+[1355/1760] phone_band / taku / coffee-long-vowel-deletion
+[1356/1760] phone_band / taku / station-small-tsu-deletion
+[1357/1760] phone_band / taku / repeat-mora-deletion
+[1358/1760] phone_band / taku / job-voicing-substitution
+[1359/1760] phone_band / taku / reservation-insertion
+[1360/1760] phone_band / taku / explain-lexical-substitution
+[1361/1760] phone_band / risa / weather-exact
+[1362/1760] phone_band / risa / job-exact
+[1363/1760] phone_band / risa / coffee-long-vowel-deletion
+[1364/1760] phone_band / risa / station-small-tsu-deletion
+[1365/1760] phone_band / risa / repeat-mora-deletion
+[1366/1760] phone_band / risa / job-voicing-substitution
+[1367/1760] phone_band / risa / reservation-insertion
+[1368/1760] phone_band / risa / explain-lexical-substitution
+[1369/1760] phone_band / makoto / weather-exact
+[1370/1760] phone_band / makoto / job-exact
+[1371/1760] phone_band / makoto / coffee-long-vowel-deletion
+[1372/1760] phone_band / makoto / station-small-tsu-deletion
+[1373/1760] phone_band / makoto / repeat-mora-deletion
+[1374/1760] phone_band / makoto / job-voicing-substitution
+[1375/1760] phone_band / makoto / reservation-insertion
+[1376/1760] phone_band / makoto / explain-lexical-substitution
+[1377/1760] phone_band / keiko / weather-exact
+[1378/1760] phone_band / keiko / job-exact
+[1379/1760] phone_band / keiko / coffee-long-vowel-deletion
+[1380/1760] phone_band / keiko / station-small-tsu-deletion
+[1381/1760] phone_band / keiko / repeat-mora-deletion
+[1382/1760] phone_band / keiko / job-voicing-substitution
+[1383/1760] phone_band / keiko / reservation-insertion
+[1384/1760] phone_band / keiko / explain-lexical-substitution
+[1385/1760] phone_band / osamu / weather-exact
+[1386/1760] phone_band / osamu / job-exact
+[1387/1760] phone_band / osamu / coffee-long-vowel-deletion
+[1388/1760] phone_band / osamu / station-small-tsu-deletion
+[1389/1760] phone_band / osamu / repeat-mora-deletion
+[1390/1760] phone_band / osamu / job-voicing-substitution
+[1391/1760] phone_band / osamu / reservation-insertion
+[1392/1760] phone_band / osamu / explain-lexical-substitution
+[1393/1760] phone_band / yui / weather-exact
+[1394/1760] phone_band / yui / job-exact
+[1395/1760] phone_band / yui / coffee-long-vowel-deletion
+[1396/1760] phone_band / yui / station-small-tsu-deletion
+[1397/1760] phone_band / yui / repeat-mora-deletion
+[1398/1760] phone_band / yui / job-voicing-substitution
+[1399/1760] phone_band / yui / reservation-insertion
+[1400/1760] phone_band / yui / explain-lexical-substitution
+[1401/1760] phone_band / hiro / weather-exact
+[1402/1760] phone_band / hiro / job-exact
+[1403/1760] phone_band / hiro / coffee-long-vowel-deletion
+[1404/1760] phone_band / hiro / station-small-tsu-deletion
+[1405/1760] phone_band / hiro / repeat-mora-deletion
+[1406/1760] phone_band / hiro / job-voicing-substitution
+[1407/1760] phone_band / hiro / reservation-insertion
+[1408/1760] phone_band / hiro / explain-lexical-substitution
+[1409/1760] phone_band / fumi / weather-exact
+[1410/1760] phone_band / fumi / job-exact
+[1411/1760] phone_band / fumi / coffee-long-vowel-deletion
+[1412/1760] phone_band / fumi / station-small-tsu-deletion
+[1413/1760] phone_band / fumi / repeat-mora-deletion
+[1414/1760] phone_band / fumi / job-voicing-substitution
+[1415/1760] phone_band / fumi / reservation-insertion
+[1416/1760] phone_band / fumi / explain-lexical-substitution
+[1417/1760] phone_band / gen / weather-exact
+[1418/1760] phone_band / gen / job-exact
+[1419/1760] phone_band / gen / coffee-long-vowel-deletion
+[1420/1760] phone_band / gen / station-small-tsu-deletion
+[1421/1760] phone_band / gen / repeat-mora-deletion
+[1422/1760] phone_band / gen / job-voicing-substitution
+[1423/1760] phone_band / gen / reservation-insertion
+[1424/1760] phone_band / gen / explain-lexical-substitution
+[1425/1760] phone_band / chiyo / weather-exact
+[1426/1760] phone_band / chiyo / job-exact
+[1427/1760] phone_band / chiyo / coffee-long-vowel-deletion
+[1428/1760] phone_band / chiyo / station-small-tsu-deletion
+[1429/1760] phone_band / chiyo / repeat-mora-deletion
+[1430/1760] phone_band / chiyo / job-voicing-substitution
+[1431/1760] phone_band / chiyo / reservation-insertion
+[1432/1760] phone_band / chiyo / explain-lexical-substitution
+[1433/1760] phone_band / issei / weather-exact
+[1434/1760] phone_band / issei / job-exact
+[1435/1760] phone_band / issei / coffee-long-vowel-deletion
+[1436/1760] phone_band / issei / station-small-tsu-deletion
+[1437/1760] phone_band / issei / repeat-mora-deletion
+[1438/1760] phone_band / issei / job-voicing-substitution
+[1439/1760] phone_band / issei / reservation-insertion
+[1440/1760] phone_band / issei / explain-lexical-substitution
+[1441/1760] fast_pitch / ao / weather-exact
+[1442/1760] fast_pitch / ao / job-exact
+[1443/1760] fast_pitch / ao / coffee-long-vowel-deletion
+[1444/1760] fast_pitch / ao / station-small-tsu-deletion
+[1445/1760] fast_pitch / ao / repeat-mora-deletion
+[1446/1760] fast_pitch / ao / job-voicing-substitution
+[1447/1760] fast_pitch / ao / reservation-insertion
+[1448/1760] fast_pitch / ao / explain-lexical-substitution
+[1449/1760] fast_pitch / ren / weather-exact
+[1450/1760] fast_pitch / ren / job-exact
+[1451/1760] fast_pitch / ren / coffee-long-vowel-deletion
+[1452/1760] fast_pitch / ren / station-small-tsu-deletion
+[1453/1760] fast_pitch / ren / repeat-mora-deletion
+[1454/1760] fast_pitch / ren / job-voicing-substitution
+[1455/1760] fast_pitch / ren / reservation-insertion
+[1456/1760] fast_pitch / ren / explain-lexical-substitution
+[1457/1760] fast_pitch / mio / weather-exact
+[1458/1760] fast_pitch / mio / job-exact
+[1459/1760] fast_pitch / mio / coffee-long-vowel-deletion
+[1460/1760] fast_pitch / mio / station-small-tsu-deletion
+[1461/1760] fast_pitch / mio / repeat-mora-deletion
+[1462/1760] fast_pitch / mio / job-voicing-substitution
+[1463/1760] fast_pitch / mio / reservation-insertion
+[1464/1760] fast_pitch / mio / explain-lexical-substitution
+[1465/1760] fast_pitch / kai / weather-exact
+[1466/1760] fast_pitch / kai / job-exact
+[1467/1760] fast_pitch / kai / coffee-long-vowel-deletion
+[1468/1760] fast_pitch / kai / station-small-tsu-deletion
+[1469/1760] fast_pitch / kai / repeat-mora-deletion
+[1470/1760] fast_pitch / kai / job-voicing-substitution
+[1471/1760] fast_pitch / kai / reservation-insertion
+[1472/1760] fast_pitch / kai / explain-lexical-substitution
+[1473/1760] fast_pitch / aya / weather-exact
+[1474/1760] fast_pitch / aya / job-exact
+[1475/1760] fast_pitch / aya / coffee-long-vowel-deletion
+[1476/1760] fast_pitch / aya / station-small-tsu-deletion
+[1477/1760] fast_pitch / aya / repeat-mora-deletion
+[1478/1760] fast_pitch / aya / job-voicing-substitution
+[1479/1760] fast_pitch / aya / reservation-insertion
+[1480/1760] fast_pitch / aya / explain-lexical-substitution
+[1481/1760] fast_pitch / jun / weather-exact
+[1482/1760] fast_pitch / jun / job-exact
+[1483/1760] fast_pitch / jun / coffee-long-vowel-deletion
+[1484/1760] fast_pitch / jun / station-small-tsu-deletion
+[1485/1760] fast_pitch / jun / repeat-mora-deletion
+[1486/1760] fast_pitch / jun / job-voicing-substitution
+[1487/1760] fast_pitch / jun / reservation-insertion
+[1488/1760] fast_pitch / jun / explain-lexical-substitution
+[1489/1760] fast_pitch / nami / weather-exact
+[1490/1760] fast_pitch / nami / job-exact
+[1491/1760] fast_pitch / nami / coffee-long-vowel-deletion
+[1492/1760] fast_pitch / nami / station-small-tsu-deletion
+[1493/1760] fast_pitch / nami / repeat-mora-deletion
+[1494/1760] fast_pitch / nami / job-voicing-substitution
+[1495/1760] fast_pitch / nami / reservation-insertion
+[1496/1760] fast_pitch / nami / explain-lexical-substitution
+[1497/1760] fast_pitch / sota / weather-exact
+[1498/1760] fast_pitch / sota / job-exact
+[1499/1760] fast_pitch / sota / coffee-long-vowel-deletion
+[1500/1760] fast_pitch / sota / station-small-tsu-deletion
+[1501/1760] fast_pitch / sota / repeat-mora-deletion
+[1502/1760] fast_pitch / sota / job-voicing-substitution
+[1503/1760] fast_pitch / sota / reservation-insertion
+[1504/1760] fast_pitch / sota / explain-lexical-substitution
+[1505/1760] fast_pitch / eri / weather-exact
+[1506/1760] fast_pitch / eri / job-exact
+[1507/1760] fast_pitch / eri / coffee-long-vowel-deletion
+[1508/1760] fast_pitch / eri / station-small-tsu-deletion
+[1509/1760] fast_pitch / eri / repeat-mora-deletion
+[1510/1760] fast_pitch / eri / job-voicing-substitution
+[1511/1760] fast_pitch / eri / reservation-insertion
+[1512/1760] fast_pitch / eri / explain-lexical-substitution
+[1513/1760] fast_pitch / taku / weather-exact
+[1514/1760] fast_pitch / taku / job-exact
+[1515/1760] fast_pitch / taku / coffee-long-vowel-deletion
+[1516/1760] fast_pitch / taku / station-small-tsu-deletion
+[1517/1760] fast_pitch / taku / repeat-mora-deletion
+[1518/1760] fast_pitch / taku / job-voicing-substitution
+[1519/1760] fast_pitch / taku / reservation-insertion
+[1520/1760] fast_pitch / taku / explain-lexical-substitution
+[1521/1760] fast_pitch / risa / weather-exact
+[1522/1760] fast_pitch / risa / job-exact
+[1523/1760] fast_pitch / risa / coffee-long-vowel-deletion
+[1524/1760] fast_pitch / risa / station-small-tsu-deletion
+[1525/1760] fast_pitch / risa / repeat-mora-deletion
+[1526/1760] fast_pitch / risa / job-voicing-substitution
+[1527/1760] fast_pitch / risa / reservation-insertion
+[1528/1760] fast_pitch / risa / explain-lexical-substitution
+[1529/1760] fast_pitch / makoto / weather-exact
+[1530/1760] fast_pitch / makoto / job-exact
+[1531/1760] fast_pitch / makoto / coffee-long-vowel-deletion
+[1532/1760] fast_pitch / makoto / station-small-tsu-deletion
+[1533/1760] fast_pitch / makoto / repeat-mora-deletion
+[1534/1760] fast_pitch / makoto / job-voicing-substitution
+[1535/1760] fast_pitch / makoto / reservation-insertion
+[1536/1760] fast_pitch / makoto / explain-lexical-substitution
+[1537/1760] fast_pitch / keiko / weather-exact
+[1538/1760] fast_pitch / keiko / job-exact
+[1539/1760] fast_pitch / keiko / coffee-long-vowel-deletion
+[1540/1760] fast_pitch / keiko / station-small-tsu-deletion
+[1541/1760] fast_pitch / keiko / repeat-mora-deletion
+[1542/1760] fast_pitch / keiko / job-voicing-substitution
+[1543/1760] fast_pitch / keiko / reservation-insertion
+[1544/1760] fast_pitch / keiko / explain-lexical-substitution
+[1545/1760] fast_pitch / osamu / weather-exact
+[1546/1760] fast_pitch / osamu / job-exact
+[1547/1760] fast_pitch / osamu / coffee-long-vowel-deletion
+[1548/1760] fast_pitch / osamu / station-small-tsu-deletion
+[1549/1760] fast_pitch / osamu / repeat-mora-deletion
+[1550/1760] fast_pitch / osamu / job-voicing-substitution
+[1551/1760] fast_pitch / osamu / reservation-insertion
+[1552/1760] fast_pitch / osamu / explain-lexical-substitution
+[1553/1760] fast_pitch / yui / weather-exact
+[1554/1760] fast_pitch / yui / job-exact
+[1555/1760] fast_pitch / yui / coffee-long-vowel-deletion
+[1556/1760] fast_pitch / yui / station-small-tsu-deletion
+[1557/1760] fast_pitch / yui / repeat-mora-deletion
+[1558/1760] fast_pitch / yui / job-voicing-substitution
+[1559/1760] fast_pitch / yui / reservation-insertion
+[1560/1760] fast_pitch / yui / explain-lexical-substitution
+[1561/1760] fast_pitch / hiro / weather-exact
+[1562/1760] fast_pitch / hiro / job-exact
+[1563/1760] fast_pitch / hiro / coffee-long-vowel-deletion
+[1564/1760] fast_pitch / hiro / station-small-tsu-deletion
+[1565/1760] fast_pitch / hiro / repeat-mora-deletion
+[1566/1760] fast_pitch / hiro / job-voicing-substitution
+[1567/1760] fast_pitch / hiro / reservation-insertion
+[1568/1760] fast_pitch / hiro / explain-lexical-substitution
+[1569/1760] fast_pitch / fumi / weather-exact
+[1570/1760] fast_pitch / fumi / job-exact
+[1571/1760] fast_pitch / fumi / coffee-long-vowel-deletion
+[1572/1760] fast_pitch / fumi / station-small-tsu-deletion
+[1573/1760] fast_pitch / fumi / repeat-mora-deletion
+[1574/1760] fast_pitch / fumi / job-voicing-substitution
+[1575/1760] fast_pitch / fumi / reservation-insertion
+[1576/1760] fast_pitch / fumi / explain-lexical-substitution
+[1577/1760] fast_pitch / gen / weather-exact
+[1578/1760] fast_pitch / gen / job-exact
+[1579/1760] fast_pitch / gen / coffee-long-vowel-deletion
+[1580/1760] fast_pitch / gen / station-small-tsu-deletion
+[1581/1760] fast_pitch / gen / repeat-mora-deletion
+[1582/1760] fast_pitch / gen / job-voicing-substitution
+[1583/1760] fast_pitch / gen / reservation-insertion
+[1584/1760] fast_pitch / gen / explain-lexical-substitution
+[1585/1760] fast_pitch / chiyo / weather-exact
+[1586/1760] fast_pitch / chiyo / job-exact
+[1587/1760] fast_pitch / chiyo / coffee-long-vowel-deletion
+[1588/1760] fast_pitch / chiyo / station-small-tsu-deletion
+[1589/1760] fast_pitch / chiyo / repeat-mora-deletion
+[1590/1760] fast_pitch / chiyo / job-voicing-substitution
+[1591/1760] fast_pitch / chiyo / reservation-insertion
+[1592/1760] fast_pitch / chiyo / explain-lexical-substitution
+[1593/1760] fast_pitch / issei / weather-exact
+[1594/1760] fast_pitch / issei / job-exact
+[1595/1760] fast_pitch / issei / coffee-long-vowel-deletion
+[1596/1760] fast_pitch / issei / station-small-tsu-deletion
+[1597/1760] fast_pitch / issei / repeat-mora-deletion
+[1598/1760] fast_pitch / issei / job-voicing-substitution
+[1599/1760] fast_pitch / issei / reservation-insertion
+[1600/1760] fast_pitch / issei / explain-lexical-substitution
+[1601/1760] slow_pitch / ao / weather-exact
+[1602/1760] slow_pitch / ao / job-exact
+[1603/1760] slow_pitch / ao / coffee-long-vowel-deletion
+[1604/1760] slow_pitch / ao / station-small-tsu-deletion
+[1605/1760] slow_pitch / ao / repeat-mora-deletion
+[1606/1760] slow_pitch / ao / job-voicing-substitution
+[1607/1760] slow_pitch / ao / reservation-insertion
+[1608/1760] slow_pitch / ao / explain-lexical-substitution
+[1609/1760] slow_pitch / ren / weather-exact
+[1610/1760] slow_pitch / ren / job-exact
+[1611/1760] slow_pitch / ren / coffee-long-vowel-deletion
+[1612/1760] slow_pitch / ren / station-small-tsu-deletion
+[1613/1760] slow_pitch / ren / repeat-mora-deletion
+[1614/1760] slow_pitch / ren / job-voicing-substitution
+[1615/1760] slow_pitch / ren / reservation-insertion
+[1616/1760] slow_pitch / ren / explain-lexical-substitution
+[1617/1760] slow_pitch / mio / weather-exact
+[1618/1760] slow_pitch / mio / job-exact
+[1619/1760] slow_pitch / mio / coffee-long-vowel-deletion
+[1620/1760] slow_pitch / mio / station-small-tsu-deletion
+[1621/1760] slow_pitch / mio / repeat-mora-deletion
+[1622/1760] slow_pitch / mio / job-voicing-substitution
+[1623/1760] slow_pitch / mio / reservation-insertion
+[1624/1760] slow_pitch / mio / explain-lexical-substitution
+[1625/1760] slow_pitch / kai / weather-exact
+[1626/1760] slow_pitch / kai / job-exact
+[1627/1760] slow_pitch / kai / coffee-long-vowel-deletion
+[1628/1760] slow_pitch / kai / station-small-tsu-deletion
+[1629/1760] slow_pitch / kai / repeat-mora-deletion
+[1630/1760] slow_pitch / kai / job-voicing-substitution
+[1631/1760] slow_pitch / kai / reservation-insertion
+[1632/1760] slow_pitch / kai / explain-lexical-substitution
+[1633/1760] slow_pitch / aya / weather-exact
+[1634/1760] slow_pitch / aya / job-exact
+[1635/1760] slow_pitch / aya / coffee-long-vowel-deletion
+[1636/1760] slow_pitch / aya / station-small-tsu-deletion
+[1637/1760] slow_pitch / aya / repeat-mora-deletion
+[1638/1760] slow_pitch / aya / job-voicing-substitution
+[1639/1760] slow_pitch / aya / reservation-insertion
+[1640/1760] slow_pitch / aya / explain-lexical-substitution
+[1641/1760] slow_pitch / jun / weather-exact
+[1642/1760] slow_pitch / jun / job-exact
+[1643/1760] slow_pitch / jun / coffee-long-vowel-deletion
+[1644/1760] slow_pitch / jun / station-small-tsu-deletion
+[1645/1760] slow_pitch / jun / repeat-mora-deletion
+[1646/1760] slow_pitch / jun / job-voicing-substitution
+[1647/1760] slow_pitch / jun / reservation-insertion
+[1648/1760] slow_pitch / jun / explain-lexical-substitution
+[1649/1760] slow_pitch / nami / weather-exact
+[1650/1760] slow_pitch / nami / job-exact
+[1651/1760] slow_pitch / nami / coffee-long-vowel-deletion
+[1652/1760] slow_pitch / nami / station-small-tsu-deletion
+[1653/1760] slow_pitch / nami / repeat-mora-deletion
+[1654/1760] slow_pitch / nami / job-voicing-substitution
+[1655/1760] slow_pitch / nami / reservation-insertion
+[1656/1760] slow_pitch / nami / explain-lexical-substitution
+[1657/1760] slow_pitch / sota / weather-exact
+[1658/1760] slow_pitch / sota / job-exact
+[1659/1760] slow_pitch / sota / coffee-long-vowel-deletion
+[1660/1760] slow_pitch / sota / station-small-tsu-deletion
+[1661/1760] slow_pitch / sota / repeat-mora-deletion
+[1662/1760] slow_pitch / sota / job-voicing-substitution
+[1663/1760] slow_pitch / sota / reservation-insertion
+[1664/1760] slow_pitch / sota / explain-lexical-substitution
+[1665/1760] slow_pitch / eri / weather-exact
+[1666/1760] slow_pitch / eri / job-exact
+[1667/1760] slow_pitch / eri / coffee-long-vowel-deletion
+[1668/1760] slow_pitch / eri / station-small-tsu-deletion
+[1669/1760] slow_pitch / eri / repeat-mora-deletion
+[1670/1760] slow_pitch / eri / job-voicing-substitution
+[1671/1760] slow_pitch / eri / reservation-insertion
+[1672/1760] slow_pitch / eri / explain-lexical-substitution
+[1673/1760] slow_pitch / taku / weather-exact
+[1674/1760] slow_pitch / taku / job-exact
+[1675/1760] slow_pitch / taku / coffee-long-vowel-deletion
+[1676/1760] slow_pitch / taku / station-small-tsu-deletion
+[1677/1760] slow_pitch / taku / repeat-mora-deletion
+[1678/1760] slow_pitch / taku / job-voicing-substitution
+[1679/1760] slow_pitch / taku / reservation-insertion
+[1680/1760] slow_pitch / taku / explain-lexical-substitution
+[1681/1760] slow_pitch / risa / weather-exact
+[1682/1760] slow_pitch / risa / job-exact
+[1683/1760] slow_pitch / risa / coffee-long-vowel-deletion
+[1684/1760] slow_pitch / risa / station-small-tsu-deletion
+[1685/1760] slow_pitch / risa / repeat-mora-deletion
+[1686/1760] slow_pitch / risa / job-voicing-substitution
+[1687/1760] slow_pitch / risa / reservation-insertion
+[1688/1760] slow_pitch / risa / explain-lexical-substitution
+[1689/1760] slow_pitch / makoto / weather-exact
+[1690/1760] slow_pitch / makoto / job-exact
+[1691/1760] slow_pitch / makoto / coffee-long-vowel-deletion
+[1692/1760] slow_pitch / makoto / station-small-tsu-deletion
+[1693/1760] slow_pitch / makoto / repeat-mora-deletion
+[1694/1760] slow_pitch / makoto / job-voicing-substitution
+[1695/1760] slow_pitch / makoto / reservation-insertion
+[1696/1760] slow_pitch / makoto / explain-lexical-substitution
+[1697/1760] slow_pitch / keiko / weather-exact
+[1698/1760] slow_pitch / keiko / job-exact
+[1699/1760] slow_pitch / keiko / coffee-long-vowel-deletion
+[1700/1760] slow_pitch / keiko / station-small-tsu-deletion
+[1701/1760] slow_pitch / keiko / repeat-mora-deletion
+[1702/1760] slow_pitch / keiko / job-voicing-substitution
+[1703/1760] slow_pitch / keiko / reservation-insertion
+[1704/1760] slow_pitch / keiko / explain-lexical-substitution
+[1705/1760] slow_pitch / osamu / weather-exact
+[1706/1760] slow_pitch / osamu / job-exact
+[1707/1760] slow_pitch / osamu / coffee-long-vowel-deletion
+[1708/1760] slow_pitch / osamu / station-small-tsu-deletion
+[1709/1760] slow_pitch / osamu / repeat-mora-deletion
+[1710/1760] slow_pitch / osamu / job-voicing-substitution
+[1711/1760] slow_pitch / osamu / reservation-insertion
+[1712/1760] slow_pitch / osamu / explain-lexical-substitution
+[1713/1760] slow_pitch / yui / weather-exact
+[1714/1760] slow_pitch / yui / job-exact
+[1715/1760] slow_pitch / yui / coffee-long-vowel-deletion
+[1716/1760] slow_pitch / yui / station-small-tsu-deletion
+[1717/1760] slow_pitch / yui / repeat-mora-deletion
+[1718/1760] slow_pitch / yui / job-voicing-substitution
+[1719/1760] slow_pitch / yui / reservation-insertion
+[1720/1760] slow_pitch / yui / explain-lexical-substitution
+[1721/1760] slow_pitch / hiro / weather-exact
+[1722/1760] slow_pitch / hiro / job-exact
+[1723/1760] slow_pitch / hiro / coffee-long-vowel-deletion
+[1724/1760] slow_pitch / hiro / station-small-tsu-deletion
+[1725/1760] slow_pitch / hiro / repeat-mora-deletion
+[1726/1760] slow_pitch / hiro / job-voicing-substitution
+[1727/1760] slow_pitch / hiro / reservation-insertion
+[1728/1760] slow_pitch / hiro / explain-lexical-substitution
+[1729/1760] slow_pitch / fumi / weather-exact
+[1730/1760] slow_pitch / fumi / job-exact
+[1731/1760] slow_pitch / fumi / coffee-long-vowel-deletion
+[1732/1760] slow_pitch / fumi / station-small-tsu-deletion
+[1733/1760] slow_pitch / fumi / repeat-mora-deletion
+[1734/1760] slow_pitch / fumi / job-voicing-substitution
+[1735/1760] slow_pitch / fumi / reservation-insertion
+[1736/1760] slow_pitch / fumi / explain-lexical-substitution
+[1737/1760] slow_pitch / gen / weather-exact
+[1738/1760] slow_pitch / gen / job-exact
+[1739/1760] slow_pitch / gen / coffee-long-vowel-deletion
+[1740/1760] slow_pitch / gen / station-small-tsu-deletion
+[1741/1760] slow_pitch / gen / repeat-mora-deletion
+[1742/1760] slow_pitch / gen / job-voicing-substitution
+[1743/1760] slow_pitch / gen / reservation-insertion
+[1744/1760] slow_pitch / gen / explain-lexical-substitution
+[1745/1760] slow_pitch / chiyo / weather-exact
+[1746/1760] slow_pitch / chiyo / job-exact
+[1747/1760] slow_pitch / chiyo / coffee-long-vowel-deletion
+[1748/1760] slow_pitch / chiyo / station-small-tsu-deletion
+[1749/1760] slow_pitch / chiyo / repeat-mora-deletion
+[1750/1760] slow_pitch / chiyo / job-voicing-substitution
+[1751/1760] slow_pitch / chiyo / reservation-insertion
+[1752/1760] slow_pitch / chiyo / explain-lexical-substitution
+[1753/1760] slow_pitch / issei / weather-exact
+[1754/1760] slow_pitch / issei / job-exact
+[1755/1760] slow_pitch / issei / coffee-long-vowel-deletion
+[1756/1760] slow_pitch / issei / station-small-tsu-deletion
+[1757/1760] slow_pitch / issei / repeat-mora-deletion
+[1758/1760] slow_pitch / issei / job-voicing-substitution
+[1759/1760] slow_pitch / issei / reservation-insertion
+[1760/1760] slow_pitch / issei / explain-lexical-substitution
+{
+  "allConditions": {
+    "attempts": 1760,
+    "strictPositionLocalization": {
+      "toleranceMorae": 0,
+      "truePositivePositions": 1642,
+      "falsePositivePositions": 3220,
+      "falseNegativePositions": 338,
+      "precision": 0.337721,
+      "recall": 0.829293,
+      "f1": 0.479977
+    },
+    "withinOneMoraLocalization": {
+      "toleranceMorae": 1,
+      "truePositivePositions": 1717,
+      "falsePositivePositions": 3145,
+      "falseNegativePositions": 263,
+      "precision": 0.353147,
+      "recall": 0.867172,
+      "f1": 0.5019
+    },
+    "errorDetection": {
+      "truePositives": 1151,
+      "falsePositives": 204,
+      "falseNegatives": 169,
+      "trueNegatives": 236,
+      "precision": 0.849446,
+      "recall": 0.87197,
+      "f1": 0.860561
+    },
+    "exactControlTranscription": {
+      "attempts": 440,
+      "exactMoraMatches": 236,
+      "emptyTranscripts": 0,
+      "moraErrorRate": 0.087774
+    },
+    "injectedVariantEvidence": {
+      "errorAttempts": 1320,
+      "closerToInjectedReading": 766,
+      "closerToExpectedTarget": 279,
+      "equalDistance": 275,
+      "closerToInjectedRate": 0.580303
+    }
+  },
+  "cleanOnly": {
+    "attempts": 160,
+    "strictPositionLocalization": {
+      "toleranceMorae": 0,
+      "truePositivePositions": 148,
+      "falsePositivePositions": 105,
+      "falseNegativePositions": 32,
+      "precision": 0.58498,
+      "recall": 0.822222,
+      "f1": 0.683603
+    },
+    "withinOneMoraLocalization": {
+      "toleranceMorae": 1,
+      "truePositivePositions": 152,
+      "falsePositivePositions": 101,
+      "falseNegativePositions": 28,
+      "precision": 0.600791,
+      "recall": 0.844444,
+      "f1": 0.702079
+    },
+    "errorDetection": {
+      "truePositives": 96,
+      "falsePositives": 9,
+      "falseNegatives": 24,
+      "trueNegatives": 31,
+      "precision": 0.914286,
+      "recall": 0.8,
+      "f1": 0.853333
+    },
+    "exactControlTranscription": {
+      "attempts": 40,
+      "exactMoraMatches": 31,
+      "emptyTranscripts": 0,
+      "moraErrorRate": 0.015517
+    },
+    "injectedVariantEvidence": {
+      "errorAttempts": 120,
+      "closerToInjectedReading": 68,
+      "closerToExpectedTarget": 28,
+      "equalDistance": 24,
+      "closerToInjectedRate": 0.566667
+    }
+  },
+  "byAugmentation": {
+    "cafe_crosstalk": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 153,
+        "falsePositivePositions": 752,
+        "falseNegativePositions": 27,
+        "precision": 0.169061,
+        "recall": 0.85,
+        "f1": 0.282028
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 171,
+        "falsePositivePositions": 734,
+        "falseNegativePositions": 9,
+        "precision": 0.18895,
+        "recall": 0.95,
+        "f1": 0.315207
+      },
+      "errorDetection": {
+        "truePositives": 119,
+        "falsePositives": 35,
+        "falseNegatives": 1,
+        "trueNegatives": 5,
+        "precision": 0.772727,
+        "recall": 0.991667,
+        "f1": 0.868613
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 5,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.368966
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 59,
+        "closerToExpectedTarget": 19,
+        "equalDistance": 42,
+        "closerToInjectedRate": 0.491667
+      }
+    },
+    "clean": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 148,
+        "falsePositivePositions": 105,
+        "falseNegativePositions": 32,
+        "precision": 0.58498,
+        "recall": 0.822222,
+        "f1": 0.683603
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 152,
+        "falsePositivePositions": 101,
+        "falseNegativePositions": 28,
+        "precision": 0.600791,
+        "recall": 0.844444,
+        "f1": 0.702079
+      },
+      "errorDetection": {
+        "truePositives": 96,
+        "falsePositives": 9,
+        "falseNegatives": 24,
+        "trueNegatives": 31,
+        "precision": 0.914286,
+        "recall": 0.8,
+        "f1": 0.853333
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 31,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.015517
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 68,
+        "closerToExpectedTarget": 28,
+        "equalDistance": 24,
+        "closerToInjectedRate": 0.566667
+      }
+    },
+    "clipped_mic": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 143,
+        "falsePositivePositions": 709,
+        "falseNegativePositions": 37,
+        "precision": 0.16784,
+        "recall": 0.794444,
+        "f1": 0.277132
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 167,
+        "falsePositivePositions": 685,
+        "falseNegativePositions": 13,
+        "precision": 0.196009,
+        "recall": 0.927778,
+        "f1": 0.323643
+      },
+      "errorDetection": {
+        "truePositives": 115,
+        "falsePositives": 32,
+        "falseNegatives": 5,
+        "trueNegatives": 8,
+        "precision": 0.782313,
+        "recall": 0.958333,
+        "f1": 0.861423
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 8,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.182759
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 73,
+        "closerToExpectedTarget": 19,
+        "equalDistance": 28,
+        "closerToInjectedRate": 0.608333
+      }
+    },
+    "fast_pitch": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 149,
+        "falsePositivePositions": 157,
+        "falseNegativePositions": 31,
+        "precision": 0.486928,
+        "recall": 0.827778,
+        "f1": 0.613169
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 155,
+        "falsePositivePositions": 151,
+        "falseNegativePositions": 25,
+        "precision": 0.506536,
+        "recall": 0.861111,
+        "f1": 0.63786
+      },
+      "errorDetection": {
+        "truePositives": 99,
+        "falsePositives": 12,
+        "falseNegatives": 21,
+        "trueNegatives": 28,
+        "precision": 0.891892,
+        "recall": 0.825,
+        "f1": 0.857143
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 28,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.027586
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 70,
+        "closerToExpectedTarget": 25,
+        "equalDistance": 25,
+        "closerToInjectedRate": 0.583333
+      }
+    },
+    "hvac_hum": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 145,
+        "falsePositivePositions": 100,
+        "falseNegativePositions": 35,
+        "precision": 0.591837,
+        "recall": 0.805556,
+        "f1": 0.682353
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 146,
+        "falsePositivePositions": 99,
+        "falseNegativePositions": 34,
+        "precision": 0.595918,
+        "recall": 0.811111,
+        "f1": 0.687059
+      },
+      "errorDetection": {
+        "truePositives": 90,
+        "falsePositives": 8,
+        "falseNegatives": 30,
+        "trueNegatives": 32,
+        "precision": 0.918367,
+        "recall": 0.75,
+        "f1": 0.825688
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 32,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.013793
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 66,
+        "closerToExpectedTarget": 34,
+        "equalDistance": 20,
+        "closerToInjectedRate": 0.55
+      }
+    },
+    "packet_dropouts": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 147,
+        "falsePositivePositions": 254,
+        "falseNegativePositions": 33,
+        "precision": 0.366584,
+        "recall": 0.816667,
+        "f1": 0.506024
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 154,
+        "falsePositivePositions": 247,
+        "falseNegativePositions": 26,
+        "precision": 0.38404,
+        "recall": 0.855556,
+        "f1": 0.53012
+      },
+      "errorDetection": {
+        "truePositives": 110,
+        "falsePositives": 26,
+        "falseNegatives": 10,
+        "trueNegatives": 14,
+        "precision": 0.808824,
+        "recall": 0.916667,
+        "f1": 0.859375
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 14,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.1
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 66,
+        "closerToExpectedTarget": 25,
+        "equalDistance": 29,
+        "closerToInjectedRate": 0.55
+      }
+    },
+    "phone_band": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 162,
+        "falsePositivePositions": 422,
+        "falseNegativePositions": 18,
+        "precision": 0.277397,
+        "recall": 0.9,
+        "f1": 0.424084
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 164,
+        "falsePositivePositions": 420,
+        "falseNegativePositions": 16,
+        "precision": 0.280822,
+        "recall": 0.911111,
+        "f1": 0.429319
+      },
+      "errorDetection": {
+        "truePositives": 118,
+        "falsePositives": 21,
+        "falseNegatives": 2,
+        "trueNegatives": 19,
+        "precision": 0.848921,
+        "recall": 0.983333,
+        "f1": 0.911197
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 19,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.067241
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 84,
+        "closerToExpectedTarget": 16,
+        "equalDistance": 20,
+        "closerToInjectedRate": 0.7
+      }
+    },
+    "quiet_room": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 142,
+        "falsePositivePositions": 89,
+        "falseNegativePositions": 38,
+        "precision": 0.614719,
+        "recall": 0.788889,
+        "f1": 0.690998
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 144,
+        "falsePositivePositions": 87,
+        "falseNegativePositions": 36,
+        "precision": 0.623377,
+        "recall": 0.8,
+        "f1": 0.70073
+      },
+      "errorDetection": {
+        "truePositives": 89,
+        "falsePositives": 13,
+        "falseNegatives": 31,
+        "trueNegatives": 27,
+        "precision": 0.872549,
+        "recall": 0.741667,
+        "f1": 0.801802
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 27,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.022414
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 64,
+        "closerToExpectedTarget": 36,
+        "equalDistance": 20,
+        "closerToInjectedRate": 0.533333
+      }
+    },
+    "slow_pitch": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 156,
+        "falsePositivePositions": 120,
+        "falseNegativePositions": 24,
+        "precision": 0.565217,
+        "recall": 0.866667,
+        "f1": 0.684211
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 157,
+        "falsePositivePositions": 119,
+        "falseNegativePositions": 23,
+        "precision": 0.568841,
+        "recall": 0.872222,
+        "f1": 0.688596
+      },
+      "errorDetection": {
+        "truePositives": 106,
+        "falsePositives": 12,
+        "falseNegatives": 14,
+        "trueNegatives": 28,
+        "precision": 0.898305,
+        "recall": 0.883333,
+        "f1": 0.890756
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 28,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.025862
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 73,
+        "closerToExpectedTarget": 23,
+        "equalDistance": 24,
+        "closerToInjectedRate": 0.608333
+      }
+    },
+    "street_noise": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 147,
+        "falsePositivePositions": 99,
+        "falseNegativePositions": 33,
+        "precision": 0.597561,
+        "recall": 0.816667,
+        "f1": 0.690141
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 148,
+        "falsePositivePositions": 98,
+        "falseNegativePositions": 32,
+        "precision": 0.601626,
+        "recall": 0.822222,
+        "f1": 0.694836
+      },
+      "errorDetection": {
+        "truePositives": 92,
+        "falsePositives": 7,
+        "falseNegatives": 28,
+        "trueNegatives": 33,
+        "precision": 0.929293,
+        "recall": 0.766667,
+        "f1": 0.840183
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 33,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.012069
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 67,
+        "closerToExpectedTarget": 32,
+        "equalDistance": 21,
+        "closerToInjectedRate": 0.558333
+      }
+    },
+    "strong_hiss": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 150,
+        "falsePositivePositions": 413,
+        "falseNegativePositions": 30,
+        "precision": 0.26643,
+        "recall": 0.833333,
+        "f1": 0.403769
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 159,
+        "falsePositivePositions": 404,
+        "falseNegativePositions": 21,
+        "precision": 0.282416,
+        "recall": 0.883333,
+        "f1": 0.427995
+      },
+      "errorDetection": {
+        "truePositives": 117,
+        "falsePositives": 29,
+        "falseNegatives": 3,
+        "trueNegatives": 11,
+        "precision": 0.80137,
+        "recall": 0.975,
+        "f1": 0.879699
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 11,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.12931
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 76,
+        "closerToExpectedTarget": 22,
+        "equalDistance": 22,
+        "closerToInjectedRate": 0.633333
+      }
+    }
+  },
+  "byErrorKind": {
+    "exact": {
+      "attempts": 440,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 469,
+        "falseNegativePositions": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 469,
+        "falseNegativePositions": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "errorDetection": {
+        "truePositives": 0,
+        "falsePositives": 204,
+        "falseNegatives": 0,
+        "trueNegatives": 236,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "exactControlTranscription": {
+        "attempts": 440,
+        "exactMoraMatches": 236,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.087774
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 0,
+        "closerToInjectedReading": 0,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 0,
+        "closerToInjectedRate": null
+      }
+    },
+    "lexical_substitution": {
+      "attempts": 220,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 865,
+        "falsePositivePositions": 669,
+        "falseNegativePositions": 15,
+        "precision": 0.563885,
+        "recall": 0.982955,
+        "f1": 0.716653
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 878,
+        "falsePositivePositions": 656,
+        "falseNegativePositions": 2,
+        "precision": 0.57236,
+        "recall": 0.997727,
+        "f1": 0.727423
+      },
+      "errorDetection": {
+        "truePositives": 220,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 220,
+        "closerToInjectedReading": 216,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 4,
+        "closerToInjectedRate": 0.981818
+      }
+    },
+    "long_vowel_deletion": {
+      "attempts": 220,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 63,
+        "falsePositivePositions": 497,
+        "falseNegativePositions": 157,
+        "precision": 0.1125,
+        "recall": 0.286364,
+        "f1": 0.161538
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 69,
+        "falsePositivePositions": 491,
+        "falseNegativePositions": 151,
+        "precision": 0.123214,
+        "recall": 0.313636,
+        "f1": 0.176923
+      },
+      "errorDetection": {
+        "truePositives": 125,
+        "falsePositives": 0,
+        "falseNegatives": 95,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 0.568182,
+        "f1": 0.724638
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 220,
+        "closerToInjectedReading": 52,
+        "closerToExpectedTarget": 153,
+        "equalDistance": 15,
+        "closerToInjectedRate": 0.236364
+      }
+    },
+    "small_tsu_deletion": {
+      "attempts": 440,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 436,
+        "falsePositivePositions": 1028,
+        "falseNegativePositions": 4,
+        "precision": 0.297814,
+        "recall": 0.990909,
+        "f1": 0.457983
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 437,
+        "falsePositivePositions": 1027,
+        "falseNegativePositions": 3,
+        "precision": 0.298497,
+        "recall": 0.993182,
+        "f1": 0.459034
+      },
+      "errorDetection": {
+        "truePositives": 438,
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 0.995455,
+        "f1": 0.997722
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 440,
+        "closerToInjectedReading": 213,
+        "closerToExpectedTarget": 3,
+        "equalDistance": 224,
+        "closerToInjectedRate": 0.484091
+      }
+    },
+    "voicing_substitution": {
+      "attempts": 220,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 104,
+        "falsePositivePositions": 311,
+        "falseNegativePositions": 116,
+        "precision": 0.250602,
+        "recall": 0.472727,
+        "f1": 0.327559
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 115,
+        "falsePositivePositions": 300,
+        "falseNegativePositions": 105,
+        "precision": 0.277108,
+        "recall": 0.522727,
+        "f1": 0.362205
+      },
+      "errorDetection": {
+        "truePositives": 150,
+        "falsePositives": 0,
+        "falseNegatives": 70,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 0.681818,
+        "f1": 0.810811
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 220,
+        "closerToInjectedReading": 91,
+        "closerToExpectedTarget": 109,
+        "equalDistance": 20,
+        "closerToInjectedRate": 0.413636
+      }
+    },
+    "word_insertion": {
+      "attempts": 220,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 174,
+        "falsePositivePositions": 246,
+        "falseNegativePositions": 46,
+        "precision": 0.414286,
+        "recall": 0.790909,
+        "f1": 0.54375
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 218,
+        "falsePositivePositions": 202,
+        "falseNegativePositions": 2,
+        "precision": 0.519048,
+        "recall": 0.990909,
+        "f1": 0.68125
+      },
+      "errorDetection": {
+        "truePositives": 218,
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 0.990909,
+        "f1": 0.995434
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 220,
+        "closerToInjectedReading": 194,
+        "closerToExpectedTarget": 14,
+        "equalDistance": 12,
+        "closerToInjectedRate": 0.881818
+      }
+    }
+  },
+  "byPersona": {
+    "ao": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 75,
+        "falsePositivePositions": 185,
+        "falseNegativePositions": 24,
+        "precision": 0.288462,
+        "recall": 0.757576,
+        "f1": 0.417827
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 81,
+        "falsePositivePositions": 179,
+        "falseNegativePositions": 18,
+        "precision": 0.311538,
+        "recall": 0.818182,
+        "f1": 0.451253
+      },
+      "errorDetection": {
+        "truePositives": 54,
+        "falsePositives": 15,
+        "falseNegatives": 12,
+        "trueNegatives": 7,
+        "precision": 0.782609,
+        "recall": 0.818182,
+        "f1": 0.8
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 7,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.090909
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 33,
+        "closerToExpectedTarget": 21,
+        "equalDistance": 12,
+        "closerToInjectedRate": 0.5
+      }
+    },
+    "aya": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 80,
+        "falsePositivePositions": 204,
+        "falseNegativePositions": 19,
+        "precision": 0.28169,
+        "recall": 0.808081,
+        "f1": 0.417755
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 83,
+        "falsePositivePositions": 201,
+        "falseNegativePositions": 16,
+        "precision": 0.292254,
+        "recall": 0.838384,
+        "f1": 0.43342
+      },
+      "errorDetection": {
+        "truePositives": 57,
+        "falsePositives": 9,
+        "falseNegatives": 9,
+        "trueNegatives": 13,
+        "precision": 0.863636,
+        "recall": 0.863636,
+        "f1": 0.863636
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 13,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.07837
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 35,
+        "closerToExpectedTarget": 17,
+        "equalDistance": 14,
+        "closerToInjectedRate": 0.530303
+      }
+    },
+    "chiyo": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 86,
+        "falsePositivePositions": 168,
+        "falseNegativePositions": 13,
+        "precision": 0.338583,
+        "recall": 0.868687,
+        "f1": 0.487252
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 90,
+        "falsePositivePositions": 164,
+        "falseNegativePositions": 9,
+        "precision": 0.354331,
+        "recall": 0.909091,
+        "f1": 0.509915
+      },
+      "errorDetection": {
+        "truePositives": 61,
+        "falsePositives": 9,
+        "falseNegatives": 5,
+        "trueNegatives": 13,
+        "precision": 0.871429,
+        "recall": 0.924242,
+        "f1": 0.897059
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 13,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.103448
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 47,
+        "closerToExpectedTarget": 7,
+        "equalDistance": 12,
+        "closerToInjectedRate": 0.712121
+      }
+    },
+    "eri": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 83,
+        "falsePositivePositions": 172,
+        "falseNegativePositions": 16,
+        "precision": 0.32549,
+        "recall": 0.838384,
+        "f1": 0.468927
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 170,
+        "falseNegativePositions": 14,
+        "precision": 0.333333,
+        "recall": 0.858586,
+        "f1": 0.480226
+      },
+      "errorDetection": {
+        "truePositives": 65,
+        "falsePositives": 7,
+        "falseNegatives": 1,
+        "trueNegatives": 15,
+        "precision": 0.902778,
+        "recall": 0.984848,
+        "f1": 0.942029
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 15,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.068966
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 34,
+        "closerToExpectedTarget": 15,
+        "equalDistance": 17,
+        "closerToInjectedRate": 0.515152
+      }
+    },
+    "fumi": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 208,
+        "falseNegativePositions": 14,
+        "precision": 0.290102,
+        "recall": 0.858586,
+        "f1": 0.433673
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 90,
+        "falsePositivePositions": 203,
+        "falseNegativePositions": 9,
+        "precision": 0.307167,
+        "recall": 0.909091,
+        "f1": 0.459184
+      },
+      "errorDetection": {
+        "truePositives": 60,
+        "falsePositives": 8,
+        "falseNegatives": 6,
+        "trueNegatives": 14,
+        "precision": 0.882353,
+        "recall": 0.909091,
+        "f1": 0.895522
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 14,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.068966
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 42,
+        "closerToExpectedTarget": 10,
+        "equalDistance": 14,
+        "closerToInjectedRate": 0.636364
+      }
+    },
+    "gen": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 92,
+        "falsePositivePositions": 173,
+        "falseNegativePositions": 7,
+        "precision": 0.34717,
+        "recall": 0.929293,
+        "f1": 0.505495
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 96,
+        "falsePositivePositions": 169,
+        "falseNegativePositions": 3,
+        "precision": 0.362264,
+        "recall": 0.969697,
+        "f1": 0.527473
+      },
+      "errorDetection": {
+        "truePositives": 63,
+        "falsePositives": 14,
+        "falseNegatives": 3,
+        "trueNegatives": 8,
+        "precision": 0.818182,
+        "recall": 0.954545,
+        "f1": 0.881119
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 8,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.075235
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 48,
+        "closerToExpectedTarget": 6,
+        "equalDistance": 12,
+        "closerToInjectedRate": 0.727273
+      }
+    },
+    "hiro": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 81,
+        "falsePositivePositions": 139,
+        "falseNegativePositions": 18,
+        "precision": 0.368182,
+        "recall": 0.818182,
+        "f1": 0.507837
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 135,
+        "falseNegativePositions": 14,
+        "precision": 0.386364,
+        "recall": 0.858586,
+        "f1": 0.532915
+      },
+      "errorDetection": {
+        "truePositives": 56,
+        "falsePositives": 4,
+        "falseNegatives": 10,
+        "trueNegatives": 18,
+        "precision": 0.933333,
+        "recall": 0.848485,
+        "f1": 0.888889
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 18,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.018809
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 37,
+        "closerToExpectedTarget": 16,
+        "equalDistance": 13,
+        "closerToInjectedRate": 0.560606
+      }
+    },
+    "issei": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 79,
+        "falsePositivePositions": 170,
+        "falseNegativePositions": 20,
+        "precision": 0.317269,
+        "recall": 0.79798,
+        "f1": 0.454023
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 84,
+        "falsePositivePositions": 165,
+        "falseNegativePositions": 15,
+        "precision": 0.337349,
+        "recall": 0.848485,
+        "f1": 0.482759
+      },
+      "errorDetection": {
+        "truePositives": 55,
+        "falsePositives": 17,
+        "falseNegatives": 11,
+        "trueNegatives": 5,
+        "precision": 0.763889,
+        "recall": 0.833333,
+        "f1": 0.797101
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 5,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.134796
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 43,
+        "closerToExpectedTarget": 16,
+        "equalDistance": 7,
+        "closerToInjectedRate": 0.651515
+      }
+    },
+    "jun": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 83,
+        "falsePositivePositions": 121,
+        "falseNegativePositions": 16,
+        "precision": 0.406863,
+        "recall": 0.838384,
+        "f1": 0.547855
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 87,
+        "falsePositivePositions": 117,
+        "falseNegativePositions": 12,
+        "precision": 0.426471,
+        "recall": 0.878788,
+        "f1": 0.574257
+      },
+      "errorDetection": {
+        "truePositives": 54,
+        "falsePositives": 14,
+        "falseNegatives": 12,
+        "trueNegatives": 8,
+        "precision": 0.794118,
+        "recall": 0.818182,
+        "f1": 0.80597
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 8,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.081505
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 39,
+        "closerToExpectedTarget": 13,
+        "equalDistance": 14,
+        "closerToInjectedRate": 0.590909
+      }
+    },
+    "kai": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 79,
+        "falsePositivePositions": 126,
+        "falseNegativePositions": 20,
+        "precision": 0.385366,
+        "recall": 0.79798,
+        "f1": 0.519737
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 82,
+        "falsePositivePositions": 123,
+        "falseNegativePositions": 17,
+        "precision": 0.4,
+        "recall": 0.828283,
+        "f1": 0.539474
+      },
+      "errorDetection": {
+        "truePositives": 54,
+        "falsePositives": 7,
+        "falseNegatives": 12,
+        "trueNegatives": 15,
+        "precision": 0.885246,
+        "recall": 0.818182,
+        "f1": 0.850394
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 15,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.0721
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 33,
+        "closerToExpectedTarget": 17,
+        "equalDistance": 16,
+        "closerToInjectedRate": 0.5
+      }
+    },
+    "keiko": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 148,
+        "falseNegativePositions": 14,
+        "precision": 0.364807,
+        "recall": 0.858586,
+        "f1": 0.512048
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 86,
+        "falsePositivePositions": 147,
+        "falseNegativePositions": 13,
+        "precision": 0.369099,
+        "recall": 0.868687,
+        "f1": 0.518072
+      },
+      "errorDetection": {
+        "truePositives": 54,
+        "falsePositives": 6,
+        "falseNegatives": 12,
+        "trueNegatives": 16,
+        "precision": 0.9,
+        "recall": 0.818182,
+        "f1": 0.857143
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 16,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.043887
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 44,
+        "closerToExpectedTarget": 13,
+        "equalDistance": 9,
+        "closerToInjectedRate": 0.666667
+      }
+    },
+    "makoto": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 118,
+        "falseNegativePositions": 14,
+        "precision": 0.418719,
+        "recall": 0.858586,
+        "f1": 0.562914
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 86,
+        "falsePositivePositions": 117,
+        "falseNegativePositions": 13,
+        "precision": 0.423645,
+        "recall": 0.868687,
+        "f1": 0.569536
+      },
+      "errorDetection": {
+        "truePositives": 57,
+        "falsePositives": 7,
+        "falseNegatives": 9,
+        "trueNegatives": 15,
+        "precision": 0.890625,
+        "recall": 0.863636,
+        "f1": 0.876923
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 15,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.068966
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 38,
+        "closerToExpectedTarget": 13,
+        "equalDistance": 15,
+        "closerToInjectedRate": 0.575758
+      }
+    },
+    "mio": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 79,
+        "falsePositivePositions": 238,
+        "falseNegativePositions": 20,
+        "precision": 0.249211,
+        "recall": 0.79798,
+        "f1": 0.379808
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 83,
+        "falsePositivePositions": 234,
+        "falseNegativePositions": 16,
+        "precision": 0.26183,
+        "recall": 0.838384,
+        "f1": 0.399038
+      },
+      "errorDetection": {
+        "truePositives": 60,
+        "falsePositives": 17,
+        "falseNegatives": 6,
+        "trueNegatives": 5,
+        "precision": 0.779221,
+        "recall": 0.909091,
+        "f1": 0.839161
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 5,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.112853
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 34,
+        "closerToExpectedTarget": 16,
+        "equalDistance": 16,
+        "closerToInjectedRate": 0.515152
+      }
+    },
+    "nami": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 78,
+        "falsePositivePositions": 251,
+        "falseNegativePositions": 21,
+        "precision": 0.237082,
+        "recall": 0.787879,
+        "f1": 0.364486
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 244,
+        "falseNegativePositions": 14,
+        "precision": 0.258359,
+        "recall": 0.858586,
+        "f1": 0.397196
+      },
+      "errorDetection": {
+        "truePositives": 55,
+        "falsePositives": 16,
+        "falseNegatives": 11,
+        "trueNegatives": 6,
+        "precision": 0.774648,
+        "recall": 0.833333,
+        "f1": 0.80292
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 6,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.231975
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 39,
+        "closerToExpectedTarget": 15,
+        "equalDistance": 12,
+        "closerToInjectedRate": 0.590909
+      }
+    },
+    "osamu": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 79,
+        "falsePositivePositions": 133,
+        "falseNegativePositions": 20,
+        "precision": 0.372642,
+        "recall": 0.79798,
+        "f1": 0.508039
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 82,
+        "falsePositivePositions": 130,
+        "falseNegativePositions": 17,
+        "precision": 0.386792,
+        "recall": 0.828283,
+        "f1": 0.527331
+      },
+      "errorDetection": {
+        "truePositives": 54,
+        "falsePositives": 8,
+        "falseNegatives": 12,
+        "trueNegatives": 14,
+        "precision": 0.870968,
+        "recall": 0.818182,
+        "f1": 0.84375
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 14,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.0721
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 35,
+        "closerToExpectedTarget": 18,
+        "equalDistance": 13,
+        "closerToInjectedRate": 0.530303
+      }
+    },
+    "ren": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 97,
+        "falseNegativePositions": 14,
+        "precision": 0.467033,
+        "recall": 0.858586,
+        "f1": 0.604982
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 87,
+        "falsePositivePositions": 95,
+        "falseNegativePositions": 12,
+        "precision": 0.478022,
+        "recall": 0.878788,
+        "f1": 0.619217
+      },
+      "errorDetection": {
+        "truePositives": 57,
+        "falsePositives": 4,
+        "falseNegatives": 9,
+        "trueNegatives": 18,
+        "precision": 0.934426,
+        "recall": 0.863636,
+        "f1": 0.897638
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 18,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.031348
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 31,
+        "closerToExpectedTarget": 13,
+        "equalDistance": 22,
+        "closerToInjectedRate": 0.469697
+      }
+    },
+    "risa": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 79,
+        "falsePositivePositions": 176,
+        "falseNegativePositions": 20,
+        "precision": 0.309804,
+        "recall": 0.79798,
+        "f1": 0.446328
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 86,
+        "falsePositivePositions": 169,
+        "falseNegativePositions": 13,
+        "precision": 0.337255,
+        "recall": 0.868687,
+        "f1": 0.485876
+      },
+      "errorDetection": {
+        "truePositives": 59,
+        "falsePositives": 8,
+        "falseNegatives": 7,
+        "trueNegatives": 14,
+        "precision": 0.880597,
+        "recall": 0.893939,
+        "f1": 0.887218
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 14,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.068966
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 36,
+        "closerToExpectedTarget": 14,
+        "equalDistance": 16,
+        "closerToInjectedRate": 0.545455
+      }
+    },
+    "sota": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 81,
+        "falsePositivePositions": 162,
+        "falseNegativePositions": 18,
+        "precision": 0.333333,
+        "recall": 0.818182,
+        "f1": 0.473684
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 88,
+        "falsePositivePositions": 155,
+        "falseNegativePositions": 11,
+        "precision": 0.36214,
+        "recall": 0.888889,
+        "f1": 0.51462
+      },
+      "errorDetection": {
+        "truePositives": 55,
+        "falsePositives": 7,
+        "falseNegatives": 11,
+        "trueNegatives": 15,
+        "precision": 0.887097,
+        "recall": 0.833333,
+        "f1": 0.859375
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 15,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.188088
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 38,
+        "closerToExpectedTarget": 12,
+        "equalDistance": 16,
+        "closerToInjectedRate": 0.575758
+      }
+    },
+    "taku": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 102,
+        "falseNegativePositions": 14,
+        "precision": 0.454545,
+        "recall": 0.858586,
+        "f1": 0.594406
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 86,
+        "falsePositivePositions": 101,
+        "falseNegativePositions": 13,
+        "precision": 0.459893,
+        "recall": 0.868687,
+        "f1": 0.601399
+      },
+      "errorDetection": {
+        "truePositives": 64,
+        "falsePositives": 14,
+        "falseNegatives": 2,
+        "trueNegatives": 8,
+        "precision": 0.820513,
+        "recall": 0.969697,
+        "f1": 0.888889
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 8,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.059561
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 42,
+        "closerToExpectedTarget": 13,
+        "equalDistance": 11,
+        "closerToInjectedRate": 0.636364
+      }
+    },
+    "yui": {
+      "attempts": 88,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 83,
+        "falsePositivePositions": 129,
+        "falseNegativePositions": 16,
+        "precision": 0.391509,
+        "recall": 0.838384,
+        "f1": 0.533762
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 85,
+        "falsePositivePositions": 127,
+        "falseNegativePositions": 14,
+        "precision": 0.400943,
+        "recall": 0.858586,
+        "f1": 0.546624
+      },
+      "errorDetection": {
+        "truePositives": 57,
+        "falsePositives": 13,
+        "falseNegatives": 9,
+        "trueNegatives": 9,
+        "precision": 0.814286,
+        "recall": 0.863636,
+        "f1": 0.838235
+      },
+      "exactControlTranscription": {
+        "attempts": 22,
+        "exactMoraMatches": 9,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.084639
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 66,
+        "closerToInjectedReading": 38,
+        "closerToExpectedTarget": 14,
+        "equalDistance": 14,
+        "closerToInjectedRate": 0.575758
+      }
+    }
+  }
+}
+Wrote /Users/peter/workspaces/japanese-repeat-after-me/experiments/008-ml-only-vosk-localization/results/macbook-m3-vosk-small-ja-0.22.json

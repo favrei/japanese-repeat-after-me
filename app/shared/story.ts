@@ -1,4 +1,12 @@
-export type Speaker = "staff" | "learner";
+/**
+ * Who says a bubble: the learner, or the other party in the scene.
+ *
+ * "other" names the role, not the job — the person on screen is whoever the
+ * stage's `castId` resolves to in the art pack, and the balloon's label comes
+ * from there. A stage carries one other party today; a scene with two would
+ * need a `castId` per bubble, not a wider union here.
+ */
+export type Speaker = "other" | "learner";
 export type BubbleMode = "autoplay" | "speak";
 
 export type DialogueBubble = {

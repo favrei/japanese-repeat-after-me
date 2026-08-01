@@ -33,6 +33,108 @@ export function normalizeJapanese(value: string) {
     .replace(/ヶ/g, "か");
 }
 
+type ReadingComparisonLine = Pick<DialogueBubble, "japanese" | "reading">;
+
+type SurfaceReadingPart = {
+  reading: string;
+  surface: string;
+};
+
+function isReadingCharacter(character: string) {
+  const code = character.charCodeAt(0);
+  return (code >= 0x3041 && code <= 0x3096) || character === "ー";
+}
+
+/**
+ * Derive the opaque surface chunks in one authored line from its canonical
+ * reading. This keeps the browser comparison target-conditioned: the content
+ * already supplies the correct reading, so the runtime does not need a large
+ * general-purpose Japanese dictionary or an ambiguous kanji-reading guess.
+ */
+function surfaceReadingParts(
+  line: ReadingComparisonLine,
+): SurfaceReadingPart[] {
+  const surface = normalizeJapanese(line.japanese);
+  const reading = normalizeJapanese(line.reading);
+  if (!surface || !reading) return [];
+
+  const chunks: Array<{ opaque: boolean; text: string }> = [];
+  for (const character of surface) {
+    const opaque = !isReadingCharacter(character);
+    const previous = chunks.at(-1);
+    if (previous?.opaque === opaque) {
+      previous.text += character;
+    } else {
+      chunks.push({ opaque, text: character });
+    }
+  }
+
+  function match(
+    chunkIndex: number,
+    readingIndex: number,
+  ): SurfaceReadingPart[] | null {
+    if (chunkIndex === chunks.length) {
+      return readingIndex === reading.length ? [] : null;
+    }
+
+    const chunk = chunks[chunkIndex];
+    if (!chunk.opaque) {
+      if (!reading.startsWith(chunk.text, readingIndex)) return null;
+      return match(chunkIndex + 1, readingIndex + chunk.text.length);
+    }
+
+    // An opaque surface chunk (kanji, a Latin abbreviation, or a number) must
+    // consume at least one reading character. Try the shortest viable reading
+    // first; the following authored kana anchors disambiguate the boundary.
+    for (let end = readingIndex + 1; end <= reading.length; end += 1) {
+      const rest = match(chunkIndex + 1, end);
+      if (rest) {
+        return [
+          {
+            surface: chunk.text,
+            reading: reading.slice(readingIndex, end),
+          },
+          ...rest,
+        ];
+      }
+    }
+    return null;
+  }
+
+  return match(0, 0) ?? [];
+}
+
+/**
+ * Put a recognizer transcript and the authored reading in the same internal
+ * representation. The line shown in the UI is never changed.
+ */
+export function normalizeForReadingComparison(
+  line: ReadingComparisonLine,
+  transcript: string,
+) {
+  const surface = normalizeJapanese(line.japanese);
+  const reading = normalizeJapanese(line.reading);
+  let heard = normalizeJapanese(transcript);
+
+  if (!heard || !surface || !reading) return heard;
+  if (heard === surface) return reading;
+
+  // Preserve authored order so a repeated kanji with two readings is handled
+  // by its occurrence rather than by a global dictionary replacement.
+  let searchFrom = 0;
+  for (const part of surfaceReadingParts(line)) {
+    const index = heard.indexOf(part.surface, searchFrom);
+    if (index === -1) continue;
+    heard =
+      heard.slice(0, index) +
+      part.reading +
+      heard.slice(index + part.surface.length);
+    searchFrom = index + part.reading.length;
+  }
+
+  return heard;
+}
+
 function editDistance(left: string, right: string) {
   const previous = Array.from({ length: right.length + 1 }, (_, index) => index);
 
@@ -60,7 +162,9 @@ function targetSimilarity(transcript: string, target: string) {
 
 function lineSimilarity(transcript: string, line: DialogueBubble) {
   const normalizedTranscript = normalizeJapanese(transcript);
+  const readingTranscript = normalizeForReadingComparison(line, transcript);
   return Math.max(
+    targetSimilarity(readingTranscript, normalizeJapanese(line.reading)),
     ...[line.japanese, line.reading, ...(line.accepted ?? [])]
       .map(normalizeJapanese)
       .map((target) => targetSimilarity(normalizedTranscript, target)),
@@ -138,11 +242,11 @@ export type ReadingMark = {
  * scoring — treat the marks as coarse guidance, not ground truth.
  */
 export function markReadingHits(
-  reading: string,
+  line: ReadingComparisonLine,
   transcript: string,
 ): ReadingMark[] {
-  const target = normalizeJapanese(reading);
-  const heard = normalizeJapanese(transcript);
+  const target = normalizeJapanese(line.reading);
+  const heard = normalizeForReadingComparison(line, transcript);
   const hits = new Array<boolean>(target.length).fill(false);
 
   if (target && heard) {
@@ -187,7 +291,7 @@ export function markReadingHits(
   // Map normalized-hit flags back onto the original reading string so
   // punctuation stays visible and unmarked.
   let markIndex = 0;
-  return Array.from(reading).map((char) => {
+  return Array.from(line.reading).map((char) => {
     if (normalizeJapanese(char) === "") {
       return { char, state: "plain" };
     }

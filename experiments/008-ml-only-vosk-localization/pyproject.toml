@@ -1,0 +1,13 @@
+[project]
+name = "jram-ml-only-vosk-localization"
+version = "0.1.0"
+description = "Standalone mora-level localization evaluation of raw Vosk output"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "numpy>=2.0,<3",
+  "pykakasi==2.3.0",
+  "vosk==0.3.44",
+]
+
+[tool.uv]
+package = false

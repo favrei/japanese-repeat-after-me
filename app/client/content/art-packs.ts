@@ -1,4 +1,5 @@
 import cafeManifest from "../../art-packs/cafe.json";
+import officeManifest from "../../art-packs/office.json";
 import taproomManifest from "../../art-packs/taproom.json";
 import type {
   ArtCharacter,
@@ -16,6 +17,7 @@ export type {
 
 export const ART_PACKS = {
   cafe: cafeManifest as ArtPack,
+  office: officeManifest as ArtPack,
   taproom: taproomManifest as ArtPack,
 } satisfies Record<string, ArtPack>;
 

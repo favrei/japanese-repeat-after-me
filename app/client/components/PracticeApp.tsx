@@ -23,6 +23,9 @@ import {
 import {
   LocalRecognitionError,
   prepareLocalRecognizer,
+  prewarmRecognitionAudio,
+  releaseRecognitionAudio,
+  settleRecognitionOutput,
   startLocalRecognition,
   type LocalRecognitionSession,
 } from "../recognition/localVosk";
@@ -62,6 +65,20 @@ type MicrophoneState =
   | "route-lost"
   | "selected";
 
+/**
+ * Opening a capture device renegotiates the whole audio route — a Bluetooth
+ * headset drops from music profile to headset profile — and whatever is
+ * playing at that moment breaks up. So the story makes no sound until the
+ * microphone is chosen, open, and reporting that it can deliver audio.
+ *
+ * `ready` is the resting value: with no microphone stage to wait for (QA mode,
+ * an insecure origin) nothing should be gated.
+ */
+type MicPreflight = "checking" | "waiting" | "ready";
+
+/** Which status the preflight is waiting on, so the pause is never opaque. */
+type MicPreflightStep = "output" | "opening" | "settling";
+
 type Feedback = {
   tone: FeedbackTone;
   kind: "attempt" | "error";
@@ -74,7 +91,16 @@ type InstallPromptEvent = Event & {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 };
 
-const SUCCESS_ADVANCE_HOLD_MS = 500;
+/**
+ * How long a judged bubble holds before the story moves on.
+ *
+ * The judgement is the point of the turn — marked reading, what Vosk heard,
+ * the attempt dots — and half a second was not enough to read any of it. The
+ * hold is a floor, not a wait: the つぎへ button on the panel ends it early.
+ */
+const SUCCESS_ADVANCE_HOLD_MS = 1_600;
+/** A forced third-miss advance holds longer; that card is the one to study. */
+const EXHAUSTED_ADVANCE_HOLD_MS = 2_200;
 
 function wait(milliseconds: number) {
   return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
@@ -217,11 +243,13 @@ function DialogueBalloon({
   bubble,
   showStatus,
   marks,
+  passed,
   character,
 }: {
   bubble: FlowBubble;
   showStatus: boolean;
   marks?: ReadingMark[];
+  passed?: boolean;
   character: ArtCharacter;
 }) {
   const isLearner = bubble.speaker === "learner";
@@ -240,7 +268,7 @@ function DialogueBalloon({
       ) : null}
       <p className="dialogue-jp">{bubble.japanese}</p>
       {marks ? (
-        <p className="dialogue-reading marked">
+        <p className={`dialogue-reading marked${passed ? " passed" : ""}`}>
           {marks.map((mark, index) => (
             <span className={mark.state} key={`${mark.char}-${index}`}>
               {mark.char}
@@ -272,14 +300,21 @@ export function PracticeApp() {
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [isListening, setIsListening] = useState(false);
+  /** The mic is open but has not delivered real audio yet. */
+  const [isWarmingUp, setIsWarmingUp] = useState(false);
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  /** The learner asked to hear the model reading of their own line. */
+  const [isPlayingModel, setIsPlayingModel] = useState(false);
   const [isAdvancing, setIsAdvancing] = useState(false);
   const [partialTranscript, setPartialTranscript] = useState("");
   const [recognitionState, setRecognitionState] =
     useState<RecognitionState>("idle");
   const [microphoneState, setMicrophoneState] =
     useState<MicrophoneState>("idle");
+  const [micPreflight, setMicPreflight] = useState<MicPreflight>("ready");
+  const [micPreflightStep, setMicPreflightStep] =
+    useState<MicPreflightStep>("output");
   const [microphoneInputs, setMicrophoneInputs] = useState<
     MicrophoneInput[]
   >([]);
@@ -288,6 +323,8 @@ export function PracticeApp() {
   const [microphoneRoute, setMicrophoneRoute] =
     useState<MicrophoneRouteEvidence | null>(null);
   const [playbackReplayToken, setPlaybackReplayToken] = useState(0);
+  /** Whether the learner has opened the microphone controls by hand. */
+  const [micControlsOpen, setMicControlsOpen] = useState(false);
   const [qaMode, setQaMode] = useState(false);
   const [artReviewPackId, setArtReviewPackId] = useState<ArtPackId | null>(
     null,
@@ -367,9 +404,11 @@ export function PracticeApp() {
     activeAudioRef.current = null;
     window.speechSynthesis?.cancel();
     setIsListening(false);
+    setIsWarmingUp(false);
     setIsEvaluating(false);
     setPartialTranscript("");
     setIsSpeaking(false);
+    setIsPlayingModel(false);
     if (recordingTimerRef.current !== null) {
       window.clearTimeout(recordingTimerRef.current);
       recordingTimerRef.current = null;
@@ -384,6 +423,7 @@ export function PracticeApp() {
     microphoneOpenRunRef.current += 1;
     gameMicrophoneRef.current?.close();
     gameMicrophoneRef.current = null;
+    void releaseRecognitionAudio();
   }, []);
 
   const reportMicrophoneRouteLost = useCallback(() => {
@@ -467,7 +507,13 @@ export function PracticeApp() {
   }, [cancelActiveMedia]);
 
   useEffect(() => {
-    if (screen !== "conversation" || interludeStage === null) return;
+    if (
+      screen !== "conversation" ||
+      interludeStage === null ||
+      micPreflight !== "ready"
+    ) {
+      return;
+    }
 
     const transition = stages[interludeStage].transition;
     const runId = playbackRunRef.current + 1;
@@ -496,12 +542,13 @@ export function PracticeApp() {
         activeAudioRef.current = null;
       }
     };
-  }, [interludeStage, qaMode, screen, stages]);
+  }, [interludeStage, micPreflight, qaMode, screen, stages]);
 
   useEffect(() => {
     if (
       screen !== "conversation" ||
       interludeStage !== null ||
+      micPreflight !== "ready" ||
       !currentBubble ||
       currentBubble.mode !== "autoplay"
     ) {
@@ -545,6 +592,7 @@ export function PracticeApp() {
     advanceBubble,
     currentBubble,
     interludeStage,
+    micPreflight,
     playbackReplayToken,
     qaMode,
     screen,
@@ -589,17 +637,63 @@ export function PracticeApp() {
     setFailedAttempts(0);
     setFeedback(null);
     setIsAdvancing(false);
+    setMicControlsOpen(false);
     setScreen("conversation");
     if (window.isSecureContext && !qaMode) {
+      setMicPreflight("checking");
       void prepareRecognition();
-      void configureMicrophone(gameSessionRunId);
+      void runMicrophonePreflight(gameSessionRunId);
+    } else {
+      setMicPreflight("ready");
     }
+  }
+
+  /**
+   * Gets the microphone all the way up before the story is allowed to make a
+   * sound, so the headset finishes switching profiles during silence.
+   */
+  async function runMicrophonePreflight(gameSessionRunId: number) {
+    // Attach the output device *before* the microphone opens. Otherwise the
+    // route moves twice: once when capture starts, and again when the audio
+    // graph grabs the speaker — the second one landing right under the first
+    // line of the story.
+    setMicPreflightStep("output");
+    await prewarmRecognitionAudio().catch(() => undefined);
+    if (gameSessionRunRef.current !== gameSessionRunId) return;
+
+    setMicPreflightStep("opening");
+    const selection = await configureMicrophone(gameSessionRunId);
+    if (gameSessionRunRef.current !== gameSessionRunId) return;
+    if (!selection) {
+      // configureMicrophone has already said what it needs — a choice, or
+      // permission. The story stays silent until that is settled.
+      setMicPreflight("waiting");
+      return;
+    }
+    await settleMicrophoneRoute(gameSessionRunId);
+  }
+
+  /** Waits for the open route to deliver audio, then releases the story. */
+  async function settleMicrophoneRoute(
+    gameSessionRunId = gameSessionRunRef.current,
+  ) {
+    // Input first — the track says it can deliver audio — then the output,
+    // which is what the learner actually hears breaking up. Both waits are
+    // bounded, so a device that never reports ready cannot strand the learner
+    // on the preparing card.
+    setMicPreflight("checking");
+    setMicPreflightStep("settling");
+    await gameMicrophoneRef.current?.waitUntilReady();
+    await settleRecognitionOutput().catch(() => undefined);
+    if (gameSessionRunRef.current !== gameSessionRunId) return;
+    setMicPreflight("ready");
   }
 
   function exitConversation() {
     gameSessionRunRef.current += 1;
     cancelActiveMedia();
     closeGameMicrophone();
+    setMicPreflight("ready");
     setScreen("menu");
     setPosition(0);
     setInterludeStage(null);
@@ -647,6 +741,10 @@ export function PracticeApp() {
       gameMicrophoneRef.current = microphone;
       setMicrophoneRoute(microphone.route);
       setMicrophoneState("selected");
+      // Build the capture graph now so the first はなす does not pay for the
+      // AudioContext, the worklet fetch, and the output device all at once.
+      void prewarmRecognitionAudio().catch(() => undefined);
+      void microphone.waitUntilReady();
       return microphone;
     } catch (error) {
       if (microphoneOpenRunRef.current === openRunId) {
@@ -674,6 +772,42 @@ export function PracticeApp() {
     setPlaybackReplayToken((token) => token + 1);
   }
 
+  /**
+   * Plays the reference reading of the learner's own line, on demand only.
+   * Never while the microphone is capturing: the model would be recorded and
+   * scored as the learner's attempt.
+   */
+  function playModelLine() {
+    if (interludeStage !== null || currentBubble.mode !== "speak") return;
+    if (isListening || isWarmingUp || isEvaluating) return;
+
+    playbackRunRef.current += 1;
+    activeAudioRef.current?.pause();
+    activeAudioRef.current = null;
+    window.speechSynthesis?.cancel();
+
+    if (isPlayingModel) {
+      setIsPlayingModel(false);
+      return;
+    }
+
+    // Studying the model is not idling: a judged card stops counting down and
+    // waits for つぎへ instead of being pulled away mid-listen.
+    if (advanceTimerRef.current !== null) {
+      window.clearTimeout(advanceTimerRef.current);
+      advanceTimerRef.current = null;
+    }
+
+    const runId = playbackRunRef.current;
+    setIsPlayingModel(true);
+    void playJapanese(currentBubble.japanese, currentBubble.audioSrc, (audio) => {
+      activeAudioRef.current = audio;
+    }).then(() => {
+      if (playbackRunRef.current !== runId) return;
+      setIsPlayingModel(false);
+    });
+  }
+
   function handleTranscripts(transcripts: string[]) {
     if (!currentBubble || currentBubble.mode !== "speak" || isAdvancing) return;
 
@@ -687,7 +821,8 @@ export function PracticeApp() {
       setFeedback({
         tone: "success",
         kind: "attempt",
-        detail: "つぎの ふきだしへ すすみます — moving to the next bubble…",
+        detail:
+          "ごうかく — passed. Check the marked reading, then つぎへ or wait.",
         transcript: result.transcript,
       });
       window.navigator.vibrate?.(40);
@@ -703,7 +838,7 @@ export function PracticeApp() {
         detail: "3かい だめでも すすみます — the third miss still moves on.",
         transcript: result.transcript,
       });
-      scheduleAdvance(650);
+      scheduleAdvance(EXHAUSTED_ADVANCE_HOLD_MS);
       return;
     }
 
@@ -746,8 +881,9 @@ export function PracticeApp() {
       detail =
         "ローカルモデルを よみこめません — the Japanese model is unavailable. Retry the download or use Skip.";
     } else if (localCode === "too-short") {
+      // Recording is a tap to start and a tap to stop, never a press-and-hold.
       detail =
-        "みじかすぎました — hold the button until the whole sentence is finished.";
+        "みじかすぎました — finish the whole sentence before pressing stop.";
     } else if (localCode === "too-quiet" || localCode === "no-audio") {
       detail =
         "こえが ちいさすぎました — move closer to the microphone and try again.";
@@ -835,7 +971,9 @@ export function PracticeApp() {
 
     window.localStorage.setItem(SAVED_MICROPHONE_KEY, selection.deviceId);
     setFeedback(null);
-    await activateGameMicrophone(selection);
+    const microphone = await activateGameMicrophone(selection);
+    // Choosing here is also how a held-back story gets released.
+    if (microphone) await settleMicrophoneRoute();
   }
 
   async function stopListening() {
@@ -883,6 +1021,13 @@ export function PracticeApp() {
       });
       return;
     }
+
+    // A model clip still sounding would be captured and scored as the attempt.
+    playbackRunRef.current += 1;
+    activeAudioRef.current?.pause();
+    activeAudioRef.current = null;
+    window.speechSynthesis?.cancel();
+    setIsPlayingModel(false);
 
     const runId = recognitionRunRef.current + 1;
     recognitionRunRef.current = runId;
@@ -932,6 +1077,7 @@ export function PracticeApp() {
 
     setFeedback(null);
     setPartialTranscript("");
+    setIsWarmingUp(true);
 
     try {
       const session = await startLocalRecognition(
@@ -941,6 +1087,18 @@ export function PracticeApp() {
           }
         },
         gameMicrophone,
+        // Fired by the first buffer of real audio, so 聞いています and the
+        // recording cap both start when the microphone is genuinely capturing
+        // rather than when the graph was merely built.
+        () => {
+          if (recognitionRunRef.current !== runId) return;
+          setIsWarmingUp(false);
+          setIsListening(true);
+          recordingTimerRef.current = window.setTimeout(() => {
+            recordingTimerRef.current = null;
+            void stopListening();
+          }, 20_000);
+        },
       );
       if (recognitionRunRef.current !== runId) {
         await session.cancel();
@@ -950,14 +1108,10 @@ export function PracticeApp() {
       recognitionRef.current = session;
       setMicrophoneRoute(gameMicrophone.route);
       setMicrophoneState("selected");
-      setIsListening(true);
-      recordingTimerRef.current = window.setTimeout(() => {
-        recordingTimerRef.current = null;
-        void stopListening();
-      }, 20_000);
     } catch (error) {
       recognitionRef.current = null;
       setIsListening(false);
+      setIsWarmingUp(false);
       if (recognitionRunRef.current === runId) recognitionProblem(error);
     }
   }
@@ -1122,36 +1276,62 @@ export function PracticeApp() {
       ? "concerned"
       : "neutral";
   const characterDim = currentBubble.mode === "speak" && !attemptSucceeded;
-  const failureMarks =
-    attemptMissed && feedback.transcript
-      ? markReadingHits(currentBubble.reading, feedback.transcript)
+  // Marks are drawn for every judged attempt, not only misses: on a pass they
+  // are what the learner is being held on the card to read.
+  const attemptMarks =
+    feedback?.kind === "attempt" && feedback.transcript
+      ? markReadingHits(currentBubble, feedback.transcript)
       : undefined;
 
-  const panelTitle = isListening
-    ? "聞いています"
-    : isEvaluating
-      ? "このデバイスで確認しています"
-      : recognitionState === "loading"
-        ? "ローカルモデルを読み込み中"
-        : attemptSucceeded
-          ? "よくできました"
-          : feedback?.kind === "attempt"
-            ? feedback.tone === "notice"
-              ? "次へ進みます"
-              : "もう一度"
-            : feedback?.kind === "error"
-              ? "確認してください"
-              : "話してみて";
+  const panelTitle = isWarmingUp
+    ? "マイクを準備しています"
+    : isListening
+      ? "聞いています"
+      : isEvaluating
+        ? "このデバイスで確認しています"
+        : recognitionState === "loading"
+          ? "ローカルモデルを読み込み中"
+          : attemptSucceeded
+            ? "よくできました"
+            : feedback?.kind === "attempt"
+              ? feedback.tone === "notice"
+                ? "次へ進みます"
+                : "もう一度"
+              : feedback?.kind === "error"
+                ? "確認してください"
+                : "話してみて";
 
-  const recordLabel = isListening
-    ? "録音をおわる"
-    : isEvaluating
-      ? "このデバイスで確認中"
-      : recognitionState === "loading"
-        ? "ローカルモデルを読み込み中"
-        : failedAttempts > 0
-          ? "もう一度はなす"
-          : "はなす";
+  const recordLabel = isWarmingUp
+    ? "マイクを準備中"
+    : isListening
+      ? "録音をおわる"
+      : isEvaluating
+        ? "このデバイスで確認中"
+        : recognitionState === "loading"
+          ? "ローカルモデルを読み込み中"
+          : failedAttempts > 0
+            ? "もう一度はなす"
+            : "はなす";
+
+  // The route panel is plumbing: it earns space only when the learner has to
+  // act on it, or asks for it. Otherwise a single chip carries the state.
+  const microphoneNeedsAttention =
+    microphoneState === "choosing" ||
+    microphoneState === "error" ||
+    microphoneState === "route-lost" ||
+    !microphoneSelection;
+  const microphoneOpen = micControlsOpen || microphoneNeedsAttention;
+
+  const microphoneChipLabel =
+    microphoneState === "loading"
+      ? "マイクを確認中"
+      : microphoneState === "route-lost"
+        ? "マイクを つなぎ直す"
+        : microphoneState === "error"
+          ? "マイクを 確認"
+          : microphoneSelection
+            ? microphoneSelection.label
+            : "マイクを えらぶ";
 
   const microphoneStatus =
     microphoneState === "loading"
@@ -1169,6 +1349,56 @@ export function PracticeApp() {
                 : microphoneState === "choosing"
                   ? "Choose the connected headset microphone"
                   : "Microphone not confirmed · hardware test open";
+
+  const microphoneDrawer = (
+    <div
+      className={`microphone-route state-${microphoneState}`}
+      data-microphone-state={microphoneState}
+      data-testid="microphone-route"
+      hidden={!microphoneOpen}
+      id="microphone-route"
+    >
+      <span>MIC INPUT</span>
+      {microphoneInputs.length > 0 ? (
+        <select
+          aria-label="Microphone input"
+          disabled={isListening || isEvaluating}
+          onChange={(event) => {
+            void selectMicrophone(event.target.value);
+          }}
+          value={microphoneSelection?.deviceId ?? ""}
+        >
+          <option value="">マイクを選ぶ</option>
+          {microphoneInputs.map((input) => (
+            <option key={input.deviceId} value={input.deviceId}>
+              {input.label}
+              {input.deviceId === "default" ? " — system route" : ""}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <button
+          disabled={
+            isListening || isEvaluating || microphoneState === "loading"
+          }
+          onClick={() => void configureMicrophone()}
+          type="button"
+        >
+          {microphoneState === "loading" ? "確認中" : "マイクを確認"}
+        </button>
+      )}
+      <small>{microphoneStatus}</small>
+      {microphoneInputs.length > 0 ? (
+        <button
+          disabled={isListening || isEvaluating}
+          onClick={() => void configureMicrophone()}
+          type="button"
+        >
+          再確認
+        </button>
+      ) : null}
+    </div>
+  );
 
   // The stage owns the shot: during a transition the position has already moved
   // to the incoming stage, so the card is drawn over the background it opens on.
@@ -1253,11 +1483,12 @@ export function PracticeApp() {
             <DialogueBalloon
               bubble={currentBubble}
               showStatus={currentBubble.mode === "autoplay" && isSpeaking}
-              marks={failureMarks}
+              marks={attemptMarks}
+              passed={attemptSucceeded}
               character={activeCharacter}
             />
             {attemptSucceeded ? (
-              <div className="scene-status success">次へ</div>
+              <div className="scene-status success">ごうかく</div>
             ) : null}
             {attemptMissed ? (
               <div className="scene-status failure">もう一度</div>
@@ -1276,7 +1507,43 @@ export function PracticeApp() {
       </section>
 
       <section className="practice-panel">
-        {isInterlude ? (
+        {micPreflight !== "ready" ? (
+          // Nothing has made a sound yet. Whatever the headset does while it
+          // opens, it does it here, against silence.
+          <>
+            <div className="panel-lead">
+              <h2>
+                {micPreflight === "checking"
+                  ? "マイクを じゅんびしています"
+                  : "マイクを えらんでください"}
+              </h2>
+              {feedback ? (
+                <p data-testid="feedback" role="status">
+                  {feedback.detail}
+                </p>
+              ) : (
+                <p data-testid="preflight-step" role="status">
+                  {micPreflightStep === "output"
+                    ? "スピーカーを つないでいます — attaching the output device."
+                    : micPreflightStep === "opening"
+                      ? "マイクを ひらいています — opening the microphone."
+                      : "おとの ルートが おちつくのを まっています — waiting for the audio route to hold still."}
+                </p>
+              )}
+            </div>
+
+            <button
+              className="primary-action speak-action advance-action"
+              data-testid="start-without-microphone"
+              onClick={() => setMicPreflight("ready")}
+              type="button"
+            >
+              このまま はじめる
+            </button>
+
+            {microphoneDrawer}
+          </>
+        ) : isInterlude ? (
           <>
             <div className="panel-lead">
               <h2>まくあい</h2>
@@ -1305,28 +1572,56 @@ export function PracticeApp() {
               )}
             </div>
 
-            <button
-              className={`primary-action speak-action${isListening ? " live" : ""}`}
-              data-recognition-state={recognitionState}
-              data-testid="record"
-              disabled={
-                isAdvancing ||
-                isEvaluating ||
-                microphoneState === "loading" ||
-                recognitionState === "loading"
-              }
-              onClick={() => {
-                if (isListening) {
-                  void stopListening();
-                } else {
-                  void startListening();
-                }
-              }}
-              type="button"
-            >
-              <MicMark />
-              {recordLabel}
-            </button>
+            <div className="speak-controls">
+              {/* The line the learner has to say, read aloud on demand — the
+                  only way to hear a model of their own bubble. */}
+              <button
+                aria-label="Hear the model reading of this line"
+                className={`replay-action model-action${isPlayingModel ? " live" : ""}`}
+                data-testid="model-line"
+                disabled={isListening || isWarmingUp || isEvaluating}
+                onClick={playModelLine}
+                type="button"
+              >
+                {isPlayingModel ? "■ とめる" : "▷ おてほん"}
+              </button>
+
+              {isAdvancing ? (
+                // The hold is what lets the judgement be read; this ends it on
+                // demand so the pause never becomes a wait.
+                <button
+                  className="primary-action speak-action advance-action"
+                  data-testid="advance-now"
+                  onClick={advanceBubble}
+                  type="button"
+                >
+                  つぎへ →
+                </button>
+              ) : (
+                <button
+                  className={`primary-action speak-action${isListening ? " live" : ""}`}
+                  data-recognition-state={recognitionState}
+                  data-testid="record"
+                  disabled={
+                    isEvaluating ||
+                    isWarmingUp ||
+                    microphoneState === "loading" ||
+                    recognitionState === "loading"
+                  }
+                  onClick={() => {
+                    if (isListening) {
+                      void stopListening();
+                    } else {
+                      void startListening();
+                    }
+                  }}
+                  type="button"
+                >
+                  <MicMark />
+                  {recordLabel}
+                </button>
+              )}
+            </div>
 
             <div className="attempts">
               <i className={failedAttempts >= 1 ? "used" : ""} />
@@ -1339,72 +1634,37 @@ export function PracticeApp() {
               </small>
             </div>
 
-            <div
-              className={`microphone-route state-${microphoneState}`}
-              data-microphone-state={microphoneState}
-              data-testid="microphone-route"
-            >
-              <span>MIC INPUT</span>
-              {microphoneInputs.length > 0 ? (
-                <select
-                  aria-label="Microphone input"
-                  disabled={isListening || isEvaluating}
-                  onChange={(event) => {
-                    void selectMicrophone(event.target.value);
-                  }}
-                  value={microphoneSelection?.deviceId ?? ""}
-                >
-                  <option value="">マイクを選ぶ</option>
-                  {microphoneInputs.map((input) => (
-                    <option key={input.deviceId} value={input.deviceId}>
-                      {input.label}
-                      {input.deviceId === "default" ? " — system route" : ""}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <button
-                  disabled={
-                    isListening ||
-                    isEvaluating ||
-                    microphoneState === "loading"
-                  }
-                  onClick={() => void configureMicrophone()}
-                  type="button"
-                >
-                  {microphoneState === "loading"
-                    ? "確認中"
-                    : "マイクを確認"}
-                </button>
-              )}
-              <small>{microphoneStatus}</small>
-              {microphoneInputs.length > 0 ? (
-                <button
-                  disabled={isListening || isEvaluating}
-                  onClick={() => void configureMicrophone()}
-                  type="button"
-                >
-                  再確認
-                </button>
-              ) : null}
+            <div className="panel-status">
+              <button
+                aria-controls="microphone-route"
+                aria-expanded={microphoneOpen}
+                className={`mic-chip state-${microphoneState}`}
+                data-testid="microphone-chip"
+                onClick={() => setMicControlsOpen((open) => !open)}
+                type="button"
+              >
+                <i aria-hidden="true" />
+                <span>{microphoneChipLabel}</span>
+              </button>
+
+              <p className="panel-foot">
+                ローカルにんしき · ろくおんは のこりません
+                {isListening && partialTranscript ? (
+                  <>
+                    <br />
+                    Listening: 「{partialTranscript}」
+                  </>
+                ) : null}
+                {feedback?.transcript ? (
+                  <>
+                    <br />
+                    Vosk heard: 「{feedback.transcript}」
+                  </>
+                ) : null}
+              </p>
             </div>
 
-            <p className="panel-foot">
-              ローカルにんしき · ろくおんは のこりません — on-device Vosk;
-              audio is not saved
-              {isListening && partialTranscript ? (
-                <>
-                  <br />
-                  Listening: 「{partialTranscript}」
-                </>
-              ) : null}
-              {feedback?.transcript ? (
-                <>
-                  <br />
-                  Vosk heard: 「{feedback.transcript}」
-                </>
-              ) : null}
-            </p>
+            {microphoneDrawer}
 
             {qaMode ? (
               <div className="qa-controls" aria-label="Development flow controls">

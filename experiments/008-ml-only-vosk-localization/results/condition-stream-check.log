@@ -1,0 +1,1620 @@
+Using raw vosk-model-small-ja-0.22 with one fresh model per condition stream; evaluating 160 sources x 2 conditions
+[1/320] clean / ao / weather-exact
+[2/320] clean / ao / job-exact
+[3/320] clean / ao / coffee-long-vowel-deletion
+[4/320] clean / ao / station-small-tsu-deletion
+[5/320] clean / ao / repeat-mora-deletion
+[6/320] clean / ao / job-voicing-substitution
+[7/320] clean / ao / reservation-insertion
+[8/320] clean / ao / explain-lexical-substitution
+[9/320] clean / ren / weather-exact
+[10/320] clean / ren / job-exact
+[11/320] clean / ren / coffee-long-vowel-deletion
+[12/320] clean / ren / station-small-tsu-deletion
+[13/320] clean / ren / repeat-mora-deletion
+[14/320] clean / ren / job-voicing-substitution
+[15/320] clean / ren / reservation-insertion
+[16/320] clean / ren / explain-lexical-substitution
+[17/320] clean / mio / weather-exact
+[18/320] clean / mio / job-exact
+[19/320] clean / mio / coffee-long-vowel-deletion
+[20/320] clean / mio / station-small-tsu-deletion
+[21/320] clean / mio / repeat-mora-deletion
+[22/320] clean / mio / job-voicing-substitution
+[23/320] clean / mio / reservation-insertion
+[24/320] clean / mio / explain-lexical-substitution
+[25/320] clean / kai / weather-exact
+[26/320] clean / kai / job-exact
+[27/320] clean / kai / coffee-long-vowel-deletion
+[28/320] clean / kai / station-small-tsu-deletion
+[29/320] clean / kai / repeat-mora-deletion
+[30/320] clean / kai / job-voicing-substitution
+[31/320] clean / kai / reservation-insertion
+[32/320] clean / kai / explain-lexical-substitution
+[33/320] clean / aya / weather-exact
+[34/320] clean / aya / job-exact
+[35/320] clean / aya / coffee-long-vowel-deletion
+[36/320] clean / aya / station-small-tsu-deletion
+[37/320] clean / aya / repeat-mora-deletion
+[38/320] clean / aya / job-voicing-substitution
+[39/320] clean / aya / reservation-insertion
+[40/320] clean / aya / explain-lexical-substitution
+[41/320] clean / jun / weather-exact
+[42/320] clean / jun / job-exact
+[43/320] clean / jun / coffee-long-vowel-deletion
+[44/320] clean / jun / station-small-tsu-deletion
+[45/320] clean / jun / repeat-mora-deletion
+[46/320] clean / jun / job-voicing-substitution
+[47/320] clean / jun / reservation-insertion
+[48/320] clean / jun / explain-lexical-substitution
+[49/320] clean / nami / weather-exact
+[50/320] clean / nami / job-exact
+[51/320] clean / nami / coffee-long-vowel-deletion
+[52/320] clean / nami / station-small-tsu-deletion
+[53/320] clean / nami / repeat-mora-deletion
+[54/320] clean / nami / job-voicing-substitution
+[55/320] clean / nami / reservation-insertion
+[56/320] clean / nami / explain-lexical-substitution
+[57/320] clean / sota / weather-exact
+[58/320] clean / sota / job-exact
+[59/320] clean / sota / coffee-long-vowel-deletion
+[60/320] clean / sota / station-small-tsu-deletion
+[61/320] clean / sota / repeat-mora-deletion
+[62/320] clean / sota / job-voicing-substitution
+[63/320] clean / sota / reservation-insertion
+[64/320] clean / sota / explain-lexical-substitution
+[65/320] clean / eri / weather-exact
+[66/320] clean / eri / job-exact
+[67/320] clean / eri / coffee-long-vowel-deletion
+[68/320] clean / eri / station-small-tsu-deletion
+[69/320] clean / eri / repeat-mora-deletion
+[70/320] clean / eri / job-voicing-substitution
+[71/320] clean / eri / reservation-insertion
+[72/320] clean / eri / explain-lexical-substitution
+[73/320] clean / taku / weather-exact
+[74/320] clean / taku / job-exact
+[75/320] clean / taku / coffee-long-vowel-deletion
+[76/320] clean / taku / station-small-tsu-deletion
+[77/320] clean / taku / repeat-mora-deletion
+[78/320] clean / taku / job-voicing-substitution
+[79/320] clean / taku / reservation-insertion
+[80/320] clean / taku / explain-lexical-substitution
+[81/320] clean / risa / weather-exact
+[82/320] clean / risa / job-exact
+[83/320] clean / risa / coffee-long-vowel-deletion
+[84/320] clean / risa / station-small-tsu-deletion
+[85/320] clean / risa / repeat-mora-deletion
+[86/320] clean / risa / job-voicing-substitution
+[87/320] clean / risa / reservation-insertion
+[88/320] clean / risa / explain-lexical-substitution
+[89/320] clean / makoto / weather-exact
+[90/320] clean / makoto / job-exact
+[91/320] clean / makoto / coffee-long-vowel-deletion
+[92/320] clean / makoto / station-small-tsu-deletion
+[93/320] clean / makoto / repeat-mora-deletion
+[94/320] clean / makoto / job-voicing-substitution
+[95/320] clean / makoto / reservation-insertion
+[96/320] clean / makoto / explain-lexical-substitution
+[97/320] clean / keiko / weather-exact
+[98/320] clean / keiko / job-exact
+[99/320] clean / keiko / coffee-long-vowel-deletion
+[100/320] clean / keiko / station-small-tsu-deletion
+[101/320] clean / keiko / repeat-mora-deletion
+[102/320] clean / keiko / job-voicing-substitution
+[103/320] clean / keiko / reservation-insertion
+[104/320] clean / keiko / explain-lexical-substitution
+[105/320] clean / osamu / weather-exact
+[106/320] clean / osamu / job-exact
+[107/320] clean / osamu / coffee-long-vowel-deletion
+[108/320] clean / osamu / station-small-tsu-deletion
+[109/320] clean / osamu / repeat-mora-deletion
+[110/320] clean / osamu / job-voicing-substitution
+[111/320] clean / osamu / reservation-insertion
+[112/320] clean / osamu / explain-lexical-substitution
+[113/320] clean / yui / weather-exact
+[114/320] clean / yui / job-exact
+[115/320] clean / yui / coffee-long-vowel-deletion
+[116/320] clean / yui / station-small-tsu-deletion
+[117/320] clean / yui / repeat-mora-deletion
+[118/320] clean / yui / job-voicing-substitution
+[119/320] clean / yui / reservation-insertion
+[120/320] clean / yui / explain-lexical-substitution
+[121/320] clean / hiro / weather-exact
+[122/320] clean / hiro / job-exact
+[123/320] clean / hiro / coffee-long-vowel-deletion
+[124/320] clean / hiro / station-small-tsu-deletion
+[125/320] clean / hiro / repeat-mora-deletion
+[126/320] clean / hiro / job-voicing-substitution
+[127/320] clean / hiro / reservation-insertion
+[128/320] clean / hiro / explain-lexical-substitution
+[129/320] clean / fumi / weather-exact
+[130/320] clean / fumi / job-exact
+[131/320] clean / fumi / coffee-long-vowel-deletion
+[132/320] clean / fumi / station-small-tsu-deletion
+[133/320] clean / fumi / repeat-mora-deletion
+[134/320] clean / fumi / job-voicing-substitution
+[135/320] clean / fumi / reservation-insertion
+[136/320] clean / fumi / explain-lexical-substitution
+[137/320] clean / gen / weather-exact
+[138/320] clean / gen / job-exact
+[139/320] clean / gen / coffee-long-vowel-deletion
+[140/320] clean / gen / station-small-tsu-deletion
+[141/320] clean / gen / repeat-mora-deletion
+[142/320] clean / gen / job-voicing-substitution
+[143/320] clean / gen / reservation-insertion
+[144/320] clean / gen / explain-lexical-substitution
+[145/320] clean / chiyo / weather-exact
+[146/320] clean / chiyo / job-exact
+[147/320] clean / chiyo / coffee-long-vowel-deletion
+[148/320] clean / chiyo / station-small-tsu-deletion
+[149/320] clean / chiyo / repeat-mora-deletion
+[150/320] clean / chiyo / job-voicing-substitution
+[151/320] clean / chiyo / reservation-insertion
+[152/320] clean / chiyo / explain-lexical-substitution
+[153/320] clean / issei / weather-exact
+[154/320] clean / issei / job-exact
+[155/320] clean / issei / coffee-long-vowel-deletion
+[156/320] clean / issei / station-small-tsu-deletion
+[157/320] clean / issei / repeat-mora-deletion
+[158/320] clean / issei / job-voicing-substitution
+[159/320] clean / issei / reservation-insertion
+[160/320] clean / issei / explain-lexical-substitution
+[161/320] cafe_crosstalk / ao / weather-exact
+[162/320] cafe_crosstalk / ao / job-exact
+[163/320] cafe_crosstalk / ao / coffee-long-vowel-deletion
+[164/320] cafe_crosstalk / ao / station-small-tsu-deletion
+[165/320] cafe_crosstalk / ao / repeat-mora-deletion
+[166/320] cafe_crosstalk / ao / job-voicing-substitution
+[167/320] cafe_crosstalk / ao / reservation-insertion
+[168/320] cafe_crosstalk / ao / explain-lexical-substitution
+[169/320] cafe_crosstalk / ren / weather-exact
+[170/320] cafe_crosstalk / ren / job-exact
+[171/320] cafe_crosstalk / ren / coffee-long-vowel-deletion
+[172/320] cafe_crosstalk / ren / station-small-tsu-deletion
+[173/320] cafe_crosstalk / ren / repeat-mora-deletion
+[174/320] cafe_crosstalk / ren / job-voicing-substitution
+[175/320] cafe_crosstalk / ren / reservation-insertion
+[176/320] cafe_crosstalk / ren / explain-lexical-substitution
+[177/320] cafe_crosstalk / mio / weather-exact
+[178/320] cafe_crosstalk / mio / job-exact
+[179/320] cafe_crosstalk / mio / coffee-long-vowel-deletion
+[180/320] cafe_crosstalk / mio / station-small-tsu-deletion
+[181/320] cafe_crosstalk / mio / repeat-mora-deletion
+[182/320] cafe_crosstalk / mio / job-voicing-substitution
+[183/320] cafe_crosstalk / mio / reservation-insertion
+[184/320] cafe_crosstalk / mio / explain-lexical-substitution
+[185/320] cafe_crosstalk / kai / weather-exact
+[186/320] cafe_crosstalk / kai / job-exact
+[187/320] cafe_crosstalk / kai / coffee-long-vowel-deletion
+[188/320] cafe_crosstalk / kai / station-small-tsu-deletion
+[189/320] cafe_crosstalk / kai / repeat-mora-deletion
+[190/320] cafe_crosstalk / kai / job-voicing-substitution
+[191/320] cafe_crosstalk / kai / reservation-insertion
+[192/320] cafe_crosstalk / kai / explain-lexical-substitution
+[193/320] cafe_crosstalk / aya / weather-exact
+[194/320] cafe_crosstalk / aya / job-exact
+[195/320] cafe_crosstalk / aya / coffee-long-vowel-deletion
+[196/320] cafe_crosstalk / aya / station-small-tsu-deletion
+[197/320] cafe_crosstalk / aya / repeat-mora-deletion
+[198/320] cafe_crosstalk / aya / job-voicing-substitution
+[199/320] cafe_crosstalk / aya / reservation-insertion
+[200/320] cafe_crosstalk / aya / explain-lexical-substitution
+[201/320] cafe_crosstalk / jun / weather-exact
+[202/320] cafe_crosstalk / jun / job-exact
+[203/320] cafe_crosstalk / jun / coffee-long-vowel-deletion
+[204/320] cafe_crosstalk / jun / station-small-tsu-deletion
+[205/320] cafe_crosstalk / jun / repeat-mora-deletion
+[206/320] cafe_crosstalk / jun / job-voicing-substitution
+[207/320] cafe_crosstalk / jun / reservation-insertion
+[208/320] cafe_crosstalk / jun / explain-lexical-substitution
+[209/320] cafe_crosstalk / nami / weather-exact
+[210/320] cafe_crosstalk / nami / job-exact
+[211/320] cafe_crosstalk / nami / coffee-long-vowel-deletion
+[212/320] cafe_crosstalk / nami / station-small-tsu-deletion
+[213/320] cafe_crosstalk / nami / repeat-mora-deletion
+[214/320] cafe_crosstalk / nami / job-voicing-substitution
+[215/320] cafe_crosstalk / nami / reservation-insertion
+[216/320] cafe_crosstalk / nami / explain-lexical-substitution
+[217/320] cafe_crosstalk / sota / weather-exact
+[218/320] cafe_crosstalk / sota / job-exact
+[219/320] cafe_crosstalk / sota / coffee-long-vowel-deletion
+[220/320] cafe_crosstalk / sota / station-small-tsu-deletion
+[221/320] cafe_crosstalk / sota / repeat-mora-deletion
+[222/320] cafe_crosstalk / sota / job-voicing-substitution
+[223/320] cafe_crosstalk / sota / reservation-insertion
+[224/320] cafe_crosstalk / sota / explain-lexical-substitution
+[225/320] cafe_crosstalk / eri / weather-exact
+[226/320] cafe_crosstalk / eri / job-exact
+[227/320] cafe_crosstalk / eri / coffee-long-vowel-deletion
+[228/320] cafe_crosstalk / eri / station-small-tsu-deletion
+[229/320] cafe_crosstalk / eri / repeat-mora-deletion
+[230/320] cafe_crosstalk / eri / job-voicing-substitution
+[231/320] cafe_crosstalk / eri / reservation-insertion
+[232/320] cafe_crosstalk / eri / explain-lexical-substitution
+[233/320] cafe_crosstalk / taku / weather-exact
+[234/320] cafe_crosstalk / taku / job-exact
+[235/320] cafe_crosstalk / taku / coffee-long-vowel-deletion
+[236/320] cafe_crosstalk / taku / station-small-tsu-deletion
+[237/320] cafe_crosstalk / taku / repeat-mora-deletion
+[238/320] cafe_crosstalk / taku / job-voicing-substitution
+[239/320] cafe_crosstalk / taku / reservation-insertion
+[240/320] cafe_crosstalk / taku / explain-lexical-substitution
+[241/320] cafe_crosstalk / risa / weather-exact
+[242/320] cafe_crosstalk / risa / job-exact
+[243/320] cafe_crosstalk / risa / coffee-long-vowel-deletion
+[244/320] cafe_crosstalk / risa / station-small-tsu-deletion
+[245/320] cafe_crosstalk / risa / repeat-mora-deletion
+[246/320] cafe_crosstalk / risa / job-voicing-substitution
+[247/320] cafe_crosstalk / risa / reservation-insertion
+[248/320] cafe_crosstalk / risa / explain-lexical-substitution
+[249/320] cafe_crosstalk / makoto / weather-exact
+[250/320] cafe_crosstalk / makoto / job-exact
+[251/320] cafe_crosstalk / makoto / coffee-long-vowel-deletion
+[252/320] cafe_crosstalk / makoto / station-small-tsu-deletion
+[253/320] cafe_crosstalk / makoto / repeat-mora-deletion
+[254/320] cafe_crosstalk / makoto / job-voicing-substitution
+[255/320] cafe_crosstalk / makoto / reservation-insertion
+[256/320] cafe_crosstalk / makoto / explain-lexical-substitution
+[257/320] cafe_crosstalk / keiko / weather-exact
+[258/320] cafe_crosstalk / keiko / job-exact
+[259/320] cafe_crosstalk / keiko / coffee-long-vowel-deletion
+[260/320] cafe_crosstalk / keiko / station-small-tsu-deletion
+[261/320] cafe_crosstalk / keiko / repeat-mora-deletion
+[262/320] cafe_crosstalk / keiko / job-voicing-substitution
+[263/320] cafe_crosstalk / keiko / reservation-insertion
+[264/320] cafe_crosstalk / keiko / explain-lexical-substitution
+[265/320] cafe_crosstalk / osamu / weather-exact
+[266/320] cafe_crosstalk / osamu / job-exact
+[267/320] cafe_crosstalk / osamu / coffee-long-vowel-deletion
+[268/320] cafe_crosstalk / osamu / station-small-tsu-deletion
+[269/320] cafe_crosstalk / osamu / repeat-mora-deletion
+[270/320] cafe_crosstalk / osamu / job-voicing-substitution
+[271/320] cafe_crosstalk / osamu / reservation-insertion
+[272/320] cafe_crosstalk / osamu / explain-lexical-substitution
+[273/320] cafe_crosstalk / yui / weather-exact
+[274/320] cafe_crosstalk / yui / job-exact
+[275/320] cafe_crosstalk / yui / coffee-long-vowel-deletion
+[276/320] cafe_crosstalk / yui / station-small-tsu-deletion
+[277/320] cafe_crosstalk / yui / repeat-mora-deletion
+[278/320] cafe_crosstalk / yui / job-voicing-substitution
+[279/320] cafe_crosstalk / yui / reservation-insertion
+[280/320] cafe_crosstalk / yui / explain-lexical-substitution
+[281/320] cafe_crosstalk / hiro / weather-exact
+[282/320] cafe_crosstalk / hiro / job-exact
+[283/320] cafe_crosstalk / hiro / coffee-long-vowel-deletion
+[284/320] cafe_crosstalk / hiro / station-small-tsu-deletion
+[285/320] cafe_crosstalk / hiro / repeat-mora-deletion
+[286/320] cafe_crosstalk / hiro / job-voicing-substitution
+[287/320] cafe_crosstalk / hiro / reservation-insertion
+[288/320] cafe_crosstalk / hiro / explain-lexical-substitution
+[289/320] cafe_crosstalk / fumi / weather-exact
+[290/320] cafe_crosstalk / fumi / job-exact
+[291/320] cafe_crosstalk / fumi / coffee-long-vowel-deletion
+[292/320] cafe_crosstalk / fumi / station-small-tsu-deletion
+[293/320] cafe_crosstalk / fumi / repeat-mora-deletion
+[294/320] cafe_crosstalk / fumi / job-voicing-substitution
+[295/320] cafe_crosstalk / fumi / reservation-insertion
+[296/320] cafe_crosstalk / fumi / explain-lexical-substitution
+[297/320] cafe_crosstalk / gen / weather-exact
+[298/320] cafe_crosstalk / gen / job-exact
+[299/320] cafe_crosstalk / gen / coffee-long-vowel-deletion
+[300/320] cafe_crosstalk / gen / station-small-tsu-deletion
+[301/320] cafe_crosstalk / gen / repeat-mora-deletion
+[302/320] cafe_crosstalk / gen / job-voicing-substitution
+[303/320] cafe_crosstalk / gen / reservation-insertion
+[304/320] cafe_crosstalk / gen / explain-lexical-substitution
+[305/320] cafe_crosstalk / chiyo / weather-exact
+[306/320] cafe_crosstalk / chiyo / job-exact
+[307/320] cafe_crosstalk / chiyo / coffee-long-vowel-deletion
+[308/320] cafe_crosstalk / chiyo / station-small-tsu-deletion
+[309/320] cafe_crosstalk / chiyo / repeat-mora-deletion
+[310/320] cafe_crosstalk / chiyo / job-voicing-substitution
+[311/320] cafe_crosstalk / chiyo / reservation-insertion
+[312/320] cafe_crosstalk / chiyo / explain-lexical-substitution
+[313/320] cafe_crosstalk / issei / weather-exact
+[314/320] cafe_crosstalk / issei / job-exact
+[315/320] cafe_crosstalk / issei / coffee-long-vowel-deletion
+[316/320] cafe_crosstalk / issei / station-small-tsu-deletion
+[317/320] cafe_crosstalk / issei / repeat-mora-deletion
+[318/320] cafe_crosstalk / issei / job-voicing-substitution
+[319/320] cafe_crosstalk / issei / reservation-insertion
+[320/320] cafe_crosstalk / issei / explain-lexical-substitution
+{
+  "allConditions": {
+    "attempts": 320,
+    "strictPositionLocalization": {
+      "toleranceMorae": 0,
+      "truePositivePositions": 301,
+      "falsePositivePositions": 865,
+      "falseNegativePositions": 59,
+      "precision": 0.258148,
+      "recall": 0.836111,
+      "f1": 0.394495
+    },
+    "withinOneMoraLocalization": {
+      "toleranceMorae": 1,
+      "truePositivePositions": 323,
+      "falsePositivePositions": 843,
+      "falseNegativePositions": 37,
+      "precision": 0.277015,
+      "recall": 0.897222,
+      "f1": 0.423329
+    },
+    "errorDetection": {
+      "truePositives": 215,
+      "falsePositives": 44,
+      "falseNegatives": 25,
+      "trueNegatives": 36,
+      "precision": 0.830116,
+      "recall": 0.895833,
+      "f1": 0.861723
+    },
+    "exactControlTranscription": {
+      "attempts": 80,
+      "exactMoraMatches": 36,
+      "emptyTranscripts": 0,
+      "moraErrorRate": 0.192241
+    },
+    "injectedVariantEvidence": {
+      "errorAttempts": 240,
+      "closerToInjectedReading": 126,
+      "closerToExpectedTarget": 47,
+      "equalDistance": 67,
+      "closerToInjectedRate": 0.525
+    }
+  },
+  "cleanOnly": {
+    "attempts": 160,
+    "strictPositionLocalization": {
+      "toleranceMorae": 0,
+      "truePositivePositions": 148,
+      "falsePositivePositions": 105,
+      "falseNegativePositions": 32,
+      "precision": 0.58498,
+      "recall": 0.822222,
+      "f1": 0.683603
+    },
+    "withinOneMoraLocalization": {
+      "toleranceMorae": 1,
+      "truePositivePositions": 152,
+      "falsePositivePositions": 101,
+      "falseNegativePositions": 28,
+      "precision": 0.600791,
+      "recall": 0.844444,
+      "f1": 0.702079
+    },
+    "errorDetection": {
+      "truePositives": 96,
+      "falsePositives": 9,
+      "falseNegatives": 24,
+      "trueNegatives": 31,
+      "precision": 0.914286,
+      "recall": 0.8,
+      "f1": 0.853333
+    },
+    "exactControlTranscription": {
+      "attempts": 40,
+      "exactMoraMatches": 31,
+      "emptyTranscripts": 0,
+      "moraErrorRate": 0.015517
+    },
+    "injectedVariantEvidence": {
+      "errorAttempts": 120,
+      "closerToInjectedReading": 68,
+      "closerToExpectedTarget": 28,
+      "equalDistance": 24,
+      "closerToInjectedRate": 0.566667
+    }
+  },
+  "byAugmentation": {
+    "cafe_crosstalk": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 153,
+        "falsePositivePositions": 760,
+        "falseNegativePositions": 27,
+        "precision": 0.167579,
+        "recall": 0.85,
+        "f1": 0.279963
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 171,
+        "falsePositivePositions": 742,
+        "falseNegativePositions": 9,
+        "precision": 0.187295,
+        "recall": 0.95,
+        "f1": 0.3129
+      },
+      "errorDetection": {
+        "truePositives": 119,
+        "falsePositives": 35,
+        "falseNegatives": 1,
+        "trueNegatives": 5,
+        "precision": 0.772727,
+        "recall": 0.991667,
+        "f1": 0.868613
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 5,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.368966
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 58,
+        "closerToExpectedTarget": 19,
+        "equalDistance": 43,
+        "closerToInjectedRate": 0.483333
+      }
+    },
+    "clean": {
+      "attempts": 160,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 148,
+        "falsePositivePositions": 105,
+        "falseNegativePositions": 32,
+        "precision": 0.58498,
+        "recall": 0.822222,
+        "f1": 0.683603
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 152,
+        "falsePositivePositions": 101,
+        "falseNegativePositions": 28,
+        "precision": 0.600791,
+        "recall": 0.844444,
+        "f1": 0.702079
+      },
+      "errorDetection": {
+        "truePositives": 96,
+        "falsePositives": 9,
+        "falseNegatives": 24,
+        "trueNegatives": 31,
+        "precision": 0.914286,
+        "recall": 0.8,
+        "f1": 0.853333
+      },
+      "exactControlTranscription": {
+        "attempts": 40,
+        "exactMoraMatches": 31,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.015517
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 120,
+        "closerToInjectedReading": 68,
+        "closerToExpectedTarget": 28,
+        "equalDistance": 24,
+        "closerToInjectedRate": 0.566667
+      }
+    }
+  },
+  "byErrorKind": {
+    "exact": {
+      "attempts": 80,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 139,
+        "falseNegativePositions": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 139,
+        "falseNegativePositions": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "errorDetection": {
+        "truePositives": 0,
+        "falsePositives": 44,
+        "falseNegatives": 0,
+        "trueNegatives": 36,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "exactControlTranscription": {
+        "attempts": 80,
+        "exactMoraMatches": 36,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.192241
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 0,
+        "closerToInjectedReading": 0,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 0,
+        "closerToInjectedRate": null
+      }
+    },
+    "lexical_substitution": {
+      "attempts": 40,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 158,
+        "falsePositivePositions": 201,
+        "falseNegativePositions": 2,
+        "precision": 0.440111,
+        "recall": 0.9875,
+        "f1": 0.608863
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 160,
+        "falsePositivePositions": 199,
+        "falseNegativePositions": 0,
+        "precision": 0.445682,
+        "recall": 1.0,
+        "f1": 0.61657
+      },
+      "errorDetection": {
+        "truePositives": 40,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 40,
+        "closerToInjectedReading": 38,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 2,
+        "closerToInjectedRate": 0.95
+      }
+    },
+    "long_vowel_deletion": {
+      "attempts": 40,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 14,
+        "falsePositivePositions": 137,
+        "falseNegativePositions": 26,
+        "precision": 0.092715,
+        "recall": 0.35,
+        "f1": 0.146597
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 19,
+        "falsePositivePositions": 132,
+        "falseNegativePositions": 21,
+        "precision": 0.125828,
+        "recall": 0.475,
+        "f1": 0.198953
+      },
+      "errorDetection": {
+        "truePositives": 25,
+        "falsePositives": 0,
+        "falseNegatives": 15,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 0.625,
+        "f1": 0.769231
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 40,
+        "closerToInjectedReading": 5,
+        "closerToExpectedTarget": 26,
+        "equalDistance": 9,
+        "closerToInjectedRate": 0.125
+      }
+    },
+    "small_tsu_deletion": {
+      "attempts": 80,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 80,
+        "falsePositivePositions": 253,
+        "falseNegativePositions": 0,
+        "precision": 0.24024,
+        "recall": 1.0,
+        "f1": 0.387409
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 80,
+        "falsePositivePositions": 253,
+        "falseNegativePositions": 0,
+        "precision": 0.24024,
+        "recall": 1.0,
+        "f1": 0.387409
+      },
+      "errorDetection": {
+        "truePositives": 80,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 80,
+        "closerToInjectedReading": 30,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 50,
+        "closerToInjectedRate": 0.375
+      }
+    },
+    "voicing_substitution": {
+      "attempts": 40,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 77,
+        "falseNegativePositions": 24,
+        "precision": 0.172043,
+        "recall": 0.4,
+        "f1": 0.240602
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 24,
+        "falsePositivePositions": 69,
+        "falseNegativePositions": 16,
+        "precision": 0.258065,
+        "recall": 0.6,
+        "f1": 0.360902
+      },
+      "errorDetection": {
+        "truePositives": 30,
+        "falsePositives": 0,
+        "falseNegatives": 10,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1": 0.857143
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 40,
+        "closerToInjectedReading": 14,
+        "closerToExpectedTarget": 20,
+        "equalDistance": 6,
+        "closerToInjectedRate": 0.35
+      }
+    },
+    "word_insertion": {
+      "attempts": 40,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 33,
+        "falsePositivePositions": 58,
+        "falseNegativePositions": 7,
+        "precision": 0.362637,
+        "recall": 0.825,
+        "f1": 0.503817
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 40,
+        "falsePositivePositions": 51,
+        "falseNegativePositions": 0,
+        "precision": 0.43956,
+        "recall": 1.0,
+        "f1": 0.610687
+      },
+      "errorDetection": {
+        "truePositives": 40,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 40,
+        "closerToInjectedReading": 39,
+        "closerToExpectedTarget": 1,
+        "equalDistance": 0,
+        "closerToInjectedRate": 0.975
+      }
+    }
+  },
+  "byPersona": {
+    "ao": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 13,
+        "falsePositivePositions": 53,
+        "falseNegativePositions": 5,
+        "precision": 0.19697,
+        "recall": 0.722222,
+        "f1": 0.309524
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 51,
+        "falseNegativePositions": 3,
+        "precision": 0.227273,
+        "recall": 0.833333,
+        "f1": 0.357143
+      },
+      "errorDetection": {
+        "truePositives": 10,
+        "falsePositives": 3,
+        "falseNegatives": 2,
+        "trueNegatives": 1,
+        "precision": 0.769231,
+        "recall": 0.833333,
+        "f1": 0.8
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 1,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.189655
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 5,
+        "closerToExpectedTarget": 4,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.416667
+      }
+    },
+    "aya": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 14,
+        "falsePositivePositions": 46,
+        "falseNegativePositions": 4,
+        "precision": 0.233333,
+        "recall": 0.777778,
+        "f1": 0.358974
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 45,
+        "falseNegativePositions": 3,
+        "precision": 0.25,
+        "recall": 0.833333,
+        "f1": 0.384615
+      },
+      "errorDetection": {
+        "truePositives": 10,
+        "falsePositives": 2,
+        "falseNegatives": 2,
+        "trueNegatives": 2,
+        "precision": 0.833333,
+        "recall": 0.833333,
+        "f1": 0.833333
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.137931
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 5,
+        "closerToExpectedTarget": 4,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.416667
+      }
+    },
+    "chiyo": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 45,
+        "falseNegativePositions": 3,
+        "precision": 0.25,
+        "recall": 0.833333,
+        "f1": 0.384615
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 44,
+        "falseNegativePositions": 2,
+        "precision": 0.266667,
+        "recall": 0.888889,
+        "f1": 0.410256
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 2,
+        "falseNegatives": 1,
+        "trueNegatives": 2,
+        "precision": 0.846154,
+        "recall": 0.916667,
+        "f1": 0.88
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.310345
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 7,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.583333
+      }
+    },
+    "eri": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 35,
+        "falseNegativePositions": 3,
+        "precision": 0.3,
+        "recall": 0.833333,
+        "f1": 0.441176
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 34,
+        "falseNegativePositions": 2,
+        "precision": 0.32,
+        "recall": 0.888889,
+        "f1": 0.470588
+      },
+      "errorDetection": {
+        "truePositives": 12,
+        "falsePositives": 2,
+        "falseNegatives": 0,
+        "trueNegatives": 2,
+        "precision": 0.857143,
+        "recall": 1.0,
+        "f1": 0.923077
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.086207
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 5,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 5,
+        "closerToInjectedRate": 0.416667
+      }
+    },
+    "fumi": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 65,
+        "falseNegativePositions": 2,
+        "precision": 0.197531,
+        "recall": 0.888889,
+        "f1": 0.323232
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 17,
+        "falsePositivePositions": 64,
+        "falseNegativePositions": 1,
+        "precision": 0.209877,
+        "recall": 0.944444,
+        "f1": 0.343434
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 2,
+        "falseNegatives": 1,
+        "trueNegatives": 2,
+        "precision": 0.846154,
+        "recall": 0.916667,
+        "f1": 0.88
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.172414
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 7,
+        "closerToExpectedTarget": 1,
+        "equalDistance": 4,
+        "closerToInjectedRate": 0.583333
+      }
+    },
+    "gen": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 17,
+        "falsePositivePositions": 55,
+        "falseNegativePositions": 1,
+        "precision": 0.236111,
+        "recall": 0.944444,
+        "f1": 0.377778
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 18,
+        "falsePositivePositions": 54,
+        "falseNegativePositions": 0,
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "errorDetection": {
+        "truePositives": 12,
+        "falsePositives": 3,
+        "falseNegatives": 0,
+        "trueNegatives": 1,
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1": 0.888889
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 1,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.172414
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 8,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 2,
+        "closerToInjectedRate": 0.666667
+      }
+    },
+    "hiro": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 14,
+        "falsePositivePositions": 38,
+        "falseNegativePositions": 4,
+        "precision": 0.269231,
+        "recall": 0.777778,
+        "f1": 0.4
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 36,
+        "falseNegativePositions": 2,
+        "precision": 0.307692,
+        "recall": 0.888889,
+        "f1": 0.457143
+      },
+      "errorDetection": {
+        "truePositives": 10,
+        "falsePositives": 1,
+        "falseNegatives": 2,
+        "trueNegatives": 3,
+        "precision": 0.909091,
+        "recall": 0.833333,
+        "f1": 0.869565
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 3,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.051724
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 5,
+        "closerToExpectedTarget": 4,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.416667
+      }
+    },
+    "issei": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 14,
+        "falsePositivePositions": 46,
+        "falseNegativePositions": 4,
+        "precision": 0.233333,
+        "recall": 0.777778,
+        "f1": 0.358974
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 44,
+        "falseNegativePositions": 2,
+        "precision": 0.266667,
+        "recall": 0.888889,
+        "f1": 0.410256
+      },
+      "errorDetection": {
+        "truePositives": 10,
+        "falsePositives": 3,
+        "falseNegatives": 2,
+        "trueNegatives": 1,
+        "precision": 0.769231,
+        "recall": 0.833333,
+        "f1": 0.8
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 1,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.37931
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 8,
+        "closerToExpectedTarget": 3,
+        "equalDistance": 1,
+        "closerToInjectedRate": 0.666667
+      }
+    },
+    "jun": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 14,
+        "falsePositivePositions": 32,
+        "falseNegativePositions": 4,
+        "precision": 0.304348,
+        "recall": 0.777778,
+        "f1": 0.4375
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 30,
+        "falseNegativePositions": 2,
+        "precision": 0.347826,
+        "recall": 0.888889,
+        "f1": 0.5
+      },
+      "errorDetection": {
+        "truePositives": 10,
+        "falsePositives": 2,
+        "falseNegatives": 2,
+        "trueNegatives": 2,
+        "precision": 0.833333,
+        "recall": 0.833333,
+        "f1": 0.833333
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.086207
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 6,
+        "closerToExpectedTarget": 3,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.5
+      }
+    },
+    "kai": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 30,
+        "falseNegativePositions": 3,
+        "precision": 0.333333,
+        "recall": 0.833333,
+        "f1": 0.47619
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 17,
+        "falsePositivePositions": 28,
+        "falseNegativePositions": 1,
+        "precision": 0.377778,
+        "recall": 0.944444,
+        "f1": 0.539683
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 2,
+        "falseNegatives": 1,
+        "trueNegatives": 2,
+        "precision": 0.846154,
+        "recall": 0.916667,
+        "f1": 0.88
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.275862
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 7,
+        "closerToExpectedTarget": 1,
+        "equalDistance": 4,
+        "closerToInjectedRate": 0.583333
+      }
+    },
+    "keiko": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 41,
+        "falseNegativePositions": 3,
+        "precision": 0.267857,
+        "recall": 0.833333,
+        "f1": 0.405405
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 41,
+        "falseNegativePositions": 3,
+        "precision": 0.267857,
+        "recall": 0.833333,
+        "f1": 0.405405
+      },
+      "errorDetection": {
+        "truePositives": 10,
+        "falsePositives": 1,
+        "falseNegatives": 2,
+        "trueNegatives": 3,
+        "precision": 0.909091,
+        "recall": 0.833333,
+        "f1": 0.869565
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 3,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.051724
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 6,
+        "closerToExpectedTarget": 3,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.5
+      }
+    },
+    "makoto": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 28,
+        "falseNegativePositions": 2,
+        "precision": 0.363636,
+        "recall": 0.888889,
+        "f1": 0.516129
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 17,
+        "falsePositivePositions": 27,
+        "falseNegativePositions": 1,
+        "precision": 0.386364,
+        "recall": 0.944444,
+        "f1": 0.548387
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 2,
+        "falseNegatives": 1,
+        "trueNegatives": 2,
+        "precision": 0.846154,
+        "recall": 0.916667,
+        "f1": 0.88
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.12069
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 8,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 2,
+        "closerToInjectedRate": 0.666667
+      }
+    },
+    "mio": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 58,
+        "falseNegativePositions": 3,
+        "precision": 0.205479,
+        "recall": 0.833333,
+        "f1": 0.32967
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 58,
+        "falseNegativePositions": 3,
+        "precision": 0.205479,
+        "recall": 0.833333,
+        "f1": 0.32967
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 3,
+        "falseNegatives": 1,
+        "trueNegatives": 1,
+        "precision": 0.785714,
+        "recall": 0.916667,
+        "f1": 0.846154
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 1,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.086207
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 6,
+        "closerToExpectedTarget": 3,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.5
+      }
+    },
+    "nami": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 69,
+        "falseNegativePositions": 3,
+        "precision": 0.178571,
+        "recall": 0.833333,
+        "f1": 0.294118
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 68,
+        "falseNegativePositions": 2,
+        "precision": 0.190476,
+        "recall": 0.888889,
+        "f1": 0.313725
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 4,
+        "falseNegatives": 1,
+        "trueNegatives": 0,
+        "precision": 0.733333,
+        "recall": 0.916667,
+        "f1": 0.814815
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.448276
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 7,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.583333
+      }
+    },
+    "osamu": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 36,
+        "falseNegativePositions": 3,
+        "precision": 0.294118,
+        "recall": 0.833333,
+        "f1": 0.434783
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 35,
+        "falseNegativePositions": 2,
+        "precision": 0.313725,
+        "recall": 0.888889,
+        "f1": 0.463768
+      },
+      "errorDetection": {
+        "truePositives": 10,
+        "falsePositives": 1,
+        "falseNegatives": 2,
+        "trueNegatives": 3,
+        "precision": 0.909091,
+        "recall": 0.833333,
+        "f1": 0.869565
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 3,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.068966
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 6,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 4,
+        "closerToInjectedRate": 0.5
+      }
+    },
+    "ren": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 32,
+        "falseNegativePositions": 2,
+        "precision": 0.333333,
+        "recall": 0.888889,
+        "f1": 0.484848
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 32,
+        "falseNegativePositions": 2,
+        "precision": 0.333333,
+        "recall": 0.888889,
+        "f1": 0.484848
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 2,
+        "falseNegatives": 1,
+        "trueNegatives": 2,
+        "precision": 0.846154,
+        "recall": 0.916667,
+        "f1": 0.88
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.12069
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 5,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 5,
+        "closerToInjectedRate": 0.416667
+      }
+    },
+    "risa": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 15,
+        "falsePositivePositions": 46,
+        "falseNegativePositions": 3,
+        "precision": 0.245902,
+        "recall": 0.833333,
+        "f1": 0.379747
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 45,
+        "falseNegativePositions": 2,
+        "precision": 0.262295,
+        "recall": 0.888889,
+        "f1": 0.405063
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 2,
+        "falseNegatives": 1,
+        "trueNegatives": 2,
+        "precision": 0.846154,
+        "recall": 0.916667,
+        "f1": 0.88
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.051724
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 6,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 4,
+        "closerToInjectedRate": 0.5
+      }
+    },
+    "sota": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 14,
+        "falsePositivePositions": 51,
+        "falseNegativePositions": 4,
+        "precision": 0.215385,
+        "recall": 0.777778,
+        "f1": 0.337349
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 17,
+        "falsePositivePositions": 48,
+        "falseNegativePositions": 1,
+        "precision": 0.261538,
+        "recall": 0.944444,
+        "f1": 0.409639
+      },
+      "errorDetection": {
+        "truePositives": 11,
+        "falsePositives": 2,
+        "falseNegatives": 1,
+        "trueNegatives": 2,
+        "precision": 0.846154,
+        "recall": 0.916667,
+        "f1": 0.88
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.844828
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 5,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 5,
+        "closerToInjectedRate": 0.416667
+      }
+    },
+    "taku": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 17,
+        "falsePositivePositions": 29,
+        "falseNegativePositions": 1,
+        "precision": 0.369565,
+        "recall": 0.944444,
+        "f1": 0.53125
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 17,
+        "falsePositivePositions": 29,
+        "falseNegativePositions": 1,
+        "precision": 0.369565,
+        "recall": 0.944444,
+        "f1": 0.53125
+      },
+      "errorDetection": {
+        "truePositives": 12,
+        "falsePositives": 3,
+        "falseNegatives": 0,
+        "trueNegatives": 1,
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1": 0.888889
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 1,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.103448
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 7,
+        "closerToExpectedTarget": 1,
+        "equalDistance": 4,
+        "closerToInjectedRate": 0.583333
+      }
+    },
+    "yui": {
+      "attempts": 16,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 30,
+        "falseNegativePositions": 2,
+        "precision": 0.347826,
+        "recall": 0.888889,
+        "f1": 0.5
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 16,
+        "falsePositivePositions": 30,
+        "falseNegativePositions": 2,
+        "precision": 0.347826,
+        "recall": 0.888889,
+        "f1": 0.5
+      },
+      "errorDetection": {
+        "truePositives": 10,
+        "falsePositives": 2,
+        "falseNegatives": 2,
+        "trueNegatives": 2,
+        "precision": 0.833333,
+        "recall": 0.833333,
+        "f1": 0.833333
+      },
+      "exactControlTranscription": {
+        "attempts": 4,
+        "exactMoraMatches": 2,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.086207
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 12,
+        "closerToInjectedReading": 7,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 3,
+        "closerToInjectedRate": 0.583333
+      }
+    }
+  }
+}
+Wrote results/condition-stream-check.json

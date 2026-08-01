@@ -1,6 +1,6 @@
 # Japanese conversation story application
 
-A client-first Android Chrome PWA with a four-stage library across two Japanese
+A client-first Android Chrome PWA with an eight-stage library across three Japanese
 conversation stories, inside a reusable seinen manga story frame. Downloaded
 gameplay remains self-contained; a thin Cloudflare Worker backend now owns the
 catalog and versioned pack delivery boundaries.
@@ -16,7 +16,7 @@ catalog and versioned pack delivery boundaries.
 - `worker/` composes the backend router with Vinext rendering and asset
   handling.
 
-The two bundled stories remain the offline source of truth for the current
+The three bundled stories remain the offline source of truth for the current
 application. The new backend routes do not sit on the practice-session path:
 `GET /api/catalog` reads current published catalog rows from D1, while
 `GET /packs/:id/:version/*` reads immutable objects directly from R2. Publishing
@@ -24,15 +24,18 @@ remote packs and syncing progress are later slices.
 
 ## Confirmed flow
 
-- Open the app and select any of the four stages.
-- The library groups two café stages and two taproom stages by story.
-- Selecting stage 1 continues automatically into stage 2. Selecting stage 2
-  practises only that stage.
+- Open the app and select any of the eight stages.
+- The library groups two café stages, two taproom stages, and four office-gig
+  stages by story.
+- Selecting a stage starts there and continues automatically through the
+  remaining stages in that story. Selecting the final stage practises only
+  that stage.
 - Every stage opens on a narrated transition card, including the first, so a
   scene is never entered mid-sentence.
 - One sentence is one bubble.
-- Each story contains thirteen bubbles. The café has four learner-speaking
-  bubbles; the taproom has five.
+- The café and taproom contain thirteen bubbles each; the office-gig story
+  contains twenty-three. They have four, five, and eight learner-speaking
+  bubbles respectively.
 - One successful attempt advances.
 - The first and second failed attempts keep the current bubble active.
 - The third failed attempt advances.
@@ -57,10 +60,8 @@ itself after a short hold — or immediately on つづける or スキップ. Sk
 card is not skipping a bubble; the one-success / three-failures / one-Skip
 bubble rules are untouched.
 
-Narration ships without audio for now: no narrator voice has been cast, and
-falling back to browser `speechSynthesis` for it would put an uncast voice in
-the story. `StageTransition.audioSrc` is the slot for a clip once that decision
-is made.
+Every transition ships a bundled narrator clip. Narration is never left to an
+uncast browser voice.
 
 A failed attempt overlays the target reading with approximate per-kana
 hit/miss marks. They come from
@@ -89,7 +90,8 @@ only as a playback-error fallback. See `tools/tts/` for the authoring command;
 model weights are never shipped with the app. The exact model, revision, voice,
 instruction, and per-line seed are recorded in each story's audio metadata:
 `public/audio/qwen3/metadata.json` for the café and
-`public/audio/taproom/metadata.json` for the taproom.
+`public/audio/taproom/metadata.json` for the taproom, and
+`public/audio/office-gig/metadata.json` for the office story.
 
 ## Local workflow
 
@@ -135,8 +137,8 @@ then cached separately after first use.
 Add `?qa=1` to a development URL to expose synthetic success, near-miss, and
 failure buttons for flow testing without microphone input.
 
-Add `?art=cafe` or `?art=taproom` to inspect that art pack, responsive scenes,
-character continuity, and composition contract.
+Add `?art=cafe`, `?art=taproom`, or `?art=office` to inspect that art pack,
+responsive scenes, character continuity, and composition contract.
 
 ## Android USB preview
 

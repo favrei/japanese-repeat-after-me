@@ -1,6 +1,6 @@
 {
   "story": "taproom",
-  "note": "Autoplay bubbles only — speak bubbles carry no reference clip, matching the cafe story. Three voices on purpose, one per character, so no two characters are synthesised as the same person: staff `dylan`, learner `sohee`, narrator `aiden`. The staff was recast from `Ono_Anna` to `dylan` on 2026-07-31 after the user heard a female voice on a character drawn as a young man. Root cause was a missing persona field, not a casting mistake: neither the Step 3 character card nor the Step 7 voice table carried apparent gender, so the art work and the casting each invented their own answer. Persona is now a required, defaultable-but-never-blank field in .agents/documents/stage-design-flow.md, and Step 9 gained a persona-agreement check that looks at the art and listens to the voice together. `dylan` is documented as Beijing-dialect-locked; it was auditioned anyway on the greeting and the recommending line and accepted by ear for Japanese, which extends the existing lesson that preset labels are a hint, not a limit. Speed stays at 1.0: these are autoplay free rides, not shadowing targets, and 1.0 is what was judged. Each line pins the exact seed that produced its accepted clip; seeds do not depend on position in this array, so lines may be reordered or inserted freely.",
+  "note": "Autoplay bubbles plus on-demand model clips for the speak bubbles, added 2026-08-01 so a learner can tap to hear their own line; playback is never automatic. Three voices on purpose, one per character, so no two characters are synthesised as the same person: staff `dylan`, learner `sohee`, narrator `aiden`. Speak-bubble models use `sohee`, the cast learner persona already shipped on `taproom-glass-thanks`; the café has no learner persona, so its models use the staff voice instead. The staff was recast from `Ono_Anna` to `dylan` on 2026-07-31 after the user heard a female voice on a character drawn as a young man. Root cause was a missing persona field, not a casting mistake: neither the Step 3 character card nor the Step 7 voice table carried apparent gender, so the art work and the casting each invented their own answer. Persona is now a required, defaultable-but-never-blank field in .agents/documents/stage-design-flow.md, and Step 9 gained a persona-agreement check that looks at the art and listens to the voice together. `dylan` is documented as Beijing-dialect-locked; it was auditioned anyway on the greeting and the recommending line and accepted by ear for Japanese, which extends the existing lesson that preset labels are a hint, not a limit. Speed stays at 1.0: 1.0 is what was judged on the autoplay lines, and the model clips stay consistent with what the learner hears elsewhere. Each line pins the exact seed that produced its accepted clip; seeds do not depend on position in this array, so lines may be reordered or inserted freely.",
   "lines": [
     {
       "id": "taproom-choose-open",
@@ -61,6 +61,41 @@
       "text": "そちらのカウンターをご自由にお使いください。ごゆっくりどうぞ。",
       "voice": "dylan",
       "seed": 20260737
+    },
+    {
+      "id": "taproom-choose-firsttime",
+      "text": "あの、初めてなんです。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "deliveryIntent": "Slightly hesitant admission."
+    },
+    {
+      "id": "taproom-choose-recommend",
+      "text": "おすすめはどれですか。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "deliveryIntent": "Genuine question."
+    },
+    {
+      "id": "taproom-choose-order",
+      "text": "じゃあ、ペールエールをお願いします。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "deliveryIntent": "Decided order after deliberation."
+    },
+    {
+      "id": "taproom-glass-pay",
+      "text": "お会計は今ですか。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "deliveryIntent": "Practical clarifying question."
+    },
+    {
+      "id": "taproom-glass-here",
+      "text": "ここで飲んでもいいですか。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "deliveryIntent": "Polite permission question."
     }
   ]
 }

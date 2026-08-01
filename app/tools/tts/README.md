@@ -23,6 +23,13 @@ uv run python3 generate_audio.py \
   --log ../../../stories/taproom/audio/generation-log.json
 ```
 
+```bash
+uv run python3 generate_audio.py \
+  --lines ../../../stories/office-gig/voices.json \
+  --output-dir ../../public/audio/office-gig \
+  --log ../../../stories/office-gig/audio/generation-log.json
+```
+
 The café ships under `public/audio/qwen3/` for historical reasons; later
 stories use `public/audio/<story>/`.
 

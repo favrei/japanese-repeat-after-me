@@ -46,7 +46,7 @@ async function render(pathname = "/") {
   );
 }
 
-test("server-renders the four-stage story library", async () => {
+test("server-renders the eight-stage story library", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -61,13 +61,20 @@ test("server-renders the four-stage story library", async () => {
   assert.match(html, /A moment at the café/);
   assert.match(html, /初めての一杯/);
   assert.match(html, /The first glass/);
+  assert.match(html, /土曜日のライブ/);
+  assert.match(html, /Saturday&#x27;s gig/);
   assert.match(html, /\/art-packs\/cafe\/cover\.png/);
   assert.match(html, /\/art-packs\/taproom\/cover\.png/);
+  assert.match(html, /\/art-packs\/office\/cover\.png/);
   for (const stageId of [
     "ordering",
     "meal",
     "taproom-choose",
     "taproom-glass",
+    "gig-notice",
+    "gig-taste",
+    "gig-join",
+    "gig-meet",
   ]) {
     assert.match(html, new RegExp(`select-stage-${stageId}`));
   }
@@ -103,6 +110,7 @@ test("ships a local-only PWA shell without private development artifacts", async
     manifest,
     cafeArtManifest,
     taproomArtManifest,
+    officeArtManifest,
     serviceWorker,
     hostingConfig,
     builtWranglerConfig,
@@ -130,6 +138,7 @@ test("ships a local-only PWA shell without private development artifacts", async
     readFile(new URL("../../public/manifest.json", import.meta.url), "utf8"),
     readFile(new URL("../../art-packs/cafe.json", import.meta.url), "utf8"),
     readFile(new URL("../../art-packs/taproom.json", import.meta.url), "utf8"),
+    readFile(new URL("../../art-packs/office.json", import.meta.url), "utf8"),
     readFile(new URL("../../public/sw.js", import.meta.url), "utf8"),
     readFile(new URL("../../dist/.openai/hosting.json", import.meta.url), "utf8"),
     readFile(new URL("../../dist/server/wrangler.json", import.meta.url), "utf8"),
@@ -152,9 +161,36 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.match(app, /openGameMicrophone/);
   assert.match(app, /game-session mic active/);
   assert.match(app, /data-testid="microphone-route"/);
-  assert.match(app, /const SUCCESS_ADVANCE_HOLD_MS = 500/);
+  // A judged bubble holds long enough to read the verdict, and offers a way
+  // out of that hold rather than making it a wait.
+  assert.match(app, /const SUCCESS_ADVANCE_HOLD_MS = 1_600/);
+  assert.match(app, /const EXHAUSTED_ADVANCE_HOLD_MS = 2_200/);
+  assert.match(app, /data-testid="advance-now"/);
+  // Recording starts on real captured audio, not on a fixed delay.
+  assert.match(localRecognizer, /onCaptureStart/);
+  assert.match(microphoneRoute, /waitUntilReady/);
+  assert.match(app, /setIsWarmingUp/);
   assert.match(app, /data-testid="replay-autoplay"/);
   assert.match(app, /setPlaybackReplayToken/);
+  // A learner can hear a model of their own line, on demand, and never while
+  // the microphone is capturing it.
+  assert.match(app, /data-testid="model-line"/);
+  assert.match(app, /function playModelLine/);
+  // Opening a capture device renegotiates the audio route, so the story makes
+  // no sound until the microphone has settled.
+  assert.match(app, /micPreflight !== "ready"/);
+  assert.match(app, /function runMicrophonePreflight/);
+  assert.match(app, /waitUntilReady\(\)/);
+  assert.match(app, /data-testid="start-without-microphone"/);
+  // The output route is waited on by its own status — a rendering clock and a
+  // steady reported latency — never by a fixed delay.
+  assert.match(localRecognizer, /export async function settleRecognitionOutput/);
+  assert.match(localRecognizer, /context\.outputLatency/);
+  assert.match(localRecognizer, /time > previousTime/);
+  assert.match(app, /settleRecognitionOutput\(\)/);
+  assert.match(app, /data-testid="preflight-step"/);
+  assert.match(app, /disabled=\{isListening \|\| isWarmingUp \|\| isEvaluating\}/);
+  assert.match(css, /\.speak-controls\s*\{/);
   assert.match(app, /hardware test open/i);
   assert.match(app, /addEventListener\("devicechange"/);
   assert.match(app, /audio is not saved/i);
@@ -166,7 +202,14 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.match(app, /data-testid=\{`transition-\$\{stage\.transition\.id\}`\}/);
   assert.doesNotMatch(app, /DEFAULT_ROUNDS|Skip round|manual override/i);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  // The panel is bounded so the scene, not the plumbing, owns the screen.
   assert.match(css, /\.practice-panel\s*\{[^}]*block-size:/s);
+  assert.match(css, /\.practice-panel\s*\{[^}]*max-block-size:/s);
+  // Microphone routing collapses to a chip and only opens on demand.
+  assert.match(css, /\.mic-chip\s*\{/);
+  assert.match(css, /\.microphone-route\[hidden\]\s*\{[^}]*display:\s*none/s);
+  assert.match(app, /data-testid="microphone-chip"/);
+  assert.match(app, /hidden=\{!microphoneOpen\}/);
   assert.match(css, /\.panel-foot\s*\{[^}]*grid-row:\s*3/s);
   assert.match(css, /\.autoplay-controls\s*\{[^}]*grid-row:\s*1/s);
   assert.match(css, /\.scene-image/);
@@ -201,7 +244,9 @@ test("ships a local-only PWA shell without private development artifacts", async
   assert.equal(parsedManifest.display, "standalone");
   assert.equal(parsedManifest.orientation, "portrait");
   assert.equal(parsedManifest.icons.length, 2);
-  assert.match(serviceWorker, /conversation-app-shell-v11/);
+  // The shell cache is versioned; what matters is that every shipped clip
+  // below is in it, not which number the release is on.
+  assert.match(serviceWorker, /conversation-app-shell-v\d+/);
   assert.match(serviceWorker, /conversation-app-model-v3/);
   assert.match(serviceWorker, /vosk-model-small-ja-0\.22\.parts\.json/);
   assert.match(serviceWorker, /new ReadableStream/);
@@ -231,8 +276,18 @@ test("ships a local-only PWA shell without private development artifacts", async
     "meal-thanks.mp3",
     "meal-return.mp3",
   ];
+  // Model readings of the learner's own lines, played only on demand, plus the
+  // narrator opening each stage.
+  const cafeModelFiles = [
+    "ordering-menu.mp3",
+    "ordering-order.mp3",
+    "meal-restroom.mp3",
+    "meal-serve.mp3",
+    "ordering-open.mp3",
+    "meal-open.mp3",
+  ];
   await Promise.all(
-    audioFiles.map(async (file) => {
+    [...audioFiles, ...cafeModelFiles].map(async (file) => {
       assert.match(serviceWorker, new RegExp(file.replace(".", "\\.")));
       const info = await stat(
         new URL(`../../public/audio/qwen3/${file}`, import.meta.url),
@@ -246,6 +301,8 @@ test("ships a local-only PWA shell without private development artifacts", async
       "utf8",
     ),
   );
+  // The batch manifest is only rewritten by a complete run, so it documents
+  // the autoplay batch; the model clips were a later partial `--only` pass.
   assert.equal(audioMetadata.clips.length, audioFiles.length);
   assert.ok(audioMetadata.clips.every((clip) => clip.voice === "Ono_Anna"));
   assert.ok(audioMetadata.clips.every((clip) => clip.instruction === ""));
@@ -262,8 +319,15 @@ test("ships a local-only PWA shell without private development artifacts", async
     "taproom-glass-later.mp3",
     "taproom-glass-counter.mp3",
   ];
+  const taproomModelFiles = [
+    "taproom-choose-firsttime.mp3",
+    "taproom-choose-recommend.mp3",
+    "taproom-choose-order.mp3",
+    "taproom-glass-pay.mp3",
+    "taproom-glass-here.mp3",
+  ];
   await Promise.all(
-    taproomAudioFiles.map(async (file) => {
+    [...taproomAudioFiles, ...taproomModelFiles].map(async (file) => {
       assert.match(serviceWorker, new RegExp(file.replace(".", "\\.")));
       const info = await stat(
         new URL(`../../public/audio/taproom/${file}`, import.meta.url),
@@ -304,13 +368,82 @@ test("ships a local-only PWA shell without private development artifacts", async
     3,
   );
 
+  const officeAudioFiles = [
+    "gig-notice-open.mp3",
+    "gig-notice-hello.mp3",
+    "gig-notice-hello-back.mp3",
+    "gig-notice-shirt.mp3",
+    "gig-notice-highschool.mp3",
+    "gig-notice-rock.mp3",
+    "gig-notice-guitar.mp3",
+    "gig-taste-open.mp3",
+    "gig-taste-ask.mp3",
+    "gig-taste-why.mp3",
+    "gig-taste-agree.mp3",
+    "gig-taste-recommend.mp3",
+    "gig-taste-saturday.mp3",
+    "gig-taste-venue.mp3",
+    "gig-join-open.mp3",
+    "gig-join-earlier.mp3",
+    "gig-join-spare.mp3",
+    "gig-join-come.mp3",
+    "gig-join-together.mp3",
+    "gig-join-price.mp3",
+    "gig-join-cash.mp3",
+    "gig-meet-open.mp3",
+    "gig-meet-six.mp3",
+    "gig-meet-where.mp3",
+    "gig-meet-east.mp3",
+    "gig-meet-forward.mp3",
+    "gig-meet-bye.mp3",
+  ];
+  await Promise.all(
+    officeAudioFiles.map(async (file) => {
+      assert.match(serviceWorker, new RegExp(file.replace(".", "\\.")));
+      const info = await stat(
+        new URL(`../../public/audio/office-gig/${file}`, import.meta.url),
+      );
+      assert.ok(info.size > 1_000);
+    }),
+  );
+  const officeAudioMetadata = JSON.parse(
+    await readFile(
+      new URL("../../public/audio/office-gig/metadata.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  assert.equal(officeAudioMetadata.clips.length, officeAudioFiles.length);
+  assert.ok(
+    officeAudioMetadata.clips
+      .filter((clip) => clip.speaker === "coworker")
+      .every((clip) => clip.voice === "serena"),
+  );
+  assert.ok(
+    officeAudioMetadata.clips
+      .filter((clip) => clip.speaker === "learner")
+      .every((clip) => clip.voice === "sohee"),
+  );
+  assert.ok(
+    officeAudioMetadata.clips
+      .filter((clip) => clip.speaker === "narrator")
+      .every((clip) => clip.voice === "aiden"),
+  );
+  assert.ok(
+    officeAudioMetadata.clips.every((clip) => clip.instruction.length > 0),
+  );
+  assert.equal(
+    new Set(officeAudioMetadata.clips.map((clip) => clip.voice)).size,
+    3,
+  );
+
   const parsedArtManifests = [
     JSON.parse(cafeArtManifest),
     JSON.parse(taproomArtManifest),
+    JSON.parse(officeArtManifest),
   ];
   assert.deepEqual(
     parsedArtManifests.map((pack) => pack.id),
-    ["cafe", "taproom"],
+    ["cafe", "taproom", "office"],
   );
 
   for (const parsedArtManifest of parsedArtManifests) {

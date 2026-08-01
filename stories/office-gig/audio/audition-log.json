@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-08-01T09:47:35.728473+00:00",
+  "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-6bit",
+  "revision": "1c6c0ff58c43afa8df571facde2efa077efd85e2",
+  "default_voice": "Ono_Anna",
+  "max_tokens": 256,
+  "max_attempts": 5,
+  "clips": [
+    {
+      "id": "audition-guitar__serena",
+      "text": "じつは私、ギターをやってるんですよ。",
+      "file": "audition-guitar__serena.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Natural, relaxed spoken Japanese. Two coworkers on a Friday, not a service counter.",
+      "seed": 537950323,
+      "duration_seconds": 3.2,
+      "expected_seconds": [
+        1.6,
+        7.4
+      ],
+      "suspect": false,
+      "sha256": "9b5b264f81f04a094685014449dbfecdfa162d48b609523eadada72f7c81a9b0"
+    },
+    {
+      "id": "audition-guitar__vivian",
+      "text": "じつは私、ギターをやってるんですよ。",
+      "file": "audition-guitar__vivian.mp3",
+      "voice": "vivian",
+      "speed": 1.0,
+      "instruct": "Natural, relaxed spoken Japanese. Two coworkers on a Friday, not a service counter.",
+      "seed": 610497936,
+      "duration_seconds": 4.08,
+      "expected_seconds": [
+        1.6,
+        7.4
+      ],
+      "suspect": false,
+      "sha256": "f1570aac71ed65e98b35caf575083f4b330384583a2c10e4ad7ee7e091e1372d"
+    },
+    {
+      "id": "audition-agree__serena",
+      "text": "ギターがいいと、それだけで聞いちゃいますよね。",
+      "file": "audition-agree__serena.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Natural, relaxed spoken Japanese. Two coworkers on a Friday, not a service counter.",
+      "seed": 691449058,
+      "duration_seconds": 3.52,
+      "expected_seconds": [
+        2.1,
+        9.4
+      ],
+      "suspect": false,
+      "sha256": "df7ce78a98fd0066176784831bd0ae79783a7b557ea051f456319d636ffb6da4"
+    },
+    {
+      "id": "audition-agree__vivian",
+      "text": "ギターがいいと、それだけで聞いちゃいますよね。",
+      "file": "audition-agree__vivian.mp3",
+      "voice": "vivian",
+      "speed": 1.0,
+      "instruct": "Natural, relaxed spoken Japanese. Two coworkers on a Friday, not a service counter.",
+      "seed": 1989149239,
+      "duration_seconds": 3.36,
+      "expected_seconds": [
+        2.1,
+        9.4
+      ],
+      "suspect": false,
+      "sha256": "bb86a3ab086a5c15b7bd43af7cb5c5a90f847ddb2188b42986592f2185bb7dc9"
+    },
+    {
+      "id": "audition-learner-reference__sohee",
+      "text": "ギターの音が好きで、よくロックを聞きます。",
+      "file": "audition-learner-reference__sohee.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Natural, relaxed spoken Japanese. Two coworkers on a Friday, not a service counter.",
+      "seed": 939270487,
+      "duration_seconds": 3.84,
+      "expected_seconds": [
+        1.9,
+        8.6
+      ],
+      "suspect": false,
+      "sha256": "544c4949d043a938d5115aa177a1f6af77edf9f067e3d691e3647ce4b80bc481"
+    }
+  ]
+}

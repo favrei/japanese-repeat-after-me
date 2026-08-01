@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "note": "Twenty adult Japanese voice-design candidates. Prompts deliberately request neutral, studio-clean speech because these clips are recognition evidence and possible future persona anchors, not acted story takes. Every candidate still requires human listening before product use.",
+  "personas": [
+    {
+      "id": "ao",
+      "label": "Ao — bright young woman",
+      "apparentGender": "woman",
+      "ageBand": "20s",
+      "timbre": "bright clear soprano",
+      "prompt": "A native Japanese woman in her twenties with a bright, clear soprano voice, precise consonants, a standard Tokyo accent, calm neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "ren",
+      "label": "Ren — light young man",
+      "apparentGender": "man",
+      "ageBand": "20s",
+      "timbre": "warm light tenor",
+      "prompt": "A native Japanese man in his twenties with a warm light tenor voice, crisp articulation, a standard Tokyo accent, restrained neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "mio",
+      "label": "Mio — soft young woman",
+      "apparentGender": "woman",
+      "ageBand": "20s",
+      "timbre": "soft airy mezzo without breath noise",
+      "prompt": "A native Japanese woman in her twenties with a soft mezzo voice and gentle rounded resonance, but no audible breathiness, a standard Tokyo accent, careful articulation, and slightly slow neutral pacing. Studio-clean speech only: no acting, laughter, sighs, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "kai",
+      "label": "Kai — energetic young man",
+      "apparentGender": "man",
+      "ageBand": "20s",
+      "timbre": "clear agile tenor",
+      "prompt": "A native Japanese man in his twenties with a clear agile tenor voice, firm consonants, a standard Tokyo accent, alert but neutral delivery, and moderately quick pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "aya",
+      "label": "Aya — composed woman",
+      "apparentGender": "woman",
+      "ageBand": "30s",
+      "timbre": "balanced professional mezzo",
+      "prompt": "A native Japanese woman in her thirties with a balanced professional mezzo voice, clean vowels, a standard Tokyo accent, composed neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "jun",
+      "label": "Jun — crisp man",
+      "apparentGender": "man",
+      "ageBand": "30s",
+      "timbre": "dry crisp baritone",
+      "prompt": "A native Japanese man in his thirties with a dry, crisp baritone voice, precise mora timing, a standard Tokyo accent, matter-of-fact neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "nami",
+      "label": "Nami — low woman",
+      "apparentGender": "woman",
+      "ageBand": "30s",
+      "timbre": "low smoky alto",
+      "prompt": "A native Japanese woman in her thirties with a low smoky alto voice, steady resonance, a standard Tokyo accent, restrained neutral delivery, and slightly slow pacing. Keep the recording clean and non-breathy: no acting, laughter, sighs, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "sota",
+      "label": "Sota — resonant man",
+      "apparentGender": "man",
+      "ageBand": "30s",
+      "timbre": "resonant mid baritone",
+      "prompt": "A native Japanese man in his thirties with a resonant mid baritone voice, smooth connected phrasing, a standard Tokyo accent, calm neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "eri",
+      "label": "Eri — focused woman",
+      "apparentGender": "woman",
+      "ageBand": "40s",
+      "timbre": "focused clear alto",
+      "prompt": "A native Japanese woman in her forties with a focused clear alto voice, strong intelligibility, a standard Tokyo accent, calm neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "taku",
+      "label": "Taku — firm man",
+      "apparentGender": "man",
+      "ageBand": "40s",
+      "timbre": "firm compact baritone",
+      "prompt": "A native Japanese man in his forties with a firm compact baritone voice, controlled pitch movement, a standard Tokyo accent, neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "risa",
+      "label": "Risa — textured woman",
+      "apparentGender": "woman",
+      "ageBand": "40s",
+      "timbre": "textured mid-low mezzo",
+      "prompt": "A native Japanese woman in her forties with a lightly textured mid-low mezzo voice, distinct consonants, a standard Tokyo accent, understated neutral delivery, and moderately quick pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "makoto",
+      "label": "Makoto — gentle man",
+      "apparentGender": "man",
+      "ageBand": "40s",
+      "timbre": "gentle rounded bass-baritone",
+      "prompt": "A native Japanese man in his forties with a gentle rounded bass-baritone voice, unforced clarity, a standard Tokyo accent, calm neutral delivery, and slightly slow pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "keiko",
+      "label": "Keiko — assured woman",
+      "apparentGender": "woman",
+      "ageBand": "50s",
+      "timbre": "assured warm alto",
+      "prompt": "A native Japanese woman in her fifties with an assured warm alto voice, even mora timing, a standard Tokyo accent, reserved neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "osamu",
+      "label": "Osamu — deep man",
+      "apparentGender": "man",
+      "ageBand": "50s",
+      "timbre": "deep dry bass",
+      "prompt": "A native Japanese man in his fifties with a deep dry bass voice, clear word boundaries, a standard Tokyo accent, restrained neutral delivery, and slightly slow pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "yui",
+      "label": "Yui — lively mature woman",
+      "apparentGender": "woman",
+      "ageBand": "50s",
+      "timbre": "lively ringing mezzo",
+      "prompt": "A native Japanese woman in her fifties with a lively ringing mezzo voice, precise vowels, a standard Tokyo accent, alert but neutral delivery, and moderately quick pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "hiro",
+      "label": "Hiro — relaxed mature man",
+      "apparentGender": "man",
+      "ageBand": "50s",
+      "timbre": "relaxed warm baritone",
+      "prompt": "A native Japanese man in his fifties with a relaxed warm baritone voice, smooth phrasing, a standard Tokyo accent, calm neutral delivery, and natural medium pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "fumi",
+      "label": "Fumi — older clear woman",
+      "apparentGender": "woman",
+      "ageBand": "60s",
+      "timbre": "clear mature contralto",
+      "prompt": "A native Japanese woman in her sixties with a clear mature contralto voice, careful articulation, a standard Tokyo accent, composed neutral delivery, and slow-natural pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "gen",
+      "label": "Gen — older gravelly man",
+      "apparentGender": "man",
+      "ageBand": "60s",
+      "timbre": "lightly gravelly bass-baritone",
+      "prompt": "A native Japanese man in his sixties with a lightly gravelly bass-baritone voice that remains highly intelligible, a standard Tokyo accent, neutral delivery, and slow-natural pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "chiyo",
+      "label": "Chiyo — senior woman",
+      "apparentGender": "woman",
+      "ageBand": "70s",
+      "timbre": "slender mature alto",
+      "prompt": "A native Japanese woman in her seventies with a slender mature alto voice, deliberate consonants, a standard Tokyo accent, dignified neutral delivery, and slow pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    },
+    {
+      "id": "issei",
+      "label": "Issei — senior man",
+      "apparentGender": "man",
+      "ageBand": "70s",
+      "timbre": "full mature bass",
+      "prompt": "A native Japanese man in his seventies with a full mature bass voice, deliberate mora timing, a standard Tokyo accent, dignified neutral delivery, and slow pacing. Studio-clean speech only: no acting, laughter, sighs, breaths, fillers, or extra sounds. Read the supplied Japanese exactly as written."
+    }
+  ]
+}

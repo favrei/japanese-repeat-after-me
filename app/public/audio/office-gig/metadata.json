@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/tts/generate_audio.py",
+  "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-6bit",
+  "revision": "1c6c0ff58c43afa8df571facde2efa077efd85e2",
+  "baseSeed": 20260730,
+  "maxTokens": 256,
+  "maxAttempts": 5,
+  "clips": [
+    {
+      "id": "gig-notice-open",
+      "text": "金曜日の昼休み。休憩室で、同僚が音楽を聞いていた。",
+      "speaker": "narrator",
+      "voice": "aiden",
+      "instruction": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone.",
+      "deliveryIntent": "Opens the story from the cover. Unhurried, no warmth.",
+      "seed": 295383715
+    },
+    {
+      "id": "gig-notice-hello",
+      "text": "あ、おつかれさまです。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "A greeting on noticing someone. Brief, not performed.",
+      "seed": 1380265701
+    },
+    {
+      "id": "gig-notice-hello-back",
+      "text": "おつかれさまです。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "Plain and even; a free ride that models the register.",
+      "seed": 2012337679
+    },
+    {
+      "id": "gig-notice-shirt",
+      "text": "そのTシャツ、何のバンドですか。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "Curious, a little tentative at the head of the line.",
+      "seed": 2002044228
+    },
+    {
+      "id": "gig-notice-highschool",
+      "text": "高校のときからずっと好きなバンドなんですよ。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Fond, slightly amused at herself. The warmest line in stage 1.",
+      "seed": 1033108092
+    },
+    {
+      "id": "gig-notice-rock",
+      "text": "私もロック、好きなんです。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "Offering something about yourself; small lift on 好き.",
+      "seed": 961867110
+    },
+    {
+      "id": "gig-notice-guitar",
+      "text": "じつは私、ギターをやってるんですよ。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "A small confession she is pleased to make; じつは carries it.",
+      "seed": 2134450386
+    },
+    {
+      "id": "gig-taste-open",
+      "text": "自動販売機の前に、缶コーヒーが二つ並んだ。",
+      "speaker": "narrator",
+      "voice": "aiden",
+      "instruction": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone.",
+      "deliveryIntent": "Quiet, marking that the break has settled.",
+      "seed": 1453237231
+    },
+    {
+      "id": "gig-taste-ask",
+      "text": "ふだんはどんなの聞くんですか。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Genuine curiosity, casual. ふだん should sound offhand.",
+      "seed": 1492838360
+    },
+    {
+      "id": "gig-taste-why",
+      "text": "ギターの音が好きで、よくロックを聞きます。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "The longest learner line. Even pace, a clear break at the comma.",
+      "seed": 1841240151
+    },
+    {
+      "id": "gig-taste-agree",
+      "text": "ギターがいいと、それだけで聞いちゃいますよね。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Opinionated and companionable; the よね reaches for agreement.",
+      "seed": 1017408739
+    },
+    {
+      "id": "gig-taste-recommend",
+      "text": "じゃあ、おすすめはなんですか。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "Asking someone who clearly knows more. Light questioning rise.",
+      "seed": 516699742
+    },
+    {
+      "id": "gig-taste-saturday",
+      "text": "ちょうど土曜日にライブがあるんですよ。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "The hinge of the story. Offhand, as if it just occurred to her.",
+      "seed": 96345606
+    },
+    {
+      "id": "gig-taste-venue",
+      "text": "小さいライブハウスなんですけど、音がいいんですよ。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Fondly qualifying — small place, good sound.",
+      "seed": 1139863458
+    },
+    {
+      "id": "gig-join-open",
+      "text": "夕方、会社の玄関でまた会った。",
+      "speaker": "narrator",
+      "voice": "aiden",
+      "instruction": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone.",
+      "deliveryIntent": "Marks the jump to evening. Flatter than the other three cards.",
+      "seed": 871572140
+    },
+    {
+      "id": "gig-join-earlier",
+      "text": "あ、さっきの話なんですけど。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Catching someone on the way out. Slight rise on けど.",
+      "seed": 1293922557
+    },
+    {
+      "id": "gig-join-spare",
+      "text": "じつは、チケットが一枚あまってるんです。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Matter-of-fact, not pleading. She is offering, not asking a favour.",
+      "seed": 2050417538
+    },
+    {
+      "id": "gig-join-come",
+      "text": "私も行ってもいいですか。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "Asking permission to join. Polite, a little hopeful.",
+      "seed": 2037489813
+    },
+    {
+      "id": "gig-join-together",
+      "text": "ぜひ、一緒に行きましょう。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Warm and immediate. ぜひ is the whole line.",
+      "seed": 248507141
+    },
+    {
+      "id": "gig-join-price",
+      "text": "チケットはいくらですか。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "Practical question, no hesitation.",
+      "seed": 1290858571
+    },
+    {
+      "id": "gig-join-cash",
+      "text": "三千円ですけど、当日でいいですよ。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Practical, reassuring on the second half.",
+      "seed": 386679220
+    },
+    {
+      "id": "gig-meet-open",
+      "text": "外は、もう暗くなっていた。",
+      "speaker": "narrator",
+      "voice": "aiden",
+      "instruction": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone.",
+      "deliveryIntent": "The quietest of the four cards.",
+      "seed": 499788117
+    },
+    {
+      "id": "gig-meet-six",
+      "text": "土曜日、六時でいいですか。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Checking, not proposing. Small rise at the end.",
+      "seed": 1395557095
+    },
+    {
+      "id": "gig-meet-where",
+      "text": "じゃあ、どこで待ち合わせしますか。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "Settling a detail. Even, unhurried.",
+      "seed": 649096948
+    },
+    {
+      "id": "gig-meet-east",
+      "text": "駅の東口はどうですか。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Easy suggestion, no emphasis.",
+      "seed": 2103110588
+    },
+    {
+      "id": "gig-meet-forward",
+      "text": "楽しみにしています。",
+      "speaker": "learner",
+      "voice": "sohee",
+      "instruction": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "deliveryIntent": "The closing beat of the learner's arc. Warm, unhurried.",
+      "seed": 1657553479
+    },
+    {
+      "id": "gig-meet-bye",
+      "text": "では、また土曜日に。",
+      "speaker": "coworker",
+      "voice": "serena",
+      "instruction": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "deliveryIntent": "Closing beat, lighter and shorter than everything before it.",
+      "seed": 1694086095
+    }
+  ]
+}

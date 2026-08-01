@@ -52,9 +52,19 @@ Canonical detail belongs in linked cells.
 - The full-bleed adult seinen frame is deployed, but the selector and generated
   café/taproom packs have mechanical QA rather than the user's explicit visual
   verdict. See [Visual Design](cells/visual-design.md).
-- Treat Vosk as a coarse known-sentence content gate, not pronunciation
-  diagnosis, and keep recognition, scoring, and feedback replaceable. See
-  [Recognition](cells/recognition.md).
+- Experiment 008 is complete condition by condition: ten of eleven synthetic
+  conditions have an exact reproducible pair, while clipped microphone is an
+  explicit unstable result. The best accepted localization precision is only
+  `0.609442`, so treat Vosk as a coarse known-sentence/content signal, not
+  learner-facing pronunciation diagnosis. There is no accepted merged
+  1,760-attempt result. See [Recognition](cells/recognition.md) and
+  [Experiments](cells/experiments.md).
+- The uncommitted application working tree fixes Experiment 007's direct
+  kanji-versus-kana comparison with target-conditioned reading normalization
+  and passed typecheck, lint, build, and 50 tests. This repairs the integration
+  defect locally, not raw-model localization quality, and is not in the
+  deployed commit. See [Recognition](cells/recognition.md) and
+  [Delivery](cells/delivery.md).
 
 ## Active defaults
 
@@ -118,6 +128,10 @@ Canonical detail belongs in linked cells.
 - Human-labeled recognition quality, feedback granularity, browser/Android
   resource use, and synchronization policy remain evidence-gated. See
   [Recognition](cells/recognition.md) and [Recordings](cells/recordings.md).
+- The 160-clip synthetic controlled-error corpus remains `not_reviewed`, and
+  Experiments 007/008 plus their results remain untracked local work. Preserve
+  them before relying on the evidence outside this checkout. See
+  [Experiments](cells/experiments.md).
 
 ## Active evaluation gates
 
@@ -153,6 +167,12 @@ Canonical detail belongs in linked cells.
 - Before tuning recognition thresholds or claiming pronunciation precision,
   label acceptable, intentionally incorrect, and near-miss attempts against
   human judgments. See [Recognition](cells/recognition.md).
+- For recognition experiments, keep ML core, product behavior, and integration
+  separate. Evaluate one condition at a time in a fresh sequential process
+  with native thread counts pinned to `1`; require two exact scoring replays,
+  preserve anomalies, and never let one unstable condition invalidate the
+  others. Report synthetic and real corpora separately. See
+  [Experiments](cells/experiments.md).
 - Keep the private voice corpus local and untracked while the GitHub origin is
   public; never include `datasets/` in a deployment. See
   [Recordings](cells/recordings.md).

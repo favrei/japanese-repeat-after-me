@@ -11,6 +11,7 @@ import {
 
 class FakeAudioTrack extends EventTarget {
   label = "Peter's AirPods";
+  muted = false;
   readyState = "live";
   stopCalls = 0;
 
@@ -22,6 +23,28 @@ class FakeAudioTrack extends EventTarget {
     this.stopCalls += 1;
     this.readyState = "ended";
   }
+
+  setMuted(muted) {
+    this.muted = muted;
+    this.dispatchEvent(new Event(muted ? "mute" : "unmute"));
+  }
+}
+
+function openSession(track, onRouteLost = () => {}) {
+  return new GameMicrophoneSession(
+    {
+      getAudioTracks: () => [track],
+      getTracks: () => [track],
+    },
+    { deviceId: "airpods-id", label: "Peter's AirPods" },
+    {
+      activeDeviceId: "airpods-id",
+      activeLabel: "Peter's AirPods",
+      requestedDeviceId: "airpods-id",
+      status: "matched",
+    },
+    onRouteLost,
+  );
 }
 
 const inputs = [
@@ -124,24 +147,10 @@ test("rejects silent fallback to a different browser device", () => {
 
 test("keeps one microphone stream alive until the game session closes", () => {
   const track = new FakeAudioTrack();
-  const stream = {
-    getAudioTracks: () => [track],
-    getTracks: () => [track],
-  };
   let routeLostCalls = 0;
-  const session = new GameMicrophoneSession(
-    stream,
-    { deviceId: "airpods-id", label: "Peter's AirPods" },
-    {
-      activeDeviceId: "airpods-id",
-      activeLabel: "Peter's AirPods",
-      requestedDeviceId: "airpods-id",
-      status: "matched",
-    },
-    () => {
-      routeLostCalls += 1;
-    },
-  );
+  const session = openSession(track, () => {
+    routeLostCalls += 1;
+  });
 
   assert.equal(session.active, true);
   assert.equal(track.stopCalls, 0);
@@ -154,4 +163,32 @@ test("keeps one microphone stream alive until the game session closes", () => {
   session.close();
   assert.equal(session.active, false);
   assert.equal(track.stopCalls, 1);
+});
+
+test("treats a recovered mute as warm-up, not a lost route", async () => {
+  const track = new FakeAudioTrack();
+  let routeLostCalls = 0;
+  const session = openSession(track, () => {
+    routeLostCalls += 1;
+  });
+
+  track.setMuted(true);
+  assert.equal(session.ready, false);
+
+  const ready = session.waitUntilReady(1000);
+  track.setMuted(false);
+
+  assert.equal(await ready, true);
+  assert.equal(session.ready, true);
+  assert.equal(routeLostCalls, 0);
+  session.close();
+});
+
+test("stops waiting for a microphone that never reports it can capture", async () => {
+  const track = new FakeAudioTrack();
+  const session = openSession(track);
+
+  track.setMuted(true);
+  assert.equal(await session.waitUntilReady(10), false);
+  session.close();
 });

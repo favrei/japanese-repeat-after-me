@@ -41,6 +41,11 @@ against, so Step 3 of the stage design flow must produce, per speaker
   that Skip can dismiss.
 - **Perceives.** What is observable in the room by anyone present. Only these
   facts may be reacted to.
+- **Character.** Who this person is in two or three words, and what those words
+  do to their lines, with at least one consequence stated as a prohibition.
+  Pass E compares this field against the dialogue in both directions, so
+  "friendly" is unusable and "practical about people — a line of hers that
+  hedges or angles is wrong" is checkable.
 - **Voice fingerprint.** Politeness tier stated as concrete grammar
   (尊敬語・謙譲語 / です・ます / plain), typical sentence length, one habitual
   word or opener, who asks the questions.
@@ -125,10 +130,37 @@ It must read as one continuous person with one agenda. Fails:
 - The character's own goal disappearing — a server who stops trying to complete
   the transaction, a learner who stops trying to get fed.
 
+### Pass E — Persona alignment
+
+Added 2026-08-01. A declared persona that never reaches the dialogue is
+decoration, and the first four passes cannot see the difference: a line can be
+in-register, epistemically clean, uniquely attributable, and still belong to a
+character nobody declared.
+
+Check the **Character** field of each card against the lines, in both
+directions:
+
+1. **Every line expresses a declared trait.** Walk the speaker's lines and name
+   the trait each one comes from. A line that traces to nothing is either the
+   wrong line, or evidence of a trait the card failed to declare — decide which,
+   and fix that one.
+2. **Every declared trait reaches at least one line.** A trait with no line is
+   decoration. Cut it from the card, or write the line it implies. Do not leave
+   it: the art work reads the same card, and will draw a trait the dialogue
+   never earned.
+
+The prohibition form of the Character field is what makes this checkable —
+"a line of hers that hedges, apologises, or angles is wrong" can be tested
+against a line; "warm" cannot.
+
+Expect this pass to catch small word choices the others are indifferent to.
+じゃあ and ぜひ both work as procedure; only one of them belongs to a character
+declared as warm and unhesitating.
+
 ## Verdict
 
 The gate is pass/fail for the whole stage set. On any failure, fix the content,
-then rerun **all four passes** — a rewritten line changes attribution and
+then rerun **all five passes** — a rewritten line changes attribution and
 knowledge for its neighbours. Never resolve a failure by changing flow rules;
 if a line seems to require a flow change, stop and raise it with the user.
 
@@ -139,7 +171,7 @@ what was rewritten, and anything left uncertain.
 
 - This gate judges the conversation only. Art, audio, difficulty, and reading
   accuracy have their own checks in the stage design flow.
-- It cannot certify natural Japanese. A script can pass all four passes and
+- It cannot certify natural Japanese. A script can pass all five passes and
   still be stiff; Step 6 of the flow and reading aloud remain necessary.
 - Distinct voices must survive into audio. Carry the fingerprints into the
   art & voice brief so two characters are not synthesised as the same person.

@@ -1,0 +1,448 @@
+Using raw vosk-model-small-ja-0.22 with one fresh model per condition stream; evaluating 8 sources x 1 conditions
+[1/8] cafe_crosstalk / ao / weather-exact
+[2/8] cafe_crosstalk / ao / job-exact
+[3/8] cafe_crosstalk / ao / coffee-long-vowel-deletion
+[4/8] cafe_crosstalk / ao / station-small-tsu-deletion
+[5/8] cafe_crosstalk / ao / repeat-mora-deletion
+[6/8] cafe_crosstalk / ao / job-voicing-substitution
+[7/8] cafe_crosstalk / ao / reservation-insertion
+[8/8] cafe_crosstalk / ao / explain-lexical-substitution
+{
+  "allConditions": {
+    "attempts": 8,
+    "strictPositionLocalization": {
+      "toleranceMorae": 0,
+      "truePositivePositions": 6,
+      "falsePositivePositions": 43,
+      "falseNegativePositions": 3,
+      "precision": 0.122449,
+      "recall": 0.666667,
+      "f1": 0.206897
+    },
+    "withinOneMoraLocalization": {
+      "toleranceMorae": 1,
+      "truePositivePositions": 8,
+      "falsePositivePositions": 41,
+      "falseNegativePositions": 1,
+      "precision": 0.163265,
+      "recall": 0.888889,
+      "f1": 0.275862
+    },
+    "errorDetection": {
+      "truePositives": 6,
+      "falsePositives": 2,
+      "falseNegatives": 0,
+      "trueNegatives": 0,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.857143
+    },
+    "exactControlTranscription": {
+      "attempts": 2,
+      "exactMoraMatches": 0,
+      "emptyTranscripts": 0,
+      "moraErrorRate": 0.275862
+    },
+    "injectedVariantEvidence": {
+      "errorAttempts": 6,
+      "closerToInjectedReading": 2,
+      "closerToExpectedTarget": 2,
+      "equalDistance": 2,
+      "closerToInjectedRate": 0.333333
+    }
+  },
+  "cleanOnly": {
+    "attempts": 0,
+    "strictPositionLocalization": {
+      "toleranceMorae": 0,
+      "truePositivePositions": 0,
+      "falsePositivePositions": 0,
+      "falseNegativePositions": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "withinOneMoraLocalization": {
+      "toleranceMorae": 1,
+      "truePositivePositions": 0,
+      "falsePositivePositions": 0,
+      "falseNegativePositions": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "errorDetection": {
+      "truePositives": 0,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "trueNegatives": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "exactControlTranscription": {
+      "attempts": 0,
+      "exactMoraMatches": 0,
+      "emptyTranscripts": 0,
+      "moraErrorRate": null
+    },
+    "injectedVariantEvidence": {
+      "errorAttempts": 0,
+      "closerToInjectedReading": 0,
+      "closerToExpectedTarget": 0,
+      "equalDistance": 0,
+      "closerToInjectedRate": null
+    }
+  },
+  "byAugmentation": {
+    "cafe_crosstalk": {
+      "attempts": 8,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 6,
+        "falsePositivePositions": 43,
+        "falseNegativePositions": 3,
+        "precision": 0.122449,
+        "recall": 0.666667,
+        "f1": 0.206897
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 8,
+        "falsePositivePositions": 41,
+        "falseNegativePositions": 1,
+        "precision": 0.163265,
+        "recall": 0.888889,
+        "f1": 0.275862
+      },
+      "errorDetection": {
+        "truePositives": 6,
+        "falsePositives": 2,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.857143
+      },
+      "exactControlTranscription": {
+        "attempts": 2,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.275862
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 6,
+        "closerToInjectedReading": 2,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 2,
+        "closerToInjectedRate": 0.333333
+      }
+    }
+  },
+  "byErrorKind": {
+    "exact": {
+      "attempts": 2,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 8,
+        "falseNegativePositions": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 8,
+        "falseNegativePositions": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "errorDetection": {
+        "truePositives": 0,
+        "falsePositives": 2,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "exactControlTranscription": {
+        "attempts": 2,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.275862
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 0,
+        "closerToInjectedReading": 0,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 0,
+        "closerToInjectedRate": null
+      }
+    },
+    "lexical_substitution": {
+      "attempts": 1,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 4,
+        "falsePositivePositions": 13,
+        "falseNegativePositions": 0,
+        "precision": 0.235294,
+        "recall": 1.0,
+        "f1": 0.380952
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 4,
+        "falsePositivePositions": 13,
+        "falseNegativePositions": 0,
+        "precision": 0.235294,
+        "recall": 1.0,
+        "f1": 0.380952
+      },
+      "errorDetection": {
+        "truePositives": 1,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 1,
+        "closerToInjectedReading": 1,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 0,
+        "closerToInjectedRate": 1.0
+      }
+    },
+    "long_vowel_deletion": {
+      "attempts": 1,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 3,
+        "falseNegativePositions": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 3,
+        "falseNegativePositions": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "errorDetection": {
+        "truePositives": 1,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 1,
+        "closerToInjectedReading": 0,
+        "closerToExpectedTarget": 1,
+        "equalDistance": 0,
+        "closerToInjectedRate": 0.0
+      }
+    },
+    "small_tsu_deletion": {
+      "attempts": 2,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 2,
+        "falsePositivePositions": 13,
+        "falseNegativePositions": 0,
+        "precision": 0.133333,
+        "recall": 1.0,
+        "f1": 0.235294
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 2,
+        "falsePositivePositions": 13,
+        "falseNegativePositions": 0,
+        "precision": 0.133333,
+        "recall": 1.0,
+        "f1": 0.235294
+      },
+      "errorDetection": {
+        "truePositives": 2,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 2,
+        "closerToInjectedReading": 0,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 2,
+        "closerToInjectedRate": 0.0
+      }
+    },
+    "voicing_substitution": {
+      "attempts": 1,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 4,
+        "falseNegativePositions": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 1,
+        "falsePositivePositions": 3,
+        "falseNegativePositions": 0,
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "errorDetection": {
+        "truePositives": 1,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 1,
+        "closerToInjectedReading": 0,
+        "closerToExpectedTarget": 1,
+        "equalDistance": 0,
+        "closerToInjectedRate": 0.0
+      }
+    },
+    "word_insertion": {
+      "attempts": 1,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 2,
+        "falseNegativePositions": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 1,
+        "falsePositivePositions": 1,
+        "falseNegativePositions": 0,
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.666667
+      },
+      "errorDetection": {
+        "truePositives": 1,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 1,
+        "closerToInjectedReading": 1,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 0,
+        "closerToInjectedRate": 1.0
+      }
+    }
+  },
+  "byPersona": {
+    "ao": {
+      "attempts": 8,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 6,
+        "falsePositivePositions": 43,
+        "falseNegativePositions": 3,
+        "precision": 0.122449,
+        "recall": 0.666667,
+        "f1": 0.206897
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 8,
+        "falsePositivePositions": 41,
+        "falseNegativePositions": 1,
+        "precision": 0.163265,
+        "recall": 0.888889,
+        "f1": 0.275862
+      },
+      "errorDetection": {
+        "truePositives": 6,
+        "falsePositives": 2,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.857143
+      },
+      "exactControlTranscription": {
+        "attempts": 2,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.275862
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 6,
+        "closerToInjectedReading": 2,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 2,
+        "closerToInjectedRate": 0.333333
+      }
+    }
+  }
+}
+Wrote results/embedded-native-thread-check.json

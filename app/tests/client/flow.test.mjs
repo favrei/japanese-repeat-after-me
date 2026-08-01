@@ -8,6 +8,7 @@ import {
 } from "../../client/gameplay/flow.ts";
 import { STORIES } from "../../client/content/stories.ts";
 import { FLOW, STAGES } from "../../client/content/cafe.ts";
+import { OFFICE_GIG_STORY } from "../../client/content/office-gig.ts";
 import { TAPROOM_STORY } from "../../client/content/taproom.ts";
 
 test("keeps the redesigned café story intact", () => {
@@ -51,7 +52,7 @@ test("keeps the redesigned café story intact", () => {
   );
   assert.ok(
     FLOW.filter((bubble) => bubble.mode === "autoplay").every(
-      (bubble) => bubble.speaker === "staff",
+      (bubble) => bubble.speaker === "other",
     ),
   );
   assert.ok(
@@ -61,14 +62,14 @@ test("keeps the redesigned café story intact", () => {
   );
 });
 
-test("ships four selectable stages across café and taproom stories", () => {
+test("ships eight selectable stages across three stories", () => {
   assert.deepEqual(
     STORIES.map((story) => story.id),
-    ["cafe-conversation", "taproom-first-glass"],
+    ["cafe-conversation", "taproom-first-glass", "office-gig"],
   );
   assert.equal(
     STORIES.reduce((count, story) => count + story.stages.length, 0),
-    4,
+    8,
   );
   assert.deepEqual(
     TAPROOM_STORY.stages.map((stage) => stage.bubbles.length),
@@ -83,6 +84,20 @@ test("ships four selectable stages across café and taproom stories", () => {
     TAPROOM_STORY.flow
       .filter((bubble) => bubble.mode === "autoplay")
       .every((bubble) => bubble.audioSrc?.startsWith("/audio/taproom/")),
+  );
+  assert.deepEqual(
+    OFFICE_GIG_STORY.stages.map((stage) => stage.bubbles.length),
+    [6, 6, 6, 5],
+  );
+  assert.equal(OFFICE_GIG_STORY.flow.length, 23);
+  assert.equal(
+    OFFICE_GIG_STORY.flow.filter((bubble) => bubble.mode === "speak").length,
+    8,
+  );
+  assert.ok(
+    OFFICE_GIG_STORY.flow.every((bubble) =>
+      bubble.audioSrc?.startsWith("/audio/office-gig/"),
+    ),
   );
 });
 

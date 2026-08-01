@@ -14,6 +14,41 @@ import { STORIES } from "../../client/content/stories.ts";
 
 const NOW = "2026-07-31T12:00:00.000Z";
 
+test("every stage transition ships its narration", async () => {
+  for (const story of STORIES) {
+    for (const stage of story.stages) {
+      // Playback never falls back to a synthetic voice for narration, so a
+      // transition without a clip opens the stage in silence.
+      const { audioSrc } = stage.transition;
+      assert.ok(audioSrc, `${story.id}/${stage.id}: narration has no clip`);
+      const clip = await readFile(
+        new URL(`../../public${audioSrc}`, import.meta.url),
+      );
+      assert.ok(clip.byteLength > 1_000, `${audioSrc} is not audio`);
+    }
+  }
+});
+
+test("every speaking bubble ships a model clip the learner can hear", async () => {
+  for (const story of STORIES) {
+    for (const stage of story.stages) {
+      for (const bubble of stage.bubbles) {
+        if (bubble.mode !== "speak") continue;
+        // Without a bundled clip, playback falls back to the system voice —
+        // not a reviewed reference reading of the line being scored.
+        assert.ok(
+          bubble.audioSrc,
+          `${story.id}/${stage.id}: "${bubble.japanese}" has no model clip`,
+        );
+        const clip = await readFile(
+          new URL(`../../public${bubble.audioSrc}`, import.meta.url),
+        );
+        assert.ok(clip.byteLength > 1_000, `${bubble.audioSrc} is not audio`);
+      }
+    }
+  }
+});
+
 test("catalog payloads preserve the versioned immutable pack path", () => {
   const value = {
     schemaVersion: CATALOG_SCHEMA_VERSION,

@@ -26,7 +26,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
     bubbles: [
       {
         id: "taproom-choose-welcome",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "いらっしゃいませ。ご注文はお決まりですか。",
         reading: "いらっしゃいませ。ごちゅうもんはおきまりですか。",
@@ -40,11 +40,12 @@ export const TAPROOM_STAGES: PracticeStage[] = [
         japanese: "あの、初めてなんです。",
         reading: "あの、はじめてなんです。",
         translation: "Um — it's my first time here.",
+        audioSrc: "/audio/taproom/taproom-choose-firsttime.mp3",
         accepted: ["初めてなんです", "初めてです", "あの、初めてです"],
       },
       {
         id: "taproom-choose-board",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "ごゆっくりどうぞ。本日のビールはこちらのボードにございます。",
         reading:
@@ -59,6 +60,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
         japanese: "おすすめはどれですか。",
         reading: "おすすめはどれですか。",
         translation: "Which one do you recommend?",
+        audioSrc: "/audio/taproom/taproom-choose-recommend.mp3",
         accepted: [
           "どれがおすすめですか",
           "おすすめはなんですか",
@@ -67,7 +69,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
       },
       {
         id: "taproom-choose-two",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "おすすめは、ペールエールと黒ビールです。",
         reading: "おすすめは、ぺーるえーるとくろびーるです。",
@@ -76,7 +78,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
       },
       {
         id: "taproom-choose-bitter",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "ペールエールは苦みが少なくて、飲みやすいですよ。",
         reading: "ぺーるえーるはにがみがすくなくて、のみやすいですよ。",
@@ -90,6 +92,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
         japanese: "じゃあ、ペールエールをお願いします。",
         reading: "じゃあ、ぺーるえーるをおねがいします。",
         translation: "I'll have the pale ale, then.",
+        audioSrc: "/audio/taproom/taproom-choose-order.mp3",
         accepted: [
           "ペールエールをお願いします",
           "ペールエールお願いします",
@@ -119,7 +122,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
     bubbles: [
       {
         id: "taproom-glass-served",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "お待たせしました。こちらどうぞ。",
         reading: "おまたせしました。こちらどうぞ。",
@@ -142,6 +145,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
         japanese: "お会計は今ですか。",
         reading: "おかいけいはいまですか。",
         translation: "Do I pay now?",
+        audioSrc: "/audio/taproom/taproom-glass-pay.mp3",
         accepted: [
           "会計は今ですか",
           "今お会計ですか",
@@ -151,7 +155,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
       },
       {
         id: "taproom-glass-later",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "お会計は最後にまとめてお願いします。",
         reading: "おかいけいはさいごにまとめておねがいします。",
@@ -165,6 +169,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
         japanese: "ここで飲んでもいいですか。",
         reading: "ここでのんでもいいですか。",
         translation: "Is it all right to drink here?",
+        audioSrc: "/audio/taproom/taproom-glass-here.mp3",
         accepted: [
           "ここで飲んでいいですか",
           "ここでもいいですか",
@@ -173,7 +178,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
       },
       {
         id: "taproom-glass-counter",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese:
           "そちらのカウンターをご自由にお使いください。ごゆっくりどうぞ。",

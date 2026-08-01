@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "note": "The expected target stays fixed while ttsText deliberately changes the spoken reading. Exact cases measure false alarms. Error cases cover the mistakes the current kana-marker UI claims to localize. Synthetic labels describe the requested TTS text; human listening is still required to confirm the waveform realizes each intended pronunciation.",
+  "cases": [
+    {
+      "id": "weather-exact",
+      "targetId": "s01",
+      "targetText": "今日はいい天気ですね。",
+      "targetReading": "きょうは いい てんき ですね。",
+      "ttsText": "今日はいい天気ですね。",
+      "spokenReading": "きょうは いい てんき ですね。",
+      "errorKind": "exact"
+    },
+    {
+      "id": "job-exact",
+      "targetId": "s06",
+      "targetText": "新しい仕事にはもう慣れましたか。",
+      "targetReading": "あたらしい しごとには もう なれましたか。",
+      "ttsText": "新しい仕事にはもう慣れましたか。",
+      "spokenReading": "あたらしい しごとには もう なれましたか。",
+      "errorKind": "exact"
+    },
+    {
+      "id": "coffee-long-vowel-deletion",
+      "targetId": "s03",
+      "targetText": "このコーヒーは少し苦いですが、おいしいです。",
+      "targetReading": "この コーヒーは すこし にがいですが、おいしいです。",
+      "ttsText": "この、こひーは少し苦いですが、おいしいです。",
+      "spokenReading": "この こひーは すこし にがいですが、おいしいです。",
+      "errorKind": "long_vowel_deletion"
+    },
+    {
+      "id": "station-small-tsu-deletion",
+      "targetId": "s02",
+      "targetText": "駅まで歩いて十分ぐらいです。",
+      "targetReading": "えきまで あるいて じゅっぷん ぐらいです。",
+      "ttsText": "駅まで歩いて、じゅぷんぐらいです。",
+      "spokenReading": "えきまで あるいて じゅぷん ぐらいです。",
+      "errorKind": "small_tsu_deletion"
+    },
+    {
+      "id": "repeat-mora-deletion",
+      "targetId": "s05",
+      "targetText": "すみません、もう一度言ってください。",
+      "targetReading": "すみません、もう いちど いって ください。",
+      "ttsText": "すみません、もう一度、いてください。",
+      "spokenReading": "すみません、もう いちど いて ください。",
+      "errorKind": "small_tsu_deletion"
+    },
+    {
+      "id": "job-voicing-substitution",
+      "targetId": "s06",
+      "targetText": "新しい仕事にはもう慣れましたか。",
+      "targetReading": "あたらしい しごとには もう なれましたか。",
+      "ttsText": "新しい、しことにはもう慣れましたか。",
+      "spokenReading": "あたらしい しことには もう なれましたか。",
+      "errorKind": "voicing_substitution"
+    },
+    {
+      "id": "reservation-insertion",
+      "targetId": "s08",
+      "targetText": "予約した時間を変更してもいいですか。",
+      "targetReading": "よやくした じかんを へんこうしても いいですか。",
+      "ttsText": "予約した時間を、今、変更してもいいですか。",
+      "spokenReading": "よやくした じかんを いま へんこうしても いいですか。",
+      "errorKind": "word_insertion"
+    },
+    {
+      "id": "explain-lexical-substitution",
+      "targetId": "s09",
+      "targetText": "日本語で自分の考えを説明するのは難しいです。",
+      "targetReading": "にほんごで じぶんの かんがえを せつめいするのは むずかしいです。",
+      "ttsText": "日本語で自分の意見を説明するのは難しいです。",
+      "spokenReading": "にほんごで じぶんの いけんを せつめいするのは むずかしいです。",
+      "errorKind": "lexical_substitution"
+    }
+  ]
+}

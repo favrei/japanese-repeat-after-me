@@ -138,8 +138,9 @@ learner attempts. Human pronunciation judgments are required for calibration.
 
 The user prioritized model and pipeline functionality followed by recall and
 precision over device-deployment work. Experiment 006 completed the first
-real-corpus baseline; on 2026-07-30 the user judged it promising and parked the
-lane for later review.
+real-corpus baseline; Experiment 007 later diagnosed a product integration
+failure, and Experiment 008 isolated raw Vosk error detection and mora
+localization. See [Experiments](experiments.md).
 
 Use task-specific metrics rather than an ambiguous single "model accuracy":
 
@@ -188,6 +189,48 @@ same-speaker/session evidence for rejecting wholly different sentences, not
 Conversion was deterministic, but only `27/30` surface transcripts and `1/30`
 word/confidence/timestamp arrays matched exactly across runs. Top-one sentence
 identity and aggregate closed-catalog discrimination remained stable.
+
+## Controlled-error baseline
+
+Experiment 007 generated 160 synthetic clean clips: twenty VoiceDesign
+personas × two exact controls and six deliberate error cases. Its 1,760-attempt
+product-stack result exposed an integration defect rather than raw-model
+quality: the UI aligned kanji-bearing Vosk surface text directly with kana,
+falsely marked all `440/440` exact controls, and accepted every deliberate
+clean error through the coarse content gate.
+
+The uncommitted application working tree now repairs that representation gap
+with target-conditioned conversion from recognized surface chunks to the
+active bubble's authored kana reading before sentence comparison and marker
+alignment. It covers kanji, katakana/long vowels, mixed Latin/katakana, all
+bundled learner bubbles, unrelated-line rejection, and closest-catalog
+selection; typecheck, lint, build, and 50 tests passed. This fixes the measured
+integration defect locally. It does not improve raw Vosk evidence or make the
+marker a validated pronunciation diagnosis, and it is not present in the
+deployed commit recorded in [Delivery](delivery.md).
+
+Experiment 008 excluded the app and evaluated raw Vosk plus independent
+surface-to-hiragana conversion and mora alignment. Ten of eleven conditions
+have an exact reproducible scoring pair; clipped microphone produced three
+distinct scoring variants and is explicitly unstable. There is no accepted
+merged result. On clean synthetic speech, localization precision/recall is
+`0.584980 / 0.822222` and error-detection precision/recall is
+`0.914286 / 0.800000`. The best accepted localization precision across
+conditions is only `0.609442`; café crosstalk falls to `0.169248`, strong hiss
+to `0.267730`, packet dropouts to `0.362963`, and phone bandwidth to
+`0.271357` while retaining high recall by over-highlighting.
+
+**Current belief:** transcript-derived mora localization is not reliable
+enough for learner-facing pronunciation feedback. Vosk remains useful as a
+coarse known-sentence/content signal, while attempt-level error detection is
+stronger than error location. The synthetic labels remain `not_reviewed`, so
+none of these figures is human-referenced learner precision or recall.
+
+The durable experiment method is condition-by-condition: keep ML core,
+product behavior, and integration separate; run each native condition twice
+in fresh sequential single-threaded processes; require exact scoring equality;
+preserve anomalous runs; and never let one unstable condition invalidate the
+others. See [Experiments](experiments.md) for the full standard and table.
 
 ## Bluetooth capture and session lifecycle
 
@@ -349,10 +392,10 @@ Dependency risk carried by the merged app:
 - Preserve the recognition boundary: `scoreAttempt`, the hit/miss renderer, and
   feedback UI must remain able to consume later constrained-recognition and
   acoustic-alignment results without coupling product flow to one runtime.
-- When the user resumes this lane, begin with the human-label protocol and the
-  evidence sequence below, not another uncalibrated model experiment.
+- For future model-quality work, begin with the human-label protocol and the
+  evidence sequence below, not another uncalibrated threshold or model change.
 
-## Evidence sequence when this lane resumes
+## Evidence sequence for future model quality
 
 1. Apply the defined human-label protocol to acceptable, intentionally
    incorrect, and near-miss learner attempts.
@@ -410,6 +453,9 @@ Dependency risk carried by the merged app:
 - `experiments/README.md`
 - `experiments/006-real-corpus-vosk-baseline/README.md`
 - `experiments/006-real-corpus-vosk-baseline/results/`
+- `experiments/007-synthetic-error-localization/README.md`
+- `experiments/008-ml-only-vosk-localization/README.md`
+- `experiments/008-ml-only-vosk-localization/results/conditions/`
 - `app/client/gameplay/scoring.ts`
 - `app/client/components/PracticeApp.tsx`
 - User flow rejection recorded on 2026-07-30.

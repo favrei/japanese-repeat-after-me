@@ -1,0 +1,442 @@
+{
+  "generated_at": "2026-08-01T12:59:16.768822+00:00",
+  "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-CustomVoice-6bit",
+  "revision": "1c6c0ff58c43afa8df571facde2efa077efd85e2",
+  "default_voice": "Ono_Anna",
+  "max_tokens": 256,
+  "max_attempts": 5,
+  "clips": [
+    {
+      "id": "gig-notice-open",
+      "text": "金曜日の昼休み。休憩室で、同僚が音楽を聞いていた。",
+      "file": "gig-notice-open.mp3",
+      "voice": "aiden",
+      "speed": 1.0,
+      "instruct": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone.",
+      "seed": 295383715,
+      "duration_seconds": 5.76,
+      "expected_seconds": [
+        2.2,
+        9.8
+      ],
+      "suspect": false,
+      "sha256": "78858d8505d81ee595180a95bcba89d37f45c16fb63eaf4e5513874999f2ee10"
+    },
+    {
+      "id": "gig-notice-hello",
+      "text": "あ、おつかれさまです。",
+      "file": "gig-notice-hello.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 1380265701,
+      "duration_seconds": 1.92,
+      "expected_seconds": [
+        0.9,
+        4.6
+      ],
+      "suspect": false,
+      "sha256": "897d5a071dd633ed44ee8dd402447586e24319127642041071042523dd40817e"
+    },
+    {
+      "id": "gig-notice-hello-back",
+      "text": "おつかれさまです。",
+      "file": "gig-notice-hello-back.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 2012337679,
+      "duration_seconds": 1.52,
+      "expected_seconds": [
+        0.8,
+        4.2
+      ],
+      "suspect": false,
+      "sha256": "2f8af62cbcce49e44005734e552b5172c66e7819ca6f617518fa0784f087b8f0"
+    },
+    {
+      "id": "gig-notice-shirt",
+      "text": "そのTシャツ、何のバンドですか。",
+      "file": "gig-notice-shirt.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 2002044228,
+      "duration_seconds": 3.36,
+      "expected_seconds": [
+        1.4,
+        6.6
+      ],
+      "suspect": false,
+      "sha256": "7debff1a23b38f5ca1aadbaf2c319f8f65300b7ce3c4560e9a949fcab171ad89"
+    },
+    {
+      "id": "gig-notice-highschool",
+      "text": "高校のときからずっと好きなバンドなんですよ。",
+      "file": "gig-notice-highschool.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 1033108092,
+      "duration_seconds": 2.88,
+      "expected_seconds": [
+        2.1,
+        9.4
+      ],
+      "suspect": false,
+      "sha256": "5126fb221fdc3289c4706405c27afa107aac85bbb172c027a0263887c11632ab"
+    },
+    {
+      "id": "gig-notice-rock",
+      "text": "私もロック、好きなんです。",
+      "file": "gig-notice-rock.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 961867110,
+      "duration_seconds": 2.72,
+      "expected_seconds": [
+        1.1,
+        5.4
+      ],
+      "suspect": false,
+      "sha256": "c8d647cf2f674fea276d8d5fd796accb959e3fb57e51d5fd1e6acdf18dd66d5b"
+    },
+    {
+      "id": "gig-notice-guitar",
+      "text": "じつは私、ギターをやってるんですよ。",
+      "file": "gig-notice-guitar.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 2134450386,
+      "duration_seconds": 3.44,
+      "expected_seconds": [
+        1.6,
+        7.4
+      ],
+      "suspect": false,
+      "sha256": "cdf07576f5a66dbd1abd09b925160f2967b505b1228e37b7b83d45e47cf35f7b"
+    },
+    {
+      "id": "gig-taste-open",
+      "text": "自動販売機の前に、缶コーヒーが二つ並んだ。",
+      "file": "gig-taste-open.mp3",
+      "voice": "aiden",
+      "speed": 1.0,
+      "instruct": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone.",
+      "seed": 1453237231,
+      "duration_seconds": 3.44,
+      "expected_seconds": [
+        1.9,
+        8.6
+      ],
+      "suspect": false,
+      "sha256": "00917c8340afa593f327070e192e474ade0063c1373c043f5cb55767b236a21c"
+    },
+    {
+      "id": "gig-taste-ask",
+      "text": "ふだんはどんなの聞くんですか。",
+      "file": "gig-taste-ask.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 1492838360,
+      "duration_seconds": 2.08,
+      "expected_seconds": [
+        1.4,
+        6.6
+      ],
+      "suspect": false,
+      "sha256": "969cda77ed7d54ccf79e12e373fe4d280c7895d1ba49a57668900b9494710dd7"
+    },
+    {
+      "id": "gig-taste-why",
+      "text": "ギターの音が好きで、よくロックを聞きます。",
+      "file": "gig-taste-why.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 1841240151,
+      "duration_seconds": 4.08,
+      "expected_seconds": [
+        1.9,
+        8.6
+      ],
+      "suspect": false,
+      "sha256": "8c4e13a6ed09712e97a9a48db663c8d4ccfec98a38e23ec11b4867535b858ca8"
+    },
+    {
+      "id": "gig-taste-agree",
+      "text": "ギターがいいと、それだけで聞いちゃいますよね。",
+      "file": "gig-taste-agree.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 1017408739,
+      "duration_seconds": 2.88,
+      "expected_seconds": [
+        2.1,
+        9.4
+      ],
+      "suspect": false,
+      "sha256": "e1239062529650327f1b2424eaafe668b6ebe4eca9cea00986aecebdbf3487b8"
+    },
+    {
+      "id": "gig-taste-recommend",
+      "text": "じゃあ、おすすめはなんですか。",
+      "file": "gig-taste-recommend.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 516699742,
+      "duration_seconds": 2.48,
+      "expected_seconds": [
+        1.3,
+        6.2
+      ],
+      "suspect": false,
+      "sha256": "3dd258aaf96ba4cfd545f3b5a1f745c402ee8ce9abb26e25c135057286c17f0e"
+    },
+    {
+      "id": "gig-taste-saturday",
+      "text": "ちょうど土曜日にライブがあるんですよ。",
+      "file": "gig-taste-saturday.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 96345606,
+      "duration_seconds": 2.72,
+      "expected_seconds": [
+        1.8,
+        8.2
+      ],
+      "suspect": false,
+      "sha256": "b7e3b3622d14a78b9205fca461c721dd69bdd5cd540283099970b92170fc7341"
+    },
+    {
+      "id": "gig-taste-venue",
+      "text": "小さいライブハウスなんですけど、音がいいんですよ。",
+      "file": "gig-taste-venue.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 1139863458,
+      "duration_seconds": 3.2,
+      "expected_seconds": [
+        2.3,
+        10.2
+      ],
+      "suspect": false,
+      "sha256": "ae2c45a6d27ac8cece9537956b854ee578c7808d2ed15e27e19fd05c23ea4373"
+    },
+    {
+      "id": "gig-join-open",
+      "text": "夕方、会社の玄関でまた会った。",
+      "file": "gig-join-open.mp3",
+      "voice": "aiden",
+      "speed": 1.0,
+      "instruct": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone.",
+      "seed": 871572140,
+      "duration_seconds": 2.48,
+      "expected_seconds": [
+        1.3,
+        6.2
+      ],
+      "suspect": false,
+      "sha256": "56a46fe575e032a188e6b619ddb9eaf7f842d1d59008d4670f7c993635a41cde"
+    },
+    {
+      "id": "gig-join-earlier",
+      "text": "あ、さっきの話なんですけど。",
+      "file": "gig-join-earlier.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 1293922557,
+      "duration_seconds": 2.24,
+      "expected_seconds": [
+        1.2,
+        5.8
+      ],
+      "suspect": false,
+      "sha256": "4dfb5084b3bc9682e7211b5d6bfea063685235f2c1353a4773173d068fe0ba45"
+    },
+    {
+      "id": "gig-join-spare",
+      "text": "じつは、チケットが一枚あまってるんです。",
+      "file": "gig-join-spare.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 2050417538,
+      "duration_seconds": 2.8,
+      "expected_seconds": [
+        1.8,
+        8.2
+      ],
+      "suspect": false,
+      "sha256": "ad2483c418d37ebdd57442e182f9b49909d029ad85ed535def4c391d9ea8c25c"
+    },
+    {
+      "id": "gig-join-come",
+      "text": "私も行ってもいいですか。",
+      "file": "gig-join-come.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 2037489813,
+      "duration_seconds": 1.92,
+      "expected_seconds": [
+        1.1,
+        5.4
+      ],
+      "suspect": false,
+      "sha256": "eec5961a9ece1a9d5c8d5c76a7fc0dfe6085c59df67dea3bc5f2a1086c0cf79a"
+    },
+    {
+      "id": "gig-join-together",
+      "text": "ぜひ、一緒に行きましょう。",
+      "file": "gig-join-together.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 248507141,
+      "duration_seconds": 3.04,
+      "expected_seconds": [
+        1.1,
+        5.4
+      ],
+      "suspect": false,
+      "sha256": "69657808714854126906885e97927144f07cd10fd334f4016965d2a4bd831d85"
+    },
+    {
+      "id": "gig-join-price",
+      "text": "チケットはいくらですか。",
+      "file": "gig-join-price.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 1290858571,
+      "duration_seconds": 2.24,
+      "expected_seconds": [
+        1.1,
+        5.4
+      ],
+      "suspect": false,
+      "sha256": "25a08f14fa6bb38ef22fe486f0fcd56900538e52994587eb6150ea3c3f276970"
+    },
+    {
+      "id": "gig-join-cash",
+      "text": "三千円ですけど、当日でいいですよ。",
+      "file": "gig-join-cash.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 386679220,
+      "duration_seconds": 3.12,
+      "expected_seconds": [
+        1.5,
+        7.0
+      ],
+      "suspect": false,
+      "sha256": "01a13d25c82a6f9c399ae6fdee85dd795eac13999ae5bef041848b6c0d886cc3"
+    },
+    {
+      "id": "gig-meet-open",
+      "text": "外は、もう暗くなっていた。",
+      "file": "gig-meet-open.mp3",
+      "voice": "aiden",
+      "speed": 1.0,
+      "instruct": "Quiet, unhurried scene-setting. Reads the room, never addresses anyone.",
+      "seed": 499788117,
+      "duration_seconds": 2.64,
+      "expected_seconds": [
+        1.1,
+        5.4
+      ],
+      "suspect": false,
+      "sha256": "5467ef5c01162f16419c70ce953711bea5b6e59f8d1013fb9c9afc9bf0e20389"
+    },
+    {
+      "id": "gig-meet-six",
+      "text": "土曜日、六時でいいですか。",
+      "file": "gig-meet-six.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 1395557095,
+      "duration_seconds": 2.0,
+      "expected_seconds": [
+        1.1,
+        5.4
+      ],
+      "suspect": false,
+      "sha256": "216e55cf62450bee15510577b8663aae9be6541a0059ab7e5c54b7d6ebe00b94"
+    },
+    {
+      "id": "gig-meet-where",
+      "text": "じゃあ、どこで待ち合わせしますか。",
+      "file": "gig-meet-where.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 649096948,
+      "duration_seconds": 2.8,
+      "expected_seconds": [
+        1.5,
+        7.0
+      ],
+      "suspect": false,
+      "sha256": "5e5baa6451a4364a6a94e20b52f715dff3ccc3c65123b10f1f5ff41744e5b052"
+    },
+    {
+      "id": "gig-meet-east",
+      "text": "駅の東口はどうですか。",
+      "file": "gig-meet-east.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 2103110588,
+      "duration_seconds": 2.48,
+      "expected_seconds": [
+        1.0,
+        5.0
+      ],
+      "suspect": false,
+      "sha256": "54a499645439fab9ada453e66a213da7d54305f23109c166b0ce3c54ee9703fd"
+    },
+    {
+      "id": "gig-meet-forward",
+      "text": "楽しみにしています。",
+      "file": "gig-meet-forward.mp3",
+      "voice": "sohee",
+      "speed": 1.0,
+      "instruct": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+      "seed": 1657553479,
+      "duration_seconds": 2.48,
+      "expected_seconds": [
+        0.9,
+        4.6
+      ],
+      "suspect": false,
+      "sha256": "8db31ceac0b680ddb2ec04caa986252527e29e5b72c5b378ac25e96fbee94b04"
+    },
+    {
+      "id": "gig-meet-bye",
+      "text": "では、また土曜日に。",
+      "file": "gig-meet-bye.mp3",
+      "voice": "serena",
+      "speed": 1.0,
+      "instruct": "Warm and quick, like someone glad to be talking about this. Friendly polite, never deferential.",
+      "seed": 1694086095,
+      "duration_seconds": 1.92,
+      "expected_seconds": [
+        0.8,
+        4.2
+      ],
+      "suspect": false,
+      "sha256": "99a92e95bdea17439baf756c5c7bc7cea37fa19679e2d6b596e43d38f0be747a"
+    }
+  ]
+}

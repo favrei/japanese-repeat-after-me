@@ -1,0 +1,42 @@
+{
+  "story": "office-gig",
+  "note": "Coworker casting audition, 2026-08-01. Two candidates on the two lines that carry her contractions and her よ/よね, where a stiff or wrong-aged read shows first. `ono_anna` is excluded despite fitting the persona: it already voices the café staff, and this character must not sound like the waitress from another story. `sohee` reads the learner's longest line so the coworker can be judged against the learner on adjacent audio — both read female, so that pairing, not coworker-vs-narrator, is where this story can repeat the taproom's mismatch. Judge persona first (woman, late 20s, warm, quick, slightly bright), then Japanese quality, then distinctness from `sohee`.",
+  "instruct": "Natural, relaxed spoken Japanese. Two coworkers on a Friday, not a service counter.",
+  "lines": [
+    {
+      "id": "audition-guitar__serena",
+      "text": "じつは私、ギターをやってるんですよ。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "deliveryIntent": "A small confession she is pleased to make; じつは carries it."
+    },
+    {
+      "id": "audition-guitar__vivian",
+      "text": "じつは私、ギターをやってるんですよ。",
+      "voice": "vivian",
+      "speaker": "coworker",
+      "deliveryIntent": "A small confession she is pleased to make; じつは carries it."
+    },
+    {
+      "id": "audition-agree__serena",
+      "text": "ギターがいいと、それだけで聞いちゃいますよね。",
+      "voice": "serena",
+      "speaker": "coworker",
+      "deliveryIntent": "Opinionated and companionable; the よね reaches for agreement."
+    },
+    {
+      "id": "audition-agree__vivian",
+      "text": "ギターがいいと、それだけで聞いちゃいますよね。",
+      "voice": "vivian",
+      "speaker": "coworker",
+      "deliveryIntent": "Opinionated and companionable; the よね reaches for agreement."
+    },
+    {
+      "id": "audition-learner-reference__sohee",
+      "text": "ギターの音が好きで、よくロックを聞きます。",
+      "voice": "sohee",
+      "speaker": "learner",
+      "deliveryIntent": "Even, clearly spaced. The learner voice already shipped on the taproom."
+    }
+  ]
+}

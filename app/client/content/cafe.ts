@@ -30,11 +30,12 @@ export const STAGES: PracticeStage[] = [
         "ひるさがりのきっさてん。どあをあけると、こーひーのかおりがした。",
       translation:
         "Mid-afternoon at a coffee shop. You open the door, and the smell of coffee reaches you.",
+      audioSrc: "/audio/qwen3/ordering-open.mp3",
     },
     bubbles: [
       {
         id: "ordering-welcome",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "いらっしゃいませ。",
         reading: "いらっしゃいませ。",
@@ -43,7 +44,7 @@ export const STAGES: PracticeStage[] = [
       },
       {
         id: "ordering-question",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "ご注文はお決まりですか。",
         reading: "ごちゅうもんはおきまりですか。",
@@ -57,11 +58,12 @@ export const STAGES: PracticeStage[] = [
         japanese: "メニューをお願いします。",
         reading: "めにゅーをおねがいします。",
         translation: "A menu, please.",
+        audioSrc: "/audio/qwen3/ordering-menu.mp3",
         accepted: ["メニューお願いします", "メニューを見せてください"],
       },
       {
         id: "ordering-second",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "本日のおすすめは、ブレンドコーヒーです。",
         reading: "ほんじつのおすすめは、ぶれんどこーひーです。",
@@ -70,7 +72,7 @@ export const STAGES: PracticeStage[] = [
       },
       {
         id: "ordering-ready",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "お決まりになりましたら、お呼びください。",
         reading: "おきまりになりましたら、およびください。",
@@ -84,11 +86,12 @@ export const STAGES: PracticeStage[] = [
         japanese: "ブレンドコーヒーをお願いします。",
         reading: "ぶれんどこーひーをおねがいします。",
         translation: "The house blend, please.",
+        audioSrc: "/audio/qwen3/ordering-order.mp3",
         accepted: ["コーヒーをお願いします", "ブレンドをお願いします"],
       },
       {
         id: "ordering-thanks",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "ありがとうございます。",
         reading: "ありがとうございます。",
@@ -111,11 +114,12 @@ export const STAGES: PracticeStage[] = [
         "かっぷがからになった。あなたはでんぴょうをもって、せきをたった。",
       translation:
         "The cup is empty. You take the check and get up from your seat.",
+      audioSrc: "/audio/qwen3/meal-open.mp3",
     },
     bubbles: [
       {
         id: "meal-arrives",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "お会計は、レジでお願いします。",
         reading: "おかいけいは、れじでおねがいします。",
@@ -129,11 +133,12 @@ export const STAGES: PracticeStage[] = [
         japanese: "レシートをお願いします。",
         reading: "れしーとをおねがいします。",
         translation: "A receipt, please.",
+        audioSrc: "/audio/qwen3/meal-restroom.mp3",
         accepted: ["レシートください", "領収書をお願いします"],
       },
       {
         id: "meal-payment-options",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "現金とカードが使えます。",
         reading: "げんきんとかーどがつかえます。",
@@ -147,11 +152,12 @@ export const STAGES: PracticeStage[] = [
         japanese: "カードでお願いします。",
         reading: "かーどでおねがいします。",
         translation: "By card, please.",
+        audioSrc: "/audio/qwen3/meal-serve.mp3",
         accepted: ["クレジットカードでお願いします", "カードで払います"],
       },
       {
         id: "meal-thanks",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "ありがとうございました。",
         reading: "ありがとうございました。",
@@ -160,7 +166,7 @@ export const STAGES: PracticeStage[] = [
       },
       {
         id: "meal-return",
-        speaker: "staff",
+        speaker: "other",
         mode: "autoplay",
         japanese: "またお越しくださいませ。",
         reading: "またおこしくださいませ。",

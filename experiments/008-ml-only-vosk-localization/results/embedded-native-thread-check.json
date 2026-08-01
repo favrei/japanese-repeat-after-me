@@ -1,0 +1,2393 @@
+{
+  "schemaVersion": 1,
+  "experiment": "008-ml-only-vosk-localization",
+  "recordedAt": "2026-08-01T09:15:50.522450+00:00",
+  "question": "How accurately does raw Vosk output reveal and localize injected Japanese mora errors when product scoring and UI code are excluded?",
+  "boundary": {
+    "included": [
+      "Pinned native Vosk Japanese decoding",
+      "Independent pykakasi surface-to-hiragana conversion",
+      "Independent mora tokenization and Levenshtein alignment",
+      "Synthetic audio interference"
+    ],
+    "excluded": [
+      "app/client/gameplay/scoring.ts",
+      "Application sentence catalog scoring",
+      "Application acceptance threshold",
+      "UI reading-marker implementation",
+      "UI rendering and feedback policy"
+    ]
+  },
+  "dataset": {
+    "root": "datasets/japanese-synthetic-errors-v1/qwen3-voice-design-20",
+    "manifestSha256": "df20c123cde52ba3a9eb2f7462ac051849a7b235e9ec878c7b7f5ff04063f49a",
+    "datasetId": "japanese-synthetic-errors-v1-qwen3-voice-design-20",
+    "humanListeningStatus": "not_reviewed",
+    "sourceClips": 8,
+    "personas": 1,
+    "cases": 8
+  },
+  "model": {
+    "name": "vosk-model-small-ja-0.22",
+    "sourceArchiveSha256": "efa092d280153a77615e9e0c7d7283e93e600de3d19d3bec686c57ef19d52eac",
+    "stateIsolation": "One fresh Vosk Model instance per condition stream",
+    "conditionModelLoadMs": {
+      "cafe_crosstalk": 281.353
+    }
+  },
+  "method": {
+    "primaryUnit": "Expected-reading Japanese mora position",
+    "primaryMetric": "Strict exact-position precision and recall",
+    "secondaryMetric": "One-to-one matching within plus/minus one mora",
+    "decoderConcurrency": "Sequential native decoding",
+    "insertionPolicy": "Inserted morae anchor to the following expected mora, or the final expected mora when inserted at the end.",
+    "variantEvidence": "For each error attempt, compare raw recognized-reading edit distance to the expected target and injected spoken variant.",
+    "augmentationConditions": [
+      "cafe_crosstalk"
+    ]
+  },
+  "summary": {
+    "allConditions": {
+      "attempts": 8,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 6,
+        "falsePositivePositions": 43,
+        "falseNegativePositions": 3,
+        "precision": 0.122449,
+        "recall": 0.666667,
+        "f1": 0.206897
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 8,
+        "falsePositivePositions": 41,
+        "falseNegativePositions": 1,
+        "precision": 0.163265,
+        "recall": 0.888889,
+        "f1": 0.275862
+      },
+      "errorDetection": {
+        "truePositives": 6,
+        "falsePositives": 2,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.857143
+      },
+      "exactControlTranscription": {
+        "attempts": 2,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": 0.275862
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 6,
+        "closerToInjectedReading": 2,
+        "closerToExpectedTarget": 2,
+        "equalDistance": 2,
+        "closerToInjectedRate": 0.333333
+      }
+    },
+    "cleanOnly": {
+      "attempts": 0,
+      "strictPositionLocalization": {
+        "toleranceMorae": 0,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 0,
+        "falseNegativePositions": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "withinOneMoraLocalization": {
+        "toleranceMorae": 1,
+        "truePositivePositions": 0,
+        "falsePositivePositions": 0,
+        "falseNegativePositions": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "errorDetection": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "exactControlTranscription": {
+        "attempts": 0,
+        "exactMoraMatches": 0,
+        "emptyTranscripts": 0,
+        "moraErrorRate": null
+      },
+      "injectedVariantEvidence": {
+        "errorAttempts": 0,
+        "closerToInjectedReading": 0,
+        "closerToExpectedTarget": 0,
+        "equalDistance": 0,
+        "closerToInjectedRate": null
+      }
+    },
+    "byAugmentation": {
+      "cafe_crosstalk": {
+        "attempts": 8,
+        "strictPositionLocalization": {
+          "toleranceMorae": 0,
+          "truePositivePositions": 6,
+          "falsePositivePositions": 43,
+          "falseNegativePositions": 3,
+          "precision": 0.122449,
+          "recall": 0.666667,
+          "f1": 0.206897
+        },
+        "withinOneMoraLocalization": {
+          "toleranceMorae": 1,
+          "truePositivePositions": 8,
+          "falsePositivePositions": 41,
+          "falseNegativePositions": 1,
+          "precision": 0.163265,
+          "recall": 0.888889,
+          "f1": 0.275862
+        },
+        "errorDetection": {
+          "truePositives": 6,
+          "falsePositives": 2,
+          "falseNegatives": 0,
+          "trueNegatives": 0,
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.857143
+        },
+        "exactControlTranscription": {
+          "attempts": 2,
+          "exactMoraMatches": 0,
+          "emptyTranscripts": 0,
+          "moraErrorRate": 0.275862
+        },
+        "injectedVariantEvidence": {
+          "errorAttempts": 6,
+          "closerToInjectedReading": 2,
+          "closerToExpectedTarget": 2,
+          "equalDistance": 2,
+          "closerToInjectedRate": 0.333333
+        }
+      }
+    },
+    "byErrorKind": {
+      "exact": {
+        "attempts": 2,
+        "strictPositionLocalization": {
+          "toleranceMorae": 0,
+          "truePositivePositions": 0,
+          "falsePositivePositions": 8,
+          "falseNegativePositions": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": null
+        },
+        "withinOneMoraLocalization": {
+          "toleranceMorae": 1,
+          "truePositivePositions": 0,
+          "falsePositivePositions": 8,
+          "falseNegativePositions": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": null
+        },
+        "errorDetection": {
+          "truePositives": 0,
+          "falsePositives": 2,
+          "falseNegatives": 0,
+          "trueNegatives": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": null
+        },
+        "exactControlTranscription": {
+          "attempts": 2,
+          "exactMoraMatches": 0,
+          "emptyTranscripts": 0,
+          "moraErrorRate": 0.275862
+        },
+        "injectedVariantEvidence": {
+          "errorAttempts": 0,
+          "closerToInjectedReading": 0,
+          "closerToExpectedTarget": 0,
+          "equalDistance": 0,
+          "closerToInjectedRate": null
+        }
+      },
+      "lexical_substitution": {
+        "attempts": 1,
+        "strictPositionLocalization": {
+          "toleranceMorae": 0,
+          "truePositivePositions": 4,
+          "falsePositivePositions": 13,
+          "falseNegativePositions": 0,
+          "precision": 0.235294,
+          "recall": 1.0,
+          "f1": 0.380952
+        },
+        "withinOneMoraLocalization": {
+          "toleranceMorae": 1,
+          "truePositivePositions": 4,
+          "falsePositivePositions": 13,
+          "falseNegativePositions": 0,
+          "precision": 0.235294,
+          "recall": 1.0,
+          "f1": 0.380952
+        },
+        "errorDetection": {
+          "truePositives": 1,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "exactControlTranscription": {
+          "attempts": 0,
+          "exactMoraMatches": 0,
+          "emptyTranscripts": 0,
+          "moraErrorRate": null
+        },
+        "injectedVariantEvidence": {
+          "errorAttempts": 1,
+          "closerToInjectedReading": 1,
+          "closerToExpectedTarget": 0,
+          "equalDistance": 0,
+          "closerToInjectedRate": 1.0
+        }
+      },
+      "long_vowel_deletion": {
+        "attempts": 1,
+        "strictPositionLocalization": {
+          "toleranceMorae": 0,
+          "truePositivePositions": 0,
+          "falsePositivePositions": 3,
+          "falseNegativePositions": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "withinOneMoraLocalization": {
+          "toleranceMorae": 1,
+          "truePositivePositions": 0,
+          "falsePositivePositions": 3,
+          "falseNegativePositions": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "errorDetection": {
+          "truePositives": 1,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "exactControlTranscription": {
+          "attempts": 0,
+          "exactMoraMatches": 0,
+          "emptyTranscripts": 0,
+          "moraErrorRate": null
+        },
+        "injectedVariantEvidence": {
+          "errorAttempts": 1,
+          "closerToInjectedReading": 0,
+          "closerToExpectedTarget": 1,
+          "equalDistance": 0,
+          "closerToInjectedRate": 0.0
+        }
+      },
+      "small_tsu_deletion": {
+        "attempts": 2,
+        "strictPositionLocalization": {
+          "toleranceMorae": 0,
+          "truePositivePositions": 2,
+          "falsePositivePositions": 13,
+          "falseNegativePositions": 0,
+          "precision": 0.133333,
+          "recall": 1.0,
+          "f1": 0.235294
+        },
+        "withinOneMoraLocalization": {
+          "toleranceMorae": 1,
+          "truePositivePositions": 2,
+          "falsePositivePositions": 13,
+          "falseNegativePositions": 0,
+          "precision": 0.133333,
+          "recall": 1.0,
+          "f1": 0.235294
+        },
+        "errorDetection": {
+          "truePositives": 2,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "exactControlTranscription": {
+          "attempts": 0,
+          "exactMoraMatches": 0,
+          "emptyTranscripts": 0,
+          "moraErrorRate": null
+        },
+        "injectedVariantEvidence": {
+          "errorAttempts": 2,
+          "closerToInjectedReading": 0,
+          "closerToExpectedTarget": 0,
+          "equalDistance": 2,
+          "closerToInjectedRate": 0.0
+        }
+      },
+      "voicing_substitution": {
+        "attempts": 1,
+        "strictPositionLocalization": {
+          "toleranceMorae": 0,
+          "truePositivePositions": 0,
+          "falsePositivePositions": 4,
+          "falseNegativePositions": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "withinOneMoraLocalization": {
+          "toleranceMorae": 1,
+          "truePositivePositions": 1,
+          "falsePositivePositions": 3,
+          "falseNegativePositions": 0,
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4
+        },
+        "errorDetection": {
+          "truePositives": 1,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "exactControlTranscription": {
+          "attempts": 0,
+          "exactMoraMatches": 0,
+          "emptyTranscripts": 0,
+          "moraErrorRate": null
+        },
+        "injectedVariantEvidence": {
+          "errorAttempts": 1,
+          "closerToInjectedReading": 0,
+          "closerToExpectedTarget": 1,
+          "equalDistance": 0,
+          "closerToInjectedRate": 0.0
+        }
+      },
+      "word_insertion": {
+        "attempts": 1,
+        "strictPositionLocalization": {
+          "toleranceMorae": 0,
+          "truePositivePositions": 0,
+          "falsePositivePositions": 2,
+          "falseNegativePositions": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "withinOneMoraLocalization": {
+          "toleranceMorae": 1,
+          "truePositivePositions": 1,
+          "falsePositivePositions": 1,
+          "falseNegativePositions": 0,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.666667
+        },
+        "errorDetection": {
+          "truePositives": 1,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "trueNegatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "exactControlTranscription": {
+          "attempts": 0,
+          "exactMoraMatches": 0,
+          "emptyTranscripts": 0,
+          "moraErrorRate": null
+        },
+        "injectedVariantEvidence": {
+          "errorAttempts": 1,
+          "closerToInjectedReading": 1,
+          "closerToExpectedTarget": 0,
+          "equalDistance": 0,
+          "closerToInjectedRate": 1.0
+        }
+      }
+    },
+    "byPersona": {
+      "ao": {
+        "attempts": 8,
+        "strictPositionLocalization": {
+          "toleranceMorae": 0,
+          "truePositivePositions": 6,
+          "falsePositivePositions": 43,
+          "falseNegativePositions": 3,
+          "precision": 0.122449,
+          "recall": 0.666667,
+          "f1": 0.206897
+        },
+        "withinOneMoraLocalization": {
+          "toleranceMorae": 1,
+          "truePositivePositions": 8,
+          "falsePositivePositions": 41,
+          "falseNegativePositions": 1,
+          "precision": 0.163265,
+          "recall": 0.888889,
+          "f1": 0.275862
+        },
+        "errorDetection": {
+          "truePositives": 6,
+          "falsePositives": 2,
+          "falseNegatives": 0,
+          "trueNegatives": 0,
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.857143
+        },
+        "exactControlTranscription": {
+          "attempts": 2,
+          "exactMoraMatches": 0,
+          "emptyTranscripts": 0,
+          "moraErrorRate": 0.275862
+        },
+        "injectedVariantEvidence": {
+          "errorAttempts": 6,
+          "closerToInjectedReading": 2,
+          "closerToExpectedTarget": 2,
+          "equalDistance": 2,
+          "closerToInjectedRate": 0.333333
+        }
+      }
+    }
+  },
+  "runtime": {
+    "attempts": 8,
+    "workers": 1,
+    "wallSeconds": 15.85,
+    "attemptsPerSecond": 0.504726
+  },
+  "environment": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.11",
+    "numpy": "2.4.6",
+    "vosk": "0.3.44",
+    "pykakasi": "2.3.0",
+    "nativeMathThreads": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "ffmpeg": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
+    "git": {
+      "commit": "d5a1909fb8bd1368506246c0d575fa73654718b0",
+      "dirty": true
+    }
+  },
+  "limitations": [
+    "Vosk is a word ASR model and does not emit phoneme posterior probabilities; localization is inferred only from its free-decoded transcript.",
+    "Pykakasi is an evaluation adapter, not a learned acoustic component, and ambiguous Japanese readings can still be converted incorrectly.",
+    "The source labels specify text requested from TTS; no human has yet confirmed every waveform realizes the intended pronunciation.",
+    "VoiceDesign personas are synthetic variation, not independent human speakers.",
+    "Augmented attempts reuse source clips and are correlated; the interference matrix is representative rather than exhaustive.",
+    "This Vosk/Kaldi build changed some transcripts under concurrency and after mixed-condition reuse; each condition is decoded sequentially with a fresh model instance.",
+    "The macOS Vosk wheel links Apple Accelerate; native math thread counts are pinned to one because noisy boundary hypotheses varied without this pin."
+  ],
+  "records": [
+    {
+      "personaId": "ao",
+      "caseId": "weather-exact",
+      "targetId": "s01",
+      "errorKind": "exact",
+      "augmentation": "cafe_crosstalk",
+      "sourceFile": "clean/ao/weather-exact.wav",
+      "sourceSha256": "7418779f9cf1206ae4912a2bcb91a1f6a52d8c02c9819c0fd8bfe11be42d2a8e",
+      "conditionSeed": 8321584178913894928,
+      "audioDurationSeconds": 2.1,
+      "recognizedSurfaceText": "今日 は いわば られ ます",
+      "recognizedReading": "きょうはいわばられます",
+      "recognizedMorae": [
+        "きょ",
+        "う",
+        "は",
+        "い",
+        "わ",
+        "ば",
+        "ら",
+        "れ",
+        "ま",
+        "す"
+      ],
+      "words": [
+        {
+          "surface": "今日",
+          "confidence": 0.330762,
+          "startSeconds": 0.24,
+          "endSeconds": 0.51
+        },
+        {
+          "surface": "は",
+          "confidence": 1.0,
+          "startSeconds": 0.54069,
+          "endSeconds": 0.690388
+        },
+        {
+          "surface": "いわば",
+          "confidence": 0.580826,
+          "startSeconds": 0.690388,
+          "endSeconds": 1.08
+        },
+        {
+          "surface": "られ",
+          "confidence": 0.462785,
+          "startSeconds": 1.233479,
+          "endSeconds": 1.44
+        },
+        {
+          "surface": "ます",
+          "confidence": 0.395298,
+          "startSeconds": 1.47,
+          "endSeconds": 1.68
+        }
+      ],
+      "meanWordConfidence": 0.553934,
+      "decodeMs": 1527.855,
+      "realtimeFactor": 0.72755,
+      "targetMorae": [
+        "きょ",
+        "う",
+        "は",
+        "い",
+        "い",
+        "て",
+        "ん",
+        "き",
+        "で",
+        "す",
+        "ね"
+      ],
+      "injectedMorae": [
+        "きょ",
+        "う",
+        "は",
+        "い",
+        "い",
+        "て",
+        "ん",
+        "き",
+        "で",
+        "す",
+        "ね"
+      ],
+      "groundTruthOperations": [],
+      "groundTruthErrorPositions": [],
+      "predictedOperations": [
+        {
+          "operation": "replace",
+          "expectedIndex": 4,
+          "expected": "い",
+          "observed": "わ"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 5,
+          "expected": "て",
+          "observed": "ば"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 6,
+          "expected": "ん",
+          "observed": "ら"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 7,
+          "expected": "き",
+          "observed": "れ"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 8,
+          "expected": "で",
+          "observed": "ま"
+        },
+        {
+          "operation": "delete",
+          "expectedIndex": 10,
+          "expected": "ね",
+          "observed": null
+        }
+      ],
+      "predictedErrorPositions": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "distanceToTargetMorae": 6,
+      "distanceToInjectedMorae": 6
+    },
+    {
+      "personaId": "ao",
+      "caseId": "job-exact",
+      "targetId": "s06",
+      "errorKind": "exact",
+      "augmentation": "cafe_crosstalk",
+      "sourceFile": "clean/ao/job-exact.wav",
+      "sourceSha256": "41988d88a97b50e1c06f18c5fc6f638d79845390a1e65bb3798d88c12d09de49",
+      "conditionSeed": 14320280396560193304,
+      "audioDurationSeconds": 3.94,
+      "recognizedSurfaceText": "新しい 仕事 に は 今日 なれ まし た",
+      "recognizedReading": "あたらしいしごとにはきょうなれました",
+      "recognizedMorae": [
+        "あ",
+        "た",
+        "ら",
+        "し",
+        "い",
+        "し",
+        "ご",
+        "と",
+        "に",
+        "は",
+        "きょ",
+        "う",
+        "な",
+        "れ",
+        "ま",
+        "し",
+        "た"
+      ],
+      "words": [
+        {
+          "surface": "新しい",
+          "confidence": 1.0,
+          "startSeconds": 0.3,
+          "endSeconds": 0.9
+        },
+        {
+          "surface": "仕事",
+          "confidence": 1.0,
+          "startSeconds": 0.93,
+          "endSeconds": 1.35
+        },
+        {
+          "surface": "に",
+          "confidence": 1.0,
+          "startSeconds": 1.35,
+          "endSeconds": 1.5
+        },
+        {
+          "surface": "は",
+          "confidence": 1.0,
+          "startSeconds": 1.5,
+          "endSeconds": 1.74
+        },
+        {
+          "surface": "今日",
+          "confidence": 0.413452,
+          "startSeconds": 2.34,
+          "endSeconds": 2.669189
+        },
+        {
+          "surface": "なれ",
+          "confidence": 0.653079,
+          "startSeconds": 2.719719,
+          "endSeconds": 2.97
+        },
+        {
+          "surface": "まし",
+          "confidence": 1.0,
+          "startSeconds": 2.973058,
+          "endSeconds": 3.18
+        },
+        {
+          "surface": "た",
+          "confidence": 1.0,
+          "startSeconds": 3.21,
+          "endSeconds": 3.3
+        }
+      ],
+      "meanWordConfidence": 0.883316,
+      "decodeMs": 1413.303,
+      "realtimeFactor": 0.358706,
+      "targetMorae": [
+        "あ",
+        "た",
+        "ら",
+        "し",
+        "い",
+        "し",
+        "ご",
+        "と",
+        "に",
+        "は",
+        "も",
+        "う",
+        "な",
+        "れ",
+        "ま",
+        "し",
+        "た",
+        "か"
+      ],
+      "injectedMorae": [
+        "あ",
+        "た",
+        "ら",
+        "し",
+        "い",
+        "し",
+        "ご",
+        "と",
+        "に",
+        "は",
+        "も",
+        "う",
+        "な",
+        "れ",
+        "ま",
+        "し",
+        "た",
+        "か"
+      ],
+      "groundTruthOperations": [],
+      "groundTruthErrorPositions": [],
+      "predictedOperations": [
+        {
+          "operation": "replace",
+          "expectedIndex": 10,
+          "expected": "も",
+          "observed": "きょ"
+        },
+        {
+          "operation": "delete",
+          "expectedIndex": 17,
+          "expected": "か",
+          "observed": null
+        }
+      ],
+      "predictedErrorPositions": [
+        10,
+        17
+      ],
+      "distanceToTargetMorae": 2,
+      "distanceToInjectedMorae": 2
+    },
+    {
+      "personaId": "ao",
+      "caseId": "coffee-long-vowel-deletion",
+      "targetId": "s03",
+      "errorKind": "long_vowel_deletion",
+      "augmentation": "cafe_crosstalk",
+      "sourceFile": "clean/ao/coffee-long-vowel-deletion.wav",
+      "sourceSha256": "3b496d493948e42008aaf86d2d3272f3ab32f928829998e085da87854aa690b3",
+      "conditionSeed": 5401401846717996037,
+      "audioDurationSeconds": 5.06,
+      "recognizedSurfaceText": "の コーヒー は 少し 苦い で は いい 天気 美味しい です",
+      "recognizedReading": "のこーひーはすこしにがいではいいてんきおいしいです",
+      "recognizedMorae": [
+        "の",
+        "こ",
+        "ー",
+        "ひ",
+        "ー",
+        "は",
+        "す",
+        "こ",
+        "し",
+        "に",
+        "が",
+        "い",
+        "で",
+        "は",
+        "い",
+        "い",
+        "て",
+        "ん",
+        "き",
+        "お",
+        "い",
+        "し",
+        "い",
+        "で",
+        "す"
+      ],
+      "words": [
+        {
+          "surface": "の",
+          "confidence": 0.776732,
+          "startSeconds": 0.444881,
+          "endSeconds": 0.75
+        },
+        {
+          "surface": "コーヒー",
+          "confidence": 0.754949,
+          "startSeconds": 0.93,
+          "endSeconds": 1.44
+        },
+        {
+          "surface": "は",
+          "confidence": 1.0,
+          "startSeconds": 1.47,
+          "endSeconds": 1.74
+        },
+        {
+          "surface": "少し",
+          "confidence": 1.0,
+          "startSeconds": 1.74,
+          "endSeconds": 2.19
+        },
+        {
+          "surface": "苦い",
+          "confidence": 1.0,
+          "startSeconds": 2.22,
+          "endSeconds": 2.55
+        },
+        {
+          "surface": "で",
+          "confidence": 0.989157,
+          "startSeconds": 2.55,
+          "endSeconds": 2.67
+        },
+        {
+          "surface": "は",
+          "confidence": 0.70097,
+          "startSeconds": 2.85,
+          "endSeconds": 3.194244
+        },
+        {
+          "surface": "いい",
+          "confidence": 0.619924,
+          "startSeconds": 3.21,
+          "endSeconds": 3.48
+        },
+        {
+          "surface": "天気",
+          "confidence": 0.619924,
+          "startSeconds": 3.48,
+          "endSeconds": 3.96
+        },
+        {
+          "surface": "美味しい",
+          "confidence": 0.820149,
+          "startSeconds": 3.99,
+          "endSeconds": 4.41
+        },
+        {
+          "surface": "です",
+          "confidence": 1.0,
+          "startSeconds": 4.44,
+          "endSeconds": 4.68
+        }
+      ],
+      "meanWordConfidence": 0.8438,
+      "decodeMs": 1648.663,
+      "realtimeFactor": 0.325823,
+      "targetMorae": [
+        "こ",
+        "の",
+        "こ",
+        "ー",
+        "ひ",
+        "ー",
+        "は",
+        "す",
+        "こ",
+        "し",
+        "に",
+        "が",
+        "い",
+        "で",
+        "す",
+        "が",
+        "お",
+        "い",
+        "し",
+        "い",
+        "で",
+        "す"
+      ],
+      "injectedMorae": [
+        "こ",
+        "の",
+        "こ",
+        "ひ",
+        "ー",
+        "は",
+        "す",
+        "こ",
+        "し",
+        "に",
+        "が",
+        "い",
+        "で",
+        "す",
+        "が",
+        "お",
+        "い",
+        "し",
+        "い",
+        "で",
+        "す"
+      ],
+      "groundTruthOperations": [
+        {
+          "operation": "delete",
+          "expectedIndex": 3,
+          "expected": "ー",
+          "observed": null
+        }
+      ],
+      "groundTruthErrorPositions": [
+        3
+      ],
+      "predictedOperations": [
+        {
+          "operation": "delete",
+          "expectedIndex": 0,
+          "expected": "こ",
+          "observed": null
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 14,
+          "expected": null,
+          "observed": "は"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 14,
+          "expected": null,
+          "observed": "い"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 14,
+          "expected": null,
+          "observed": "い"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 14,
+          "expected": null,
+          "observed": "て"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 14,
+          "expected": "す",
+          "observed": "ん"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 15,
+          "expected": "が",
+          "observed": "き"
+        }
+      ],
+      "predictedErrorPositions": [
+        0,
+        14,
+        15
+      ],
+      "distanceToTargetMorae": 7,
+      "distanceToInjectedMorae": 8
+    },
+    {
+      "personaId": "ao",
+      "caseId": "station-small-tsu-deletion",
+      "targetId": "s02",
+      "errorKind": "small_tsu_deletion",
+      "augmentation": "cafe_crosstalk",
+      "sourceFile": "clean/ao/station-small-tsu-deletion.wav",
+      "sourceSha256": "243f7bf023acfe9c9b7df2d3d47dff96fc157939306f024273b712d7589211d3",
+      "conditionSeed": 8429202146481022159,
+      "audioDurationSeconds": 3.85,
+      "recognizedSurfaceText": "なり 歩い て まし た か 新しい 仕事 の を れ ます",
+      "recognizedReading": "なりあるいてましたかあたらしいしごとのをれます",
+      "recognizedMorae": [
+        "な",
+        "り",
+        "あ",
+        "る",
+        "い",
+        "て",
+        "ま",
+        "し",
+        "た",
+        "か",
+        "あ",
+        "た",
+        "ら",
+        "し",
+        "い",
+        "し",
+        "ご",
+        "と",
+        "の",
+        "を",
+        "れ",
+        "ま",
+        "す"
+      ],
+      "words": [
+        {
+          "surface": "なり",
+          "confidence": 0.246951,
+          "startSeconds": 0.63,
+          "endSeconds": 0.84
+        },
+        {
+          "surface": "歩い",
+          "confidence": 0.304562,
+          "startSeconds": 0.849628,
+          "endSeconds": 1.11
+        },
+        {
+          "surface": "て",
+          "confidence": 0.424213,
+          "startSeconds": 1.23,
+          "endSeconds": 1.29
+        },
+        {
+          "surface": "まし",
+          "confidence": 0.98631,
+          "startSeconds": 1.302392,
+          "endSeconds": 1.5
+        },
+        {
+          "surface": "た",
+          "confidence": 0.98631,
+          "startSeconds": 1.5,
+          "endSeconds": 1.56
+        },
+        {
+          "surface": "か",
+          "confidence": 1.0,
+          "startSeconds": 1.56,
+          "endSeconds": 1.77
+        },
+        {
+          "surface": "新しい",
+          "confidence": 1.0,
+          "startSeconds": 1.95,
+          "endSeconds": 2.52
+        },
+        {
+          "surface": "仕事",
+          "confidence": 1.0,
+          "startSeconds": 2.52,
+          "endSeconds": 2.85
+        },
+        {
+          "surface": "の",
+          "confidence": 0.258803,
+          "startSeconds": 3.0,
+          "endSeconds": 3.09
+        },
+        {
+          "surface": "を",
+          "confidence": 0.414391,
+          "startSeconds": 3.15,
+          "endSeconds": 3.27
+        },
+        {
+          "surface": "れ",
+          "confidence": 0.578687,
+          "startSeconds": 3.368832,
+          "endSeconds": 3.45
+        },
+        {
+          "surface": "ます",
+          "confidence": 1.0,
+          "startSeconds": 3.48,
+          "endSeconds": 3.66
+        }
+      ],
+      "meanWordConfidence": 0.683352,
+      "decodeMs": 2387.405,
+      "realtimeFactor": 0.620105,
+      "targetMorae": [
+        "え",
+        "き",
+        "ま",
+        "で",
+        "あ",
+        "る",
+        "い",
+        "て",
+        "じゅ",
+        "っ",
+        "ぷ",
+        "ん",
+        "ぐ",
+        "ら",
+        "い",
+        "で",
+        "す"
+      ],
+      "injectedMorae": [
+        "え",
+        "き",
+        "ま",
+        "で",
+        "あ",
+        "る",
+        "い",
+        "て",
+        "じゅ",
+        "ぷ",
+        "ん",
+        "ぐ",
+        "ら",
+        "い",
+        "で",
+        "す"
+      ],
+      "groundTruthOperations": [
+        {
+          "operation": "delete",
+          "expectedIndex": 9,
+          "expected": "っ",
+          "observed": null
+        }
+      ],
+      "groundTruthErrorPositions": [
+        9
+      ],
+      "predictedOperations": [
+        {
+          "operation": "delete",
+          "expectedIndex": 0,
+          "expected": "え",
+          "observed": null
+        },
+        {
+          "operation": "delete",
+          "expectedIndex": 1,
+          "expected": "き",
+          "observed": null
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 2,
+          "expected": "ま",
+          "observed": "な"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 3,
+          "expected": "で",
+          "observed": "り"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 8,
+          "expected": null,
+          "observed": "ま"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 8,
+          "expected": "じゅ",
+          "observed": "し"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 9,
+          "expected": "っ",
+          "observed": "た"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 10,
+          "expected": "ぷ",
+          "observed": "か"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 11,
+          "expected": "ん",
+          "observed": "あ"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 12,
+          "expected": "ぐ",
+          "observed": "た"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 14,
+          "expected": null,
+          "observed": "し"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 15,
+          "expected": null,
+          "observed": "し"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 15,
+          "expected": null,
+          "observed": "ご"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 15,
+          "expected": null,
+          "observed": "と"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 15,
+          "expected": null,
+          "observed": "の"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 15,
+          "expected": null,
+          "observed": "を"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 15,
+          "expected": null,
+          "observed": "れ"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 15,
+          "expected": "で",
+          "observed": "ま"
+        }
+      ],
+      "predictedErrorPositions": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15
+      ],
+      "distanceToTargetMorae": 18,
+      "distanceToInjectedMorae": 18
+    },
+    {
+      "personaId": "ao",
+      "caseId": "repeat-mora-deletion",
+      "targetId": "s05",
+      "errorKind": "small_tsu_deletion",
+      "augmentation": "cafe_crosstalk",
+      "sourceFile": "clean/ao/repeat-mora-deletion.wav",
+      "sourceSha256": "58fffd8f801692979c3c1fa8a46c83b535359c1baf5da17e64d7b3768c015330",
+      "conditionSeed": 11764087653884593714,
+      "audioDurationSeconds": 3.78,
+      "recognizedSurfaceText": "今日 に ませ ん です ね もう一度 い て い て ください",
+      "recognizedReading": "きょうにませんですねもういちどいていてください",
+      "recognizedMorae": [
+        "きょ",
+        "う",
+        "に",
+        "ま",
+        "せ",
+        "ん",
+        "で",
+        "す",
+        "ね",
+        "も",
+        "う",
+        "い",
+        "ち",
+        "ど",
+        "い",
+        "て",
+        "い",
+        "て",
+        "く",
+        "だ",
+        "さ",
+        "い"
+      ],
+      "words": [
+        {
+          "surface": "今日",
+          "confidence": 0.656903,
+          "startSeconds": 0.21,
+          "endSeconds": 0.48
+        },
+        {
+          "surface": "に",
+          "confidence": 0.296035,
+          "startSeconds": 0.598954,
+          "endSeconds": 0.69
+        },
+        {
+          "surface": "ませ",
+          "confidence": 1.0,
+          "startSeconds": 0.72,
+          "endSeconds": 0.96
+        },
+        {
+          "surface": "ん",
+          "confidence": 1.0,
+          "startSeconds": 0.96,
+          "endSeconds": 1.08
+        },
+        {
+          "surface": "です",
+          "confidence": 0.965479,
+          "startSeconds": 1.258931,
+          "endSeconds": 1.5
+        },
+        {
+          "surface": "ね",
+          "confidence": 0.593991,
+          "startSeconds": 1.53,
+          "endSeconds": 1.74
+        },
+        {
+          "surface": "もう一度",
+          "confidence": 0.672519,
+          "startSeconds": 1.83,
+          "endSeconds": 2.429817
+        },
+        {
+          "surface": "い",
+          "confidence": 0.466579,
+          "startSeconds": 2.43,
+          "endSeconds": 2.55
+        },
+        {
+          "surface": "て",
+          "confidence": 1.0,
+          "startSeconds": 2.58,
+          "endSeconds": 2.7
+        },
+        {
+          "surface": "い",
+          "confidence": 1.0,
+          "startSeconds": 2.73,
+          "endSeconds": 2.79
+        },
+        {
+          "surface": "て",
+          "confidence": 1.0,
+          "startSeconds": 2.79,
+          "endSeconds": 2.91
+        },
+        {
+          "surface": "ください",
+          "confidence": 0.896647,
+          "startSeconds": 2.91,
+          "endSeconds": 3.42
+        }
+      ],
+      "meanWordConfidence": 0.795679,
+      "decodeMs": 1555.095,
+      "realtimeFactor": 0.411401,
+      "targetMorae": [
+        "す",
+        "み",
+        "ま",
+        "せ",
+        "ん",
+        "も",
+        "う",
+        "い",
+        "ち",
+        "ど",
+        "い",
+        "っ",
+        "て",
+        "く",
+        "だ",
+        "さ",
+        "い"
+      ],
+      "injectedMorae": [
+        "す",
+        "み",
+        "ま",
+        "せ",
+        "ん",
+        "も",
+        "う",
+        "い",
+        "ち",
+        "ど",
+        "い",
+        "て",
+        "く",
+        "だ",
+        "さ",
+        "い"
+      ],
+      "groundTruthOperations": [
+        {
+          "operation": "delete",
+          "expectedIndex": 11,
+          "expected": "っ",
+          "observed": null
+        }
+      ],
+      "groundTruthErrorPositions": [
+        11
+      ],
+      "predictedOperations": [
+        {
+          "operation": "insert",
+          "expectedIndex": 0,
+          "expected": null,
+          "observed": "きょ"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 0,
+          "expected": "す",
+          "observed": "う"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 1,
+          "expected": "み",
+          "observed": "に"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 5,
+          "expected": null,
+          "observed": "で"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 5,
+          "expected": null,
+          "observed": "す"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 5,
+          "expected": null,
+          "observed": "ね"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 11,
+          "expected": null,
+          "observed": "て"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 11,
+          "expected": "っ",
+          "observed": "い"
+        }
+      ],
+      "predictedErrorPositions": [
+        0,
+        1,
+        5,
+        11
+      ],
+      "distanceToTargetMorae": 8,
+      "distanceToInjectedMorae": 8
+    },
+    {
+      "personaId": "ao",
+      "caseId": "job-voicing-substitution",
+      "targetId": "s06",
+      "errorKind": "voicing_substitution",
+      "augmentation": "cafe_crosstalk",
+      "sourceFile": "clean/ao/job-voicing-substitution.wav",
+      "sourceSha256": "f68b150e38fe0b0842977556c8b2046921219195ca6e9b3a9c4c3023b4caf085",
+      "conditionSeed": 18390734244207803140,
+      "audioDurationSeconds": 3.25,
+      "recognizedSurfaceText": "新しい ね 仕事 に は を なれ まし た か ね",
+      "recognizedReading": "あたらしいねしごとにはをなれましたかね",
+      "recognizedMorae": [
+        "あ",
+        "た",
+        "ら",
+        "し",
+        "い",
+        "ね",
+        "し",
+        "ご",
+        "と",
+        "に",
+        "は",
+        "を",
+        "な",
+        "れ",
+        "ま",
+        "し",
+        "た",
+        "か",
+        "ね"
+      ],
+      "words": [
+        {
+          "surface": "新しい",
+          "confidence": 1.0,
+          "startSeconds": 0.24,
+          "endSeconds": 1.02
+        },
+        {
+          "surface": "ね",
+          "confidence": 0.454274,
+          "startSeconds": 1.2,
+          "endSeconds": 1.35
+        },
+        {
+          "surface": "仕事",
+          "confidence": 0.966532,
+          "startSeconds": 1.38,
+          "endSeconds": 1.74
+        },
+        {
+          "surface": "に",
+          "confidence": 1.0,
+          "startSeconds": 1.74,
+          "endSeconds": 1.86
+        },
+        {
+          "surface": "は",
+          "confidence": 0.959994,
+          "startSeconds": 1.86,
+          "endSeconds": 1.979285
+        },
+        {
+          "surface": "を",
+          "confidence": 0.909069,
+          "startSeconds": 2.01,
+          "endSeconds": 2.16
+        },
+        {
+          "surface": "なれ",
+          "confidence": 0.790436,
+          "startSeconds": 2.16,
+          "endSeconds": 2.37
+        },
+        {
+          "surface": "まし",
+          "confidence": 1.0,
+          "startSeconds": 2.371677,
+          "endSeconds": 2.55
+        },
+        {
+          "surface": "た",
+          "confidence": 1.0,
+          "startSeconds": 2.55,
+          "endSeconds": 2.64
+        },
+        {
+          "surface": "か",
+          "confidence": 0.963609,
+          "startSeconds": 2.64,
+          "endSeconds": 2.82
+        },
+        {
+          "surface": "ね",
+          "confidence": 0.887519,
+          "startSeconds": 2.91,
+          "endSeconds": 3.06
+        }
+      ],
+      "meanWordConfidence": 0.902858,
+      "decodeMs": 1182.597,
+      "realtimeFactor": 0.363876,
+      "targetMorae": [
+        "あ",
+        "た",
+        "ら",
+        "し",
+        "い",
+        "し",
+        "ご",
+        "と",
+        "に",
+        "は",
+        "も",
+        "う",
+        "な",
+        "れ",
+        "ま",
+        "し",
+        "た",
+        "か"
+      ],
+      "injectedMorae": [
+        "あ",
+        "た",
+        "ら",
+        "し",
+        "い",
+        "し",
+        "こ",
+        "と",
+        "に",
+        "は",
+        "も",
+        "う",
+        "な",
+        "れ",
+        "ま",
+        "し",
+        "た",
+        "か"
+      ],
+      "groundTruthOperations": [
+        {
+          "operation": "replace",
+          "expectedIndex": 6,
+          "expected": "ご",
+          "observed": "こ"
+        }
+      ],
+      "groundTruthErrorPositions": [
+        6
+      ],
+      "predictedOperations": [
+        {
+          "operation": "insert",
+          "expectedIndex": 5,
+          "expected": null,
+          "observed": "ね"
+        },
+        {
+          "operation": "delete",
+          "expectedIndex": 10,
+          "expected": "も",
+          "observed": null
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 11,
+          "expected": "う",
+          "observed": "を"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 17,
+          "expected": null,
+          "observed": "ね"
+        }
+      ],
+      "predictedErrorPositions": [
+        5,
+        10,
+        11,
+        17
+      ],
+      "distanceToTargetMorae": 4,
+      "distanceToInjectedMorae": 5
+    },
+    {
+      "personaId": "ao",
+      "caseId": "reservation-insertion",
+      "targetId": "s08",
+      "errorKind": "word_insertion",
+      "augmentation": "cafe_crosstalk",
+      "sourceFile": "clean/ao/reservation-insertion.wav",
+      "sourceSha256": "1c14bccfc4e98d084ba17574cee14d314f4f8ecd3c8d0acad7228f884020b471",
+      "conditionSeed": 8345307938905762518,
+      "audioDurationSeconds": 4.1,
+      "recognizedSurfaceText": "予約 し た 時間 は なれ まし た 今 変更 し て も いい です かぁ に",
+      "recognizedReading": "よやくしたじかんはなれましたいまへんこうしてもいいですかぁに",
+      "recognizedMorae": [
+        "よ",
+        "や",
+        "く",
+        "し",
+        "た",
+        "じ",
+        "か",
+        "ん",
+        "は",
+        "な",
+        "れ",
+        "ま",
+        "し",
+        "た",
+        "い",
+        "ま",
+        "へ",
+        "ん",
+        "こ",
+        "う",
+        "し",
+        "て",
+        "も",
+        "い",
+        "い",
+        "で",
+        "す",
+        "かぁ",
+        "に"
+      ],
+      "words": [
+        {
+          "surface": "予約",
+          "confidence": 1.0,
+          "startSeconds": 0.33,
+          "endSeconds": 0.69
+        },
+        {
+          "surface": "し",
+          "confidence": 1.0,
+          "startSeconds": 0.69,
+          "endSeconds": 0.81
+        },
+        {
+          "surface": "た",
+          "confidence": 1.0,
+          "startSeconds": 0.81,
+          "endSeconds": 0.9
+        },
+        {
+          "surface": "時間",
+          "confidence": 1.0,
+          "startSeconds": 0.9,
+          "endSeconds": 1.29
+        },
+        {
+          "surface": "は",
+          "confidence": 0.558786,
+          "startSeconds": 1.29,
+          "endSeconds": 1.47
+        },
+        {
+          "surface": "なれ",
+          "confidence": 0.542399,
+          "startSeconds": 1.56,
+          "endSeconds": 1.8
+        },
+        {
+          "surface": "まし",
+          "confidence": 1.0,
+          "startSeconds": 1.83,
+          "endSeconds": 2.01
+        },
+        {
+          "surface": "た",
+          "confidence": 1.0,
+          "startSeconds": 2.01,
+          "endSeconds": 2.13
+        },
+        {
+          "surface": "今",
+          "confidence": 0.783198,
+          "startSeconds": 2.25,
+          "endSeconds": 2.49
+        },
+        {
+          "surface": "変更",
+          "confidence": 0.879664,
+          "startSeconds": 2.49,
+          "endSeconds": 2.88
+        },
+        {
+          "surface": "し",
+          "confidence": 1.0,
+          "startSeconds": 2.88,
+          "endSeconds": 3.0
+        },
+        {
+          "surface": "て",
+          "confidence": 1.0,
+          "startSeconds": 3.0,
+          "endSeconds": 3.09
+        },
+        {
+          "surface": "も",
+          "confidence": 1.0,
+          "startSeconds": 3.09,
+          "endSeconds": 3.21
+        },
+        {
+          "surface": "いい",
+          "confidence": 0.886056,
+          "startSeconds": 3.21,
+          "endSeconds": 3.33
+        },
+        {
+          "surface": "です",
+          "confidence": 0.794117,
+          "startSeconds": 3.33,
+          "endSeconds": 3.52876
+        },
+        {
+          "surface": "かぁ",
+          "confidence": 0.363126,
+          "startSeconds": 3.54,
+          "endSeconds": 3.72
+        },
+        {
+          "surface": "に",
+          "confidence": 0.486034,
+          "startSeconds": 3.75,
+          "endSeconds": 3.867511
+        }
+      ],
+      "meanWordConfidence": 0.840787,
+      "decodeMs": 2163.501,
+      "realtimeFactor": 0.527683,
+      "targetMorae": [
+        "よ",
+        "や",
+        "く",
+        "し",
+        "た",
+        "じ",
+        "か",
+        "ん",
+        "を",
+        "へ",
+        "ん",
+        "こ",
+        "う",
+        "し",
+        "て",
+        "も",
+        "い",
+        "い",
+        "で",
+        "す",
+        "か"
+      ],
+      "injectedMorae": [
+        "よ",
+        "や",
+        "く",
+        "し",
+        "た",
+        "じ",
+        "か",
+        "ん",
+        "を",
+        "い",
+        "ま",
+        "へ",
+        "ん",
+        "こ",
+        "う",
+        "し",
+        "て",
+        "も",
+        "い",
+        "い",
+        "で",
+        "す",
+        "か"
+      ],
+      "groundTruthOperations": [
+        {
+          "operation": "insert",
+          "expectedIndex": 9,
+          "expected": null,
+          "observed": "い"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 9,
+          "expected": null,
+          "observed": "ま"
+        }
+      ],
+      "groundTruthErrorPositions": [
+        9
+      ],
+      "predictedOperations": [
+        {
+          "operation": "insert",
+          "expectedIndex": 8,
+          "expected": null,
+          "observed": "は"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 8,
+          "expected": null,
+          "observed": "な"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 8,
+          "expected": null,
+          "observed": "れ"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 8,
+          "expected": null,
+          "observed": "ま"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 8,
+          "expected": null,
+          "observed": "し"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 8,
+          "expected": null,
+          "observed": "た"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 8,
+          "expected": null,
+          "observed": "い"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 8,
+          "expected": "を",
+          "observed": "ま"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 20,
+          "expected": null,
+          "observed": "かぁ"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 20,
+          "expected": "か",
+          "observed": "に"
+        }
+      ],
+      "predictedErrorPositions": [
+        8,
+        20
+      ],
+      "distanceToTargetMorae": 10,
+      "distanceToInjectedMorae": 8
+    },
+    {
+      "personaId": "ao",
+      "caseId": "explain-lexical-substitution",
+      "targetId": "s09",
+      "errorKind": "lexical_substitution",
+      "augmentation": "cafe_crosstalk",
+      "sourceFile": "clean/ao/explain-lexical-substitution.wav",
+      "sourceSha256": "87e1951c431aef687aa8f475120d8b2f5a8454120d6e5ed8e7502fb5b65b20aa",
+      "conditionSeed": 4676919942736944972,
+      "audioDurationSeconds": 4.9,
+      "recognizedSurfaceText": "日本 名 えー 自分 の 意見 を は いい ねー する の は 衛生 です ね",
+      "recognizedReading": "にっぽんめいえーじぶんのいけんをはいいねーするのはえいせいですね",
+      "recognizedMorae": [
+        "に",
+        "っ",
+        "ぽ",
+        "ん",
+        "め",
+        "い",
+        "え",
+        "ー",
+        "じ",
+        "ぶ",
+        "ん",
+        "の",
+        "い",
+        "け",
+        "ん",
+        "を",
+        "は",
+        "い",
+        "い",
+        "ね",
+        "ー",
+        "す",
+        "る",
+        "の",
+        "は",
+        "え",
+        "い",
+        "せ",
+        "い",
+        "で",
+        "す",
+        "ね"
+      ],
+      "words": [
+        {
+          "surface": "日本",
+          "confidence": 0.99386,
+          "startSeconds": 0.36,
+          "endSeconds": 0.783314
+        },
+        {
+          "surface": "名",
+          "confidence": 0.670449,
+          "startSeconds": 0.783314,
+          "endSeconds": 1.023766
+        },
+        {
+          "surface": "えー",
+          "confidence": 0.333602,
+          "startSeconds": 1.203044,
+          "endSeconds": 1.35
+        },
+        {
+          "surface": "自分",
+          "confidence": 1.0,
+          "startSeconds": 1.38,
+          "endSeconds": 1.77
+        },
+        {
+          "surface": "の",
+          "confidence": 1.0,
+          "startSeconds": 1.77,
+          "endSeconds": 1.95
+        },
+        {
+          "surface": "意見",
+          "confidence": 0.995693,
+          "startSeconds": 1.95,
+          "endSeconds": 2.280694
+        },
+        {
+          "surface": "を",
+          "confidence": 0.859924,
+          "startSeconds": 2.280694,
+          "endSeconds": 2.37
+        },
+        {
+          "surface": "は",
+          "confidence": 0.930527,
+          "startSeconds": 2.43,
+          "endSeconds": 2.55
+        },
+        {
+          "surface": "いい",
+          "confidence": 0.587814,
+          "startSeconds": 2.550555,
+          "endSeconds": 2.73
+        },
+        {
+          "surface": "ねー",
+          "confidence": 0.45567,
+          "startSeconds": 2.76,
+          "endSeconds": 2.94
+        },
+        {
+          "surface": "する",
+          "confidence": 1.0,
+          "startSeconds": 2.97,
+          "endSeconds": 3.27
+        },
+        {
+          "surface": "の",
+          "confidence": 1.0,
+          "startSeconds": 3.27,
+          "endSeconds": 3.42
+        },
+        {
+          "surface": "は",
+          "confidence": 1.0,
+          "startSeconds": 3.451467,
+          "endSeconds": 3.571334
+        },
+        {
+          "surface": "衛生",
+          "confidence": 0.231111,
+          "startSeconds": 3.93,
+          "endSeconds": 4.23
+        },
+        {
+          "surface": "です",
+          "confidence": 1.0,
+          "startSeconds": 4.26,
+          "endSeconds": 4.53
+        },
+        {
+          "surface": "ね",
+          "confidence": 0.926597,
+          "startSeconds": 4.56,
+          "endSeconds": 4.71
+        }
+      ],
+      "meanWordConfidence": 0.811578,
+      "decodeMs": 2160.796,
+      "realtimeFactor": 0.440979,
+      "targetMorae": [
+        "に",
+        "ほ",
+        "ん",
+        "ご",
+        "で",
+        "じ",
+        "ぶ",
+        "ん",
+        "の",
+        "か",
+        "ん",
+        "が",
+        "え",
+        "を",
+        "せ",
+        "つ",
+        "め",
+        "い",
+        "す",
+        "る",
+        "の",
+        "は",
+        "む",
+        "ず",
+        "か",
+        "し",
+        "い",
+        "で",
+        "す"
+      ],
+      "injectedMorae": [
+        "に",
+        "ほ",
+        "ん",
+        "ご",
+        "で",
+        "じ",
+        "ぶ",
+        "ん",
+        "の",
+        "い",
+        "け",
+        "ん",
+        "を",
+        "せ",
+        "つ",
+        "め",
+        "い",
+        "す",
+        "る",
+        "の",
+        "は",
+        "む",
+        "ず",
+        "か",
+        "し",
+        "い",
+        "で",
+        "す"
+      ],
+      "groundTruthOperations": [
+        {
+          "operation": "delete",
+          "expectedIndex": 9,
+          "expected": "か",
+          "observed": null
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 10,
+          "expected": "ん",
+          "observed": "い"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 11,
+          "expected": "が",
+          "observed": "け"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 12,
+          "expected": "え",
+          "observed": "ん"
+        }
+      ],
+      "groundTruthErrorPositions": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "predictedOperations": [
+        {
+          "operation": "insert",
+          "expectedIndex": 1,
+          "expected": null,
+          "observed": "っ"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 1,
+          "expected": "ほ",
+          "observed": "ぽ"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 3,
+          "expected": null,
+          "observed": "め"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 3,
+          "expected": null,
+          "observed": "い"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 3,
+          "expected": "ご",
+          "observed": "え"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 4,
+          "expected": "で",
+          "observed": "ー"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 9,
+          "expected": "か",
+          "observed": "い"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 10,
+          "expected": "ん",
+          "observed": "け"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 11,
+          "expected": "が",
+          "observed": "ん"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 12,
+          "expected": "え",
+          "observed": "を"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 13,
+          "expected": "を",
+          "observed": "は"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 14,
+          "expected": "せ",
+          "observed": "い"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 15,
+          "expected": "つ",
+          "observed": "い"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 16,
+          "expected": "め",
+          "observed": "ね"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 17,
+          "expected": "い",
+          "observed": "ー"
+        },
+        {
+          "operation": "delete",
+          "expectedIndex": 22,
+          "expected": "む",
+          "observed": null
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 23,
+          "expected": "ず",
+          "observed": "え"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 24,
+          "expected": "か",
+          "observed": "い"
+        },
+        {
+          "operation": "replace",
+          "expectedIndex": 25,
+          "expected": "し",
+          "observed": "せ"
+        },
+        {
+          "operation": "insert",
+          "expectedIndex": 28,
+          "expected": null,
+          "observed": "ね"
+        }
+      ],
+      "predictedErrorPositions": [
+        1,
+        3,
+        4,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        22,
+        23,
+        24,
+        25,
+        28
+      ],
+      "distanceToTargetMorae": 20,
+      "distanceToInjectedMorae": 16
+    }
+  ]
+}

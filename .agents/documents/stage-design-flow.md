@@ -57,13 +57,19 @@ Fixed rules you author *inside*, never around:
 
 Accept a situation only if all four hold:
 
-- **Immediately useful.** The learner would say these exact sentences within
-  days of arriving. This is spoken recall, not a grammar syllabus.
-- **The learner has a goal.** Order food, buy a ticket, check in, ask a
-  pharmacist, report a lost item. "Chat about hobbies" fails: no goal, no
-  natural sentence set.
-- **The other party is predictable.** Real staff say near-identical lines every
-  time. If the other party's replies are unpredictable, a linear script lies.
+- **Immediately useful.** The learner would say these exact sentences in their
+  own life within weeks. This is spoken recall, not a grammar syllabus.
+- **The learner wants something.** Not necessarily a transaction. Order food,
+  buy a ticket, check in — but equally: get invited along, borrow the record,
+  settle who brings what, be told where to meet. The test is that you can name
+  what the learner holds at the end and did not hold at the start. "Talk about
+  music" fails; "leave with a time and a place for Saturday's gig" passes. Same
+  topic, different story.
+- **The other party's replies are predictable.** Service staff are predictable
+  because their script is fixed. A friend or a coworker is predictable when the
+  learner's goal narrows what they would plausibly say next — which is what
+  naming the goal above buys you. If a reply could reasonably go three ways, a
+  linear script lies.
 - **It closes.** The goal is reached in 2–4 stages, roughly 20 bubbles total.
 
 Write one line naming the situation, the place, and what the learner walks away
@@ -137,8 +143,9 @@ to misuse:
 Decide, in words, before any dialogue:
 
 - **Other party:** role, approximate age, apparent gender, register used toward
-  the learner (business polite, plain polite, brusque), and one trait that
-  shapes word choice (rushed, elderly, over-helpful).
+  the learner (business polite, plain polite, brusque), and the two or three
+  words of character that shape word choice (rushed, elderly, over-helpful,
+  enthusiastic about one thing and practical about everything else).
 - **Learner persona:** who the learner *is* in this scene — traveller with a
   companion, resident alone, parent with a child. This decides politeness
   level, pronoun use, and whether a line like "for her" is even possible.
@@ -171,10 +178,19 @@ most frequently forgotten character — before writing any line:
   downstream, and each will silently invent its own answer to anything left
   blank. Write `default: unmarked adult, neutral mid-range` only as a
   deliberate choice, not as a placeholder to fill in later.
+- **Character (required, never omitted)** — who this person is, in two or three
+  words, plus what those words *do* to their lines. "Enthusiastic about music,
+  practical about people" is a character; "friendly" is not, because nothing
+  follows from it. State at least one consequence as a prohibition — "a line of
+  hers that hedges or angles is wrong" — because that is the form the gate can
+  check. Persona says who is seen and heard; Character says why this person says
+  these particular sentences and not equally polite different ones. Both feed
+  the art work: appearance is derived from Character as much as from Persona.
 - **Voice fingerprint** — politeness tier as concrete grammar
   (尊敬語・謙譲語 / です・ます / plain), typical sentence length, one habitual
-  word or opener, and who asks the questions. This is *what* the character
-  says; Persona above is *who is heard and seen saying it*. Both are required.
+  word or opener, and who asks the questions. This is the *grammar* of what the
+  character says; Character above is the *reason* they say it. All three fields
+  are required.
 - **Never says** — a short banned list. A beginner learner never produces
   かしこまりました or よろしいでしょうか; café staff never explain grammar.
 
@@ -225,6 +241,44 @@ is scaffolding.
   and labels may be drawn into the art where the setting calls for them. What
   the learner must read or act on still lives in UI text, and speech still
   lives in balloons.
+
+### Naturalness under skip-safety
+
+Skip-safety and natural Japanese pull against each other, and the pull is
+structural rather than a sign of careless writing. Real conversation runs on
+tokens that acknowledge what the other person just said — そうなんですね、
+わかります、本当ですか、なるほど — and **every one of them is banned**, because
+the learner's turn is a bubble that Skip can erase. Strip them and you are left
+with a row of clean standalone declaratives that pass every gate and read like a
+textbook. Expect this. The first draft of a stage set will sound stiff, and the
+cause is the constraint, not the author.
+
+Do not fix it by weakening skip-safety. Rebuild the texture out of things that
+do not depend on the learner having spoken:
+
+- **Sentence-final particles instead of reactions.** よね reaches for agreement
+  without claiming any was given; よ carries warmth into a line that is
+  otherwise a bare statement. This is the single highest-value substitution.
+- **Opinions instead of facts.** 「私はいつもギターの音で選びます。」 is a fact
+  recited at nobody. 「ギターがいいと、それだけで聞いちゃいますよね。」 is the
+  same information said by someone who has a view. Both survive silence; only
+  one sounds like a person.
+- **Give the colloquial register to the other party only.** Contractions
+  (やってる、聞いちゃいます) and casual shapes (どんなの) make one speaker sound
+  spoken rather than written — and because the learner never contracts, the
+  same move sharpens blind attribution in Pass C. Naturalness and separation
+  reinforce each other here rather than competing.
+- **Let the learner use 〜んです.** 「私もロックが好きです。」 is a textbook
+  sentence; 「私もロック、好きなんです。」 is what someone says. Explanatory の
+  is beginner-safe and buys a great deal of naturalness for nothing.
+- **〜て rather than 〜ので to link a reason.** ので is the written form. It also
+  runs longer, so the spoken form usually shortens the bubble.
+- **Specifics rather than generic nouns.** 何のバンド over バンドの; 高校のとき
+  から over 好きな. Vague nouns are also where dangling referents hide — a line
+  pointing at "that band" when nobody ever named one is both stiff *and* broken.
+
+Say every line aloud after this pass. If a real person would not say it in that
+room, it is still wrong, whatever the gates report.
 
 ### Fields (see `app/shared/story.ts`)
 
@@ -298,10 +352,11 @@ surfaces inside a character's mouth.
 
 Run it as a separate reading pass over `speaker`, `japanese`, `reading`, and
 `translation` only, with your drafting notes and rationale out of view — the
-point is to lose the author's memory of what each line was *meant* to do. Four
+point is to lose the author's memory of what each line was *meant* to do. Five
 passes: leak scan, knowledge ledger, blind attribution with the speaker labels
-stripped, and a single-speaker read-through per character. It is pass/fail for
-the whole stage set; on any failure, fix the content and rerun all four.
+stripped, a single-speaker read-through per character, and persona alignment
+against the Character field in both directions. It is pass/fail for the whole
+stage set; on any failure, fix the content and rerun all five.
 
 Include the transition lines in the leak scan and the knowledge ledger, and
 exclude them from blind attribution — they are attributable by design. The
@@ -335,8 +390,18 @@ This brief is the handoff to the art work.
 ### Other-party characters — one block per castId from Step 2b
 - Persona line copied verbatim from the Step 3 card: apparent gender, apparent
   age band, vocal timbre. Required in every block; never "unspecified"
-- Role, build, clothing appropriate to the role
-- Expression range needed across the stages
+- Character line copied verbatim from the Step 3 card, then **a table mapping
+  each trait to what it looks like**. Appearance is derived from Character as
+  much as from Persona: what someone chose to wear, how they stand, and what
+  their hands look like are all evidence of who they are. A block that lists
+  clothing without naming the trait each item serves is a styling list, not a
+  brief — and it lets the art contradict the dialogue while satisfying every
+  bullet
+- State the traits' negative space too: what must *not* be drawn because a line
+  already says it. A character who says she plays guitar should not be holding
+  one; the drawing would make her line redundant
+- Expression range needed across the stages, tied to traits — name which trait
+  each expression is the visible moment of
 - Register they project, taken from Step 3 rather than from styling
 - Which scenes they appear in, and that they must read as standing in each
 - Constraint: adult seinen proportions, no chibi
@@ -431,6 +496,13 @@ does not consume the one bubble Skip dismisses.
   its cast voice together, and confirm they read as the same person — apparent
   gender first, then age band. Clip-by-clip listening does not catch this,
   because each clip sounds fine on its own; only the pairing fails.
+- **Character agreement:** then read the character's lines while looking at the
+  drawing, and confirm the person in the picture is the person saying them. Walk
+  the trait table from the brief: each trait must be visible, and nothing
+  prominent in the drawing may assert a trait the card never declared. This is
+  the art-side half of the gate's Pass E — the dialogue check cannot see the
+  picture, and the persona check above only compares gender and age, so a
+  drawing can agree on both and still be someone else.
 - Simulate a pessimistic run: skip or fail out *every* learner bubble and
   confirm the remaining dialogue still coheres.
 - Re-run the character separation gate if any line changed after Step 6b.
@@ -445,6 +517,11 @@ does not consume the one bubble Skip dismisses.
   per speaker including the learner. Every card carries a Persona line —
   apparent gender, age band, timbre — with a stated default rather than a
   blank, and the art and the cast voice agree with it.
+- Every card also carries a Character line, every declared trait reaches at
+  least one bubble, every bubble traces to a trait, and each trait names what
+  it looks like in the brief. Persona keeps the drawing and the voice from
+  disagreeing about *who* this is; Character keeps the drawing, the voice, and
+  the dialogue from disagreeing about *what they are like*.
 - Every stage — the first included — names its shot, its other party, and its
   narrator line, and every key resolves in the art pack.
 - Every bubble has validated `japanese`, `reading`, and `translation`; every

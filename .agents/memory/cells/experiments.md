@@ -338,16 +338,175 @@ Disposition:
   baseline. Do not interpret its closed-catalog rejection as final
   pronunciation quality.
 
+## Recognition-experiment standard
+
+The user made this the durable standard on 2026-08-01 after the long
+Experiment 007/008 round became difficult to interpret:
+
+1. Keep **ML core**, **product behavior**, and the **integration gap** as three
+   separate questions and reports. An integration defect is real, but its
+   metrics are not model precision or recall.
+2. Make one augmentation or operating condition the acceptance unit. Do not
+   turn many conditions into one all-or-none experiment, and do not discard a
+   valid condition because another condition is unstable.
+3. Run each native recognizer condition sequentially in a fresh Python
+   process, with one worker and `OMP_NUM_THREADS`, `OPENBLAS_NUM_THREADS`,
+   `MKL_NUM_THREADS`, `VECLIB_MAXIMUM_THREADS`, and `NUMEXPR_NUM_THREADS`
+   pinned to `1` before native imports.
+4. Require two isolated runs to match exactly on every scoring input and
+   output: surface transcript, hiragana/mora sequence, alignment operations,
+   predicted positions, edit distances, and aggregate metrics. Word-confidence
+   floats, timings, and runtime metadata are diagnostics and are not part of
+   the equality gate when scoring does not consume them.
+5. Preserve every anomalous run. If the first pair differs, one adjudication
+   replay may establish an exact pair, but the differing replay remains
+   disclosed. Three distinct scoring variants make that condition unstable.
+6. Pin the dataset manifest, source-audio hashes, model archive, augmentation
+   seed, and donor scope. A filtered run must use the same complete donor pool
+   as its corresponding full-corpus condition.
+7. Report each corpus and domain separately. Synthetic controlled errors are
+   useful fixtures, but never substitute for human-reviewed real speech and
+   must not be pooled with it into one headline metric.
+8. Preserve result files independently; never overwrite accepted evidence with
+   a provisional combined run. A merged report may summarize already accepted
+   conditions, but is not itself an acceptance gate.
+
+This standard exists to make failures small, attributable, and resumable. It
+replaces the earlier attempt to accept or reject one 1,760-attempt matrix.
+
+## 007 — Synthetic product-stack error localization
+
+Question: can the then-current Vosk sentence gate and kana-highlighting path
+locate controlled Japanese errors across synthetic voices and interference?
+
+Corpus and execution:
+
+- Twenty Qwen3 VoiceDesign personas × eight cases produced 160 clean WAVs,
+  578.8 seconds, and 26.5 MiB under ignored
+  `datasets/japanese-synthetic-errors-v1/qwen3-voice-design-20/`.
+- Cases contain two exact controls plus long-vowel deletion, two small-`っ`
+  deletions, voicing substitution, word insertion, and lexical substitution.
+- Eleven clean/interference conditions produced 1,760 attempts.
+- The full four-worker pass finished in 846.196 seconds after an eight-source
+  smoke test. Later Experiment 008 evidence showed that this threaded Vosk
+  configuration is not reliably deterministic, so exact Experiment 007
+  aggregates are diagnostic rather than a reproducible raw-model benchmark.
+- All source clips remain `not_reviewed`; their requested TTS labels have not
+  been confirmed by a human listener.
+
+Recorded diagnostic result:
+
+- position-localization precision `0.112618`, recall `0.918182`, F1
+  `0.200629`;
+- all `440/440` exact controls were falsely marked;
+- synthetic sentence-acceptance precision `0.252955`, recall `0.972727`;
+- deliberate-error false acceptance `0.957576` overall and `1.0` on clean
+  sources;
+- long-vowel localization precision `0.037016`, recall `0.290909`.
+
+Interpretation:
+
+- High recall came from over-highlighting, not useful localization.
+- The immediate integration defect was direct comparison of Vosk surface text
+  containing kanji with the target's kana reading.
+- The `0.30` catalog gate behaved as a coarse known-sentence content gate and
+  accepted every deliberate clean error. Experiment 007 therefore measures a
+  product-stack/integration failure, not raw Vosk model precision.
+
+Evidence:
+
+- `experiments/007-synthetic-error-localization/README.md`
+- `experiments/007-synthetic-error-localization/results/macbook-m3-vosk-small-ja-0.22.json`
+
+## 008 — ML-only Vosk mora localization
+
+Question: how accurately does raw Vosk output reveal and localize the same
+controlled mora errors when application scoring, thresholds, marker generation,
+and UI are excluded?
+
+Boundary and method:
+
+- Raw `vosk-model-small-ja-0.22` decoding feeds an independent `pykakasi`
+  surface-to-hiragana adapter, mora tokenization, and edit alignment.
+- `pykakasi` retains a known boundary ambiguity: unsegmented `今日は` converts
+  to `こんにちは`, while Vosk's usual segmented `今日 は` converts to
+  `きょうは`. Keep adapter error separate from acoustic-model error.
+- Ten unit tests cover deterministic augmentation, reading conversion,
+  alignment, and metric behavior.
+- Conditions follow the recognition-experiment standard above. There is no
+  accepted merged 1,760-attempt result; the old
+  `results/macbook-m3-vosk-small-ja-0.22.json` is rejected and must not be
+  quoted.
+
+Recorded per-condition result:
+
+| Condition | Status | Localization precision / recall | Detection precision / recall | Exact controls |
+|---|---|---:|---:|---:|
+| Clean | accepted | `0.584980 / 0.822222` | `0.914286 / 0.800000` | `31/40` |
+| Quiet room | accepted | `0.609442 / 0.788889` | `0.872549 / 0.741667` | `27/40` |
+| Café crosstalk | accepted | `0.169248 / 0.850000` | `0.772727 / 0.991667` | `5/40` |
+| Street noise | accepted | `0.597561 / 0.816667` | `0.929293 / 0.766667` | `33/40` |
+| HVAC hum | accepted | `0.598361 / 0.811111` | `0.919192 / 0.758333` | `32/40` |
+| Strong hiss | accepted | `0.267730 / 0.838889` | `0.801370 / 0.975000` | `11/40` |
+| Clipped microphone | **unstable** | `0.169031–0.169231 / 0.794444` | `0.782313 / 0.958333` | `8/40` |
+| Packet dropouts | accepted | `0.362963 / 0.816667` | `0.802920 / 0.916667` | `13/40` |
+| Phone bandwidth | accepted | `0.271357 / 0.900000` | `0.848921 / 0.983333` | `19/40` |
+| Faster/higher | accepted | `0.490132 / 0.827778` | `0.891892 / 0.825000` | `28/40` |
+| Slower/lower | accepted | `0.565217 / 0.866667` | `0.898305 / 0.883333` | `28/40` |
+
+Reproducibility findings:
+
+- Ten conditions have an exact accepted pair. Faster/higher runs A and C form
+  its pair; run B changed one scoring record and remains disclosed.
+- Three clipped-microphone runs produced three scoring variants, differing by
+  one or two surface transcripts. Clipping is a completed negative result, not
+  an unfinished condition.
+- Earlier shared-model threads, independent model objects on four threads,
+  mixed-condition model reuse, and fresh model objects within one shared
+  process all changed scoring output. A model-object boundary is not sufficient
+  native-state isolation for this build.
+- Unpinned sequential café runs changed `23/160` surface transcripts despite
+  byte-identical augmented PCM. Pinning all native math thread counts to `1`
+  stabilized the two standalone café references.
+- Clean sequential repeats matched on all 160 scoring records; unused
+  confidence floats drifted around the sixth decimal place.
+
+Interpretation:
+
+- Raw Vosk carries substantially more error-location evidence than the broken
+  Experiment 007 product path exposed, but it is not good enough for
+  learner-facing localized pronunciation feedback.
+- Even the best accepted localization precision is only `0.609442`; about four
+  of ten highlighted positions are false alarms. Café crosstalk, strong hiss,
+  packet dropouts, and phone bandwidth retain high recall by over-highlighting.
+- Attempt-level error detection is materially stronger than localization, so
+  the result remains consistent with Vosk as a coarse known-sentence/content
+  signal rather than a pronunciation-diagnosis model.
+- These are controlled synthetic stress-test results. Human listening has not
+  verified the TTS labels, and they do not establish learner-facing precision
+  or recall on real speech.
+
+Evidence:
+
+- `experiments/008-ml-only-vosk-localization/README.md`
+- `experiments/008-ml-only-vosk-localization/results/clean-sequential-a.json`
+- `experiments/008-ml-only-vosk-localization/results/clean-sequential-b.json`
+- `experiments/008-ml-only-vosk-localization/results/cafe-native-single-thread-a.json`
+- `experiments/008-ml-only-vosk-localization/results/cafe-native-single-thread-b.json`
+- `experiments/008-ml-only-vosk-localization/results/conditions/`
+
 ## Future evidence
 
-When the recognition lane resumes:
+For the next recognition-quality evidence:
 
 1. Apply the human-label protocol to acceptable, intentionally incorrect, and
    near-miss learner attempts before calibrating product thresholds.
 2. Compare the complete pipeline against human decisions and quantify false
    acceptance, false rejection, precision, recall, and feedback usefulness.
-3. Test real-speech acoustic alignment across speakers and rates.
-4. Later, repeat resource and microphone measurements on representative
+3. Add a licensed real Japanese human-speech corpus for ecological recognizer
+   accuracy, keeping it separate from the controlled synthetic fixtures.
+4. Test real-speech acoustic alignment across speakers and rates.
+5. Later, repeat resource and microphone measurements on representative
    Android devices.
 
 A separate evidence gap now belongs to reference audio rather than
