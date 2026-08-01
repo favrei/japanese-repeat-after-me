@@ -105,7 +105,8 @@ See [`../memory/cells/recognition.md`](../memory/cells/recognition.md) and
 ### Content
 
 - What lesson-pack schema is required for imported chapters? The application's
-  `stages.ts` shape and the art-pack manifest cover the current cases only.
+  `app/shared/story.ts` shape and the art-pack manifest cover the current cases
+  only.
 - Should the application accept plain text, JSON, or both?
 - Should users be able to edit readings and segmentation manually?
 

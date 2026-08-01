@@ -1,0 +1,111 @@
+{
+  "story": "cafe",
+  "note": "Extracted verbatim from the hardcoded LINES tuple in app/tools/tts/generate_audio.py on 2026-08-01, so the café's casting lives with the story instead of inside the generator. Nothing about the takes changed: staff and learner lines pin `Ono_Anna` explicitly, which is the same voice they previously inherited from the tool's --voice default, and the nine seeds are the ones already pinned in code. The learner's on-demand model clips are voiced by the café staff on purpose — the in-scene teacher models the line, and the café learner is uncast, unlike the taproom's `sohee`. Narration is `aiden`, the same storyteller as the taproom, so the narrator stays one person across the app and stays distinct from the café staff. Lines without a seed derive one from the line id rather than array position, so they may be reordered or inserted freely. Clips ship to app/public/audio/qwen3/.",
+  "lines": [
+    {
+      "id": "ordering-welcome",
+      "text": "いらっしゃいませ。",
+      "voice": "Ono_Anna",
+      "seed": 20261730,
+      "deliveryIntent": "Warm but routine greeting."
+    },
+    {
+      "id": "ordering-question",
+      "text": "ご注文はお決まりですか。",
+      "voice": "Ono_Anna",
+      "seed": 20260731,
+      "deliveryIntent": "Routine service question with a natural questioning rise."
+    },
+    {
+      "id": "ordering-second",
+      "text": "本日のおすすめは、ブレンドコーヒーです。",
+      "voice": "Ono_Anna",
+      "seed": 20260732,
+      "deliveryIntent": "Matter-of-fact recommendation."
+    },
+    {
+      "id": "ordering-ready",
+      "text": "お決まりになりましたら、お呼びください。",
+      "voice": "Ono_Anna",
+      "seed": 20261733,
+      "deliveryIntent": "Unhurried service instruction."
+    },
+    {
+      "id": "ordering-thanks",
+      "text": "ありがとうございます。",
+      "voice": "Ono_Anna",
+      "seed": 20260734,
+      "deliveryIntent": "Brief polite acknowledgement."
+    },
+    {
+      "id": "meal-arrives",
+      "text": "お会計は、レジでお願いします。",
+      "voice": "Ono_Anna",
+      "seed": 20260735,
+      "deliveryIntent": "Clear register instruction."
+    },
+    {
+      "id": "meal-payment-options",
+      "text": "現金とカードが使えます。",
+      "voice": "Ono_Anna",
+      "seed": 20260736,
+      "deliveryIntent": "Matter-of-fact payment information."
+    },
+    {
+      "id": "meal-thanks",
+      "text": "ありがとうございました。",
+      "voice": "Ono_Anna",
+      "seed": 20260737,
+      "deliveryIntent": "Warm closing thanks."
+    },
+    {
+      "id": "meal-return",
+      "text": "またお越しくださいませ。",
+      "voice": "Ono_Anna",
+      "seed": 20260738,
+      "deliveryIntent": "Polite farewell."
+    },
+    {
+      "id": "ordering-menu",
+      "text": "メニューをお願いします。",
+      "voice": "Ono_Anna",
+      "speaker": "learner",
+      "deliveryIntent": "Clear polite request."
+    },
+    {
+      "id": "ordering-order",
+      "text": "ブレンドコーヒーをお願いします。",
+      "voice": "Ono_Anna",
+      "speaker": "learner",
+      "deliveryIntent": "Decided polite order."
+    },
+    {
+      "id": "meal-restroom",
+      "text": "レシートをお願いします。",
+      "voice": "Ono_Anna",
+      "speaker": "learner",
+      "deliveryIntent": "Brief polite request at the register."
+    },
+    {
+      "id": "meal-serve",
+      "text": "カードでお願いします。",
+      "voice": "Ono_Anna",
+      "speaker": "learner",
+      "deliveryIntent": "Decided payment choice."
+    },
+    {
+      "id": "ordering-open",
+      "text": "昼下がりの喫茶店。ドアを開けると、コーヒーの香りがした。",
+      "voice": "aiden",
+      "speaker": "narrator",
+      "deliveryIntent": "Unhurried scene-setting narration."
+    },
+    {
+      "id": "meal-open",
+      "text": "カップが空になった。あなたは伝票を持って、席を立った。",
+      "voice": "aiden",
+      "speaker": "narrator",
+      "deliveryIntent": "Quiet narration closing the scene."
+    }
+  ]
+}

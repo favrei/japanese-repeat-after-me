@@ -6,15 +6,16 @@ or Japanese here.
 
 Flow: [`../../.agents/documents/stage-design-flow.md`](../../.agents/documents/stage-design-flow.md)
 Gate: [`../../.agents/documents/character-separation-gate.md`](../../.agents/documents/character-separation-gate.md)
-Brief: [`brief.md`](brief.md) · Encoded: [`stages.ts`](stages.ts)
+Brief: [`brief.md`](brief.md) · Casting: [`voices.json`](voices.json)
+Encoded: [`../../app/client/content/taproom.ts`](../../app/client/content/taproom.ts)
 
-Status: **implemented in the focused feature worktree** — stage cuts and
-dialogue were confirmed by the user on 2026-07-31. Character cards, dialogue,
-difficulty, the separation gate, audio, original art, story registration, and
-the full application QA gate are complete. The implementation lives on
-`feature/story-selection` in
-`/Users/peter/workspaces/japanese-repeat-after-me-story-selection`; it has not
-been merged into the dirty nested `app/` checkout.
+Status: **shipped** — stage cuts and dialogue were confirmed by the user on
+2026-07-31. Character cards, dialogue, difficulty, the separation gate, audio,
+original art, story registration, and the full application QA gate are
+complete. The story is encoded at `app/client/content/taproom.ts` and
+registered in `app/client/content/stories.ts`; its clips ship under
+`app/public/audio/taproom/`. This folder is the draft and the provenance only —
+see [`../README.md`](../README.md).
 
 ## Template
 
@@ -131,8 +132,9 @@ cards so the cards stay a test of what each person separately knows.
 
 ## Dialogue (Step 4)
 
-Encoded shape and `accepted` variants live in [`stages.ts`](stages.ts). Speak
-bubbles are marked **speak**; everything else autoplays.
+Encoded shape and `accepted` variants live in
+[`../../app/client/content/taproom.ts`](../../app/client/content/taproom.ts).
+Speak bubbles are marked **speak**; everything else autoplays.
 
 ### Stage 1 — 選ぶ
 

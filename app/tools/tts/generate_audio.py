@@ -28,8 +28,6 @@ TAIL_PADDING_SECONDS = 0.15
 MIN_SECONDS_PER_CHAR = 0.10
 MAX_SECONDS_PER_CHAR = 0.40
 DURATION_SLACK_SECONDS = 1.0
-REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_OUTPUT_DIR = REPO_ROOT / "public" / "audio" / "qwen3"
 
 
 @dataclass(frozen=True)
@@ -40,64 +38,30 @@ class Line:
     voice: str | None = None
     speed: float = 1.0
     seed: int | None = None
+    speaker: str = "staff"
+    section: str | None = None
+    instruct: str | None = None
 
 
-LINES = (
-    Line(
-        "ordering-welcome",
-        "いらっしゃいませ。",
-        "Warm but routine greeting.",
-        seed=20_261_730,
-    ),
-    Line(
-        "ordering-question",
-        "ご注文はお決まりですか。",
-        "Routine service question with a natural questioning rise.",
-        seed=20_260_731,
-    ),
-    Line(
-        "ordering-second",
-        "本日のおすすめは、ブレンドコーヒーです。",
-        "Matter-of-fact recommendation.",
-        seed=20_260_732,
-    ),
-    Line(
-        "ordering-ready",
-        "お決まりになりましたら、お呼びください。",
-        "Unhurried service instruction.",
-        seed=20_261_733,
-    ),
-    Line(
-        "ordering-thanks",
-        "ありがとうございます。",
-        "Brief polite acknowledgement.",
-        seed=20_260_734,
-    ),
-    Line(
-        "meal-arrives",
-        "お会計は、レジでお願いします。",
-        "Clear register instruction.",
-        seed=20_260_735,
-    ),
-    Line(
-        "meal-payment-options",
-        "現金とカードが使えます。",
-        "Matter-of-fact payment information.",
-        seed=20_260_736,
-    ),
-    Line(
-        "meal-thanks",
-        "ありがとうございました。",
-        "Warm closing thanks.",
-        seed=20_260_737,
-    ),
-    Line(
-        "meal-return",
-        "またお越しくださいませ。",
-        "Polite farewell.",
-        seed=20_260_738,
-    ),
-)
+@dataclass(frozen=True)
+class Story:
+    """A manifest's lines plus the acting direction they inherit."""
+
+    lines: tuple[Line, ...]
+    instruct: str | None = None
+    sections: dict[str, str] | None = None
+
+    def instruct_for(self, line: Line, fallback: str | None) -> str | None:
+        """Resolve direction: line, then section, then story, then CLI."""
+        if line.instruct is not None:
+            return line.instruct or None
+        if line.section and self.sections:
+            section_instruct = self.sections.get(line.section)
+            if section_instruct is not None:
+                return section_instruct or None
+        if self.instruct is not None:
+            return self.instruct or None
+        return fallback
 
 
 def seed_for(line: Line, namespace_seed: int) -> int:
@@ -144,10 +108,11 @@ def trim_trailing_silence(audio: mx.array, sample_rate: int) -> mx.array:
     return audio[: min(end, audio.shape[0])]
 
 
-def load_lines(path: Path) -> tuple[Line, ...]:
-    """Load a story bundle manifest with optional voice, speed, and seed."""
+def load_lines(path: Path) -> Story:
+    """Load a story manifest with optional voice, speed, seed, and direction."""
     raw = json.loads(path.read_text(encoding="utf-8"))
-    return tuple(
+    sections = raw.get("sections") or {}
+    lines = tuple(
         Line(
             id=entry["id"],
             text=entry["text"],
@@ -158,9 +123,23 @@ def load_lines(path: Path) -> tuple[Line, ...]:
             voice=entry.get("voice"),
             speed=float(entry.get("speed", 1.0)),
             seed=entry.get("seed"),
+            speaker=entry.get("speaker", "staff"),
+            section=entry.get("section"),
+            instruct=entry.get("instruct"),
         )
         for entry in raw["lines"]
     )
+
+    unknown = sorted(
+        {line.section for line in lines if line.section} - set(sections)
+    )
+    if unknown:
+        raise SystemExit(
+            f"{path}: line(s) reference undeclared section(s): "
+            f"{', '.join(unknown)}"
+        )
+
+    return Story(lines=lines, instruct=raw.get("instruct"), sections=sections)
 
 
 def parse_args() -> argparse.Namespace:
@@ -172,7 +151,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--voice", default=DEFAULT_VOICE)
     parser.add_argument(
         "--instruct",
-        help="Experiment-only acting direction; canonical clips omit it.",
+        help="Run-wide acting direction; a manifest line or section overrides it.",
     )
     parser.add_argument(
         "--seed",
@@ -192,11 +171,17 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_MAX_TOKENS,
         help="Hard generation ceiling per attempt.",
     )
-    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        required=True,
+        help="Where the shipped MP3s land, under app/public/audio/.",
+    )
     parser.add_argument(
         "--lines",
         type=Path,
-        help="Story JSON manifest; defaults to the built-in café lines.",
+        required=True,
+        help="Story JSON manifest under stories/<story>/voices.json.",
     )
     parser.add_argument(
         "--log",
@@ -280,7 +265,8 @@ def merged_log(
 
 def main() -> None:
     args = parse_args()
-    lines = load_lines(args.lines) if args.lines else LINES
+    story = load_lines(args.lines)
+    lines = story.lines
     known = {line.id for line in lines}
     requested = set(args.only or ())
     unknown = sorted(requested - known)
@@ -299,6 +285,7 @@ def main() -> None:
         temp_root = Path(temp_dir)
         for line in selected:
             voice = line.voice or args.voice
+            instruct = story.instruct_for(line, args.instruct)
             base_seed = seed_for(line, args.seed)
             low, high = duration_bounds(line.text)
             accepted_audio = None
@@ -310,12 +297,14 @@ def main() -> None:
                 seed = base_seed + attempt * SEED_STRIDE
                 mx.random.seed(seed)
                 print(f"Generating {line.id} [{voice}] with seed {seed}: {line.text}")
+                if instruct:
+                    print(f"  direction: {instruct}")
                 results = list(
                     model.generate(
                         text=line.text,
                         voice=voice,
                         lang_code="Japanese",
-                        instruct=args.instruct,
+                        instruct=instruct,
                         speed=line.speed,
                         temperature=0.7,
                         top_p=0.95,
@@ -395,7 +384,7 @@ def main() -> None:
                     "file": mp3_path.name,
                     "voice": voice,
                     "speed": line.speed,
-                    "instruct": args.instruct,
+                    "instruct": instruct,
                     "seed": accepted_seed,
                     "duration_seconds": round(accepted_duration, 3),
                     "expected_seconds": [round(low, 2), round(high, 2)],
@@ -421,9 +410,9 @@ def main() -> None:
                 {
                     "id": line.id,
                     "text": line.text,
-                    "speaker": "staff",
+                    "speaker": line.speaker,
                     "voice": line.voice or args.voice,
-                    "instruction": args.instruct or "",
+                    "instruction": story.instruct_for(line, args.instruct) or "",
                     "deliveryIntent": line.delivery_intent,
                     "seed": entry_by_id[line.id]["seed"],
                 }

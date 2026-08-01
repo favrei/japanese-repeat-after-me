@@ -31,6 +31,21 @@ This is a draft. Revise it as stage authoring teaches us more.
 3. Do not change flow logic, state handling, or test selectors. A stage is
    content; the progression rules are fixed and owned by the product cell.
 
+### Where the files go
+
+`stories/` holds the idea; `app/` holds the implementation. Never write a
+second copy of an encoded story or a shipped clip under `stories/` — see
+[`../../stories/README.md`](../../stories/README.md).
+
+| Output | Path |
+| --- | --- |
+| The draft (Steps 1–6b) | `stories/<story>/story.md` |
+| The art & voice brief (Step 7) | `stories/<story>/brief.md` |
+| The line manifest (Step 7b) | `stories/<story>/voices.json` |
+| Generation provenance | `stories/<story>/audio/generation-log.json`, `audio/candidates/` |
+| The encoded story (Step 8) | `app/client/content/<story>.ts`, registered in `stories.ts` |
+| Shipped clips | `app/public/audio/<story>/` |
+
 Fixed rules you author *inside*, never around:
 
 - One sentence is one bubble.
@@ -227,7 +242,17 @@ is scaffolding.
 ## Step 5 — Control difficulty
 
 The attempt budget is fixed at three failures, so **difficulty lives in the
-content**. Tune these dials, roughly in this order:
+content**.
+
+First assign and verify the requested Japanese-language level with
+[`japanese-conversation-difficulty-guideline.md`](japanese-conversation-difficulty-guideline.md).
+It rates task, language resources, discourse, listening, and interaction,
+then reports learner production separately from listening/comprehension. Keep
+that language level separate from rehearsal load: a long or phonetically
+fragile N4 sentence is still N4 language, but it may be a poor speaking target.
+
+After the language-level check, tune these practice dials, roughly in this
+order:
 
 1. **Length.** Count morae in the `reading`. Early stages ~8–14 morae per speak
    bubble; later ~15–25. Past ~30 it is a memory test, not a speaking test.
