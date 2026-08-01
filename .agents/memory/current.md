@@ -14,184 +14,145 @@ Canonical detail belongs in linked cells.
 
 - Preserve the user-confirmed bubble progression: one sentence per bubble;
   learner bubbles advance after one success, the third failure, or one Skip;
-  Skip dismisses exactly one bubble and is not a failure. See
-  [Product](cells/product.md).
-- The canonical nested repository now lives under neutral directory `app/`;
-  the final product name remains open and should feel like an **adult
-  story/game**, not a classroom drill. Its four-stage café/taproom library,
-  schema-v2 art packs, narrated transitions, bundled reference audio, local
-  Vosk recognition, and Sites packaging remain intact. See
-  [Project](cells/project.md), [Product](cells/product.md), and
-  [Delivery](cells/delivery.md).
-- Sites version 4 from exact root commit
-  `685293d99256fc0f17bce0a878236b2945e6702c` is live at
-  `https://japanese-speaking-story.zenridge.chatgpt.site`. The artifact passed
-  art/model validation, typecheck, lint, production build, and 42 automated
-  tests, but the site is public and unauthenticated. See
-  [Delivery](cells/delivery.md) and [Backend and Data](cells/backend.md).
-- Frontend/backend separation is implemented locally at nested commit
-  `ae92de5`: route shell, client, shared contracts, D1/R2 server helpers, and
-  Worker composition have separate ownership. Logical `DB` and `PACKS`
-  bindings, the first catalog migration/route, immutable pack reads, and local
-  export/restore helpers pass the unified QA gate. They remain undeployed; the
-  live Sites version still has no D1 or R2. See
-  [Backend and Data](cells/backend.md) and [Delivery](cells/delivery.md).
-- Gameplay and the complete running session remain client-owned. A downloaded
-  story completes when backend requests fail. Future server work remains
-  limited to identity, catalog, compact progress sync, and submission intake.
-  See [Backend and Data](cells/backend.md).
-- macOS Chrome and Android Chrome must record through a connected Bluetooth
-  headset microphone, with AirPods as the primary acceptance device. Silent
-  fallback to the Mac or phone microphone is a release failure; actual input
-  identity and signal must be verified. See [Platform](cells/platform.md) and
-  [Recognition](cells/recognition.md).
-- The deployed microphone selector still opens and stops the selected stream
-  for each learner turn. After a reported AirPods playback burst/dropout at the
-  learner-to-PC boundary, the user selected a persistent microphone session as
-  the next design: keep the chosen stream alive for the active game, process it
-  only during learner turns, and release it on game exit, page close, route
-  loss, or permission loss. This is decided but not implemented or deployed.
-  See [Platform](cells/platform.md) and [Recognition](cells/recognition.md).
-- The library preserves the café rather than replacing it with the taproom.
-  Direct Stage 2 entry opens that stage's transition and runs only the rest of
-  that story. Every stage owns a `sceneId`, `castId`, and skip-safe narrated
-  transition. See [Product](cells/product.md) and [Content](cells/content.md).
-- The taproom has two stages, 13 bubbles, five learner speak bubbles, two
-  narrated transitions, a passed character-separation gate, and an original
-  art pack. Its staff is now male `dylan`, learner `sohee`, and narrator
-  `aiden`. For the recast, only `dylan`'s two-line audition was user-approved,
-  not the seven regenerated shipped staff clips. See [Content](cells/content.md),
-  [Audio](cells/audio.md), and [Visual Design](cells/visual-design.md).
-- The full-bleed adult seinen frame and schema-v2 art-pack contract remain the
-  visual direction. The finished selector and taproom pack have mechanical QA,
-  not the user's explicit visual verdict. See
-  [Visual Design](cells/visual-design.md).
-- Local-first Vosk recognition is the current runtime. Treat it as a coarse
-  known-sentence content gate, not pronunciation diagnosis, and keep
-  recognition and feedback replaceable. See
+  Skip dismisses exactly one bubble and is not a failure. Successful feedback
+  remains visible for 500 ms, every autoplay bubble can replay without
+  advancing, and phone/desktop turn geometry stays stable. See
+  [Product](cells/product.md) and [Visual Design](cells/visual-design.md).
+- The canonical application lives under `app/` but is tracked directly by the
+  root Git repository. Flattening merge `5377e8f` imported the complete former
+  app history; `app/` is no longer a nested repository. Local `main` is at
+  `41fd840`, two commits ahead of verified GitHub `origin/main`. See
+  [Project](cells/project.md) and [Delivery](cells/delivery.md).
+- Sites version 5 deploys exact root commit
+  `41fd8404a1f396a3254e32168e638371305c3fd1` at
+  `https://japanese-speaking-story.zenridge.chatgpt.site`. It passed art/model
+  validation, typecheck, lint, production build, and 43 tests, but the URL is
+  public and unauthenticated. See [Delivery](cells/delivery.md).
+- The selected microphone now remains open for the active game while Vosk
+  processing attaches only during learner turns. The stream closes on
+  completion, exit, teardown, superseding runs, and route loss. This is
+  implemented and deployed, but whether it fixes the reported AirPods
+  learner-to-PC playback burst/dropout still requires the user's physical
+  hardware test. See [Recognition](cells/recognition.md) and
+  [Platform](cells/platform.md).
+- Gameplay and a complete downloaded session remain client-owned. Version 5
+  contains the separated client/shared/server/Worker source and packaged
+  logical `DB`/`PACKS` bindings, but hosted D1/R2 provisioning, migration
+  application, and persistence have not been verified. See
+  [Backend and Data](cells/backend.md).
+- The four-stage café/taproom library, schema-v2 art packs, narrated
+  transitions, bundled reference audio, and local Vosk recognition remain
+  integrated. Direct Stage 2 entry opens that stage's transition and runs only
+  the remainder of its story. See [Product](cells/product.md),
+  [Content](cells/content.md), and [Recognition](cells/recognition.md).
+- The taproom uses staff `dylan`, learner `sohee`, and narrator `aiden`. Only
+  `dylan`'s two-line audition was user-approved; the seven regenerated shipped
+  staff clips still need a complete listening pass. See
+  [Audio](cells/audio.md) and [Content](cells/content.md).
+- The full-bleed adult seinen frame is deployed, but the selector and generated
+  café/taproom packs have mechanical QA rather than the user's explicit visual
+  verdict. See [Visual Design](cells/visual-design.md).
+- Treat Vosk as a coarse known-sentence content gate, not pronunciation
+  diagnosis, and keep recognition, scoring, and feedback replaceable. See
   [Recognition](cells/recognition.md).
 
 ## Active defaults
 
 - New content must be skip-safe and pass the detached four-pass character
   separation gate: leak scan, knowledge ledger, blind attribution, and
-  single-speaker read-through. Every character card must also carry a Persona
-  line—apparent gender, age band, and vocal timbre—which may use a stated
-  default but may never be absent. See [Content](cells/content.md).
+  single-speaker read-through. Every character card must declare apparent
+  gender, age band, and vocal timbre. See [Content](cells/content.md).
 - Cast art and voice from the same persona, audition presets rather than
-  trusting language or dialect labels, keep roles distinct within a story, and
-  judge the final art/voice pairing together. Every shipped reference clip
-  still requires a complete human listening pass. See [Audio](cells/audio.md)
-  and [Visual Design](cells/visual-design.md).
-- Reference audio is generated locally at authoring time and bundled. Preserve
-  exact model, voice, instruction, explicit seed, duration, and hash
-  provenance. Partial generation must not leave shipped metadata disagreeing
-  with the canonical generation log. See [Audio](cells/audio.md).
-- Keep the existing TTS safeguards: trim only trailing silence, retain the
-  duration/reseed guard, merge partial logs, and derive fallback seeds from a
-  stable line id rather than manifest position.
-- Use newsprint, black/neutral ink, one deep-red accent, Shippori Mincho B1 and
-  Zen Kaku Gothic New, restrained adult proportions, screentone, hard-edged
-  panels, and full-viewport scene art. Story art contains no dialogue or UI.
-- Keep gameplay, recognition, and the local progress event log in the client.
-  Future pack URLs are immutable and versioned; catalog changes are additive;
-  hosted services must degrade to delayed sync rather than break practice.
-  See [Backend and Data](cells/backend.md).
-- Stay Cloudflare-native for the current backend. Keep provider-specific access
-  localized behind natural storage helpers, but do not build a portability
-  framework or GCP adapter until a real migration is requested. See
+  trusting language labels, keep roles distinct within a story, and judge the
+  final pairing together. Every shipped clip requires human listening. See
+  [Audio](cells/audio.md) and [Visual Design](cells/visual-design.md).
+- Generate reference audio locally at authoring time and bundle it. Preserve
+  exact model, voice, instruction, seed, duration, and hash provenance; trim
+  only trailing silence, retain the duration/reseed guard, merge partial logs,
+  and derive fallback seeds from stable line ids. See [Audio](cells/audio.md).
+- Use the established newsprint/seinen art system: black or neutral ink, one
+  deep-red accent, Shippori Mincho B1, Zen Kaku Gothic New, adult proportions,
+  screentone, hard-edged panels, full-viewport art, and no dialogue or UI in
+  story images. See [Visual Design](cells/visual-design.md).
+- Keep gameplay, recognition, and the append-only progress log in the client.
+  Pack URLs are immutable and versioned; catalog changes are additive; hosted
+  failures degrade to delayed sync rather than interrupt practice. See
   [Backend and Data](cells/backend.md).
-- Use the shared compatibility date `2026-05-22` for the current Vite Worker
-  and Worker-test runtimes until the Cloudflare Vite plugin is upgraded.
-- Keep model weights, caches, private recordings, and disposable TTS outputs
-  out of Git and deployment packages. Reviewed reference clips are intentional
-  application assets; the private corpus remains local and untracked. See
-  [Project](cells/project.md), [Recognition](cells/recognition.md), and
+- Stay Cloudflare-native without building an unused portability framework. Use
+  compatibility date `2026-05-22` until the bundled Cloudflare Vite runtime is
+  upgraded. See [Backend and Data](cells/backend.md).
+- Keep model weights, caches, private recordings, disposable TTS outputs, and
+  `datasets/` out of Git and deployment packages. Reviewed reference clips are
+  intentional assets. See [Project](cells/project.md) and
   [Recordings](cells/recordings.md).
-- Do not proactively invoke or expand the personal `speak-human` skill. Use it
-  only when the user explicitly asks, and do not uninstall or modify it.
+- Do not proactively invoke or expand the personal `speak-human` skill; use it
+  only when the user explicitly asks. See [Project](cells/project.md).
 
 ## Blockers and open questions
 
-- The live product URL is public and has no application or Sites
-  authentication. Decide whether and how to restrict access before real use.
-  See [Backend and Data](cells/backend.md) and
-  [Delivery](cells/delivery.md).
-- The seven shipped taproom `dylan` staff clips and the redesigned café's nine
-  autoplay clips need complete listening passes. Mechanical QA cannot hear
-  dialect artifacts, wrong pitch accent, or mangled loanwords. See
-  [Audio](cells/audio.md).
-- The selector and both generated packs still need the user's visual verdict.
-  A dedicated café register plate remains optional art debt. See
-  [Visual Design](cells/visual-design.md).
+- The live product is public and has no application or Sites authentication.
+  Decide whether and how to restrict access before real use. See
+  [Backend and Data](cells/backend.md) and [Delivery](cells/delivery.md).
+- Push local commits `685293d` and `41fd840` to the root GitHub remote; the
+  deployed source is currently two commits ahead of `origin/main`. See
+  [Project](cells/project.md) and [Delivery](cells/delivery.md).
+- AirPods/Bluetooth-headset capture and the persistent-session behavior remain
+  unverified on both macOS and Android. Browser device identity or a non-empty
+  recording cannot prove the physical input route, and silent fallback to a
+  built-in microphone is a release failure. See [Platform](cells/platform.md).
 - No Android device has been connected. Microphone recognition,
   service-worker/offline behavior, installation, and mobile memory remain
   unverified. See [Platform](cells/platform.md).
-- AirPods/Bluetooth-headset microphone routing is unverified on both macOS and
-  Android. Version 4 exposes an explicit input selector and browser route
-  evidence, but permission, labels, or a non-empty recording are insufficient;
-  QA must prove the physical captured route without built-in-microphone
-  fallback. The user will close this hardware test item personally. See
-  [Platform](cells/platform.md).
-- The post-separation dependency graph reports 20 total transitive npm audit
-  findings; the last recorded production-only audit on deployed-era code found
-  five. No automatic or forced audit fix was applied. See
-  [Delivery](cells/delivery.md).
-- The nested app has no Git remote. Its deployment commits exist locally and
-  in the deployed Sites version but cannot be pushed until a remote is added.
-  See [Project](cells/project.md).
-- Hosted D1/R2 provisioning, durability, automatic migration application,
-  protected export/restore operation, catalog growth, eager whole-library
-  caching, and learner-audio policy remain unresolved. Local logical
-  export/restore already round-trips with the first table. See
+- The seven shipped taproom `dylan` clips and the redesigned café's nine
+  autoplay clips need complete listening passes. See [Audio](cells/audio.md).
+- The selector and both generated packs still need the user's visual verdict;
+  a dedicated café register plate remains optional art debt. See
+  [Visual Design](cells/visual-design.md).
+- Verify whether Sites version 5 provisioned D1/R2, applied the first migration,
+  and preserves data across redeploys. Protected export/restore operation,
+  catalog growth, and learner-audio policy also remain unresolved. See
   [Backend and Data](cells/backend.md).
-- Direct Cloudflare deployments expose a Bindings canvas and Workers Traces;
-  GPT Sites currently does not expose that underlying control plane and
-  documents no equivalent topology view. See
-  [Backend and Data](cells/backend.md).
+- The last recorded dependency graph has 20 transitive npm audit findings; the
+  deployed-era production-only audit found five. No automatic or forced fix
+  was applied. See [Delivery](cells/delivery.md).
 - Human-labeled recognition quality, feedback granularity, browser/Android
   resource use, and synchronization policy remain evidence-gated. See
-  [Recognition](cells/recognition.md), [Platform](cells/platform.md), and
-  [Recordings](cells/recordings.md).
+  [Recognition](cells/recognition.md) and [Recordings](cells/recordings.md).
 
 ## Active evaluation gates
 
-- Preserve the complete café and taproom flow: transitions must not change
-  bubble counts, one Skip dismisses one bubble, and direct second-stage
-  selection begins at its own transition. See [Product](cells/product.md).
-- Every new or edited story must verify readings, pass a pessimistic
-  all-skip/all-fail run, pass character separation, declare persona, and
-  receive an art/voice agreement review before encoding. See
-  [Content](cells/content.md).
+- Preserve both stories and all four stages: transitions do not change bubble
+  counts, one Skip dismisses one bubble, direct second-stage selection begins
+  at its own transition, replay does not advance, and success advances only
+  after the 500 ms hold. See [Product](cells/product.md).
+- Every new or edited story must verify readings, pass pessimistic all-skip and
+  all-fail runs, pass character separation, declare personas, and receive an
+  art/voice agreement review before encoding. See [Content](cells/content.md).
 - Every reference clip must pass human listening before becoming a learner
   target. Prefer another take or sentence over wrong audio. See
   [Audio](cells/audio.md).
-- A visual candidate must pass art-pack validation, typecheck, lint, production
-  build, tests, and phone/wide-desktop browser inspection, then receive a
-  separate user visual verdict. See [Visual Design](cells/visual-design.md).
-- Subsequent deployments require a frozen source commit and artifact,
-  privacy/package checks, honest audit disclosure, real-device trusted-HTTPS
-  QA, explicit approval, and verified private access when privacy is intended.
-  See [Delivery](cells/delivery.md).
-- The separated app must retain 23 client, 2 contract, 7 Worker/D1/R2, and 5
-  cross-boundary integration tests under one `npm run qa` gate. A downloaded
-  session must continue to complete when the backend is unavailable. See
+- A visual candidate must pass art-pack validation, typecheck, lint, build,
+  tests, and phone/wide-desktop inspection, then receive a separate user visual
+  verdict. See [Visual Design](cells/visual-design.md).
+- Releases require a frozen source commit and artifact, privacy/package checks,
+  honest audit disclosure, trusted-HTTPS real-device QA, explicit approval,
+  and verified private access when privacy is intended. See
+  [Delivery](cells/delivery.md).
+- Retain the current unified gate: 29 client, 2 contract, 7 Worker/D1/R2, and 5
+  integration tests. A downloaded session must complete while the backend is
+  unavailable. See [Backend and Data](cells/backend.md) and
+  [Delivery](cells/delivery.md).
+- Before treating Bluetooth capture as released, prove the actual AirPods or
+  headset signal on macOS and Android across multiple turns, reconnects, route
+  changes, and exit teardown. Confirm that reference speech is never scored
+  while processing is detached. See [Platform](cells/platform.md) and
+  [Recognition](cells/recognition.md).
+- Before relying on hosted data, smoke-test real Sites binding provisioning,
+  migration application, catalog/pack routes, persistence, and recovery. See
   [Backend and Data](cells/backend.md).
-- Before release, verify AirPods/Bluetooth-headset capture on both macOS Chrome
-  and Android Chrome with evidence of the actual selected input and recorded
-  signal, including reconnect and route-change behavior. See
-  [Platform](cells/platform.md) and [Recognition](cells/recognition.md).
-- Before the next Bluetooth-focused deployment, implement one selected
-  microphone stream per active game session while enabling recognition
-  processing only on learner turns. Verify that reference speech is not scored,
-  teardown handles exit and route loss, and repeated turns do not reacquire the
-  device. The persistent Chrome microphone indicator and lower-quality AirPods
-  call-mode playback are accepted tradeoffs pending real hardware review.
-- The deployed artifact proves Sites packaging only. It does not close Android
-  microphone, recognition, PWA installation, or offline QA.
-- When recognition resumes, label acceptable, intentionally incorrect, and
-  near-miss attempts before tuning thresholds or claiming pronunciation or
-  localized-error precision. See [Recognition](cells/recognition.md).
+- Before tuning recognition thresholds or claiming pronunciation precision,
+  label acceptable, intentionally incorrect, and near-miss attempts against
+  human judgments. See [Recognition](cells/recognition.md).
 - Keep the private voice corpus local and untracked while the GitHub origin is
   public; never include `datasets/` in a deployment. See
   [Recordings](cells/recordings.md).

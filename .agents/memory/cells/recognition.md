@@ -222,15 +222,25 @@ identity and aggregate closed-catalog discrimination remained stable.
   repeated route transitions and is preferred over the earlier proposed
   2-second cooldown/fade workaround. It must not score or retain the PC's
   reference speech while processing is inactive.
-- This persistent-session decision is durable direction only; it has not been
-  implemented, tested, committed, or deployed.
+- Root commit `41fd840` implements the decision with a game-session owner
+  separate from each Vosk attempt. Starting a game opens and retains the
+  selected stream; learner turns attach and detach only their AudioWorklet/Vosk
+  processing graph. Completion, explicit exit, component teardown, a
+  superseding run, or selected-route mute/end/loss closes it, and run ids
+  cancel stale asynchronous opens.
+- The implementation added a lifecycle unit test and deployment-source
+  assertions. Art/model validation, typecheck, lint, production build, 29
+  client tests, 2 contract tests, 7 Worker tests, and 5 integration tests all
+  passed. Sites version 5 deploys it. No automated check captured ambient
+  audio; whether it fixes the reported AirPods transition remains open for the
+  user's hardware test.
 
 ## Local browser Vosk integration (merged)
 
 The local-first lane entered the four-stage app at merge commit `3a3b84d`
-(`Merge local Vosk recognition into four-stage app`) and remains on current
-nested `app/` `main`. `3a3b84d` is a real two-parent merge of the
-four-stage/TTS lineage at `14cd2b6` and recognition commit `18fcf55`
+(`Merge local Vosk recognition into four-stage app`) and remains in the
+root-tracked application under `app/`. `3a3b84d` is a real two-parent merge of
+the four-stage/TTS lineage at `14cd2b6` and recognition commit `18fcf55`
 (`Replace browser speech with local Vosk recognition`). The former recognition
 and temporary integration worktrees were removed after the merge was verified;
 `app/` is the only remaining worktree.
@@ -287,7 +297,7 @@ Verification history:
   a live worktree preview**. This is the first positive real
   browser/microphone smoke result for the AudioWorklet + `vosk-browser` +
   `vosk-model-small-ja-0.22` path.
-- after integration and the production model-transport fix, nested `main`
+- after integration and the production model-transport fix, application `main`
   passed art/model validation, TypeScript, lint, production build, and 25/25
   tests;
 - a production-browser smoke on `127.0.0.1` reached the first taproom learner
@@ -296,7 +306,9 @@ Verification history:
 - Sites deployment version 1 rejected the redundant full model archive for
   exceeding the 26,214,400-byte per-file limit. Current deployment packaging
   omits only that full archive while retaining the six chunks and manifest;
-  Sites version 3 accepted the final artifact from `05a986f`.
+  Sites version 3 accepted the corrected artifact from `05a986f`; version 5
+  retains the same split-model transport while adding the later microphone
+  lifecycle and turn-layout work.
 
 What that manual pass does **not** cover: the other speaking bubbles,
 wrong-sentence rejection, short/quiet/clipped retry behaviour, Android resource
@@ -419,6 +431,8 @@ Dependency risk carried by the merged app:
   of a persistent game-session microphone design recorded on 2026-07-31.
 - Apple Bluetooth listening versus speak/listen mode guidance:
   https://support.apple.com/en-ie/102217.
+- Persistent game-session capture implementation, 43-test QA, and Sites
+  version 5 deployment at root commit `41fd840` recorded on 2026-07-31.
 
 ## Related cells
 

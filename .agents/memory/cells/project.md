@@ -18,9 +18,9 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
 - The initial product is a focused practical-speaking rehearsal engine, not a
   complete language course or open-ended conversation system.
 - The repository remains in evidence-gathering product and technical scoping,
-  but the isolated nested app now has a deployed integrated candidate on
-  `app/` `main`: a stage library preserves the café story, adds the taproom
-  story, and uses local Vosk recognition.
+  but `app/` now contains a deployed integrated candidate tracked directly by
+  the root repository: a stage library preserves the café story, adds the
+  taproom story, and uses local Vosk recognition.
 - The first real-corpus recognition baseline is complete and promising as a
   coarse known-sentence content signal. The user parked that lane on
   2026-07-30 pending later review; device-runtime benchmarking also remains
@@ -29,9 +29,9 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   that behavior as the baseline even as stories and stages are added. The
   full-bleed seinen frame, café redesign, schema-v2 art system, narrated scene
   transitions, four-stage selector, complete taproom bundle, and local Vosk
-  recognition are integrated. Later commits recast the taproom staff and made
-  the build fit Sites. Frontend/backend separation was implemented later at
-  `ae92de5`; that local state has not been deployed.
+  recognition are integrated. Later commits recast the taproom staff, made the
+  build fit Sites, separated the frontend and backend, added explicit
+  microphone routing, and retained one microphone stream for each active game.
   See [Product](product.md), [Content](content.md), [Recognition](recognition.md),
   and [Visual Design](visual-design.md).
 - For learner-speaking bubbles, advance after one correct attempt, the third
@@ -50,8 +50,11 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   committed to the repository and the consolidated handoff.
 - The cloud work produced 17 commits through `02d3a5d`, four experimental
   spikes, and no application implementation.
-- Subsequent local work created the isolated application implementation. The first
-  version's flow was rejected; the corrected version was user-confirmed.
+- Subsequent local work created an initially isolated application repository.
+  The first version's flow was rejected; the corrected version was
+  user-confirmed. After the private voice corpus was removed from all Git
+  history, the user approved flattening the complete application history into
+  the root repository on 2026-07-31.
 
 ## Operating rules
 
@@ -63,7 +66,7 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   machine-readable result, observed facts, interpretation, and limitations.
 - Do not commit model files, virtual environments, package caches, the private
   voice corpus, or disposable TTS candidates and intermediate outputs.
-  Reviewed, provenance-tracked reference clips bundled with the nested app are
+  Reviewed, provenance-tracked reference clips bundled with the application are
   intentional application assets; model weights remain external. The earlier
   local-commit exception for the private corpus was withdrawn on 2026-07-30
   when the repository became public; `/datasets/` is ignored and must stay
@@ -80,8 +83,9 @@ Canonical project-wide memory for `japanese-repeat-after-me`.
   not in host-specific locations such as `.claude/skills/`. On 2026-07-30 the
   user rejected a `.claude/skills/` placement for exactly this reason: such
   material must follow the project and stay in Git.
-- Use short-lived sibling worktrees for focused, apples-to-apples changes to
-  the nested `app/` repository when useful. Integrate finished commits
+- Use short-lived sibling worktrees for focused, apples-to-apples changes when
+  useful. The application is no longer a nested Git repository, so create any
+  new worktree from the root repository, integrate finished commits
   deliberately, verify that useful work is reachable, and remove duplicate
   checkouts after integration.
 - In zsh, lowercase `path` is tied to the `PATH` command-search array. Do not
@@ -147,42 +151,58 @@ Out of the initial scope:
 
 ## Repository state
 
-- No root product frontend, root `pyproject.toml`, project-wide test suite, or
-  CI workflow exists. The canonical application implementation is the isolated
-  Vinext/React/TypeScript Git repository under `app/`.
-- Nested `app/` `main` contains separation commit `ae92de5`
-  (`Separate client and Cloudflare backend`). Its history includes the real
-  four-stage/Vosk merge `3a3b84d`, taproom staff recast `19139c6`, Sites
-  connection `bf2643f`, split-model packaging `a850c3f`, and final Worker
-  packaging fix `05a986f`. The directory and current-facing identifiers were
-  renamed from prototype terminology on 2026-07-31; that cleanup passed full
-  QA.
+- No root-level product frontend, root `pyproject.toml`, project-wide test
+  suite, or CI workflow exists. The canonical Vinext/React/TypeScript
+  application lives under `app/`, but its files and complete imported history
+  are tracked directly by the root Git repository.
+- Root merge commit `5377e8f` flattened the application by importing renamed
+  app head `dd38928` as its second parent under path `app/`. The imported
+  101-file source matched former inner tree `9ceda452` except for one
+  trailing-blank-line cleanup in `art-system/PROMPT_TEMPLATE.md`; the resulting
+  root `app/` subtree is `3b3edbd3`.
+- The imported history includes separation commit `ae92de5`, four-stage/Vosk
+  merge `3a3b84d`, taproom staff recast `19139c6`, Sites connection `bf2643f`,
+  split-model packaging `a850c3f`, and Worker packaging fix `05a986f`.
+  Subsequent root commits `685293d` and `41fd840` add explicit microphone-route
+  selection, persistent game-session capture, stable turn geometry, replay,
+  and the 500 ms success hold.
 - The earlier focused lineage remains useful history:
   `51cbcdb`/`e37d5c4` for the art-pack and redesigned café work,
   `6e6b83c` for scene transitions, `7a0f812` for the four-stage selector and
   taproom integration, `14cd2b6` for TTS reconciliation, and `18fcf55` for
-  local recognition. A safety branch,
-  `safety/pre-story-selection-main-20260731`, preserves `06b5291`.
-- `app/` is now the nested repository's only worktree. The former TTS,
-  recognition, art-system, transition, selector, and temporary integration
-  checkouts were removed after their useful commits were verified as reachable
-  or their changes were reconciled.
-- The nested app has no configured Git remote. Its commits and model
-  preparation outputs are local. The outer repository is public and records
-  the implementation handoff.
+  local recognition. Diverged safety snapshots are retained by the archive
+  tags below rather than by active branches.
+- `app/` no longer contains `.git`; the former nested metadata was moved to a
+  temporary recovery directory at
+  `/tmp/japanese-repeat-after-me-flatten.g5Dfv4/app.git`. A bundle of all ten
+  former inner branches remains at
+  `/tmp/japanese-repeat-after-me-flatten.g5Dfv4/app-history.bundle`, verified
+  again on 2026-08-01 with SHA-256
+  `ba36adaf97a59c2e5d15d160bf32b22d2ce3412078649ffb10bb1e85612a1f41`,
+  but `/tmp` is not a durable backup.
+- Two diverged application safety snapshots are retained as annotated root
+  tags: `archive/app/pre-story-selection-main-20260731` at `06b5291` and
+  `archive/app/pre-tts-merge-ui-20260730` at `9f4e9bb`. All other imported
+  branch tips are reachable through the flattening merge parent.
+- The root repository is the only source repository and has the public GitHub
+  origin. On 2026-08-01, local `main` at `41fd840` was two commits ahead of
+  verified remote `origin/main` at `5377e8f`; the route-selection and
+  persistent-microphone commits therefore still need a GitHub push even though
+  their packaged source was deployed to Sites.
 - The prepared Vosk archive and split model assets under `app/public/models/`
   are ignored local outputs, not committed application assets. The application
   manifest records six verified chunks for service-worker streaming.
-- The separated app passed art/model validation, typecheck, lint, production
-  build, 23 client tests, 2 contract tests, 7 Worker/D1/R2 tests, and 5
-  integration tests. Earlier production-browser QA on IPv4 loopback reached the
-  first taproom learner bubble with recognition ready and recording enabled;
-  no microphone permission or real speech capture was performed.
-- Sites project `appgprj_6a6c341cd2048191a6bc18824b3a3255` deployed version 3
-  from exact nested commit `05a986fd0efbcc9337557d8e07b9b295af6aa335` at
-  `https://japanese-speaking-story.zenridge.chatgpt.site`. The live site is
-  public and unauthenticated. That deployed version has no application backend,
-  D1, or R2; the local separation and bindings remain undeployed.
+- The current app passed art/model validation, typecheck, lint, production
+  build, 29 client tests, 2 contract tests, 7 Worker/D1/R2 tests, and 5
+  integration tests. Chrome QA also verified stable phone/desktop turn
+  geometry, replay for staff and learner autoplay, and the 500 ms success hold.
+  No automated run accepted microphone permission or captured ambient speech.
+- Sites project `appgprj_6a6c341cd2048191a6bc18824b3a3255` deployed version 5
+  from exact root commit `41fd8404a1f396a3254e32168e638371305c3fd1`
+  at `https://japanese-speaking-story.zenridge.chatgpt.site`. The release
+  contains persistent game-session capture and the turn-layout changes. The
+  live site remains public and unauthenticated; hosted D1/R2 provisioning and
+  migration behavior were not verified by the deployment result.
 - No Android device run has occurred. The deployment does not verify Android
   microphone capture, recognition, service-worker/offline behavior, or PWA
   installation.
@@ -216,7 +236,8 @@ Out of the initial scope:
 - `.agents/documents/open-questions.md`
 - `app/README.md`
 - `experiments/README.md`
-- Root Git history through `1da4175`
+- Root Git history through `41fd840` and verified `origin/main` state on
+  2026-08-01.
 - User correction recorded on 2026-07-30.
 - User's two-stage dialogue and bubble-progression clarification recorded on
   2026-07-30.
@@ -233,6 +254,9 @@ Out of the initial scope:
   directory rename, and adult story/game naming direction recorded on
   2026-07-31.
 - Sites deployment and access inspection recorded on 2026-07-31.
+- User-approved repository flattening at `5377e8f`, archive safety tags,
+  persistent microphone and stable-turn implementation at `41fd840`, complete
+  43-test QA, and Sites version 5 deployment recorded on 2026-07-31.
 
 ## Related cells
 

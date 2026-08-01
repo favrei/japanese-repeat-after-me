@@ -13,10 +13,10 @@ backup, and recovery.
 
 ## Current implementation
 
-- The local nested repository under `app/` now has explicit `app/` route-shell,
+- The root-tracked application under `app/` has explicit `app/` route-shell,
   `client/`, `shared/`, `server/`, and `worker/` boundaries. The separation was
-  implemented on nested `main` at `ae92de5` (`Separate client and Cloudflare
-  backend`).
+  implemented at imported-history commit `ae92de5` (`Separate client and
+  Cloudflare backend`).
 - `client/` owns bundled stories, gameplay, playback, capture, Vosk
   recognition, scoring, and presentation. It has no dependency on `server/`,
   and a downloaded story completes when backend requests fail.
@@ -30,10 +30,13 @@ backup, and recovery.
   export/restore helpers are implemented and tested but are not public HTTP
   routes.
 - `app/.openai/hosting.json` now declares logical bindings `DB` and `PACKS`.
-  This activates isolated local resources and requests hosted resources on a
-  later Sites deployment.
-- The live Sites version 3 still runs older commit `05a986f`, with no
-  application backend, D1, or R2. No deployment occurred during separation.
+  This activates isolated local resources and requested hosted resources in
+  the version 5 package; actual hosted provisioning remains unverified.
+- Sites version 5 deploys exact root commit `41fd840`, which contains the
+  separated Worker source and packaged logical `DB`/`PACKS` bindings. The
+  deployment result did not verify whether hosted D1/R2 resources were
+  provisioned, whether the catalog migration ran, or whether catalog and pack
+  routes persist across redeploys.
 - There is no account, login, session, OAuth, or user-identity implementation.
   Recognition sessions are in-memory audio-capture objects, not user sessions.
 - The deployed Sites project is publicly accessible and has no Sites sign-in
@@ -56,8 +59,9 @@ backup, and recovery.
 
 ## Agreed target boundary
 
-This is the negotiated end state. The catalog/pack slice is now implemented
-locally; identity, progress sync, submission, remote-pack publication, and
+This is the negotiated end state. The catalog/pack slice is implemented and
+packaged in the deployed source, but only its local runtime has been verified.
+Identity, progress sync, submission, remote-pack publication, and confirmed
 hosted provisioning remain future work:
 
 - The frontend owns the frame, bubble state machine, playback, capture, Vosk
@@ -237,8 +241,8 @@ pre-deploy invocation, and hosted restore drill remain unimplemented:
 
 - Should the deployed application remain public, or should access be restricted
   before real use?
-- When should D1 and R2 be provisioned?
-- Does the first D1 deployment confirm automatic migration application and
+- Did Sites version 5 provision D1 and R2 from the packaged logical bindings?
+- Does the first hosted D1 smoke confirm automatic migration application and
   durable state across redeploys?
 - How will the project obtain sufficient topology, tracing, database, and
   recovery visibility while GPT Sites does not expose the underlying
@@ -258,6 +262,9 @@ pre-deploy invocation, and hosted restore drill remain unimplemented:
   2026-07-31.
 - Frontend/backend separation commit `ae92de5`, post-separation QA, and live
   local D1 check recorded on 2026-07-31.
+- Root flattening at `5377e8f` and Sites version 5 deployment from `41fd840`
+  with packaged `DB`/`PACKS` metadata recorded on 2026-07-31; hosted binding
+  operation remains unverified.
 - Cloudflare Vitest, compatibility-date, Drizzle generation, and dashboard
   visualization research recorded on 2026-07-31.
 - GPT Sites documentation research recorded on 2026-07-31:

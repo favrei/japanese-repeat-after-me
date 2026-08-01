@@ -56,8 +56,9 @@ implementation.
 - Starting at a first stage continues through the rest of that story. Selecting
   a second stage directly opens that stage's own narrated transition and runs
   only the remaining stage. Returning from completion goes to the library.
-- This library entered nested `app/` `main` through `3a3b84d` and remains
-  present after the later backend separation. See [Project](project.md) and
+- This library entered the application history through `3a3b84d`, was imported
+  into the root repository at `5377e8f`, and remains present after backend and
+  microphone-session work. See [Project](project.md) and
   [Delivery](delivery.md).
 
 ## Superseded café script — historical source of the flow
@@ -103,8 +104,15 @@ restore its content over the current coffee/payment story.
 - A stage-transition card is not a dialogue bubble and does not change the
   stage's bubble count. Each stage, including the first stage of a story, opens
   on its own transition.
-- Current nested `app/` `main` implements this behavior; do not regress to
-  attempt-level or round-level Skip.
+- Current root `main` implements this behavior; do not regress to attempt-level
+  or round-level Skip.
+- On a successful learner attempt, keep the successful bubble and feedback
+  visible for 500 ms before advancing. This short hold is part of the deployed
+  turn feedback, not another attempt or flow state.
+- Every staff or learner autoplay bubble exposes replay. Replay restarts that
+  bubble's audio without advancing or replacing the bubble.
+- The conversation panel keeps a stable phone and desktop footprint across
+  autoplay and learner-speaking turns so controls do not resize the scene.
 
 ## Current product belief
 
@@ -255,6 +263,8 @@ ingredients still require separate review:
 - `README.md`
 - User selection of an adult story/game naming character and neutral `app/`
   technical directory recorded on 2026-07-31.
+- Stable turn geometry, autoplay replay, 500 ms success hold, and Chrome QA at
+  root commit `41fd840` recorded on 2026-07-31.
 
 ## Related cells
 

@@ -32,30 +32,30 @@ develop locally
 QA and deployment are separate actions. Deployment must not rebuild or
 substitute a different artifact after approval.
 
-The first Sites deployment completed on 2026-07-31, and version 4 later added
-the explicit microphone-route selector. The word “privately” in
-the intended flow is not the current access state: Sites reports the deployed
-application as public, and the app implements no authentication. Restricting
-access remains an explicit follow-up.
+The first Sites deployment completed on 2026-07-31. Version 4 added the
+explicit microphone-route selector, and version 5 added the persistent
+game-session microphone plus stable turn geometry, replay, and a 500 ms success
+hold. The word “privately” in the intended flow is not the current access
+state: Sites reports the deployed application as public, and the app implements
+no authentication. Restricting access remains an explicit follow-up.
 
 ## Current infrastructure
 
-- The repository root has no product frontend or release toolchain; the
-  canonical application is the nested repository under `app/`.
-- The isolated Vinext/React/TypeScript implementation under `app/` serves
+- The repository root has no root-level product frontend or release toolchain;
+  the canonical application is tracked under `app/` by the root repository.
+  It is no longer a nested Git repository.
+- The Vinext/React/TypeScript implementation under `app/` serves
   locally at `http://localhost:3000/` and has a PWA manifest, service
   worker, bundled art/audio, local Vosk recognition, and development-only
   synthetic speech/flow controls.
-- Nested `app/` `main` now includes separation commit `ae92de5`
-  (`Separate client and Cloudflare backend`) after the deployed
-  `05a986f` (`Trim browser assets from Sites worker`). Its history includes the
+- Root merge commit `5377e8f` imported renamed app head `dd38928` and its full
+  history under `app/`. That history includes separation commit `ae92de5`, the
   four-stage/Vosk merge `3a3b84d`, taproom staff recast `19139c6`, Sites
-  connection `bf2643f`, split-model packaging `a850c3f`, and final Worker
-  packaging fix `05a986f`.
-  `app/` is the nested repository's only worktree. The folder, package, cache,
-  and active documentation names no longer use prototype terminology.
-- The nested app has no configured Git remote, so its commits cannot be pushed
-  until a remote is deliberately added.
+  connection `bf2643f`, split-model packaging `a850c3f`, and Worker packaging
+  fix `05a986f`.
+- The root repository has the GitHub remote. On 2026-08-01, verified
+  `origin/main` was at flattening commit `5377e8f`, while local `main` was two
+  commits ahead at deployed source `41fd840`; push remains outstanding.
 - A Chrome run at 412×915 verified one-bubble Skip, one-success progression,
   third-failure progression, the stage boundary, completion, and restart. The
   user confirmed the resulting flow on 2026-07-30.
@@ -73,7 +73,7 @@ access remains an explicit follow-up.
   manifest. The controlling service worker streams them as the logical archive
   response, and recognition initialization waits for service-worker control.
 - Current local QA passes art/model validation, typecheck, lint, production
-  build, 23 client tests, 2 shared-contract tests, 7 workerd D1/R2 tests, and
+  build, 29 client tests, 2 shared-contract tests, 7 workerd D1/R2 tests, and
   5 integration tests. A live local development check also applied the first
   D1 migration, returned an empty catalog over the real Worker route, and
   confirmed that the bundled library rendered independently.
@@ -91,14 +91,18 @@ access remains an explicit follow-up.
   validation, typecheck, lint, production build, 28 client tests, 2 contract
   tests, 7 Worker tests, and 5 integration tests. Real AirPods/Bluetooth QA was
   deliberately left open for the user to close personally.
-- Version 4 still starts and stops microphone capture per learner turn. The
-  subsequently selected persistent-microphone session design is not part of
-  the deployed artifact and requires a new implementation, QA pass, explicit
-  deployment instruction, and saved Sites version.
+- Sites version 5 is the current release. It deployed exact root commit
+  `41fd8404a1f396a3254e32168e638371305c3fd1` and retains the chosen microphone
+  stream for the active game while attaching Vosk processing only during
+  learner turns. It also freezes phone/desktop turn-panel geometry, exposes
+  replay on all autoplay bubbles, and holds successful feedback for 500 ms.
+  The full QA gate passed with 43 tests, and Chrome geometry/replay/hold checks
+  passed. Real AirPods capture was not automated and remains open.
 - The deployed site is public and unauthenticated. The app has no accounts,
-  login, OAuth, or server-side product session. The deployed version has no D1
-  or R2 binding; local `app/.openai/hosting.json` now declares `DB` and `PACKS`,
-  but no post-separation version has been saved or deployed. See
+  login, OAuth, or server-side product session. Version 5 contains the separated
+  Worker source and packages `app/.openai/hosting.json` with logical `DB` and
+  `PACKS` bindings, but deployment success did not verify hosted resource
+  provisioning, migration application, or route persistence. See
   [Backend and Data](backend.md).
 - Deployment version 1 failed because the redundant 49,654,706-byte full model
   archive exceeded Sites' 26,214,400-byte per-file limit. The deployed package
@@ -109,7 +113,8 @@ access remains an explicit follow-up.
   dynamic Vosk import into a redundant server chunk. The final build removes
   duplicate server font assets and excludes Vosk from the Worker;
   `dist/server/` was 2.3 MB before packaging.
-- The post-separation install reports 20 total transitive `npm audit` findings
+- The last recorded post-separation install reports 20 total transitive
+  `npm audit` findings
   (1 low, 6 moderate, 13 high), down from an initial lock resolution with 22.
   The last recorded production-only audit on deployed-era code reported 5
   findings (2 moderate, 3 high). These include `vosk-browser`'s `uuid` advisory
@@ -152,8 +157,10 @@ access remains an explicit follow-up.
 
 ## Minimum sufficient QA and release workflow
 
-1. Keep the deployable site in an isolated Git project that cannot inherit the
-   parent repository's private voice-data history.
+1. Keep the private corpus excluded from root Git history and reject
+   `datasets/`, recordings, and private artifacts from deployment packages.
+   A separate application repository is no longer required after the approved
+   flattening.
 2. Provide hot-reload development and a production-build local preview.
 3. Provide one reproducible local QA command covering type checks, lint, unit
    tests, build, browser smoke tests, forced WASM fallback, optional WebGPU,
@@ -238,6 +245,15 @@ server-side requirement justifies it.
   no-op. The transition worktree successfully exercised real `412×915` media
   queries through a same-origin iframe; the selector worktree later used the
   browser viewport capability directly.
+- Node 22's `--experimental-strip-types` cannot execute TypeScript constructor
+  parameter properties. Client code imported directly by tests must use
+  explicit field declarations and assignments; this affected both
+  `MicrophoneRouteError` and `GameMicrophoneSession` before correction.
+- A React hydration warning carrying injected
+  `data-immersive-translate-page-theme="dark"` came from an installed Chrome
+  extension mutating `<html>` before hydration. Treat it as external browser
+  state unless it reproduces in a clean profile or without the injected
+  attribute.
 
 ## Open questions
 
@@ -275,6 +291,9 @@ server-side requirement justifies it.
   2026-07-31.
 - Sites version 4 deployment from root commit `685293d`, its 42-test QA pass,
   and the later persistent-microphone direction recorded on 2026-07-31.
+- Repository flattening at `5377e8f`, persistent microphone and stable-turn
+  implementation at `41fd840`, 43-test QA, Chrome geometry/replay/hold checks,
+  and Sites version 5 deployment recorded on 2026-07-31.
 - `.agents/resources/seinen-manga-frame/`
 - Historical nested commits `e37d5c4`, `6e6b83c`, `7a0f812`, `14cd2b6`,
   `18fcf55`, `3a3b84d`, `19139c6`, `bf2643f`, `a850c3f`, and `05a986f`.

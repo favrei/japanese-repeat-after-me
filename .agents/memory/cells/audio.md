@@ -37,7 +37,7 @@ and what remains unsettled about prompting the synthesiser.
   MLX/Metal, using the **1.7B CustomVoice 6-bit** model and the native Japanese
   speaker **`Ono_Anna`** from the official CustomVoice config.
 - Model weights stay in the Hugging Face user cache and are never committed.
-- Authoring tooling lives under the nested app's `tools/tts/`.
+- Authoring tooling lives under `app/tools/tts/`.
 
 Measured during selection on the M3:
 
@@ -150,7 +150,7 @@ Later commits add the current story assets:
 - `feature/story-selection` commit `7a0f812` added eight taproom dialogue clips
   and two narrator clips. Nested commit `19139c6` later recast all seven staff
   clips from `Ono_Anna` to `dylan`; learner and narrator clips were not
-  regenerated. The current assets remain on nested `app/` `main`.
+  regenerated. The current assets remain in the root-tracked `app/` tree.
 
 The `0.0.0.0` origin can prevent Chrome from granting microphone permission;
 preview on `localhost`. See [Delivery](delivery.md).

@@ -20,11 +20,11 @@ runtime capability tiers, and hosting assumptions.
   built-in Mac or phone microphone does not pass.
 - Optional targets: Linux AMD64 Chrome and iOS Chrome or installed PWA, each
   requiring separate validation.
-- Hosting target and current host: GPT Sites. Version 4 of the app is deployed
-  from root commit `685293d` at
+- Hosting target and current host: GPT Sites. Version 5 of the app is deployed
+  from root commit `41fd840` at
   `https://japanese-speaking-story.zenridge.chatgpt.site`. It passed the
-  recorded automated QA gate, but access is public and unauthenticated rather
-  than private. See [Delivery](delivery.md) and
+  43-test automated QA gate and Chrome turn-layout checks, but access is public
+  and unauthenticated rather than private. See [Delivery](delivery.md) and
   [Backend and Data](backend.md).
 - A private GPT Sites test kit has demonstrated authenticated API routes and
   server-side recording storage/export. The intended application may still be
@@ -58,11 +58,12 @@ reconnect behavior still need real-device proof.
 For the active game session, keep the selected Bluetooth microphone stream
 open continuously rather than stopping it after each learner turn. Recognition
 processing remains enabled only during learner turns, and the stream is
-released on game exit, page teardown, route/device loss, or permission loss.
-This user-selected design avoids repeated AirPods speak/listen-mode transitions
-at turn boundaries. Its accepted costs are a persistent Chrome microphone
-indicator and potentially lower-quality call-mode reference playback. This is
-not implemented in deployed version 4.
+released on game completion, explicit exit, page teardown, a superseding game,
+route/device loss, or permission loss. Root commit `41fd840` implements this
+separate session ownership and version 5 deploys it. Its accepted costs are a
+persistent Chrome microphone indicator and potentially lower-quality call-mode
+reference playback. Whether it resolves the reported AirPods burst/dropout
+still requires the user's physical hardware test.
 
 Candidate interaction state:
 
@@ -96,9 +97,9 @@ UI
 - AirPods microphone selection and retained routing through permission,
   reconnect, and recording cycles are mandatory acceptance checks. Verify the
   captured signal comes from the headset rather than the Mac microphone.
-- Verify that a persistent game-session stream survives multiple learner and
-  PC turns without reacquisition or playback bursts, and that leaving the game
-  releases it.
+- Verify that the implemented persistent game-session stream survives multiple
+  learner and PC turns without reacquisition or playback bursts, and that
+  leaving the game releases it on real hardware.
 - M3 performance is the first baseline but must not be treated as
   representative of mobile hardware.
 
@@ -184,8 +185,8 @@ real-device recognition.
 - The original Android Chrome PWA prototype request did not authorize
   deployment; a later explicit release deployed the Sites candidate. The corrected
   bubble-level progression is user-confirmed. The responsive
-  four-stage café/taproom library and local Vosk runtime are integrated on
-  nested `app/` `main`. The app passed desktop and `412×915`
+  four-stage café/taproom library and local Vosk runtime are integrated in the
+  root-tracked `app/` tree. The app passed desktop and `412×915`
   browser QA, but real Android behavior remains unverified. See
   [Product](product.md), [Visual Design](visual-design.md), and
   [Delivery](delivery.md).
@@ -197,11 +198,11 @@ real-device recognition.
   separately prepared Japanese model. Its production transport splits the
   ignored local archive into six manifest-verified parts and has the
   controlling service worker stream them as one logical archive.
-- The deployed Sites version still has no application backend,
-  authentication, D1, or R2. Local nested `main` now separates client, shared,
-  server, and Worker ownership; its isolated local D1/R2 bindings and first
-  catalog/pack routes remain undeployed. Gameplay is client-owned, and the
-  backend must never enter the critical path of a running session. See
+- The deployed Sites version still has no application authentication. Version
+  5 contains the separated client/shared/server/Worker source and declares D1
+  and R2 bindings, but hosted provisioning, migration application, and route
+  persistence remain unverified. Gameplay is client-owned, and the backend
+  must never enter the critical path of a running session. See
   [Backend and Data](backend.md).
 - Production-browser QA on IPv4 loopback reached a recognition-ready learner
   bubble with recording enabled. This verifies initialization and delivery,
@@ -265,6 +266,8 @@ real-device recognition.
   2026-07-31.
 - Root commit `685293d`, Sites version 4, and the user's persistent
   game-session microphone decision recorded on 2026-07-31.
+- Root commit `41fd840`, 43-test QA, and Sites version 5 deployment of the
+  persistent game-session microphone recorded on 2026-07-31.
 
 ## Related cells
 

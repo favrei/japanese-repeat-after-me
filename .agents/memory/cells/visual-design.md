@@ -31,13 +31,14 @@ layout, swappable art slots, and pending asset work.
   be copied blindly.
 - The replacement was implemented as a story-neutral frame plus swappable art
   packs at `e37d5c4`, followed by scene transitions at `6e6b83c` and the
-  four-stage library at `7a0f812`. All remain present on current nested
-  `app/` `main`; the later recast, deployment-packaging, and backend-separation
+  four-stage library at `7a0f812`. All remain present in the root-tracked
+  `app/` tree; the later recast, deployment-packaging, and backend-separation
   commits did not replace the frame or packs.
 - The four-stage app includes an original taproom pack and passed mechanical
   and production-browser QA, but the finished selector and taproom visuals
-  still need the user's explicit visual verdict. Treat them as an integrated
-  local candidate, not an approved or deployed frame.
+  still need the user's explicit visual verdict. They are deployed in Sites
+  version 5, but deployment and mechanical QA do not constitute visual
+  approval.
 
 ## Constant frame and swappable layers
 
@@ -85,7 +86,7 @@ The earlier rejected frame used Hachi Maru Pop, Klee One, a warm
 paper/yellow/pink/blue palette, rounded controls, thick outlines, a chibi SVG
 staff character, and `width: min(100%, 680px)` containers. The user rejected
 that tone as looking intended for a very young child. It is preserved only as
-history; it is not the current nested-main frame.
+history; it is not the current frame.
 
 Its visual audit also found:
 
@@ -226,6 +227,10 @@ must judge art and voice together. See [Audio](audio.md) and
 - The later integrated local-recognition build at `3a3b84d` passed the expanded
   art/model, typecheck, lint, production-build, and 25/25-test gate. Its visual
   status is unchanged: mechanical QA is not the user's visual verdict.
+- Root commit `41fd840` fixed the conversation panel footprint across autoplay
+  and speaking states. Chrome QA measured identical per-viewport geometry and
+  verified replay without bubble changes. This closes the turn-resize defect,
+  not the pending visual verdict on the selector and art packs.
 
 ## Open questions
 
@@ -259,6 +264,7 @@ must judge art and voice together. See [Audio](audio.md) and
 - `app/README.md`
 - Nested app commits `e37d5c4`, `6e6b83c`, `7a0f812`, merge `3a3b84d`, and
   recast `19139c6`.
+- Root commit `41fd840` and its desktop/mobile stable-layout Chrome QA.
 - `app/art-system/README.md`, `app/art-system/art-pack.schema.json`,
   `app/art-packs/cafe.json`, `app/scripts/validate-art-packs.mjs`, and
   `app/client/components/ArtReview.tsx`.
