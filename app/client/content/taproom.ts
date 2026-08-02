@@ -114,7 +114,7 @@ export const TAPROOM_STAGES: PracticeStage[] = [
       id: "taproom-glass-open",
       japanese: "タップからビールが注がれ、白い泡が静かに立ち上がった。",
       reading:
-        "たっぷからびーるがそそがれ、しろいあわがしずかにたちのぼった。",
+        "たっぷからびーるがそそがれ、しろいあわがしずかにたちあがった。",
       translation:
         "Beer runs from the tap, and a white head rises quietly.",
       audioSrc: "/audio/taproom/taproom-glass-open.mp3",

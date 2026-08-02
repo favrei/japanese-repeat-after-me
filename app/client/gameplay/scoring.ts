@@ -236,15 +236,16 @@ export type ReadingMark = {
 };
 
 /**
- * Approximate per-kana hit/miss marks for a failed attempt, derived from a
- * Levenshtein alignment between the line reading and the heard transcript.
- * This is transcript-to-target string alignment, not acoustic phoneme
- * scoring — treat the marks as coarse guidance, not ground truth.
+ * Approximate per-kana hit flags for one attempt, indexed by position in the
+ * normalized reading, derived from a Levenshtein alignment between that
+ * reading and the heard transcript. This is transcript-to-target string
+ * alignment, not acoustic phoneme scoring — treat the flags as coarse
+ * guidance, not ground truth.
  */
-export function markReadingHits(
+export function readingHitFlags(
   line: ReadingComparisonLine,
   transcript: string,
-): ReadingMark[] {
+): boolean[] {
   const target = normalizeJapanese(line.reading);
   const heard = normalizeForReadingComparison(line, transcript);
   const hits = new Array<boolean>(target.length).fill(false);
@@ -288,8 +289,18 @@ export function markReadingHits(
     }
   }
 
-  // Map normalized-hit flags back onto the original reading string so
-  // punctuation stays visible and unmarked.
+  return hits;
+}
+
+/**
+ * The same attempt marks laid back over the authored reading string, so
+ * punctuation stays visible and unmarked.
+ */
+export function markReadingHits(
+  line: ReadingComparisonLine,
+  transcript: string,
+): ReadingMark[] {
+  const hits = readingHitFlags(line, transcript);
   let markIndex = 0;
   return Array.from(line.reading).map((char) => {
     if (normalizeJapanese(char) === "") {
