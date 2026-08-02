@@ -1,0 +1,36 @@
+{
+  "story": "secondhand-bicycle",
+  "note": "Authoring manifest. uncle_fu is an audition candidate; sohee/aiden preserve learner/narrator continuity. Registration wording must be localized before release. Missing seeds derive from stable line ids.",
+  "instruct": "Natural Japanese in a small used-bicycle shop. Mechanically candid, never salesy.",
+  "sections": {
+    "bike-shop-owner": "Dry, clear shop speech. Specifications and mechanical facts before persuasion.",
+    "learner": "Comparison-driven, safety-conscious, clearly spaced for imitation.",
+    "narrator": "Quiet movement through one shop over an afternoon."
+  },
+  "lines": [
+    {"id":"bicycle-choose-open","text":"土曜日の午後、中古自転車店の前に二台の自転車が並んでいた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Specific visual choice, no sales energy."},
+    {"id":"bicycle-choose-two","text":"通勤用なら、この二台が乗りやすいです。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Neutral narrowing to two options."},
+    {"id":"bicycle-choose-commute","text":"駅まで毎日十五分ぐらい乗ります。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Daily use and duration clearly segmented."},
+    {"id":"bicycle-choose-basket","text":"左の自転車は、かごが大きいです。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Visible comparison fact."},
+    {"id":"bicycle-choose-lighter","text":"もう少し軽い自転車はありますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Polite comparative request."},
+    {"id":"bicycle-choose-three-kilos","text":"右の自転車は、三キロ軽いです。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Measured answer; articulate さんきろ."},
+    {"id":"bicycle-test-open","text":"店の前の試乗スペースに、白い線が引かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Safe visible test area."},
+    {"id":"bicycle-test-saddle","text":"サドルは、このレバーで調整できます。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Point to component and action."},
+    {"id":"bicycle-test-lower","text":"もう少し低くしてもいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Simple permission request."},
+    {"id":"bicycle-test-area","text":"店の前で試乗できます。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Plain availability."},
+    {"id":"bicycle-test-brake","text":"後ろのブレーキが少し弱い気がします。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Careful sensory report, not accusation."},
+    {"id":"bicycle-test-adjust","text":"ブレーキは、購入前に調整します。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Candid repair commitment."},
+    {"id":"bicycle-decide-open","text":"店内の作業台に、青い自転車が立てかけられていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Shift from test to measured decision."},
+    {"id":"bicycle-decide-price","text":"価格は一万八千円です。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Neutral exact price."},
+    {"id":"bicycle-decide-included","text":"ブレーキの調整も入っていますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clarify included work."},
+    {"id":"bicycle-decide-service","text":"点検と調整は、価格に含まれています。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Exact inclusion statement."},
+    {"id":"bicycle-decide-this-one","text":"この自転車にします。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clean decision, no excitement performance."},
+    {"id":"bicycle-decide-hour","text":"点検後、一時間ほどでお渡しできます。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Practical handover time."},
+    {"id":"bicycle-register-open","text":"一時間後、整備を終えた自転車が店の入口に置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Visible serviced result."},
+    {"id":"bicycle-register-id","text":"防犯登録には、身分証が必要です。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Local procedure, clear compound words."},
+    {"id":"bicycle-register-this-id","text":"この身分証で大丈夫ですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Direct document check."},
+    {"id":"bicycle-register-card","text":"登録カードは、お客様の控えです。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"Explain the document's status."},
+    {"id":"bicycle-register-when","text":"このカードは、いつ使いますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Simple future-use question."},
+    {"id":"bicycle-register-procedures","text":"住所変更や譲渡などの手続きで使います。","voice":"uncle_fu","speaker":"bike-shop-owner","section":"bike-shop-owner","deliveryIntent":"List examples without turning into a lecture."}
+  ]
+}

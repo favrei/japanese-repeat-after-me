@@ -1,0 +1,37 @@
+{
+  "story": "onsen-inn",
+  "note": "Authoring manifest. ono_anna and uncle_fu are audition candidates; sohee/aiden preserve learner/narrator continuity. Facility-specific rules require a local recheck before release. Missing seeds derive from stable line ids.",
+  "instruct": "Natural restrained Japanese at a mountain ryokan. Practical hospitality, never ceremonial performance.",
+  "sections": {
+    "ryokan-attendant": "Measured warm hospitality speech. Anticipatory and practical.",
+    "bath-attendant": "Soft slow rule-specific speech, unobtrusive and plain.",
+    "learner": "Respectful facility questions, clearly spaced for imitation.",
+    "narrator": "Quiet evening-to-morning scene setting."
+  },
+  "lines": [
+    {"id":"onsen-arrival-open","text":"夕方、山あいの旅館の玄関に明かりがともっていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Warm light, restrained arrival."},
+    {"id":"onsen-arrival-reservation","text":"ご予約の番号をお願いします。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Routine measured check-in."},
+    {"id":"onsen-arrival-number","text":"予約番号は三〇七二です。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Read each digit distinctly."},
+    {"id":"onsen-arrival-meals","text":"夕食は七時、朝食は八時です。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Two times, cleanly separated."},
+    {"id":"onsen-arrival-bath-hours","text":"温泉は何時まで入れますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Simple schedule question."},
+    {"id":"onsen-arrival-eleven","text":"夜十一時までご利用いただけます。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Hospitality keigo without flourish."},
+    {"id":"onsen-room-open","text":"畳の部屋に、浴衣と小さなタオルが置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Quiet room inventory."},
+    {"id":"onsen-room-sizes","text":"浴衣は、棚の中に三つのサイズがあります。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Practical size information."},
+    {"id":"onsen-room-larger","text":"大きいサイズに替えてもらえますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Polite exchange request."},
+    {"id":"onsen-room-dinner-place","text":"夕食は一階の食事処です。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Location stated clearly."},
+    {"id":"onsen-room-valuables","text":"貴重品はどこに置けばいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Security question, unhurried."},
+    {"id":"onsen-room-safe","text":"貴重品は、部屋の金庫に入れてください。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Direct room instruction."},
+    {"id":"onsen-bath-open","text":"廊下の奥で、温泉の暖簾が揺れていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Private quiet threshold."},
+    {"id":"onsen-bath-wash","text":"湯船に入る前に、体を洗ってください。","voice":"uncle_fu","speaker":"bath-attendant","section":"bath-attendant","deliveryIntent":"One plain rule, no moralizing."},
+    {"id":"onsen-bath-towel-question","text":"このタオルは、湯船に入れてもいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Facility-specific permission question."},
+    {"id":"onsen-bath-towel-out","text":"タオルは、湯船の外に置いてください。","voice":"uncle_fu","speaker":"bath-attendant","section":"bath-attendant","deliveryIntent":"Short location rule."},
+    {"id":"onsen-bath-phone-question","text":"携帯電話を持って入ってもいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Privacy rule question, neutral."},
+    {"id":"onsen-bath-locker","text":"携帯電話は、鍵のかかるロッカーに入れてください。","voice":"uncle_fu","speaker":"bath-attendant","section":"bath-attendant","deliveryIntent":"Practical secure alternative."},
+    {"id":"onsen-departure-open","text":"翌朝、玄関に荷物と送迎車の時刻表が並んでいた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Morning departure inventory."},
+    {"id":"onsen-departure-checkout","text":"チェックアウトは十時です。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Routine time."},
+    {"id":"onsen-departure-luggage","text":"荷物を午後まで預かってもらえますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clear duration and storage request."},
+    {"id":"onsen-departure-hold","text":"荷物はフロントでお預かりします。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Practical hospitality response."},
+    {"id":"onsen-departure-shuttle","text":"駅までの送迎車は何時に出ますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Onward-transport question."},
+    {"id":"onsen-departure-ten-thirty","text":"次の便は十時半に出発します。","voice":"ono_anna","speaker":"ryokan-attendant","section":"ryokan-attendant","deliveryIntent":"Final exact departure time."}
+  ]
+}

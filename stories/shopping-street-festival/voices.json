@@ -1,0 +1,39 @@
+{
+  "story": "shopping-street-festival",
+  "note": "Authoring manifest. dylan and serena are audition candidates; sohee/aiden preserve learner/narrator continuity. Missing seeds derive from stable line ids.",
+  "instruct": "Natural Japanese at a neighborhood summer festival. Energetic enough to be heard, never theatrical.",
+  "sections": {
+    "stall-leader": "Strong warm operational speech, brisk and community-practical.",
+    "festival-visitor": "Bright short rule questions, task-focused and adult.",
+    "learner": "Earnest clarification becoming clear public instruction, evenly spaced.",
+    "narrator": "Restrained dusk, crowd, and fine-rain transitions."
+  },
+  "lines": [
+    {"id":"festival-role-open","text":"夕方、商店街の通りに祭りの提灯が並んでいた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Community dusk, not spectacle."},
+    {"id":"festival-role-assignment","text":"今日は、輪投げの受付をお願いします。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"Clear first assignment."},
+    {"id":"festival-role-flow","text":"初めてなので、仕事の流れを教えてください。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Earnest, no apology performance."},
+    {"id":"festival-role-table","text":"料金箱と景品は、この机にあります。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"Point to visible tools."},
+    {"id":"festival-role-change","text":"何時に交代しますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Direct schedule question."},
+    {"id":"festival-role-six","text":"六時に次の人と交代します。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"Exact handover time."},
+    {"id":"festival-stock-open","text":"景品の棚に、空いた場所が増えていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Visible supply change."},
+    {"id":"festival-stock-twenty","text":"小さい景品が、あと二十個です。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"Inventory count, clearly articulated."},
+    {"id":"festival-stock-fetch","text":"倉庫から持ってきましょうか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Useful offer, small rise."},
+    {"id":"festival-stock-warehouse","text":"倉庫は、通りの奥にあります。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"One location fact."},
+    {"id":"festival-stock-how-many","text":"何箱必要ですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Counter question, articulate なんはこ."},
+    {"id":"festival-stock-two-boxes","text":"二箱あれば足ります。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"Quantity and sufficiency."},
+    {"id":"festival-customer-transition","text":"通りが暗くなるころ、輪投げの前に新しい列ができた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Shift from setup to public service."},
+    {"id":"festival-customer-open","text":"このゲームは、まだできますか。","voice":"serena","speaker":"festival-visitor","section":"festival-visitor","deliveryIntent":"Unembarrassed availability question."},
+    {"id":"festival-customer-price","text":"はい、一回三百円です。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"First confident public line."},
+    {"id":"festival-customer-where-throw","text":"輪は、どこから投げますか。","voice":"serena","speaker":"festival-visitor","section":"festival-visitor","deliveryIntent":"Short boundary question."},
+    {"id":"festival-customer-line","text":"この線の後ろから投げてください。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clear physical instruction."},
+    {"id":"festival-customer-where-prize","text":"景品は、どこで受け取りますか。","voice":"serena","speaker":"festival-visitor","section":"festival-visitor","deliveryIntent":"Final process question."},
+    {"id":"festival-customer-exit","text":"出口の係の人から受け取ってください。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Location and person clearly separated."},
+    {"id":"festival-clean-open","text":"夜、提灯の下に細い雨が落ち始めた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Fine rain, no emergency."},
+    {"id":"festival-clean-close","text":"雨が強くなる前に、屋台を閉めます。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"Early practical closure."},
+    {"id":"festival-clean-what","text":"私は何を片づければいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Task clarification."},
+    {"id":"festival-clean-paper","text":"紙の景品を、奥の箱に入れてください。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"One concrete action."},
+    {"id":"festival-clean-cardboard","text":"濡れた段ボールは別にします。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Organized cleanup statement."},
+    {"id":"festival-clean-bags","text":"ごみ袋は、商店街の倉庫にあります。","voice":"dylan","speaker":"stall-leader","section":"stall-leader","deliveryIntent":"Supply location."},
+    {"id":"festival-clean-carry","text":"片づけが終わったら、倉庫まで運びます。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Condition then completion task."}
+  ]
+}

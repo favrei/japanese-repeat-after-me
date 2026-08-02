@@ -1,0 +1,38 @@
+{
+  "story": "moving-day",
+  "note": "Authoring manifest. dylan, ono_anna, and vivian are audition candidates only. sohee/aiden preserve learner/narrator continuity. Missing seeds derive from stable line ids.",
+  "instruct": "Natural spoken Japanese during one moving day. Practical, adult, restrained.",
+  "sections": {
+    "mover": "Brisk moving-crew speech. Concrete objects and handling actions, clearly articulated.",
+    "gas-technician": "Even safety inspection speech. Conditions and controls must be precise.",
+    "neighbor": "Unhurried direct neighbor speech. Clear about rules, practical about help.",
+    "learner": "Considerate, plain-polite, evenly spaced for imitation.",
+    "narrator": "Quiet visual cuts across one day."
+  },
+  "lines": [
+    {"id":"moving-boxes-open","text":"朝、新しい部屋の前に引っ越しの箱が積まれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Morning beginning, purposeful disorder."},
+    {"id":"moving-boxes-check","text":"まず、こちらの荷物を確認します。","voice":"dylan","speaker":"mover","section":"mover","deliveryIntent":"Brisk first action."},
+    {"id":"moving-boxes-fragile","text":"この箱には割れ物が入っています。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Stress 割れ物 clearly."},
+    {"id":"moving-boxes-red","text":"赤い印の箱は、上に置きます。","voice":"dylan","speaker":"mover","section":"mover","deliveryIntent":"Concrete handling decision."},
+    {"id":"moving-boxes-desk","text":"机は窓のそばに置いてください。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Calm placement request."},
+    {"id":"moving-boxes-order","text":"大きい家具から順番に運びます。","voice":"dylan","speaker":"mover","section":"mover","deliveryIntent":"Forward-moving closure."},
+    {"id":"moving-sofa-open","text":"玄関の前で、大きなソファが止まっていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Visible obstacle, not comic."},
+    {"id":"moving-sofa-elevator","text":"このソファは、エレベーターに入りません。","voice":"dylan","speaker":"mover","section":"mover","deliveryIntent":"Direct dimensional fact."},
+    {"id":"moving-sofa-legs","text":"脚を外すことはできますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"One careful solution question."},
+    {"id":"moving-sofa-four","text":"脚は四本とも外せます。","voice":"dylan","speaker":"mover","section":"mover","deliveryIntent":"Articulate よんほん."},
+    {"id":"moving-sofa-request","text":"外してから運んでください。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Sequence must remain clear."},
+    {"id":"moving-sofa-blanket","text":"壁に傷がつかないよう、毛布で包みます。","voice":"dylan","speaker":"mover","section":"mover","deliveryIntent":"Professional care, no reassurance performance."},
+    {"id":"moving-water-open","text":"夕方、台所の給湯器の前に工具箱が置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Quiet shift to evening and utilities."},
+    {"id":"moving-water-check","text":"給湯器の点検を始めます。","voice":"ono_anna","speaker":"gas-technician","section":"gas-technician","deliveryIntent":"Formal start, precise compound words."},
+    {"id":"moving-water-when","text":"お湯はいつから使えますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Simple availability question."},
+    {"id":"moving-water-after","text":"点検が終われば、すぐ使えます。","voice":"ono_anna","speaker":"gas-technician","section":"gas-technician","deliveryIntent":"Clear condition then result."},
+    {"id":"moving-water-knob","text":"このつまみは何に使いますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Pointed practical question."},
+    {"id":"moving-water-temperature","text":"お湯の温度は、このつまみで変えられます。","voice":"ono_anna","speaker":"gas-technician","section":"gas-technician","deliveryIntent":"Literal demonstration, even pace."},
+    {"id":"moving-neighbor-open","text":"日が暮れるころ、隣の部屋のドアが開いた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Quiet social turn after work ends."},
+    {"id":"moving-neighbor-new","text":"お隣に越してきた方ですね。","voice":"vivian","speaker":"neighbor","section":"neighbor","deliveryIntent":"Direct recognition, not accusation."},
+    {"id":"moving-neighbor-intro","text":"今日、隣に引っ越してきました。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Plain introduction."},
+    {"id":"moving-neighbor-rule","text":"この建物は、夜十時から静かにする決まりです。","voice":"vivian","speaker":"neighbor","section":"neighbor","deliveryIntent":"Clear norm, no passive aggression."},
+    {"id":"moving-neighbor-apology","text":"今日はうるさくして、すみませんでした。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Sincere, proportionate apology."},
+    {"id":"moving-neighbor-manager","text":"困ったときは、一階の管理人さんを呼んでください。","voice":"vivian","speaker":"neighbor","section":"neighbor","deliveryIntent":"Practical helpful closure."}
+  ]
+}

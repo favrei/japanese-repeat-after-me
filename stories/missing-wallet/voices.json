@@ -1,0 +1,37 @@
+{
+  "story": "missing-wallet",
+  "note": "Authoring manifest. serena and dylan are audition candidates, not approved casts. sohee and aiden preserve learner/narrator continuity. Missing seeds derive from stable line ids.",
+  "instruct": "Natural restrained Japanese. A practical lost-property problem, never crime drama.",
+  "sections": {
+    "store-clerk": "Brisk, clear convenience-store service speech without exaggerated sympathy.",
+    "police-officer": "Patient, precise police-box procedure. Calm and factual.",
+    "learner": "Factual, even, clearly spaced for imitation.",
+    "narrator": "Quiet scene-setting, detached from the people in the room."
+  },
+  "lines": [
+    {"id":"wallet-register-open","text":"夜十時、駅前のコンビニのレジに列ができていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Busy but ordinary late-night setup."},
+    {"id":"wallet-register-total","text":"お会計は千八百四十円です。","voice":"serena","speaker":"store-clerk","section":"store-clerk","deliveryIntent":"Routine total; articulate the number."},
+    {"id":"wallet-register-missing","text":"すみません、財布が見つかりません。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Concerned but controlled."},
+    {"id":"wallet-register-hold","text":"商品はこちらでお預かりします。","voice":"serena","speaker":"store-clerk","section":"store-clerk","deliveryIntent":"Immediate procedural solution."},
+    {"id":"wallet-register-return","text":"あとで取りに来てもいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Simple permission question."},
+    {"id":"wallet-register-eleven","text":"十一時までに、レジへお越しください。","voice":"serena","speaker":"store-clerk","section":"store-clerk","deliveryIntent":"Clear deadline, no scolding."},
+    {"id":"wallet-search-open","text":"レジの横に、買い物かごが一つ残されていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Quiet held-state transition."},
+    {"id":"wallet-search-none","text":"その財布は、店内には届いていません。","voice":"serena","speaker":"store-clerk","section":"store-clerk","deliveryIntent":"Direct status, restrained concern."},
+    {"id":"wallet-search-description","text":"黒くて、小さい財布です。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Two clear identifying adjectives."},
+    {"id":"wallet-search-koban","text":"入口の近くに交番があります。","voice":"serena","speaker":"store-clerk","section":"store-clerk","deliveryIntent":"Useful next step, matter-of-fact."},
+    {"id":"wallet-search-directions","text":"交番までどう行けばいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Direct route question."},
+    {"id":"wallet-search-left","text":"店を出て、最初の角を左です。","voice":"serena","speaker":"store-clerk","section":"store-clerk","deliveryIntent":"Clean one-turn direction."},
+    {"id":"wallet-report-transition","text":"コンビニを出ると、交差点の角に交番の明かりが見えた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Movement from retail pressure to procedural calm."},
+    {"id":"wallet-report-open","text":"落とし物の届けですね。","voice":"dylan","speaker":"police-officer","section":"police-officer","deliveryIntent":"Calm intake confirmation."},
+    {"id":"wallet-report-lost","text":"財布をなくしました。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Plain factual report."},
+    {"id":"wallet-report-form","text":"なくした場所と時間を、この用紙に書いてください。","voice":"dylan","speaker":"police-officer","section":"police-officer","deliveryIntent":"Patient procedural instruction."},
+    {"id":"wallet-report-place-time","text":"十時ごろ、駅前のコンビニにいました。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clear time then place."},
+    {"id":"wallet-report-contact","text":"見つかった場合は、こちらからご連絡します。","voice":"dylan","speaker":"police-officer","section":"police-officer","deliveryIntent":"No promise, only procedure."},
+    {"id":"wallet-return-transition","text":"翌日の夕方、交番のカウンターに黒い財布が置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Visible recovery without celebrating early."},
+    {"id":"wallet-return-found","text":"駅前で、黒い財布が見つかりました。","voice":"dylan","speaker":"police-officer","section":"police-officer","deliveryIntent":"Neutral recovery fact."},
+    {"id":"wallet-return-sticker","text":"赤い猫のシールが付いています。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Precise identifying detail."},
+    {"id":"wallet-return-card","text":"中には青い交通系ICカードがあります。","voice":"dylan","speaker":"police-officer","section":"police-officer","deliveryIntent":"Evidence read clearly, especially IC."},
+    {"id":"wallet-return-id","text":"こちらが身分証です。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Short handover line."},
+    {"id":"wallet-return-complete","text":"ご本人と確認できましたので、財布をお返しします。","voice":"dylan","speaker":"police-officer","section":"police-officer","deliveryIntent":"Procedural completion with restrained warmth."}
+  ]
+}

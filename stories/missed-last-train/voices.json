@@ -1,0 +1,37 @@
+{
+  "story": "missed-last-train",
+  "note": "Authoring manifest only. uncle_fu and vivian are persona-based audition candidates, not approved casts. sohee and aiden preserve the established learner/narrator continuity. No clip may ship before role auditions and a complete human listening pass. Missing seeds intentionally derive from stable line ids in the generator.",
+  "instruct": "Natural spoken Japanese late at night. Restrained, practical, never dramatic.",
+  "sections": {
+    "station-attendant": "Measured operational speech from a calm station attendant. Clear numbers, no extra warmth.",
+    "taxi-driver": "Steady, unhurried taxi-driver speech. Practical and locally confident.",
+    "learner": "Even, clearly spaced, unhurried. The learner imitates this reading directly.",
+    "narrator": "Quiet late-night scene-setting. Detached, never ominous."
+  },
+  "lines": [
+    {"id":"last-train-open","text":"金曜日の深夜、駅のホームから人影が消えていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Quiet opening; empty rather than dangerous."},
+    {"id":"last-train-ended","text":"終電は先ほど出ました。","voice":"uncle_fu","speaker":"station-attendant","section":"station-attendant","deliveryIntent":"Short operational fact."},
+    {"id":"last-train-any-left","text":"もう電車はありませんか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Tired but clear confirmation question."},
+    {"id":"last-train-first","text":"始発は五時十二分です。","voice":"uncle_fu","speaker":"station-attendant","section":"station-attendant","deliveryIntent":"Keep the time sharply articulated."},
+    {"id":"last-train-taxi-rank","text":"タクシー乗り場はどこですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Direct practical question."},
+    {"id":"last-train-east-exit","text":"東口を出て、すぐ右側です。","voice":"uncle_fu","speaker":"station-attendant","section":"station-attendant","deliveryIntent":"One clean directional phrase."},
+    {"id":"destination-open","text":"駅前のタクシー乗り場に、空車が一台止まった。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"A small release of tension as the taxi arrives."},
+    {"id":"destination-ask","text":"行き先をお願いします。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Routine opening, unhurried."},
+    {"id":"destination-sakuramachi","text":"桜町駅の近くまでお願いします。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clearly segment the fictional place name."},
+    {"id":"destination-pin","text":"画面の住所は、桜町二丁目ですね。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Visual confirmation, slight lift on ですね."},
+    {"id":"destination-how-long","text":"ここからどのくらいかかりますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Unhurried duration question."},
+    {"id":"destination-twenty","text":"この時間なら、二十分ほどです。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Matter-of-fact estimate; articulate にじゅっぷん."},
+    {"id":"directions-open","text":"タクシーは、夜の大通りを住宅街へ向かって走っていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Steady movement, no suspense."},
+    {"id":"directions-fork","text":"この先で、道が二つに分かれます。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Calm road observation."},
+    {"id":"directions-store","text":"あのコンビニを右に曲がってください。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clear landmark then action."},
+    {"id":"directions-two-buildings","text":"右側にマンションが二軒並んでいます。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Visible landmark confirmation."},
+    {"id":"directions-second-building","text":"二軒目のマンションの前で止めてください。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Longest target; pause naturally after 二軒目."},
+    {"id":"directions-entrance","text":"建物の入口に車を寄せますね。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Quiet final confirmation."},
+    {"id":"arrival-open","text":"窓の外に、交差点のコンビニが見えてきた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Recognition without celebration."},
+    {"id":"arrival-fare","text":"料金は四千二百円です。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Neutral fare statement; articulate the full number."},
+    {"id":"arrival-card","text":"カードで払えますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Short payment question."},
+    {"id":"arrival-terminal","text":"カードは、この端末にお願いします。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Routine terminal instruction."},
+    {"id":"arrival-thanks","text":"遅い時間にありがとうございました。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Genuine but restrained thanks."},
+    {"id":"arrival-belongings","text":"お忘れ物のないよう、ご注意ください。","voice":"vivian","speaker":"taxi-driver","section":"taxi-driver","deliveryIntent":"Courteous closing safety reminder."}
+  ]
+}

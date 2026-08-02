@@ -1,0 +1,36 @@
+{
+  "story": "cooking-class",
+  "note": "Authoring manifest. dylan is an audition candidate; sohee/aiden preserve learner/narrator continuity. Missing seeds derive from stable line ids.",
+  "instruct": "Natural relaxed Japanese between two adult cooking-class partners. Collaborative, never teacherly.",
+  "sections": {
+    "cooking-partner": "Warm relaxed friendly-polite speech, reading the shared recipe rather than teaching.",
+    "learner": "Curious sequence-focused questions and proposals, clearly spaced.",
+    "narrator": "Quiet visible progress from ingredients to plated dish."
+  },
+  "lines": [
+    {"id":"cooking-divide-open","text":"平日の夜、調理台に二人分の材料が並んでいた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Ordinary adult evening class."},
+    {"id":"cooking-divide-vegetables","text":"私は野菜を切りますね。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Easy first task offer."},
+    {"id":"cooking-divide-sauce","text":"じゃあ、私はソースを作ります。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Immediate matching contribution."},
+    {"id":"cooking-divide-two","text":"材料は二人分あります。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Visible recipe fact."},
+    {"id":"cooking-divide-spicy","text":"辛いものは大丈夫ですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Considerate preference check."},
+    {"id":"cooking-divide-chili","text":"唐辛子は、少しだけ使います。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Recipe quantity, not reassurance."},
+    {"id":"cooking-prep-open","text":"まな板の上に、玉ねぎとにんじんが置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Tighter focus on prep."},
+    {"id":"cooking-prep-onion","text":"玉ねぎは薄く切ります。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"One recipe action."},
+    {"id":"cooking-prep-carrot-size","text":"にんじんはどのくらいの大きさに切りますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Long size question, even pace."},
+    {"id":"cooking-prep-two-centimeters","text":"にんじんは、二センチぐらいです。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Measured approximate size."},
+    {"id":"cooking-prep-first","text":"先に全部切っておきましょう。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Collaborative sequence proposal."},
+    {"id":"cooking-prep-plate","text":"切った野菜は、この皿に分けて置きます。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Visible organization step."},
+    {"id":"cooking-pot-open","text":"鍋の中で、野菜のスープが静かに煮えていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Quiet simmer, no food glamour."},
+    {"id":"cooking-pot-water-low","text":"鍋の水が少なくなっています。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Visible pot status."},
+    {"id":"cooking-pot-add-water","text":"水を少し足したほうがいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Check before acting."},
+    {"id":"cooking-pot-roux","text":"ルーは、火を止めてから入れます。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Sequence clear at comma."},
+    {"id":"cooking-pot-taste","text":"味見してもいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Short permission question."},
+    {"id":"cooking-pot-salt","text":"塩は足さなくても大丈夫です。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Taste conclusion without praise."},
+    {"id":"cooking-finish-open","text":"白い皿の横に、教室のレシピカードが置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Dish and reusable recipe together."},
+    {"id":"cooking-finish-plate","text":"ご飯を左、カレーを右に盛ります。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Two-sided plating instruction."},
+    {"id":"cooking-finish-more","text":"もう少しカレーをかけてもいいですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Personal portion permission."},
+    {"id":"cooking-finish-photo","text":"写真は、あちらの台で撮れます。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Posted room information."},
+    {"id":"cooking-finish-recipe","text":"レシピを送ってもらえますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Useful closing request."},
+    {"id":"cooking-finish-download","text":"教室のサイトからダウンロードできます。","voice":"dylan","speaker":"cooking-partner","section":"cooking-partner","deliveryIntent":"Practical reusable closure."}
+  ]
+}

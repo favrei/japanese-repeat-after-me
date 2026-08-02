@@ -1,0 +1,41 @@
+{
+  "story": "neighborhood-clinic",
+  "note": "Authoring manifest only. Professional-role presets are audition candidates. This is language practice, not medical advice; no clip or instruction ships without full listening and medical-text recheck. Missing seeds derive from stable line ids.",
+  "instruct": "Clear natural Japanese in a neighborhood clinic. Calm, factual, never dramatic.",
+  "sections": {
+    "receptionist": "Brisk administrative intake, clear and solution-first.",
+    "nurse": "Patient systematic symptom intake, evenly paced.",
+    "doctor": "Low concise clinical observation, evidence-bound.",
+    "pharmacist": "Deliberate medication-label explanation; numbers and conditions very clear.",
+    "learner": "Concise, factual, clearly spaced for imitation.",
+    "narrator": "Neutral visual transitions through one clinic visit."
+  },
+  "lines": [
+    {"id":"clinic-reception-open","text":"午前、町のクリニックの受付に問診票が並んでいた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Orderly morning setup."},
+    {"id":"clinic-reception-first","text":"初めての受診ですか。","voice":"serena","speaker":"receptionist","section":"receptionist","deliveryIntent":"Routine intake question."},
+    {"id":"clinic-reception-walkin","text":"予約はしていませんが、診てもらえますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Polite direct walk-in request."},
+    {"id":"clinic-reception-documents","text":"保険証と身分証をお願いします。","voice":"serena","speaker":"receptionist","section":"receptionist","deliveryIntent":"Clear document list."},
+    {"id":"clinic-reception-english","text":"英語の問診票はありますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Simple accessibility question."},
+    {"id":"clinic-reception-form","text":"英語の用紙もご用意しています。","voice":"serena","speaker":"receptionist","section":"receptionist","deliveryIntent":"Solution stated without fuss."},
+    {"id":"clinic-intake-open","text":"受付のカウンターに、書き終えた問診票が置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Visible completion of paperwork."},
+    {"id":"clinic-intake-symptoms","text":"今日はどのような症状ですか。","voice":"dylan","speaker":"nurse","section":"nurse","deliveryIntent":"Open but contained symptom prompt."},
+    {"id":"clinic-intake-throat","text":"昨日の夜から、喉が痛いです。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Onset then symptom, clear break."},
+    {"id":"clinic-intake-temperature","text":"体温は三十八度です。","voice":"dylan","speaker":"nurse","section":"nurse","deliveryIntent":"Neutral measured number."},
+    {"id":"clinic-intake-cough","text":"咳も少し出ます。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Short associated symptom."},
+    {"id":"clinic-intake-allergy-question","text":"薬のアレルギーはありますか。","voice":"dylan","speaker":"nurse","section":"nurse","deliveryIntent":"Safety-critical question, no rush."},
+    {"id":"clinic-intake-no-allergy","text":"薬のアレルギーはありません。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Unambiguous negative."},
+    {"id":"clinic-intake-pass-on","text":"体温と症状を医師に伝えます。","voice":"dylan","speaker":"nurse","section":"nurse","deliveryIntent":"Procedural handoff."},
+    {"id":"clinic-exam-open","text":"診察室の机に、体温の記録と問診票が置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Evidence enters the room before dialogue."},
+    {"id":"clinic-exam-open-mouth","text":"喉を見ますので、口を開けてください。","voice":"vivian","speaker":"doctor","section":"doctor","deliveryIntent":"Concise examination instruction."},
+    {"id":"clinic-exam-swallow","text":"飲み込むと、特に痛いです。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Condition then emphasis."},
+    {"id":"clinic-exam-red","text":"喉が赤く腫れています。","voice":"vivian","speaker":"doctor","section":"doctor","deliveryIntent":"Visible finding only."},
+    {"id":"clinic-exam-test-question","text":"何か検査が必要ですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Direct clarification question."},
+    {"id":"clinic-exam-test","text":"念のため、感染症の検査をします。","voice":"vivian","speaker":"doctor","section":"doctor","deliveryIntent":"Precaution, not diagnosis."},
+    {"id":"clinic-pharmacy-open","text":"夕方、薬局のカウンターに薬の袋が置かれていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Quiet shift to written instructions."},
+    {"id":"clinic-pharmacy-purpose","text":"こちらは、喉の痛みを和らげる薬です。","voice":"uncle_fu","speaker":"pharmacist","section":"pharmacist","deliveryIntent":"Label-specific purpose."},
+    {"id":"clinic-pharmacy-frequency","text":"一日に何回飲みますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clear frequency question."},
+    {"id":"clinic-pharmacy-dose","text":"朝昼晩の三回、食後に飲んでください。","voice":"uncle_fu","speaker":"pharmacist","section":"pharmacist","deliveryIntent":"Chunk morning/noon/night, then after meals."},
+    {"id":"clinic-pharmacy-drowsy","text":"眠くなることはありますか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Safety clarification."},
+    {"id":"clinic-pharmacy-driving","text":"眠気が出た場合は、運転しないでください。","voice":"uncle_fu","speaker":"pharmacist","section":"pharmacist","deliveryIntent":"Condition then prohibition, very clear."}
+  ]
+}

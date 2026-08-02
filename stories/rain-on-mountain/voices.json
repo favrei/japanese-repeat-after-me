@@ -1,0 +1,37 @@
+{
+  "story": "rain-on-mountain",
+  "note": "Authoring manifest. serena and uncle_fu are audition candidates; sohee/aiden preserve learner/narrator continuity. Safety wording must be rechecked against current JMA/NPA guidance before release. Missing seeds derive from stable line ids.",
+  "instruct": "Natural restrained Japanese on a day hike. Evidence-led decisions, never adventure drama.",
+  "sections": {
+    "hiking-partner": "Calm collaborative outdoor speech. Cautious and decisive, never afraid or heroic.",
+    "shelter-attendant": "Slow locally exact weather and route speech. Unsensational.",
+    "learner": "Prepared conservative proposals, clearly spaced for imitation.",
+    "narrator": "Visual and acoustic weather changes only."
+  },
+  "lines": [
+    {"id":"mountain-plan-open","text":"朝、登山口の案内板の下に地図が広げられていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Prepared morning, no foreboding."},
+    {"id":"mountain-plan-rain","text":"午後は雨の予報です。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Neutral forecast fact."},
+    {"id":"mountain-plan-turnaround","text":"何時に引き返す予定ですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Planning question, not anxiety."},
+    {"id":"mountain-plan-noon","text":"十二時になったら、山頂の手前でも戻ります。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Firm precommitted limit."},
+    {"id":"mountain-plan-gear","text":"雨具と水は持っています。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Simple equipment confirmation."},
+    {"id":"mountain-plan-map","text":"地図は二人で確認しておきましょう。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Collaborative preparation."},
+    {"id":"mountain-turn-open","text":"昼前、西の空から濃い雲が広がってきた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Visible evidence, restrained."},
+    {"id":"mountain-turn-dark","text":"西の空が急に暗くなってきました。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Observation, no fear."},
+    {"id":"mountain-turn-nowcast","text":"雨雲レーダーを確認しましょう。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Practical collaborative action."},
+    {"id":"mountain-turn-lightning","text":"一時間以内に雷の可能性があります。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Current risk, precise and calm."},
+    {"id":"mountain-turn-back","text":"山頂へ行かずに、引き返しませんか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Conservative proposal without apology."},
+    {"id":"mountain-turn-shelter","text":"尾根を離れて、避難小屋へ向かいます。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Clean movement decision."},
+    {"id":"mountain-shelter-open","text":"尾根の下に、頑丈な避難小屋が見えた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Sturdy shelter becomes visible."},
+    {"id":"mountain-shelter-inside","text":"雷が聞こえる間は、建物の中にいてください。","voice":"uncle_fu","speaker":"shelter-attendant","section":"shelter-attendant","deliveryIntent":"Direct safety condition, no drama."},
+    {"id":"mountain-shelter-duration","text":"雨はどのくらい続きそうですか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Current-duration question."},
+    {"id":"mountain-shelter-thirty","text":"レーダーでは、三十分ほどで弱まる見込みです。","voice":"uncle_fu","speaker":"shelter-attendant","section":"shelter-attendant","deliveryIntent":"Forecast estimate, not guarantee."},
+    {"id":"mountain-shelter-route","text":"下りの安全な道を教えてください。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Clear marked-route request."},
+    {"id":"mountain-shelter-east","text":"東側の道は、尾根を通らずに下れます。","voice":"uncle_fu","speaker":"shelter-attendant","section":"shelter-attendant","deliveryIntent":"Mapped route fact."},
+    {"id":"mountain-descent-open","text":"雷が遠ざかり、屋根を打つ雨の音が弱くなった。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Audible easing, not an all-clear announcement."},
+    {"id":"mountain-descent-slippery","text":"雨は弱くなりましたが、道が滑りやすくなっています。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Remaining hazard after improvement."},
+    {"id":"mountain-descent-slowly","text":"ゆっくり下りましょう。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Simple conservative proposal."},
+    {"id":"mountain-descent-forty","text":"バス停まで、あと四十分です。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Neutral remaining time."},
+    {"id":"mountain-descent-together","text":"離れないで、一緒に歩きましょう。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Cooperative pacing, not command."},
+    {"id":"mountain-descent-sign","text":"登山口の案内板が見えてきました。","voice":"serena","speaker":"hiking-partner","section":"hiking-partner","deliveryIntent":"Restrained visible completion."}
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "story": "presentation-eve",
+  "note": "Authoring manifest. vivian and uncle_fu are audition candidates; sohee/aiden preserve learner/narrator continuity. Missing seeds derive from stable line ids.",
+  "instruct": "Natural professional Japanese. Precise and adult, never corporate theater.",
+  "sections": {
+    "presentation-coworker": "Crisp quick professional speech. Evidence status and timing exact, no defensiveness.",
+    "client-manager": "Deep deliberate professional questions. Skeptical but fair.",
+    "learner": "Composed integrative proposals and bounded commitments, clearly articulated.",
+    "narrator": "Quiet late-office to next-morning transitions."
+  },
+  "lines": [
+    {"id":"presentation-scope-open","text":"夜、会議室のモニターに未完成の資料が映っていた。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Late office, unfinished rather than frantic."},
+    {"id":"presentation-scope-ten","text":"明日の説明は、十分しかありません。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Hard time constraint, crisp."},
+    {"id":"presentation-scope-three","text":"一番伝えたい点を、三つに絞りませんか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Calm narrowing proposal."},
+    {"id":"presentation-scope-timing","text":"顧客は、導入時期を最も気にしています。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Audience priority, no mind-reading drama."},
+    {"id":"presentation-scope-first","text":"では、最初にスケジュールを説明します。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Decision stated cleanly."},
+    {"id":"presentation-scope-appendix","text":"費用の詳細は、補足資料に移します。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Unsentimental slide cut."},
+    {"id":"presentation-data-open","text":"スライドの中央に、作業時間のグラフが大きく表示された。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Visual focus on evidence."},
+    {"id":"presentation-data-last-month","text":"このグラフは、先月までのデータです。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Status boundary, exact."},
+    {"id":"presentation-data-current","text":"今月の数字も入れたほうがいいと思います。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Measured proposal, not insistence."},
+    {"id":"presentation-data-unconfirmed","text":"今月分は、まだ確定していません。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Caution without defensiveness."},
+    {"id":"presentation-data-provisional","text":"暫定値だと明記して、傾向だけ示しませんか。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Advanced target; pause after 明記して."},
+    {"id":"presentation-data-note","text":"注記を付けて、確定値とは分けて表示します。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Exact implementation decision."},
+    {"id":"presentation-rehearse-open","text":"時計の針が九時を回り、机に発表用のメモが並んだ。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Late but controlled rehearsal."},
+    {"id":"presentation-rehearse-twelve","text":"今の説明は、十二分かかりました。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Measured result, no criticism."},
+    {"id":"presentation-rehearse-example","text":"事例を一つ減らせば、二分短くできます。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Condition and quantified result."},
+    {"id":"presentation-rehearse-jargon","text":"専門用語が二か所残っています。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Specific remaining issue."},
+    {"id":"presentation-rehearse-client-language","text":"顧客向けの言い方に変えましょう。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Audience-centered decision."},
+    {"id":"presentation-rehearse-questions","text":"最後に質問の時間を二分取ります。","voice":"vivian","speaker":"presentation-coworker","section":"presentation-coworker","deliveryIntent":"Final timing allocation."},
+    {"id":"presentation-question-open","text":"翌朝、顧客の会議室に同じ資料が映し出された。","voice":"aiden","speaker":"narrator","section":"narrator","deliveryIntent":"Quiet payoff, no triumph."},
+    {"id":"presentation-question-impact","text":"導入が遅れた場合、費用への影響はありますか。","voice":"uncle_fu","speaker":"client-manager","section":"client-manager","deliveryIntent":"Deliberate consequence question."},
+    {"id":"presentation-question-one-month","text":"一か月以内の遅れなら、追加費用は発生しません。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Bounded known answer, composed."},
+    {"id":"presentation-question-two-months","text":"二か月以上遅れる可能性もあります。","voice":"uncle_fu","speaker":"client-manager","section":"client-manager","deliveryIntent":"Real scenario, not challenge theater."},
+    {"id":"presentation-question-followup","text":"条件を確認して、明日回答します。","voice":"sohee","speaker":"learner","section":"learner","deliveryIntent":"Explicit uncertainty and deadline."},
+    {"id":"presentation-question-written","text":"書面には、前提条件も含めてください。","voice":"uncle_fu","speaker":"client-manager","section":"client-manager","deliveryIntent":"Evidence request, concise closure."}
+  ]
+}
